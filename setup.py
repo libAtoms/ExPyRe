@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="expyre",
+    name="expyre-wfl",
     version="0.1.0b",
     packages=setuptools.find_packages(),
     install_requires=["click>=7.0"],
