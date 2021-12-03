@@ -80,6 +80,23 @@ def cli_rm(ctx, id, name, status, system, yes, clean):
             sys.stderr.write('\n')
 
 
+@cli.command("sync")
+@click.option("--id", "-i", help="comma separated list of regexps for entire job id")
+@click.option("--name", "-n", help="comma separated list of regexps for entire job name")
+@click.option("--status", "-s", help="comma separated list of status values to include, or '*' for all", default='ongoing')
+@click.option("--system", "-S", help="comma separated list of regexps for entire system name")
+@click.pass_context
+def cli_sync(ctx, id, name, status, system):
+    """Sync jobs fitting criteria (at least one criterion required)
+    """
+    if status == '*':
+        status = None
+
+    jobs = _get_jobs(id=id, name=name, status=status, system=system)
+
+    ExPyRe.sync_results_ll(jobs, cli=True)
+
+
 @cli.command("db_unlock")
 @click.pass_context
 def cli_db_unlock(ctx):

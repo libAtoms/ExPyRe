@@ -420,6 +420,22 @@ class ExPyRe:
 
         jobs_to_sync = list(config.db.jobs(system=self.system_name, id=job_id, status=status))
 
+        ExPyRe.sync_results_ll(jobs_to_sync, verbose=verbose)
+
+
+    @classmethod
+    def sync_results_ll(cls, jobs_to_sync, n_group=250, cli=False, verbose=False):
+        """Low level part of syncing jobs
+
+        Parameters
+        ----------
+        cls: class
+            class for classmethod (unused)
+        jobs_to_sync: list(dict)
+            list of job dicts returned by jobsdb.jobs()
+        n_group: int, default 250
+            number of jobs to do in a group with each rsync call
+        """
         def _grouper(n, iterable):
             it = iter(iterable)
             while True:
@@ -429,16 +445,21 @@ class ExPyRe:
                 yield chunk
 
         if len(jobs_to_sync) > 0:
-            system = config.systems[self.system_name]
-            # get remote files
-            for job_group in _grouper(250, jobs_to_sync):
-                system.get_remotes(self.stage_dir.parent, subdir_glob=[Path(j['from_dir']).name for j in job_group],
-                                   verbose=verbose)
+            for system_name in set([j['system'] for j in jobs_to_sync]):
+                system = config.systems[system_name]
+                # assume all jobs are staged from same place
+                stage_root = Path(jobs_to_sync[0]['from_dir']).parent
+                # get remote files
+                for job_group in _grouper(n_group, jobs_to_sync):
+                    system.get_remotes(stage_root, subdir_glob=[Path(j['from_dir']).name for j in job_group],
+                                       verbose=verbose)
 
-            # get remote statuses and update in JobsDB
-            status_of_remote_id = system.scheduler.status([j['remote_id'] for j in jobs_to_sync], verbose=verbose)
-            for j in jobs_to_sync:
-                config.db.update(j['id'], remote_status=status_of_remote_id[j['remote_id']])
+                # get remote statuses and update in JobsDB
+                status_of_remote_id = system.scheduler.status([j['remote_id'] for j in jobs_to_sync], verbose=verbose)
+                for j in jobs_to_sync:
+                    if cli:
+                        sys.stderr.write(f'Update remote status of {j["id"]} to {status_of_remote_id[j["remote_id"]]}\n')
+                    config.db.update(j['id'], remote_status=status_of_remote_id[j['remote_id']])
 
 
     def clean(self, wipe=False, dry_run=False, verbose=False):
