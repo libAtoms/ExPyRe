@@ -2,6 +2,7 @@ import sys
 import shutil
 import subprocess
 from pathlib import Path
+import numpy as np
 
 import click
 from ..jobsdb import JobsDB
@@ -31,8 +32,9 @@ def _get_jobs(**kwargs):
 @click.option("--name", "-n", help="comma separated list of regexps for entire job name")
 @click.option("--status", "-s", help="comma separated list of status values to include")
 @click.option("--system", "-S", help="comma separated list of regexps for entire system name")
+@click.option("--long_output", "-l", is_flag=True, help="long format output")
 @click.pass_context
-def cli_ls(ctx, id, name, status, system):
+def cli_ls(ctx, id, name, status, system, long_output):
     """List jobs fitting criteria (default all jobs)
     """
     jobs = _get_jobs(id=id, name=name, status=status, system=system)
@@ -41,8 +43,48 @@ def cli_ls(ctx, id, name, status, system):
         print(f"No matching jobs in JobsDB at {config.db.db_filename}")
     else:
         print("Jobs:")
+        # {'id': 'vasp_eval_chunk_0_KEiSzsC7ft8ASaOmurO4yw5PhlCYVLgpAcVxVXvc1e0=_1kxwmf_c',
+        # 'name': 'vasp_eval_chunk_0',
+        # 'from_dir': '/home/cluster2/bernstei/src/work/Perovskites/ACE/_expyre/run_vasp_eval_chunk_0_KEiSzsC7ft8ASaOmurO4yw5PhlCYVLgpAcVxVXvc1e0=_1kxwmf_c',
+        # 'status': 'started',
+        # 'system': 'onyx',
+        # 'remote_id': '1805770.pbs01',
+        # 'remote_status': 'running',
+        # 'creation_time': '2021-12-06 10:23:04',
+        # 'status_time': '2021-12-06 10:25:42'}
+
+        cols = []
         for job in jobs:
-            print(job)
+            headers = [] # ugly, but last loop iter is what counts
+            cols.append([])
+            if long_output:
+                headers.append('name')
+                cols[-1].append(job['name'])
+                headers.append('id')
+                cols[-1].append(' ' + job['id'])
+                headers.append('created')
+                cols[-1].append(' ' + job['creation_time'])
+            else:
+                headers.append('id')
+                cols[-1].append(job['id'][0:len(job['name'])+10]+'...')
+            headers.append('stat (time)')
+            cols[-1].append(' ' + job['status'] + ' (' + job['status_time'] + ')')
+            headers.append('remote_id@sys')
+            cols[-1].append(' ' + job['remote_id'] + '@' + job['system'])
+            headers.append('remote stat')
+            cols[-1].append(' ' + job['remote_status'])
+            if long_output:
+                headers.append('from dir')
+                cols[-1].append(' ' + job['from_dir'])
+
+        cols = np.asarray(cols)
+        fmt = ''
+        for col_i in range(cols.shape[1]):
+            col_max_width = max(len(headers[col_i]), np.max([len(v) for v in cols[:, col_i]]))
+            fmt += ' ' + '{:>' + str(col_max_width) + '}'
+        print('#' + fmt.replace('>','^').format(*headers))
+        for l in cols:
+            print(fmt.format(*l))
 
 
 @cli.command("rm")
