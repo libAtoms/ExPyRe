@@ -59,23 +59,23 @@ def cli_ls(ctx, id, name, status, system, long_output):
             cols.append([])
             if long_output:
                 headers.append('name')
-                cols[-1].append(job['name'])
+                cols[-1].append(f"{job['name']}")
                 headers.append('id')
-                cols[-1].append(' ' + job['id'])
+                cols[-1].append(f"' {job['id']}")
                 headers.append('created')
-                cols[-1].append(' ' + job['creation_time'])
+                cols[-1].append(f" {job['creation_time']}")
             else:
                 headers.append('id')
-                cols[-1].append(job['id'][0:len(job['name'])+10]+'...')
+                cols[-1].append(f"{job['id'][0:len(job['name'])+10]}...")
             headers.append('stat (time)')
-            cols[-1].append(' ' + job['status'] + ' (' + job['status_time'] + ')')
+            cols[-1].append(f" {job['status']}({job['status_time']})")
             headers.append('remote_id@sys')
-            cols[-1].append(' ' + job['remote_id'] + '@' + job['system'])
+            cols[-1].append(f" {job['remote_id']}@{job['system']}")
             headers.append('remote stat')
-            cols[-1].append(' ' + job['remote_status'])
+            cols[-1].append(f" {job['remote_status']}")
             if long_output:
                 headers.append('from dir')
-                cols[-1].append(' ' + job['from_dir'])
+                cols[-1].append(" {job['from_dir']}")
 
         cols = np.asarray(cols)
         fmt = ''
