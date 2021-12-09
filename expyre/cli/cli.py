@@ -32,7 +32,7 @@ def _get_jobs(**kwargs):
 @click.option("--name", "-n", help="comma separated list of regexps for entire job name")
 @click.option("--status", "-s", help="comma separated list of status values to include")
 @click.option("--system", "-S", help="comma separated list of regexps for entire system name")
-@click.option("--long_output", "-l", is_flag=True, help="long format output")
+@click.option("--long-output", "-l", is_flag=True, help="long format output")
 @click.pass_context
 def cli_ls(ctx, id, name, status, system, long_output):
     """List jobs fitting criteria (default all jobs)
