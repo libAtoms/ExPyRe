@@ -279,11 +279,11 @@ class ExPyRe:
             output directory
         file_glob: str or Path
             glob of file or directory to copy (recursively), absolute iff in_dir is None
-
         """
         out_dir = Path(out_dir)
         file_glob = Path(file_glob)
 
+        exclude_glob = None
         if file_glob.is_absolute():
             strip_leading = True
             assert in_dir is None
@@ -298,13 +298,20 @@ class ExPyRe:
             in_dir = Path(in_dir)
             assert in_dir.is_dir()
 
-            # for some reason Path.glob('.') gives an error
             if str(file_glob) == '.':
+                # don't stage back internel expyre files
+                exclude_glob = '_expyre*'
+                # for some reason Path.glob('.') gives an error
                 file_glob = '*'
 
         in_files = list(in_dir.glob(str(file_glob)))
+        if exclude_glob is not None:
+            excluded_files = list(in_dir.glob(str(exclude_glob)))
+        else:
+            excluded_files = []
+        in_files = [f for f in in_files if f not in excluded_files]
         if len(in_files) == 0:
-            raise RuntimeError(f'File glob "{file_glob}" in input_files does not match any files')
+            raise RuntimeError(f'File glob "{file_glob}" (excluding {exclude_glob}) in input_files does not match any files')
         for in_file in in_files:
             if strip_leading:
                 rel_out_file = in_file.name
@@ -624,7 +631,7 @@ class ExPyRe:
                 if (self.stage_dir / '_expyre_output_files').exists():
                     with open(self.stage_dir / '_expyre_output_files') as fin:
                         for in_file in [f.replace('\n', '') for f in fin.readlines()]:
-                            ExPyRe._copy(self.stage_dir, Path.cwd(), in_file)
+                            ExPyRe._copy(self.stage_dir, Path.cwd(), in_file, '_expyre*')
 
                 if not quiet and n_iter > 0:
                     # newline after one or more 'q|r' progress characters
