@@ -3,6 +3,7 @@ import shutil
 import subprocess
 from pathlib import Path
 import numpy as np
+import pandas as pd
 
 import click
 from ..jobsdb import JobsDB
@@ -53,38 +54,35 @@ def cli_ls(ctx, id, name, status, system, long_output):
         # 'creation_time': '2021-12-06 10:23:04',
         # 'status_time': '2021-12-06 10:25:42'}
 
-        cols = []
-        for job in jobs:
-            headers = [] # ugly, but last loop iter is what counts
-            cols.append([])
-            if long_output:
-                headers.append('name')
-                cols[-1].append(f"{job['name']}")
-                headers.append('id')
-                cols[-1].append(f"' {job['id']}")
-                headers.append('created')
-                cols[-1].append(f" {job['creation_time']}")
-            else:
-                headers.append('id')
-                cols[-1].append(f"{job['id'][0:len(job['name'])+10]}...")
-            headers.append('stat (time)')
-            cols[-1].append(f" {job['status']}({job['status_time']})")
-            headers.append('remote_id@sys')
-            cols[-1].append(f" {job['remote_id']}@{job['system']}")
-            headers.append('remote stat')
-            cols[-1].append(f" {job['remote_status']}")
-            if long_output:
-                headers.append('from dir')
-                cols[-1].append(" {job['from_dir']}")
+        if long_output:
+            headers = ['name', 'id', 'created']
+        else:
+            headers = ['id']
+        headers += ['stat (time)', 'remote_id@sys', 'remote stat']
+        if long_output:
+            headers += ['from dir']
 
-        cols = np.asarray(cols)
-        fmt = ''
-        for col_i in range(cols.shape[1]):
-            col_max_width = max(len(headers[col_i]), np.max([len(v) for v in cols[:, col_i]]))
-            fmt += ' ' + '{:>' + str(col_max_width) + '}'
-        print('#' + fmt.replace('>','^').format(*headers))
-        for l in cols:
-            print(fmt.format(*l))
+        rows = {f: [] for f in headers}
+        for job in jobs:
+            if long_output:
+                rows['name'].append(f"{job['name']}")
+                rows['id'].append(f"{job['id']}")
+                rows['created'].append(f"{job['creation_time']}")
+            else:
+                rows['id'].append(f"{job['id'][0:len(job['name'])+10]}...")
+            rows['stat (time)'].append(f"{job['status']}({job['status_time']})")
+            rows['remote_id@sys'].append(f"{job['remote_id']}@{job['system']}")
+            rows['remote stat'].append(f"{job['remote_status']}")
+            if long_output:
+                rows['from dir'].append("{job['from_dir']}")
+
+        d = pd.DataFrame.from_dict(rows)
+        pd.set_option('display.max_rows', None)
+        pd.set_option('display.max_columns', None)
+        pd.set_option('display.max_colwidth', None)
+        pd.set_option('display.width', None)
+        pd.set_option('display.colheader_justify', 'left')
+        print(d)
 
 
 @cli.command("rm")
