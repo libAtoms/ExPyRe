@@ -610,7 +610,7 @@ class ExPyRe:
                 if (self.stage_dir / '_expyre_output_files').exists():
                     with open(self.stage_dir / '_expyre_output_files') as fin:
                         for in_file in [f.replace('\n', '') for f in fin.readlines()]:
-                            ExPyRe._copy(self.stage_dir, Path.cwd(), in_file, '_expyre*')
+                            ExPyRe._copy(self.stage_dir, Path.cwd(), in_file)
 
                 if not quiet and n_iter > 0:
                     # newline after one or more 'q|r' progress characters
