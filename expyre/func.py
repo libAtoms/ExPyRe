@@ -298,6 +298,10 @@ class ExPyRe:
             in_dir = Path(in_dir)
             assert in_dir.is_dir()
 
+            # for some reason Path.glob('.') gives an error
+            if str(file_glob) == '.':
+                file_glob = '*'
+
         in_files = list(in_dir.glob(str(file_glob)))
         if len(in_files) == 0:
             raise RuntimeError(f'File glob "{file_glob}" in input_files does not match any files')
