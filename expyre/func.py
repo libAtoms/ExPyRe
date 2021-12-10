@@ -2,6 +2,7 @@ import sys
 import os
 import time
 import itertools
+import re
 
 import shutil
 import tempfile
@@ -66,6 +67,10 @@ class ExPyRe:
         """
         if len(config.systems) == 0 or config.db is None:
             raise RuntimeError('Configuration file was not found, ExPyRe object cannot be created')
+
+        # name will be used as part of path, can't have a few special things
+        assert ('/' not in name and '[' not in name and ']' not in name and 
+                '{' not in name and '}' not in name and '*' not in name and '\\' not in name)
 
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
             sys.stderr.write(f'ExPyRe {name} constructor start {time.time()}\n')
@@ -136,7 +141,7 @@ class ExPyRe:
             # NOTE: following loop will not match status == 'processed' because such jobs are
             # not guaranteed to have results available.  Is it a good idea to try to use those,
             # if results actually seem to be available?
-            for job in config.db.jobs(status='can_produce_results', id=f'{name}_{arghash}_.*'):
+            for job in config.db.jobs(status='can_produce_results', id=re.escape(f'{name}_{arghash}_.*')):
                 old_stage_dir = Path(job['from_dir'])
                 # this also never happen
                 if job['status'] == 'succeeded' and not (old_stage_dir / '_expyre_job_succeeded').exists():
@@ -429,7 +434,7 @@ class ExPyRe:
         else:
             status = 'ongoing'
 
-        jobs_to_sync = list(config.db.jobs(system=self.system_name, id=job_id, status=status))
+        jobs_to_sync = list(config.db.jobs(system=self.system_name, id=re.escape(job_id), status=status))
 
         ExPyRe.sync_results_ll(jobs_to_sync, verbose=verbose)
 
@@ -574,7 +579,7 @@ class ExPyRe:
 
             # get remote status of job, was set by call to self.sync_results() just above
             # remote_status: queued, held,       running,    done, failed, timeout, other
-            remote_status = list(config.db.jobs(id=self.id))[0]['remote_status']
+            remote_status = list(config.db.jobs(id=re.escape(self.id)))[0]['remote_status']
 
             # update state depending on presence of various progress files and remote status
             if (self.stage_dir / '_expyre_job_succeeded').exists():
