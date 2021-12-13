@@ -141,7 +141,7 @@ class ExPyRe:
             # NOTE: following loop will not match status == 'processed' because such jobs are
             # not guaranteed to have results available.  Is it a good idea to try to use those,
             # if results actually seem to be available?
-            for job in config.db.jobs(status='can_produce_results', id=re.escape(f'{name}_{arghash}_.*')):
+            for job in config.db.jobs(status='can_produce_results', id=re.escape(f'{name}_{arghash}') + '_.*'):
                 old_stage_dir = Path(job['from_dir'])
                 # this also never happen
                 if job['status'] == 'succeeded' and not (old_stage_dir / '_expyre_job_succeeded').exists():
@@ -426,7 +426,7 @@ class ExPyRe:
         if sync_all:
             job_id = None
         else:
-            job_id = self.id
+            job_id = re.escape(self.id)
 
         # sync even if already done
         if force_sync:
@@ -434,7 +434,7 @@ class ExPyRe:
         else:
             status = 'ongoing'
 
-        jobs_to_sync = list(config.db.jobs(system=self.system_name, id=re.escape(job_id), status=status))
+        jobs_to_sync = list(config.db.jobs(system=self.system_name, id=job_id, status=status))
 
         ExPyRe.sync_results_ll(jobs_to_sync, verbose=verbose)
 

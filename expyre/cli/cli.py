@@ -74,7 +74,7 @@ def cli_ls(ctx, id, name, status, system, long_output):
             rows['remote_id@sys'].append(f"{job['remote_id']}@{job['system']}")
             rows['remote stat'].append(f"{job['remote_status']}")
             if long_output:
-                rows['from dir'].append("{job['from_dir']}")
+                rows['from dir'].append(f"{job['from_dir']}")
 
         d = pd.DataFrame.from_dict(rows)
         pd.set_option('display.max_rows', None)
