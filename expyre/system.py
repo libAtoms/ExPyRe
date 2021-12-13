@@ -68,7 +68,7 @@ class System:
 
 
     def initialize_remote_rundir(self, verbose=False):
-        if self.initialized:
+        if self.initialized or self.host is None:
             return
 
         self.run(['mkdir', '-p', str(self.remote_rundir)], verbose=verbose)
@@ -110,29 +110,33 @@ class System:
         commands = self.commands + commands
 
         stage_dir = Path(stage_dir)
-        job_remote_rundir = self._job_remote_rundir(stage_dir)
+        if self.host is None:
+            # no host, so run in stage dir to avoid needless copying
+            job_remote_rundir = str(stage_dir)
+        else:
+            job_remote_rundir = self._job_remote_rundir(stage_dir)
 
-        # make remote rundir, but fail if job-specific remote dir already exists
-        self.run(['bash'],
-                 script=f'if [ ! -d "{self.remote_rundir}" ]; then '
-                        f'    echo "remote rundir \'{self.remote_rundir}\' does not exist" 1>&2; '
-                         '    exit 1; '
-                        f'elif [ -e "{job_remote_rundir}" ]; then '
-                        f'    echo "remote job rundir \'{job_remote_rundir}\' already exists" 1>&2; '
-                         '    exit 2; '
-                         'else '
-                        f'    mkdir -p "{job_remote_rundir}"; '
-                         'fi', verbose=verbose)
+            # make remote rundir, but fail if job-specific remote dir already exists
+            self.run(['bash'],
+                     script=f'if [ ! -d "{self.remote_rundir}" ]; then '
+                            f'    echo "remote rundir \'{self.remote_rundir}\' does not exist" 1>&2; '
+                             '    exit 1; '
+                            f'elif [ -e "{job_remote_rundir}" ]; then '
+                            f'    echo "remote job rundir \'{job_remote_rundir}\' already exists" 1>&2; '
+                             '    exit 2; '
+                             'else '
+                            f'    mkdir -p "{job_remote_rundir}"; '
+                             'fi', verbose=verbose)
 
-        # stage out files
-        # strip out final / from source path so that rsync creates stage_dir.name remotely under self.remote_rundir
-        stage_dir_src = str(stage_dir)
-        while stage_dir_src.endswith('/'):
-            stage_dir_src = stage_dir_src[:-1]
-        if 'EXPYRE_TIMING_VERBOSE' in os.environ:
-            sys.stderr.write(f'system {self.id} submit start stage in {time.time()}\n')
-        subprocess_copy(stage_dir_src, self.remote_rundir, to_host=self.host,
-                        remsh_cmd=self.remsh_cmd, verbose=verbose)
+            # stage out files
+            # strip out final / from source path so that rsync creates stage_dir.name remotely under self.remote_rundir
+            stage_dir_src = str(stage_dir)
+            while stage_dir_src.endswith('/'):
+                stage_dir_src = stage_dir_src[:-1]
+            if 'EXPYRE_TIMING_VERBOSE' in os.environ:
+                sys.stderr.write(f'system {self.id} submit start stage in {time.time()}\n')
+            subprocess_copy(stage_dir_src, self.remote_rundir, to_host=self.host,
+                            remsh_cmd=self.remsh_cmd, verbose=verbose)
 
         # submit job
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
@@ -142,8 +146,9 @@ class System:
                                       commands, resources.max_time, self.queuing_sys_header,
                                       node_dict, no_default_header=self.no_default_header, verbose=verbose)
         except Exception:
-            sys.stderr.write(f'System.submit call to Scheduler.submit failed for job id {id}, cleaning up remote dir {str(self.remote_rundir)}\n')
-            self.run(['rm', '-r', str(job_remote_rundir)], verbose=verbose)
+            if not self.host is None:
+                sys.stderr.write(f'System.submit call to Scheduler.submit failed for job id {id}, cleaning up remote dir {str(self.remote_rundir)}\n')
+                self.run(['rm', '-r', str(job_remote_rundir)], verbose=verbose)
             raise
 
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
@@ -159,6 +164,10 @@ class System:
         subdir_glob: str, list(str), default None
             only get subdirectories that much one or more globs
         """
+        if self.host is None:
+            # nothing to "get" since this ran in stage dir
+            return
+
         if subdir_glob is None:
             subdir_glob = '/*'
         elif isinstance(subdir_glob, str):
@@ -185,6 +194,10 @@ class System:
         verbose: bool, default False
             verbose output
         """
+        if self.host is None:
+            # the job remote rundir _is_ the stage dir, so do not delete here
+            return
+
         job_remote_rundir = self._job_remote_rundir(Path(stage_dir))
 
         if filenames is not None:
