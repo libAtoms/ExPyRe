@@ -2,6 +2,7 @@ import sys
 import os
 import time
 import itertools
+import re
 
 import shutil
 import tempfile
@@ -66,6 +67,10 @@ class ExPyRe:
         """
         if len(config.systems) == 0 or config.db is None:
             raise RuntimeError('Configuration file was not found, ExPyRe object cannot be created')
+
+        # name will be used as part of path, can't have a few special things
+        assert ('/' not in name and '[' not in name and ']' not in name and 
+                '{' not in name and '}' not in name and '*' not in name and '\\' not in name)
 
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
             sys.stderr.write(f'ExPyRe {name} constructor start {time.time()}\n')
@@ -136,7 +141,7 @@ class ExPyRe:
             # NOTE: following loop will not match status == 'processed' because such jobs are
             # not guaranteed to have results available.  Is it a good idea to try to use those,
             # if results actually seem to be available?
-            for job in config.db.jobs(status='can_produce_results', id=f'{name}_{arghash}_.*'):
+            for job in config.db.jobs(status='can_produce_results', id=re.escape(f'{name}_{arghash}') + '_.*'):
                 old_stage_dir = Path(job['from_dir'])
                 # this also never happen
                 if job['status'] == 'succeeded' and not (old_stage_dir / '_expyre_job_succeeded').exists():
@@ -421,7 +426,7 @@ class ExPyRe:
         if sync_all:
             job_id = None
         else:
-            job_id = self.id
+            job_id = re.escape(self.id)
 
         # sync even if already done
         if force_sync:
@@ -431,6 +436,22 @@ class ExPyRe:
 
         jobs_to_sync = list(config.db.jobs(system=self.system_name, id=job_id, status=status))
 
+        ExPyRe.sync_results_ll(jobs_to_sync, verbose=verbose)
+
+
+    @classmethod
+    def sync_results_ll(cls, jobs_to_sync, n_group=250, cli=False, verbose=False):
+        """Low level part of syncing jobs
+
+        Parameters
+        ----------
+        cls: class
+            class for classmethod (unused)
+        jobs_to_sync: list(dict)
+            list of job dicts returned by jobsdb.jobs()
+        n_group: int, default 250
+            number of jobs to do in a group with each rsync call
+        """
         def _grouper(n, iterable):
             it = iter(iterable)
             while True:
@@ -440,16 +461,21 @@ class ExPyRe:
                 yield chunk
 
         if len(jobs_to_sync) > 0:
-            system = config.systems[self.system_name]
-            # get remote files
-            for job_group in _grouper(250, jobs_to_sync):
-                system.get_remotes(self.stage_dir.parent, subdir_glob=[Path(j['from_dir']).name for j in job_group],
-                                   verbose=verbose)
+            for system_name in set([j['system'] for j in jobs_to_sync]):
+                system = config.systems[system_name]
+                # assume all jobs are staged from same place
+                stage_root = Path(jobs_to_sync[0]['from_dir']).parent
+                # get remote files
+                for job_group in _grouper(n_group, jobs_to_sync):
+                    system.get_remotes(stage_root, subdir_glob=[Path(j['from_dir']).name for j in job_group],
+                                       verbose=verbose)
 
-            # get remote statuses and update in JobsDB
-            status_of_remote_id = system.scheduler.status([j['remote_id'] for j in jobs_to_sync], verbose=verbose)
-            for j in jobs_to_sync:
-                config.db.update(j['id'], remote_status=status_of_remote_id[j['remote_id']])
+                # get remote statuses and update in JobsDB
+                status_of_remote_id = system.scheduler.status([j['remote_id'] for j in jobs_to_sync], verbose=verbose)
+                for j in jobs_to_sync:
+                    if cli:
+                        sys.stderr.write(f'Update remote status of {j["id"]} to {status_of_remote_id[j["remote_id"]]}\n')
+                    config.db.update(j['id'], remote_status=status_of_remote_id[j['remote_id']])
 
 
     def clean(self, wipe=False, dry_run=False, verbose=False):
@@ -553,7 +579,7 @@ class ExPyRe:
 
             # get remote status of job, was set by call to self.sync_results() just above
             # remote_status: queued, held,       running,    done, failed, timeout, other
-            remote_status = list(config.db.jobs(id=self.id))[0]['remote_status']
+            remote_status = list(config.db.jobs(id=re.escape(self.id)))[0]['remote_status']
 
             # update state depending on presence of various progress files and remote status
             if (self.stage_dir / '_expyre_job_succeeded').exists():

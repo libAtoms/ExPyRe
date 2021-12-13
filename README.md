@@ -190,7 +190,6 @@ For this system:
 - `EXPYRE_NCORES_PER_TASK`
 
 #### only for pytest
-- `EXPYRE_PYTEST_CLEAN`: if set, do a real cleaning of directories in pytest `test_func.py`, otherwise only a dry run
 - `EXPYRE_PYTEST_SSH`: path to ssh to use (instead of `/usr/bin/ssh`) in pytest `test_subprocess.py` (all higher level
     tests use `remsh_cmd` item for system in `config.json`
 - `EXPYRE_PYTEST_SYSTEMS`: regexp to use to filter systems from those available in `$HOME/.expyre/config.json`
@@ -210,4 +209,18 @@ Use `xpr --help` for more info.
 
 ## Code structure
 
+
 [more details coming soon]
+
+## unit testing
+
+Unit tests use `pytest`, in the `tests` subdirectory.  The only flag that's essentially required is `--basetemp`, 
+since many queuing systems won't work if you try to submit jobs from a temporary directory like `/tmp`, which
+`pytest` uses by default, because those are not shared between the head node and compute nodes.  Pass `--basetemp`
+a directory under your home directory instead.  The `--clean` flag is recommended unless you are worried that something 
+is so wrong that attempting to clean deleted jobs will delete the wrong thing.  The `EXPYRE_PYTEST_SYSTEMS` env var
+is recommended unless you want all the remote tests to run on every remote system (useful to ensure that they are working,
+but overkill if you changed functionality that's not computer or queuing system dependent). Example use:
+```
+env EXPYRE_PYTEST_SYSTEMS=tin pytest --clean --basetemp $HOME/pytest
+```

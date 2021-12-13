@@ -2,6 +2,8 @@ import sys
 import shutil
 import subprocess
 from pathlib import Path
+import numpy as np
+import pandas as pd
 
 import click
 from ..jobsdb import JobsDB
@@ -31,8 +33,9 @@ def _get_jobs(**kwargs):
 @click.option("--name", "-n", help="comma separated list of regexps for entire job name")
 @click.option("--status", "-s", help="comma separated list of status values to include")
 @click.option("--system", "-S", help="comma separated list of regexps for entire system name")
+@click.option("--long-output", "-l", is_flag=True, help="long format output")
 @click.pass_context
-def cli_ls(ctx, id, name, status, system):
+def cli_ls(ctx, id, name, status, system, long_output):
     """List jobs fitting criteria (default all jobs)
     """
     jobs = _get_jobs(id=id, name=name, status=status, system=system)
@@ -41,8 +44,45 @@ def cli_ls(ctx, id, name, status, system):
         print(f"No matching jobs in JobsDB at {config.db.db_filename}")
     else:
         print("Jobs:")
+        # {'id': 'vasp_eval_chunk_0_KEiSzsC7ft8ASaOmurO4yw5PhlCYVLgpAcVxVXvc1e0=_1kxwmf_c',
+        # 'name': 'vasp_eval_chunk_0',
+        # 'from_dir': '/home/cluster2/bernstei/src/work/Perovskites/ACE/_expyre/run_vasp_eval_chunk_0_KEiSzsC7ft8ASaOmurO4yw5PhlCYVLgpAcVxVXvc1e0=_1kxwmf_c',
+        # 'status': 'started',
+        # 'system': 'onyx',
+        # 'remote_id': '1805770.pbs01',
+        # 'remote_status': 'running',
+        # 'creation_time': '2021-12-06 10:23:04',
+        # 'status_time': '2021-12-06 10:25:42'}
+
+        if long_output:
+            headers = ['name', 'id', 'created']
+        else:
+            headers = ['id']
+        headers += ['stat (time)', 'remote_id@sys', 'remote stat']
+        if long_output:
+            headers += ['from dir']
+
+        rows = {f: [] for f in headers}
         for job in jobs:
-            print(job)
+            if long_output:
+                rows['name'].append(f"{job['name']}")
+                rows['id'].append(f"{job['id']}")
+                rows['created'].append(f"{job['creation_time']}")
+            else:
+                rows['id'].append(f"{job['id'][0:len(job['name'])+10]}...")
+            rows['stat (time)'].append(f"{job['status']}({job['status_time']})")
+            rows['remote_id@sys'].append(f"{job['remote_id']}@{job['system']}")
+            rows['remote stat'].append(f"{job['remote_status']}")
+            if long_output:
+                rows['from dir'].append(f"{job['from_dir']}")
+
+        d = pd.DataFrame.from_dict(rows)
+        pd.set_option('display.max_rows', None)
+        pd.set_option('display.max_columns', None)
+        pd.set_option('display.max_colwidth', None)
+        pd.set_option('display.width', None)
+        pd.set_option('display.colheader_justify', 'left')
+        print(d)
 
 
 @cli.command("rm")
@@ -78,6 +118,23 @@ def cli_rm(ctx, id, name, status, system, yes, clean):
         config.db.remove(xpr.id)
         if not clean:
             sys.stderr.write('\n')
+
+
+@cli.command("sync")
+@click.option("--id", "-i", help="comma separated list of regexps for entire job id")
+@click.option("--name", "-n", help="comma separated list of regexps for entire job name")
+@click.option("--status", "-s", help="comma separated list of status values to include, or '*' for all", default='ongoing')
+@click.option("--system", "-S", help="comma separated list of regexps for entire system name")
+@click.pass_context
+def cli_sync(ctx, id, name, status, system):
+    """Sync jobs fitting criteria (at least one criterion required)
+    """
+    if status == '*':
+        status = None
+
+    jobs = _get_jobs(id=id, name=name, status=status, system=system)
+
+    ExPyRe.sync_results_ll(jobs, cli=True)
 
 
 @cli.command("db_unlock")
