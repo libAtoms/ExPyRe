@@ -211,8 +211,13 @@ def do_clean(sys_name, dry_run):
         for f in xpr.stage_dir.glob('*'):
             p = subprocess.run(['wc', '-c', f'{f}'], capture_output=True)
             local_post_clean += p.stdout.decode()
-        stdout, _ = system.run(args=['bash'], script=f'cd {system.remote_rundir}/{xpr.stage_dir.name} && wc -c *\n')
-        remote_post_clean = stdout
+        if system.host is not None:
+            # If system.host is None run will happen in local stage dir, so there's no remote
+            # dir to check
+            stdout, _ = system.run(args=['bash'], script=f'cd {system.remote_rundir}/{xpr.stage_dir.name} && wc -c *\n')
+            remote_post_clean = stdout
+        else:
+            remote_post_clean = ''
 
         # check for files that have been CLEANED
         for l in local_post_clean.splitlines() + remote_post_clean.splitlines():

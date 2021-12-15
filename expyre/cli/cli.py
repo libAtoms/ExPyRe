@@ -127,14 +127,14 @@ def cli_rm(ctx, id, name, status, system, yes, clean):
 @click.option("--system", "-S", help="comma separated list of regexps for entire system name")
 @click.pass_context
 def cli_sync(ctx, id, name, status, system):
-    """Sync jobs fitting criteria (at least one criterion required)
+    """Sync remote status and results for jobs fitting criteria (at least one criterion required)
     """
     if status == '*':
         status = None
 
     jobs = _get_jobs(id=id, name=name, status=status, system=system)
 
-    ExPyRe.sync_results_ll(jobs, cli=True)
+    ExPyRe.sync_remote_results_status(jobs, cli=True)
 
 
 @cli.command("db_unlock")

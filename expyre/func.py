@@ -3,6 +3,7 @@ import os
 import time
 import itertools
 import re
+import warnings
 
 import shutil
 import tempfile
@@ -411,7 +412,7 @@ class ExPyRe:
             sys.stderr.write(f'ExPyRe {self.id} start() end {time.time()}\n')
 
 
-    def sync_results(self, sync_all=True, force_sync=False, verbose=False):
+    def sync_remote_results_status(self, sync_all=True, force_sync=False, verbose=False):
         """Sync files associated with results from remote machine to local stage dirs
         Parameters
         ----------
@@ -436,11 +437,11 @@ class ExPyRe:
 
         jobs_to_sync = list(config.db.jobs(system=self.system_name, id=job_id, status=status))
 
-        ExPyRe.sync_results_ll(jobs_to_sync, verbose=verbose)
+        ExPyRe.sync_remote_results_status_ll(jobs_to_sync, verbose=verbose)
 
 
     @classmethod
-    def sync_results_ll(cls, jobs_to_sync, n_group=250, cli=False, verbose=False):
+    def sync_remote_results_status_ll(cls, jobs_to_sync, n_group=250, cli=False, verbose=False):
         """Low level part of syncing jobs
 
         Parameters
@@ -556,8 +557,8 @@ class ExPyRe:
             string containing stdout during function
             string containing stderr during function
         """
-        if self.status == 'processed':
-            raise RuntimeError(f'Job {self.id} has been processed, results are no longer available')
+        if self.status == 'processed' or self.status == 'cleaned':
+            raise RuntimeError(f'Job {self.id} has status {self.status}, results are no longer available')
 
         system = config.systems[self.system_name]
         start_time = time.time()
@@ -566,21 +567,17 @@ class ExPyRe:
         n_iter = 0
         # this is a messy state machine - only fairly sure that there are no deadlocks or infinite loops
         while True:
-            # this test (i.e. manually looking for _expyre_job_[succeeded, failed]) seems a bit messy
-            if (sync and self.status != 'succeeded' and self.status != 'failed' and
-                not (self.stage_dir / '_expyre_job_succeeded').exists() and
-                not (self.stage_dir / '_expyre_job_failed').exists()):
+            # sync remote results and status.  This used to be inside test for status and/or succeeded/failed
+            # file existence, but that's probably not useful.  If we're in this loop we have to sync, since if
+            # sync isn't needed, loop should have been exited on previous iteration
+            self.sync_remote_results_status(sync_all, force_sync, verbose=verbose)
 
-                # if not quiet:
-                    # if n_iter > 0:
-                        # sys.stderr.write('\n')
-                    # sys.stderr.write(f'Doing sync when getting job {self.id}\n')
-                self.sync_results(sync_all, force_sync, verbose=verbose)
-
-            # get remote status of job, was set by call to self.sync_results() just above
+            # get remote status of job from db (was set by call to self.sync_remote_results_status() just above)
             # remote_status: queued, held,       running,    done, failed, timeout, other
             remote_status = list(config.db.jobs(id=re.escape(self.id)))[0]['remote_status']
 
+            # poke filesystem, since on some machines Path.exists() fails even if file appears to be there when doing ls
+            _ = list(self.stage_dir.glob('_expyre_job_*'))
             # update state depending on presence of various progress files and remote status
             if (self.stage_dir / '_expyre_job_succeeded').exists():
                 # job created final succeeded file
@@ -609,7 +606,7 @@ class ExPyRe:
                     # problem - job does not seem to be queued (even held) or running
                     if problem_last_chance:
                         # already on last chance, giving up
-                        # NOTE: should this really be 'failed', or some other status that the calling
+                        # NOTE: should this really be status 'failed', or some other status that the calling
                         # program can deal with separately?
                         self.status = 'failed'
                         config.db.update(self.id, status=self.status)
@@ -617,6 +614,7 @@ class ExPyRe:
                                             '"queued", "running", or "held", but neither "_succeeded" nor '
                                             '"_failed" file exists')
                     # give it one more chance, perhaps queuing system status and file are slow to sync to head node
+                    warnings.warn(f'Job {self.id} has no _succeeded or _failed file, but status is not queued, held, or running. Giving it one more chance')
                     problem_last_chance = True
                 else:
                     # No apparent problem, just not done yet, leave status as is, but check for timeout
