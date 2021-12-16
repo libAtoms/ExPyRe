@@ -28,6 +28,7 @@ class JobsDB:
             succeeded - job has finished successfully, and results are available
             failed - job has failed
             processed - job has been processed, and results no longer need to be saved
+            cleaned - job stage dir (local and remote) has been cleaned (large files overwritten or all files wiped)
     """
 
     possible_status = ['created', 'submitted', 'started', 'succeeded', 'failed', 'processed', 'cleaned']

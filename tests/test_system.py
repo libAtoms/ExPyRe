@@ -42,6 +42,10 @@ def do_system(tmp_path, system, job_name):
 
     system.get_remotes(tmp_path)
 
+    # poke filesystem, since sometimes Path.exists on NFS fails even if file
+    # exists when doing "ls"
+    _ = list(stage_dir.iterdir())
+
     # make sure output file got staged back in, and has correct content
     assert (stage_dir / 'out').exists()
 
