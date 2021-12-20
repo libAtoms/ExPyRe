@@ -8,15 +8,16 @@ from .base import Scheduler
 
 
 class SGE(Scheduler):
+    """Create SGE object
+    
+    Parameters
+    ----------
+    host: str
+        username and host for ssh/rsync username@machine.fqdn
+    remsh_cmd: str, default EXPYRE_RSH env var or 'ssh'
+        remote shell command to use
+    """
     def __init__(self, host, remsh_cmd=None):
-        """Create SGE object
-        Parameters
-        ----------
-        host: str
-            username and host for ssh/rsync username@machine.fqdn
-        remsh_cmd: str, default EXPYRE_RSH env var or 'ssh'
-            remote shell command to use
-        """
         self.host = host
         self.hold_command = ['qhold']
         self.release_command = ['qrls']
@@ -26,6 +27,7 @@ class SGE(Scheduler):
 
     def submit(self, id, remote_dir, partition, commands, max_time, header, node_dict, no_default_header=False, verbose=False):
         """Submit a job on a remote machine
+
         Parameters
         ----------
         id: str

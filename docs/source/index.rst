@@ -6,21 +6,26 @@
 ExPyRe's documentation!
 ########################################
 
-A Python toolkit for executing code in a (remote) scheduled job.
+A class for evaluating python functions via a queuing system, aimed at functions that take all their inputs as arguments (not files) and return all their outputs in the return values.
+
+Evaluation can take place on the same system as the main python process that is calling the functions, or on a remote system (via passwordless ssh).
 
 
-For now the documentation must be build from source. 
-
-1. ``sphinx-apidoc -o source ../expyre``  (only whenever source code changes)
-2. ``make html``
-3. ``open build/html/index.html``
 
 
 .. toctree::
     :maxdepth: 3
     :caption: Contents:
 
-    modules.rst
+    basic_use.rst
+    resources.rst 
+    config.rst
+    restarting.rst
+    environment_variables.rst
+    command_line.rst
+    unit_testing.rst
+    expyre.rst
+	
 
 * :ref:`genindex`
 * :ref:`modindex`

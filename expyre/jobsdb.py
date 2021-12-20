@@ -21,14 +21,14 @@ class JobsDB:
     """Database of jobs, currently implemented with sqlite.  Saves essential information
     on jobs, including local and remote id, local directory it's staged to, system
     its been submitted to, and status.
-
-    Status: created - job has been created, but not yet submitted to run
-            submitted - job has been submitted to some queuing system
-            started - job has started running
-            succeeded - job has finished successfully, and results are available
-            failed - job has failed
-            processed - job has been processed, and results no longer need to be saved
-            cleaned - job stage dir (local and remote) has been cleaned (large files overwritten or all files wiped)
+    Status may be one of: 
+            * created - job has been created, but not yet submitted to run
+            * submitted - job has been submitted to some queuing system
+            * started - job has started running
+            * succeeded - job has finished successfully, and results are available
+            * failed - job has failed
+            * processed - job has been processed, and results no longer need to be saved
+            * cleaned - job stage dir (local and remote) has been cleaned (large files overwritten or all files wiped)
     """
 
     possible_status = ['created', 'submitted', 'started', 'succeeded', 'failed', 'processed', 'cleaned']
@@ -57,6 +57,7 @@ class JobsDB:
 
     def __init__(self, db_filename):
         """Create JobsDB obect
+
         Parameters
         ----------
         db_filename: str
@@ -86,6 +87,7 @@ class JobsDB:
 
     def add(self, id, name, from_dir, status='created', system=None, remote_id=None, remote_status=None):
         """Add a job to the DB
+
         Parameters
         ----------
         id: str
@@ -117,6 +119,7 @@ class JobsDB:
 
     def remove(self, id):
         """Remove a job from the DB
+
         Parameters
         ----------
         id: str
@@ -131,6 +134,7 @@ class JobsDB:
 
     def update(self, id, /, **kwargs):
         """Update some field of job
+
         Parameters
         ----------
         id: str
@@ -155,6 +159,7 @@ class JobsDB:
 
     def jobs(self, status=None, id=None, name=None, system=None, readable=True):
         """Iterate through jobs
+
         Parameters
         ----------
         status: str or list(str), default None
@@ -168,7 +173,7 @@ class JobsDB:
 
         Returns
         -------
-        Iterator of dicts with fields for all DB columns for each job that matches selection criteria.
+        Iterator of dicts: Iterator of dicts with fields for all DB columns for each job that matches selection criteria.
         """
         if isinstance(status, str):
             status = [status]
@@ -213,6 +218,7 @@ class JobsDB:
 
 
     def unlock(self):
+        """unlocks the sqlite database"""
         # create tmp
         tmp_db_file = self.db_filename.parent / (self.db_filename.name + '.tmp')
         new_db = sqlite3.connect(tmp_db_file)

@@ -8,15 +8,17 @@ from .base import Scheduler
 
 
 class PBS(Scheduler):
+    """Create Slurm object
+
+    Parameters
+    ----------
+    host: str
+        username and host for ssh/rsync username@machine.fqdn
+    remsh_cmd: str, default EXPYRE_RSH env var or 'ssh'
+        remote shell command to use
+    """
+
     def __init__(self, host, remsh_cmd=None):
-        """Create Slurm object
-        Parameters
-        ----------
-        host: str
-            username and host for ssh/rsync username@machine.fqdn
-        remsh_cmd: str, default EXPYRE_RSH env var or 'ssh'
-            remote shell command to use
-        """
         self.host = host
         self.hold_command = ['qhold']
         self.release_command = ['qrls']
@@ -26,6 +28,7 @@ class PBS(Scheduler):
 
     def submit(self, id, remote_dir, partition, commands, max_time, header, node_dict, no_default_header=False, verbose=False):
         """Submit a job on a remote machine
+
         Parameters
         ----------
         id: str
@@ -48,7 +51,7 @@ class PBS(Scheduler):
 
         Returns
         -------
-        str remote job id
+        remote job id (str)
         """
         node_dict = node_dict.copy()
 
@@ -121,6 +124,7 @@ class PBS(Scheduler):
 
     def status(self, remote_ids, verbose=False):
         """determine status of remote jobs
+        
         Parameters
         ----------
         remote_ids: str, list(str)

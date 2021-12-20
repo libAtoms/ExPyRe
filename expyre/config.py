@@ -1,4 +1,7 @@
-"""configuration for expyre, from "config.json" in $EXPYRE_ROOT or $HOME/.expyre
+"""configuration for expyre, from ``config.json`` in ``$EXPYRE_ROOT`` or ``$HOME/.expyre``
+
+Global variables
+----------------
 
 root: str
     path of root directory for this run
@@ -98,6 +101,8 @@ db = None
 
 
 def init(root_dir=None, verbose=False):
+    """Initializes ``root``, ``systems``, ``db``"""
+
     import os
 
     from .units import time_to_sec, mem_to_kB
