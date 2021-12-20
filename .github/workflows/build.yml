@@ -18,7 +18,7 @@ jobs:
 
       - name: Install dependencies and expyre
         run: |
-          pip install flake8 pytest 
+          pip install flake8 pytest pytest-cov
           pip install .
 
       - name: Lint with flake8
