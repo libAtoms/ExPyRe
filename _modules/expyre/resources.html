@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expyre.resources &#8212; ExPyRe  documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ExPyRe  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../basic_use.html">
+   Basic use
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../resources.html">
+   Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../config.html">
+   Scheduler Configuration file
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../restarting.html">
+   Restarting an interrupted process
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../environment_variables.html">
+   Environment Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../command_line.html">
+   Command line utilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../unit_testing.html">
+   Unit testing
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../expyre.html">
+   expyre package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../expyre.cli.html">
+     expyre.cli package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../expyre.schedulers.html">
+     expyre.schedulers package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <h1>Source code for expyre.resources</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">.units</span> <span class="k">import</span> <span class="n">time_to_sec</span><span class="p">,</span> <span class="n">mem_to_kB</span>
+
+
+<div class="viewcode-block" id="Resources"><a class="viewcode-back" href="../../expyre.html#expyre.resources.Resources">[docs]</a><span class="k">class</span> <span class="nc">Resources</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Resources required for a task, including time, memory, cores/nodes/tasks, and particular</span>
+<span class="sd">    partitions.  Mainly consists of code that selects appropriate partition from the list</span>
+<span class="sd">    associated with each System.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    max_time: int, str</span>
+<span class="sd">        max time for job in s (int) or time spec (str)</span>
+<span class="sd">    n: (int, str)</span>
+<span class="sd">        int number of tasks or nodes to use and str &#39;tasks&#39; or &#39;nodes&#39;</span>
+<span class="sd">    ncores_per_task: int, default 1</span>
+<span class="sd">        cores per task, 0 for all cores in node</span>
+<span class="sd">    max_mem_per_task: int, str, default None</span>
+<span class="sd">        max mem per task in kB (int) or memory spec (str)</span>
+<span class="sd">    partitions: list(str), default None</span>
+<span class="sd">        regexps for types of node that can be used</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_time</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">ncores_per_task</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_mem_per_task</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partitions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="k">assert</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">,</span> <span class="s1">&#39;tasks&#39;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_time</span> <span class="o">=</span> <span class="n">time_to_sec</span><span class="p">(</span><span class="n">max_time</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ncores_per_task</span> <span class="o">=</span> <span class="n">ncores_per_task</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_mem_per_task</span> <span class="o">=</span> <span class="n">mem_to_kB</span><span class="p">(</span><span class="n">max_mem_per_task</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">partitions</span> <span class="o">=</span> <span class="n">partitions</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partitions</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">partitions</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">partitions</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Resources.find_nodes"><a class="viewcode-back" href="../../expyre.html#expyre.resources.Resources.find_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">find_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partitions</span><span class="p">,</span> <span class="n">exact_fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">partial_node</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;find a node type that accomodates requested resources</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        partitions: dict</span>
+<span class="sd">            properties of available partitions</span>
+<span class="sd">        exact_fit: bool, default True</span>
+<span class="sd">            only return nodes that exactly satisfy the number of tasks</span>
+<span class="sd">        partial_node: bool, default False</span>
+<span class="sd">            allow jobs that take less than an entire node, overrides exact_fit</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        partition: str</span>
+<span class="sd">            name of partition selected</span>
+<span class="sd">        dict: dict </span>
+<span class="sd">            various quantities of node:</span>
+<span class="sd">            </span>
+<span class="sd">            * nnodes: int, total number of nodes needed</span>
+<span class="sd">            * tot_ncores: int, total number of cores needed</span>
+<span class="sd">            * ncores_per_node: int, number of cores per node for selected nodes</span>
+<span class="sd">            * tot_ntasks: int, total number of (mpi) tasks to run</span>
+<span class="sd">            * ncores_per_task: int, cores per task</span>
+<span class="sd">            * ntasks_per_node: int, tasks per node (only if exact_fit=True, otherwise None)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">selected_partitions</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="n">partial_node</span><span class="p">:</span>
+            <span class="n">exact_fit</span><span class="o">=</span><span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">partition</span><span class="p">,</span> <span class="n">node_spec</span> <span class="ow">in</span> <span class="n">partitions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">([</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;^&#39;</span><span class="o">+</span><span class="n">nt_re</span><span class="o">+</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="n">partition</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">nt_re</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitions</span><span class="p">]):</span>
+                <span class="c1"># wrong node type</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_time&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_time</span> <span class="o">&gt;</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_time&#39;</span><span class="p">]:</span>
+                <span class="c1"># too much time</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">exact_fit</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;tasks&#39;</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncores_per_task</span><span class="p">)</span> <span class="o">%</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># wrong number of cores</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_mem_per_task</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_mem&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">nnodes</span><span class="p">,</span> <span class="n">tot_ntasks</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_nnodes_ntasks_ncores_per_task</span><span class="p">(</span><span class="n">node_spec</span><span class="p">)</span>
+                <span class="n">max_mem_per_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_mem_per_task</span> <span class="o">*</span> <span class="n">tot_ntasks</span> <span class="o">/</span> <span class="n">nnodes</span>
+                <span class="k">if</span> <span class="n">max_mem_per_node</span> <span class="o">&gt;</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_mem&#39;</span><span class="p">]:</span>
+                    <span class="c1"># too much memory</span>
+                    <span class="k">continue</span>
+
+            <span class="n">selected_partitions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">partition</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_partitions</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Failed to find acceptable node type &#39;</span>
+                               <span class="n">f</span><span class="s1">&#39;for </span><span class="si">{self}</span><span class="s1"> with exact_fit=</span><span class="si">{exact_fit}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_partitions</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">wasted_cores</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">nt</span> <span class="ow">in</span> <span class="n">selected_partitions</span><span class="p">:</span>
+                <span class="n">node_spec</span> <span class="o">=</span> <span class="n">partitions</span><span class="p">[</span><span class="n">nt</span><span class="p">]</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">tot_ntasks</span><span class="p">,</span> <span class="n">ncores_per_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_nnodes_ntasks_ncores_per_task</span><span class="p">(</span><span class="n">node_spec</span><span class="p">)</span>
+                <span class="n">wasted_cores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">tot_ntasks</span> <span class="o">*</span> <span class="n">ncores_per_task</span><span class="p">)</span> <span class="o">%</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">])</span> <span class="o">%</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">])</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># look for first one that matches exactly</span>
+                <span class="n">partition_i</span> <span class="o">=</span> <span class="n">wasted_cores</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="c1"># pick best among remaining</span>
+                <span class="n">max_extra</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">wasted_cores</span><span class="p">)</span>
+                <span class="n">partition_i</span> <span class="o">=</span> <span class="n">wasted_cores</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">max_extra</span><span class="p">)</span>
+            <span class="n">selected_partitions</span> <span class="o">=</span> <span class="p">[</span><span class="n">selected_partitions</span><span class="p">[</span><span class="n">partition_i</span><span class="p">]]</span>
+
+        <span class="n">partition</span> <span class="o">=</span> <span class="n">selected_partitions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">nnodes</span><span class="p">,</span> <span class="n">tot_ntasks</span><span class="p">,</span> <span class="n">ncores_per_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_nnodes_ntasks_ncores_per_task</span><span class="p">(</span><span class="n">partitions</span><span class="p">[</span><span class="n">partition</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">exact_fit</span><span class="p">:</span>
+            <span class="n">ntasks_per_node</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ntasks_per_node</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tot_ntasks</span> <span class="o">//</span> <span class="n">nnodes</span><span class="p">)</span>
+
+        <span class="c1"># by default use entire nodes</span>
+        <span class="n">ncores_per_node</span> <span class="o">=</span> <span class="n">partitions</span><span class="p">[</span><span class="n">partition</span><span class="p">][</span><span class="s1">&#39;ncores&#39;</span><span class="p">]</span>
+        <span class="n">tot_ncores</span> <span class="o">=</span> <span class="n">nnodes</span> <span class="o">*</span> <span class="n">ncores_per_node</span>
+        <span class="k">if</span> <span class="n">partial_node</span> <span class="ow">and</span> <span class="n">tot_ntasks</span> <span class="o">*</span> <span class="n">ncores_per_task</span> <span class="o">&lt;</span> <span class="n">partitions</span><span class="p">[</span><span class="n">partition</span><span class="p">][</span><span class="s1">&#39;ncores&#39;</span><span class="p">]:</span>
+            <span class="c1"># partial node</span>
+            <span class="n">tot_ncores</span> <span class="o">=</span> <span class="n">tot_ntasks</span> <span class="o">*</span> <span class="n">ncores_per_task</span>
+            <span class="n">ncores_per_node</span> <span class="o">=</span> <span class="n">tot_ncores</span>
+
+        <span class="k">return</span> <span class="n">partition</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;nnodes&#39;</span><span class="p">:</span> <span class="n">nnodes</span><span class="p">,</span> <span class="s1">&#39;tot_ncores&#39;</span><span class="p">:</span> <span class="n">tot_ncores</span><span class="p">,</span>
+                           <span class="s1">&#39;ncores_per_node&#39;</span><span class="p">:</span> <span class="n">ncores_per_node</span><span class="p">,</span>
+                           <span class="s1">&#39;tot_ntasks&#39;</span><span class="p">:</span> <span class="n">tot_ntasks</span><span class="p">,</span> <span class="s1">&#39;ncores_per_task&#39;</span><span class="p">:</span> <span class="n">ncores_per_task</span><span class="p">,</span> <span class="s1">&#39;ntasks_per_node&#39;</span><span class="p">:</span> <span class="n">ntasks_per_node</span><span class="p">}</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_get_nnodes_ntasks_ncores_per_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_spec</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncores_per_task</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># one task per node</span>
+            <span class="n">nnodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">tot_ntasks</span> <span class="o">=</span> <span class="n">nnodes</span>
+            <span class="n">ncores_per_task</span> <span class="o">=</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">]</span>
+
+            <span class="k">return</span> <span class="n">nnodes</span><span class="p">,</span> <span class="n">tot_ntasks</span><span class="p">,</span> <span class="n">ncores_per_task</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;nodes&#39;</span><span class="p">:</span>
+            <span class="c1"># fill up requested # of nodes</span>
+            <span class="n">nnodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">tot_ntasks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nnodes</span> <span class="o">*</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">]</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncores_per_task</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;tasks&#39;</span><span class="p">:</span>
+            <span class="c1"># determine how many nodes are necessary</span>
+            <span class="n">tot_ntasks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">nnodes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tot_ntasks</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncores_per_task</span> <span class="o">//</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">nnodes</span> <span class="o">*</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tot_ntasks</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncores_per_task</span><span class="p">:</span>
+                <span class="n">nnodes</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;number of unknown quantity </span><span class="si">{self.n[1]}</span><span class="s1">, not &quot;nodes&quot; or &quot;tasks&quot;&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">nnodes</span><span class="p">,</span> <span class="n">tot_ntasks</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncores_per_task</span>
+
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;time=</span><span class="si">{self.max_time}</span><span class="s1"> n=</span><span class="si">{self.n}</span><span class="s1"> ncores_per_task=</span><span class="si">{self.ncores_per_task}</span><span class="s1"> &#39;</span>
+                <span class="n">f</span><span class="s1">&#39;mem=</span><span class="si">{self.max_mem_per_task}</span><span class="s1"> partitions=</span><span class="si">{self.partitions}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright .<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

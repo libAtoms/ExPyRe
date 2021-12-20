@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic use &#8212; ExPyRe  documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Resources" href="resources.html" />
+    <link rel="prev" title="ExPyRe’s documentation!" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ExPyRe  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Basic use
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="resources.html">
+   Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="config.html">
+   Scheduler Configuration file
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="restarting.html">
+   Restarting an interrupted process
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="environment_variables.html">
+   Environment Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="command_line.html">
+   Command line utilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="unit_testing.html">
+   Unit testing
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="expyre.html">
+   expyre package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="expyre.cli.html">
+     expyre.cli package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="expyre.schedulers.html">
+     expyre.schedulers package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/basic_use.rst.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="basic-use">
+<h1>Basic use<a class="headerlink" href="#basic-use" title="Permalink to this headline">¶</a></h1>
+<p>An example of where ExPyRe might be useful is a resourse-heavy step in a Python script, which would otherwhise be run on a (“local”) laptop. To run that step on a (“remote”) high-performance computer, one would need to:</p>
+<ol class="arabic simple">
+<li><p>Write a script for the expensive step and potentially prepare inputs,</p></li>
+<li><p>Copy script and inputs to the “remote” location,</p></li>
+<li><p>Write a submission script and specify there the resources to use (nodes, cores, time, etc.),</p></li>
+<li><p>Submit the job,</p></li>
+<li><p>Monitor the job progress,</p></li>
+<li><p>Copy results to the “local” computer,</p></li>
+<li><p>Unpack results and run the rest of the Python script,</p></li>
+<li><p>Remove no longer useful files from “local” and “remote” locations.</p></li>
+</ol>
+<p>For ExPyRe to automatically manage these steps, one needs to</p>
+<ol class="arabic simple">
+<li><p>Specify hpc’s queueing system in <code class="docutils literal notranslate"><span class="pre">conf.json</span></code> (once ever),</p></li>
+<li><p>Wrap the resources-heavy part in ExPyRe functions (once per script),</p></li>
+<li><p>Clean the files with <code class="docutils literal notranslate"><span class="pre">xpr</span></code> command line utility function (once after running the script).</p></li>
+</ol>
+<p>Below is a minimal example of running a simple Numpy function remotely, with a breif explanation of options and behaviour. For more information, see the dedicated page.</p>
+<p>Original Python script:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">array_to_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+<span class="n">array_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">array_to_sum</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">array_sum</span> <span class="o">-</span> <span class="p">[</span><span class="mf">50.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span> <span class="o">==</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+<p>And ExPyRe-modified script:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">expyre.func</span> <span class="kn">import</span> <span class="n">ExPyRe</span>
+
+<span class="c1"># input for function</span>
+<span class="n">array_to_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+
+<span class="c1"># create a task to sum array over axis=1</span>
+<span class="n">xpr</span> <span class="o">=</span> <span class="n">ExPyRe</span><span class="p">(</span><span class="s1">&#39;test_task&#39;</span><span class="p">,</span> <span class="n">function</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">array_to_sum</span><span class="p">],</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;axis&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+
+<span class="c1"># resources: run for max 1 hour on 1 node, on a regular partition node</span>
+<span class="n">res</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_time&#39;</span><span class="p">:</span> <span class="s1">&#39;1h&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;nodes&#39;</span><span class="p">),</span> <span class="s1">&#39;partitions&#39;</span><span class="p">:</span> <span class="s1">&#39;regular&#39;</span><span class="p">}</span>
+
+<span class="c1"># submit job</span>
+<span class="n">xpr</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">resources</span><span class="o">=</span><span class="n">res</span><span class="p">,</span> <span class="n">system_name</span><span class="o">=</span><span class="s1">&#39;remote&#39;</span><span class="p">)</span>
+
+<span class="c1"># gather results</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">array_sum</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">xpr</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">array_sum</span> <span class="o">-</span> <span class="p">[</span><span class="mf">50.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span> <span class="o">==</span> <span class="mf">0.0</span>
+<span class="k">except</span> <span class="n">TimeoutError</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;job did not run in alloted time&#39;</span><span class="p">)</span>
+
+<span class="c1"># mark as processed in jobs db in case of restarts</span>
+<span class="n">xpr</span><span class="o">.</span><span class="n">mark_processed</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In addition, the following (modified appropriately) should be placed at <code class="docutils literal notranslate"><span class="pre">~/.expyre/config.json</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="s2">&quot;systems&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;remtote&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s1">&#39;my-cluster&#39;</span><span class="p">,</span>
+                <span class="s2">&quot;scheduler&quot;</span><span class="p">:</span> <span class="s2">&quot;sge&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;#$ -pe smp </span><span class="si">{ncores_per_node}</span><span class="s2">&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;partitions&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;regular&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;ncores&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;max_time&quot;</span> <span class="p">:</span> <span class="s2">&quot;168h&quot;</span><span class="p">,</span> <span class="s2">&quot;max_mem&quot;</span><span class="p">:</span> <span class="s2">&quot;50GB&quot;</span><span class="p">},</span>
+                            <span class="s2">&quot;large-mem&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;ncores&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span> <span class="s2">&quot;max_time&quot;</span><span class="p">:</span> <span class="s2">&quot;168h&quot;</span><span class="p">,</span> <span class="s2">&quot;max_mem&quot;</span><span class="p">:</span> <span class="s2">&quot;200GB&quot;</span><span class="p">},</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>First, we create an ExPyRe object (<code class="docutils literal notranslate"><span class="pre">xpr</span></code>). Instead of calling a function directly, we need to specify the function, its arguments and keyword arguments separately for them to be pickled and stored in the local stage directory (<code class="docutils literal notranslate"><span class="pre">~/.expyre/...</span></code> by default). Any files used by the function and some utility files are also stored there. This step also makes an entry in the jobs database (also at <code class="docutils literal notranslate"><span class="pre">~/.expyre/jobs.db</span></code>), in preparation to tracking the remote jobs, so that the parent script can be restarted if interrupted.</p>
+<p><code class="docutils literal notranslate"><span class="pre">xpr.start()</span></code> starts the job on the remote machine. It copies files from the local stage directory to remote (<code class="docutils literal notranslate"><span class="pre">~/run_expyre/</span></code>, by default) via a passwordless ssh command to <code class="docutils literal notranslate"><span class="pre">my-cluster</span></code> (i.e. <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">my-cluster</span></code> from “local” computer should work and login to the “remote” machine). The partition (or queue) is picked from the ones defined in <code class="docutils literal notranslate"><span class="pre">~/.expryre/config.json</span></code>, based on the resources specified in <code class="docutils literal notranslate"><span class="pre">res</span></code>. Scheduler-specific submission script is prepared and submitted on the “remote” computer and the status and details about the remote job are updated in the “local” <code class="docutils literal notranslate"><span class="pre">jobs.db</span></code>.</p>
+<p>Based on all above, the Sun Grid Engine submission script has the following header:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
+<span class="c1">#$ -pe smp 16</span>
+<span class="c1">#$ -N N_test_task_tkrT4KjgpTu6r-4NiIWq-CuXMmAuUbEdP6_s1uSAGiQ=_e0p0ywcz</span>
+<span class="c1">#$ -q regular</span>
+<span class="c1">#$ -l h_rt=1:00:00</span>
+<span class="c1">#$ -o job.test_task_tkrT4KjgpTu6r-4NiIWq-CuXMmAuUbEdP6_s1uSAGiQ=_e0p0ywcz.stdout</span>
+<span class="c1">#$ -e job.test_task_tkrT4KjgpTu6r-4NiIWq-CuXMmAuUbEdP6_s1uSAGiQ=_e0p0ywcz.stderr</span>
+<span class="c1">#$ -S /bin/bash</span>
+<span class="c1">#$ -r n</span>
+<span class="c1">#$ -cwd</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">xpr.get_results()</span></code> periodically checks the queueing system for job’s status and finally gathers the results, along with standard output and error. If the script is interrupted before the remote job has finished running, the whole Python script can be restarted: instead of creating a second identical instance, <code class="docutils literal notranslate"><span class="pre">ExPyRe()</span></code> will recognise the job already present in the jobs database and <code class="docutils literal notranslate"><span class="pre">xpr.get_results()</span></code> will resume waiting for the results or return if the remote job has meanwhile finished running.</p>
+<p>The final <code class="docutils literal notranslate"><span class="pre">xpr.mark_processed()</span></code> modifies the jobs.db entry. All remote and local files may be deleted with <code class="docutils literal notranslate"><span class="pre">xpr</span> <span class="pre">rm</span> <span class="pre">-c</span> <span class="pre">-s</span> <span class="pre">processed</span></code>.</p>
+</div>
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">ExPyRe’s documentation!</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="resources.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Resources</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright .<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

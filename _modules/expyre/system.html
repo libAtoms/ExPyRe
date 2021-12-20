@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expyre.system &#8212; ExPyRe  documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ExPyRe  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../basic_use.html">
+   Basic use
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../resources.html">
+   Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../config.html">
+   Scheduler Configuration file
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../restarting.html">
+   Restarting an interrupted process
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../environment_variables.html">
+   Environment Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../command_line.html">
+   Command line utilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../unit_testing.html">
+   Unit testing
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../expyre.html">
+   expyre package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../expyre.cli.html">
+     expyre.cli package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../expyre.schedulers.html">
+     expyre.schedulers package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <h1>Source code for expyre.system</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">.subprocess</span> <span class="k">import</span> <span class="n">subprocess_run</span><span class="p">,</span> <span class="n">subprocess_copy</span>
+<span class="kn">from</span> <span class="nn">.schedulers</span> <span class="k">import</span> <span class="n">schedulers</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">util</span>
+
+
+<div class="viewcode-block" id="System"><a class="viewcode-back" href="../../expyre.html#expyre.system.System">[docs]</a><span class="k">class</span> <span class="nc">System</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Interface for a System that can run jobs remotely, including staging files from</span>
+<span class="sd">    a local directory to a (config-specified) remote directory, submitting it with the correct</span>
+<span class="sd">    kind of Scheduler, and staging back the results from the remote directory.  Does not report</span>
+<span class="sd">    any other status directly.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    host: str</span>
+<span class="sd">        [username@]machine.fqdn</span>
+<span class="sd">    partitions: dict</span>
+<span class="sd">        dictionary describing partitions types</span>
+<span class="sd">    scheduler: str, Scheduler</span>
+<span class="sd">        type of scheduler</span>
+<span class="sd">    header: list(str), optional</span>
+<span class="sd">        list of batch system header to use in every job, typically for system-specific things</span>
+<span class="sd">        like selecting nodes</span>
+<span class="sd">    no_default_header: bool, default False</span>
+<span class="sd">        do not automatically add default header fields, namely job name, partition/queue,</span>
+<span class="sd">        max runtime, and stdout/stderr files</span>
+<span class="sd">    commands: list(str), optional</span>
+<span class="sd">        list of commands to run at start of every job on machine</span>
+<span class="sd">    rundir: str, default &#39;run_expyre&#39;</span>
+<span class="sd">        path on remote machine to run in.  If absolute, used as if, and if relative, relative</span>
+<span class="sd">        to (remote) home directory</span>
+<span class="sd">    remsh_cmd: str, default EXPYRE_RSH or &#39;ssh&#39;</span>
+<span class="sd">        remote shell command to use with this system</span>
+<span class="sd">    rundir_extra: str, default None</span>
+<span class="sd">        extra string to add to remote_rundir, e.g. per-project part of path</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">partitions</span><span class="p">,</span> <span class="n">scheduler</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="p">[],</span> <span class="n">no_default_header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">commands</span><span class="o">=</span><span class="p">[],</span>
+                 <span class="n">rundir</span><span class="o">=</span><span class="s1">&#39;run_expyre&#39;</span><span class="p">,</span> <span class="n">rundir_extra</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a remote system object</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remote_rundir</span> <span class="o">=</span> <span class="n">rundir</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_rundir</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remote_rundir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_rundir</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">rundir_extra</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remote_rundir</span> <span class="o">+=</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">rundir_extra</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">partitions</span> <span class="o">=</span> <span class="n">partitions</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">if</span> <span class="n">partitions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">partitions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queuing_sys_header</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_default_header</span> <span class="o">=</span> <span class="n">no_default_header</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commands</span> <span class="o">=</span> <span class="n">commands</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remsh_cmd</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">remsh_cmd</span><span class="p">(</span><span class="n">remsh_cmd</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scheduler</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">schedulers</span><span class="p">[</span><span class="n">scheduler</span><span class="p">](</span><span class="n">host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remsh_cmd</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">scheduler</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="System.run"><a class="viewcode-back" href="../../expyre.html#expyre.system.System.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">script</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="s1">&#39;bash -lc&#39;</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;_HOME_&#39;</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1"># like subprocess_run, but filling in host and remsh command from self</span>
+        <span class="k">return</span> <span class="n">subprocess_run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">script</span><span class="o">=</span><span class="n">script</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="n">shell</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remsh_cmd</span><span class="p">,</span>
+                              <span class="n">retry</span><span class="o">=</span><span class="n">retry</span><span class="p">,</span> <span class="n">in_dir</span><span class="o">=</span><span class="n">in_dir</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="n">dry_run</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="System.initialize_remote_rundir"><a class="viewcode-back" href="../../expyre.html#expyre.system.System.initialize_remote_rundir">[docs]</a>    <span class="k">def</span> <span class="nf">initialize_remote_rundir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;mkdir&#39;</span><span class="p">,</span> <span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remote_rundir</span><span class="p">)],</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_job_remote_rundir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage_dir</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.remote_rundir}</span><span class="s1">/</span><span class="si">{stage_dir.name}</span><span class="s1">&#39;</span>
+
+
+<div class="viewcode-block" id="System.submit"><a class="viewcode-back" href="../../expyre.html#expyre.system.System.submit">[docs]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">stage_dir</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">exact_fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">partial_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Submit a job on a remote machine, including staging out files</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id: str</span>
+<span class="sd">            unique id for job</span>
+<span class="sd">        stage_dir: str, Path</span>
+<span class="sd">            directory in which files have been prepared</span>
+<span class="sd">        resoures: Resources</span>
+<span class="sd">            resources to use for job</span>
+<span class="sd">        commands: list(str)</span>
+<span class="sd">            commands to run in job script after per-machine commands</span>
+<span class="sd">        exact_fit: bool, default True</span>
+<span class="sd">            only match partitions that have nodes with exact match to number of tasks</span>
+<span class="sd">        partial_node: bool, default False</span>
+<span class="sd">            allow jobs that take less than an entire node</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        id of job on remote machine</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;system </span><span class="si">{self.id}</span><span class="s1"> submit start {time.time()}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_remote_rundir</span><span class="p">()</span>
+
+        <span class="n">partition</span><span class="p">,</span> <span class="n">node_dict</span> <span class="o">=</span> <span class="n">resources</span><span class="o">.</span><span class="n">find_nodes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partitions</span><span class="p">,</span> <span class="n">exact_fit</span><span class="o">=</span><span class="n">exact_fit</span><span class="p">,</span>
+                                                    <span class="n">partial_node</span><span class="o">=</span><span class="n">partial_node</span><span class="p">)</span>
+        <span class="n">commands</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span> <span class="o">+</span> <span class="n">commands</span>
+
+        <span class="n">stage_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">stage_dir</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># no host, so run in stage dir to avoid needless copying</span>
+            <span class="n">job_remote_rundir</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">stage_dir</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">job_remote_rundir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_job_remote_rundir</span><span class="p">(</span><span class="n">stage_dir</span><span class="p">)</span>
+
+            <span class="c1"># make remote rundir, but fail if job-specific remote dir already exists</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;bash&#39;</span><span class="p">],</span>
+                     <span class="n">script</span><span class="o">=</span><span class="n">f</span><span class="s1">&#39;if [ ! -d &quot;</span><span class="si">{self.remote_rundir}</span><span class="s1">&quot; ]; then &#39;</span>
+                            <span class="n">f</span><span class="s1">&#39;    echo &quot;remote rundir </span><span class="se">\&#39;</span><span class="si">{self.remote_rundir}</span><span class="se">\&#39;</span><span class="s1"> does not exist&quot; 1&gt;&amp;2; &#39;</span>
+                             <span class="s1">&#39;    exit 1; &#39;</span>
+                            <span class="n">f</span><span class="s1">&#39;elif [ -e &quot;</span><span class="si">{job_remote_rundir}</span><span class="s1">&quot; ]; then &#39;</span>
+                            <span class="n">f</span><span class="s1">&#39;    echo &quot;remote job rundir </span><span class="se">\&#39;</span><span class="si">{job_remote_rundir}</span><span class="se">\&#39;</span><span class="s1"> already exists&quot; 1&gt;&amp;2; &#39;</span>
+                             <span class="s1">&#39;    exit 2; &#39;</span>
+                             <span class="s1">&#39;else &#39;</span>
+                            <span class="n">f</span><span class="s1">&#39;    mkdir -p &quot;</span><span class="si">{job_remote_rundir}</span><span class="s1">&quot;; &#39;</span>
+                             <span class="s1">&#39;fi&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+            <span class="c1"># stage out files</span>
+            <span class="c1"># strip out final / from source path so that rsync creates stage_dir.name remotely under self.remote_rundir</span>
+            <span class="n">stage_dir_src</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">stage_dir</span><span class="p">)</span>
+            <span class="k">while</span> <span class="n">stage_dir_src</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
+                <span class="n">stage_dir_src</span> <span class="o">=</span> <span class="n">stage_dir_src</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;system </span><span class="si">{self.id}</span><span class="s1"> submit start stage in {time.time()}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">subprocess_copy</span><span class="p">(</span><span class="n">stage_dir_src</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_rundir</span><span class="p">,</span> <span class="n">to_host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span>
+                            <span class="n">remsh_cmd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remsh_cmd</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+        <span class="c1"># submit job</span>
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;system </span><span class="si">{self.id}</span><span class="s1"> submit start scheduler submit {time.time()}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">job_remote_rundir</span><span class="p">),</span> <span class="n">partition</span><span class="p">,</span>
+                                      <span class="n">commands</span><span class="p">,</span> <span class="n">resources</span><span class="o">.</span><span class="n">max_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">queuing_sys_header</span><span class="p">,</span>
+                                      <span class="n">node_dict</span><span class="p">,</span> <span class="n">no_default_header</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">no_default_header</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;System.submit call to Scheduler.submit failed for job id </span><span class="si">{id}</span><span class="s1">, cleaning up remote dir {str(self.remote_rundir)}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;rm&#39;</span><span class="p">,</span> <span class="s1">&#39;-r&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">job_remote_rundir</span><span class="p">)],</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;system </span><span class="si">{self.id}</span><span class="s1"> submit end {time.time()}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r</span></div>
+
+
+<div class="viewcode-block" id="System.get_remotes"><a class="viewcode-back" href="../../expyre.html#expyre.system.System.get_remotes">[docs]</a>    <span class="k">def</span> <span class="nf">get_remotes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_dir</span><span class="p">,</span> <span class="n">subdir_glob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;get data from directories of remotely running jobs</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        subdir_glob: str, list(str), default None</span>
+<span class="sd">            only get subdirectories that much one or more globs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># nothing to &quot;get&quot; since this ran in stage dir</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">subdir_glob</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">subdir_glob</span> <span class="o">=</span> <span class="s1">&#39;/*&#39;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subdir_glob</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">subdir_glob</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">subdir_glob</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">subdir_glob</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">subdir_glob</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">subdir_glob</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">subdir_glob</span> <span class="o">=</span> <span class="s1">&#39;/{&#39;</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subdir_glob</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+
+        <span class="n">subprocess_copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remote_rundir</span> <span class="o">+</span> <span class="n">subdir_glob</span><span class="p">,</span> <span class="n">local_dir</span><span class="p">,</span> <span class="n">from_host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span>
+                        <span class="n">remsh_cmd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remsh_cmd</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="System.clean_rundir"><a class="viewcode-back" href="../../expyre.html#expyre.system.System.clean_rundir">[docs]</a>    <span class="k">def</span> <span class="nf">clean_rundir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage_dir</span><span class="p">,</span> <span class="n">filenames</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;clean a remote stage directory</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        stage_dir: str | Path</span>
+<span class="sd">            local stage directory path</span>
+<span class="sd">        files: list(str) or None</span>
+<span class="sd">            list of files to replaced with &#39;CLEANED&#39;, or wipe entire directory if None</span>
+<span class="sd">        verbose: bool, default False</span>
+<span class="sd">            verbose output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># the job remote rundir _is_ the stage dir, so do not delete here</span>
+            <span class="k">return</span>
+
+        <span class="n">job_remote_rundir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_job_remote_rundir</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">stage_dir</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">filenames</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span> <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;bash&#39;</span><span class="p">],</span>
+                     <span class="n">script</span><span class="o">=</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;for f in {&quot; &quot;.join(filenames)}; do</span><span class="se">\n</span><span class="s1">&#39;</span>
+                             <span class="n">f</span><span class="s1">&#39;    ff=</span><span class="si">{job_remote_rundir}</span><span class="s1">/$f</span><span class="se">\n</span><span class="s1">&#39;</span>
+                             <span class="n">f</span><span class="s1">&#39;    if [ -f $ff ]; then</span><span class="se">\n</span><span class="s1">&#39;</span>
+                             <span class="n">f</span><span class="s1">&#39;        echo &quot;CLEANED&quot; &gt; $ff</span><span class="se">\n</span><span class="s1">&#39;</span>
+                             <span class="n">f</span><span class="s1">&#39;    fi</span><span class="se">\n</span><span class="s1">&#39;</span>
+                             <span class="n">f</span><span class="s1">&#39;done</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">),</span> <span class="n">dry_run</span><span class="o">=</span><span class="n">dry_run</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;rm&#39;</span><span class="p">,</span> <span class="s1">&#39;-rf&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">job_remote_rundir</span><span class="p">)],</span> <span class="n">dry_run</span><span class="o">=</span><span class="n">dry_run</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;System: host </span><span class="si">{self.host}</span><span class="s1"> rundir </span><span class="si">{self.remote_rundir}</span><span class="s1"> scheduler {type(self.scheduler).__name__}</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partitions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">s</span></div>
+</pre></div>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright .<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

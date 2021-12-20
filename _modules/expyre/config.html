@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expyre.config &#8212; ExPyRe  documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ExPyRe  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../basic_use.html">
+   Basic use
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../resources.html">
+   Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../config.html">
+   Scheduler Configuration file
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../restarting.html">
+   Restarting an interrupted process
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../environment_variables.html">
+   Environment Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../command_line.html">
+   Command line utilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../unit_testing.html">
+   Unit testing
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../expyre.html">
+   expyre package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../expyre.cli.html">
+     expyre.cli package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../expyre.schedulers.html">
+     expyre.schedulers package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <h1>Source code for expyre.config</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;configuration for expyre, from ``config.json`` in ``$EXPYRE_ROOT`` or ``$HOME/.expyre``</span>
+
+<span class="sd">Global variables</span>
+<span class="sd">----------------</span>
+
+<span class="sd">root: str</span>
+<span class="sd">    path of root directory for this run</span>
+<span class="sd">systems: dict</span>
+<span class="sd">    dict of expyre.system.System that jobs can run on</span>
+<span class="sd">db: JobsDB</span>
+<span class="sd">    expyre.jobsdb.JobsDB database of jobs</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+
+<span class="c1"># read config.json file from expyre root (~/.expyre or EXPYRE_ROOT),</span>
+<span class="c1"># and save important parts (root, systems, db) as symbols in this module</span>
+
+
+<span class="k">def</span> <span class="nf">_rundir_extra</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;.expyre&#39;</span> <span class="ow">or</span> <span class="n">root</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;_expyre&#39;</span><span class="p">:</span>
+        <span class="n">use_root</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">parent</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">use_root</span> <span class="o">=</span> <span class="n">root</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;HOSTNAME&#39;</span><span class="p">,</span> <span class="s1">&#39;unkownhost&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">use_root</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_config</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">root_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root_dir</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># get global settings from $EXPYRE_ROOT or $HOME/.expyre</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;EXPYRE_ROOT&#39;</span><span class="p">,</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s1">&#39;.expyre&#39;</span><span class="p">))</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s1">&#39;config.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+            <span class="n">config_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+        <span class="n">found_config</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="n">config_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;systems&#39;</span><span class="p">:</span> <span class="p">{}}</span>
+        <span class="n">found_config</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">root_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="s1">&#39;EXPYRE_ROOT&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+        <span class="c1"># passed in or from env var, so no local overrides</span>
+        <span class="k">return</span> <span class="n">root</span><span class="p">,</span> <span class="n">_rundir_extra</span><span class="p">(</span><span class="n">root</span><span class="p">),</span> <span class="n">config_data</span>
+
+    <span class="n">systems</span> <span class="o">=</span> <span class="n">config_data</span><span class="p">[</span><span class="s1">&#39;systems&#39;</span><span class="p">]</span>
+
+    <span class="c1"># look for local _expyre directories that override these defaults, starting in</span>
+    <span class="c1"># $CWD and going up to $HOME (or /)</span>
+    <span class="n">cur_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">cur_dir</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span> <span class="o">!=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">absolute</span><span class="p">():</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cur_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">cur_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre&#39;</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cur_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre&#39;</span> <span class="o">/</span> <span class="s1">&#39;config.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                    <span class="n">config_data_loc</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">config_data_loc</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">(</span><span class="n">config_data_loc</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;systems&#39;</span><span class="p">}</span>
+
+                <span class="k">if</span> <span class="s1">&#39;systems&#39;</span> <span class="ow">in</span> <span class="n">config_data_loc</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">sys_name</span><span class="p">,</span> <span class="n">sys_data</span> <span class="ow">in</span> <span class="n">config_data_loc</span><span class="p">[</span><span class="s1">&#39;systems&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="k">if</span> <span class="n">sys_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="c1"># delete</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="k">del</span> <span class="n">systems</span><span class="p">[</span><span class="n">sys_name</span><span class="p">]</span>
+                            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                                <span class="k">pass</span>
+                        <span class="k">elif</span> <span class="n">sys_name</span> <span class="ow">in</span> <span class="n">systems</span><span class="p">:</span>
+                            <span class="c1"># update</span>
+                            <span class="n">systems</span><span class="p">[</span><span class="n">sys_name</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sys_data</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="c1"># add</span>
+                            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sys_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+                            <span class="n">systems</span><span class="p">[</span><span class="n">sys_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys_data</span>
+
+                <span class="n">found_config</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+
+            <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="k">if</span> <span class="n">cur_dir</span><span class="o">.</span><span class="n">parent</span> <span class="o">==</span> <span class="n">cur_dir</span><span class="p">:</span>
+            <span class="c1"># reached root, do not try to go further up</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cur_dir</span> <span class="o">=</span> <span class="n">cur_dir</span><span class="o">.</span><span class="n">parent</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">found_config</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s1">&#39;Failed to find any config.json file&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">root</span><span class="p">,</span> <span class="n">_rundir_extra</span><span class="p">(</span><span class="n">root</span><span class="p">),</span> <span class="n">config_data</span>
+
+
+<span class="n">root</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">systems</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">db</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="init"><a class="viewcode-back" href="../../expyre.html#expyre.config.init">[docs]</a><span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">root_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initializes ``root``, ``systems``, ``db``&quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">os</span>
+
+    <span class="kn">from</span> <span class="nn">.units</span> <span class="k">import</span> <span class="n">time_to_sec</span><span class="p">,</span> <span class="n">mem_to_kB</span>
+    <span class="kn">from</span> <span class="nn">.system</span> <span class="k">import</span> <span class="n">System</span>
+    <span class="kn">from</span> <span class="nn">.jobsdb</span> <span class="k">import</span> <span class="n">JobsDB</span>
+
+    <span class="k">global</span> <span class="n">root</span><span class="p">,</span> <span class="n">systems</span><span class="p">,</span> <span class="n">db</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">root</span><span class="p">,</span> <span class="n">_rundir_extra</span><span class="p">,</span> <span class="n">_config_data</span> <span class="o">=</span> <span class="n">_get_config</span><span class="p">(</span><span class="n">root_dir</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="n">systems</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span>
+
+    <span class="n">systems</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">_sys_name</span> <span class="ow">in</span> <span class="n">_config_data</span><span class="p">[</span><span class="s1">&#39;systems&#39;</span><span class="p">]:</span>
+        <span class="n">_sys_data</span> <span class="o">=</span> <span class="n">_config_data</span><span class="p">[</span><span class="s1">&#39;systems&#39;</span><span class="p">][</span><span class="n">_sys_name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">_partitions</span> <span class="ow">in</span> <span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">]:</span>
+                <span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">][</span><span class="n">_partitions</span><span class="p">][</span><span class="s1">&#39;max_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_to_sec</span><span class="p">(</span><span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">][</span><span class="n">_partitions</span><span class="p">][</span><span class="s1">&#39;max_time&#39;</span><span class="p">])</span>
+                <span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">][</span><span class="n">_partitions</span><span class="p">][</span><span class="s1">&#39;max_mem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mem_to_kB</span><span class="p">(</span><span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">][</span><span class="n">_partitions</span><span class="p">][</span><span class="s1">&#39;max_mem&#39;</span><span class="p">])</span>
+        <span class="n">systems</span><span class="p">[</span><span class="n">_sys_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">System</span><span class="p">(</span><span class="n">rundir_extra</span><span class="o">=</span><span class="n">_rundir_extra</span><span class="p">,</span> <span class="o">**</span><span class="n">_sys_data</span><span class="p">)</span>
+
+    <span class="n">db</span> <span class="o">=</span> <span class="n">JobsDB</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s1">&#39;jobs.db&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;expyre config got systems {list(systems.keys())}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="s1">&#39;pytest&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="n">init</span><span class="p">()</span>
+</pre></div>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright .<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

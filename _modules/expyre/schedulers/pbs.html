@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expyre.schedulers.pbs &#8212; ExPyRe  documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ExPyRe  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../basic_use.html">
+   Basic use
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../resources.html">
+   Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../config.html">
+   Scheduler Configuration file
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../restarting.html">
+   Restarting an interrupted process
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../environment_variables.html">
+   Environment Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../command_line.html">
+   Command line utilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../unit_testing.html">
+   Unit testing
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../expyre.html">
+   expyre package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../expyre.cli.html">
+     expyre.cli package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../expyre.schedulers.html">
+     expyre.schedulers package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <h1>Source code for expyre.schedulers.pbs</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">..subprocess</span> <span class="k">import</span> <span class="n">subprocess_run</span>
+<span class="kn">from</span> <span class="nn">..units</span> <span class="k">import</span> <span class="n">time_to_HMS</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">util</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">Scheduler</span>
+
+
+<div class="viewcode-block" id="PBS"><a class="viewcode-back" href="../../../expyre.schedulers.html#expyre.schedulers.pbs.PBS">[docs]</a><span class="k">class</span> <span class="nc">PBS</span><span class="p">(</span><span class="n">Scheduler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create Slurm object</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    host: str</span>
+<span class="sd">        username and host for ssh/rsync username@machine.fqdn</span>
+<span class="sd">    remsh_cmd: str, default EXPYRE_RSH env var or &#39;ssh&#39;</span>
+<span class="sd">        remote shell command to use</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hold_command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;qhold&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">release_command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;qrls&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cancel_command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;qdel&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remsh_cmd</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">remsh_cmd</span><span class="p">(</span><span class="n">remsh_cmd</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="PBS.submit"><a class="viewcode-back" href="../../../expyre.schedulers.html#expyre.schedulers.pbs.PBS.submit">[docs]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">remote_dir</span><span class="p">,</span> <span class="n">partition</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">max_time</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">node_dict</span><span class="p">,</span> <span class="n">no_default_header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Submit a job on a remote machine</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id: str</span>
+<span class="sd">            unique job id (local)</span>
+<span class="sd">        remote_dir: str</span>
+<span class="sd">            remote directory where files have already been prepared and job will run</span>
+<span class="sd">        partition: str</span>
+<span class="sd">            partition (or queue or node type)</span>
+<span class="sd">        commands: list(str)</span>
+<span class="sd">            list of commands to run in script</span>
+<span class="sd">        max_time: int</span>
+<span class="sd">            time in seconds to run</span>
+<span class="sd">        header: list(str)</span>
+<span class="sd">            list of header directives, not including walltime specific directive</span>
+<span class="sd">        node_dict: dict</span>
+<span class="sd">            properties related to node selection.</span>
+<span class="sd">            Fields: nnodes, tot_ntasks, tot_ncores, ncores_per_node, ppn, id, max_time, partition</span>
+<span class="sd">        no_default_header: bool, default False</span>
+<span class="sd">            do not add normal header fields, only use what&#39;s passed in in &quot;header&quot;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        remote job id (str)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">node_dict</span> <span class="o">=</span> <span class="n">node_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Make sure that there are no &#39;=&#39; in id</span>
+        <span class="c1"># (e.g. produced by base64.urlsafe encoded argument hashes),</span>
+        <span class="c1"># since those are rejected for &quot;#PBS -N&quot; despite the claim in the docs that</span>
+        <span class="c1"># any printable non-whitespace character is OK:</span>
+        <span class="c1">#     http://docs.adaptivecomputing.com/torque/4-0-2/Content/topics/commands/qsub.htm</span>
+        <span class="c1">#</span>
+        <span class="c1"># WARNING: since this is happening in scheduler-specific code, it will make stdout/stderr</span>
+        <span class="c1"># filenames dependent on scheduler, so they cannot be relied on.  Would need to move</span>
+        <span class="c1"># sanitization outside to prevent this, but it&#39;d have to be superset of everything needed</span>
+        <span class="c1"># for every scheduler.</span>
+        <span class="n">node_dict</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">id</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;EQ&#39;</span><span class="p">)</span>
+
+        <span class="n">node_dict</span><span class="p">[</span><span class="s1">&#39;max_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_to_HMS</span><span class="p">(</span><span class="n">max_time</span><span class="p">)</span>
+        <span class="n">node_dict</span><span class="p">[</span><span class="s1">&#39;partition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">partition</span>
+
+        <span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">no_default_header</span><span class="p">:</span>
+            <span class="c1"># Make sure that first characer is alphabetic</span>
+            <span class="c1"># Let&#39;s hope there aren&#39;t length limitations anymore</span>
+            <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#PBS -N N_</span><span class="si">{id}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#PBS -q </span><span class="si">{partition}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#PBS -l walltime=</span><span class="si">{max_time}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#PBS -o job.</span><span class="si">{id}</span><span class="s1">.stdout&#39;</span><span class="p">)</span>
+            <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#PBS -e job.</span><span class="si">{id}</span><span class="s1">.stderr&#39;</span><span class="p">)</span>
+            <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#PBS -S /bin/bash&#39;</span><span class="p">)</span>
+            <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#PBS -r n&#39;</span><span class="p">)</span>
+
+        <span class="c1"># set EXPYRE_NCORES_PER_NODE using scheduler-specific info, to support jobs</span>
+        <span class="c1"># that do not know exact node type at submit time.  All related quantities</span>
+        <span class="c1"># in node_dict are set based on this one by superclass Scheduler static method</span>
+        <span class="n">pre_commands</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;if [ ! -z $PBS_NUM_PPN ]; then&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;    export EXPYRE_NCORES_PER_NODE=$PBS_NUM_PPN&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;elif [ ! -z $PBS_NODEFILE ]; then&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;    export EXPYRE_NCORES_PER_NODE=$(sort -k1 $PBS_NODEFILE | uniq -c | head -1 | awk </span><span class="se">\&#39;</span><span class="s1">{{print $1}}</span><span class="se">\&#39;</span><span class="s1">)&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;else&#39;</span><span class="p">,</span>
+                       <span class="n">f</span><span class="s1">&#39;    export EXPYRE_NCORES_PER_NODE=</span><span class="si">{node_dict[&quot;ntasks_per_node&quot;]}</span><span class="s1">&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;fi&#39;</span>
+                       <span class="p">]</span> <span class="o">+</span> <span class="n">Scheduler</span><span class="o">.</span><span class="n">node_dict_env_var_commands</span><span class="p">(</span><span class="n">node_dict</span><span class="p">)</span>
+        <span class="n">pre_commands</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">node_dict</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">pre_commands</span><span class="p">]</span>
+
+        <span class="c1"># add &quot;cd remote_dir&quot; before any other command</span>
+        <span class="k">if</span> <span class="n">remote_dir</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
+            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;cd </span><span class="si">{remote_dir}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;cd ${{HOME}}/</span><span class="si">{remote_dir}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">commands</span> <span class="o">=</span> <span class="n">pre_commands</span> <span class="o">+</span> <span class="n">commands</span>
+
+        <span class="n">script</span> <span class="o">=</span> <span class="s1">&#39;#!/bin/bash -l</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">script</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">node_dict</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">header</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">script</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">commands</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+        <span class="n">submit_args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cd&#39;</span><span class="p">,</span> <span class="n">remote_dir</span><span class="p">,</span> <span class="s1">&#39;&amp;&amp;&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;job.script.pbs&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;&amp;&amp;&#39;</span><span class="p">,</span> <span class="s1">&#39;qsub&#39;</span><span class="p">,</span> <span class="s1">&#39;job.script.pbs&#39;</span><span class="p">]</span>
+
+        <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">subprocess_run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">submit_args</span><span class="p">,</span> <span class="n">script</span><span class="o">=</span><span class="n">script</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remsh_cmd</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+        <span class="c1"># parse stdout for remote job id</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;More than one line in qsub output&#39;</span><span class="p">)</span>
+        <span class="n">remote_id</span> <span class="o">=</span> <span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">remote_id</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Empty output from qsub&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">remote_id</span></div>
+
+
+<div class="viewcode-block" id="PBS.status"><a class="viewcode-back" href="../../../expyre.schedulers.html#expyre.schedulers.pbs.PBS.status">[docs]</a>    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remote_ids</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;determine status of remote jobs</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        remote_ids: str, list(str)</span>
+<span class="sd">            list of remote ids to check</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict { str remote_id: str status},  status is one of :</span>
+<span class="sd">                &quot;queued&quot;, &quot;held&quot;, &quot;running&quot;,   &quot;done&quot;, &quot;failed&quot;, &quot;timeout&quot;, &quot;other&quot;</span>
+<span class="sd">            all remote ids passed in are guaranteed to be keys in dict, specific jobs that are</span>
+<span class="sd">            not listed by queueing system have status &quot;done&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">remote_ids</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">remote_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">remote_ids</span><span class="p">]</span>
+
+        <span class="c1"># -w to make fields wide and less likely to truncate jobid</span>
+        <span class="c1"># -x for historical data it should never say &quot;Job has finished&quot;, but rather use same format for all jobs</span>
+        <span class="c1"># -a for all jobs, most useful version that works with -w, hence need for grep USER</span>
+        <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">subprocess_run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;qstat&#39;</span><span class="p">,</span> <span class="s1">&#39;-w&#39;</span><span class="p">,</span> <span class="s1">&#39;-x&#39;</span><span class="p">,</span> <span class="s1">&#39;-a&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;grep&#39;</span><span class="p">,</span> <span class="s1">&#39; $USER &#39;</span><span class="p">],</span>
+            <span class="n">remsh_cmd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remsh_cmd</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">stdout</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="c1"># parse id and status from format</span>
+        <span class="c1"># (id, _user, _queue, _jobname, _sessid, _nds, _tsk, _mem, _timereq, status, _timeelap) = l.strip().split()</span>
+        <span class="n">id_status</span> <span class="o">=</span> <span class="p">[(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">9</span><span class="p">])</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span>
+                     <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">remote_ids</span><span class="p">]</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">status</span> <span class="ow">in</span> <span class="n">id_status</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]:</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;running&#39;</span>
+            <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;Q&#39;</span><span class="p">:</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;queued&#39;</span>
+            <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;held&#39;</span>
+            <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;done&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;other&#39;</span>
+
+            <span class="n">out</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">status</span>
+
+        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">remote_ids</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">out</span><span class="p">:</span>
+                <span class="n">out</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;done&#39;</span>
+
+        <span class="k">return</span> <span class="n">out</span></div></div>
+</pre></div>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright .<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

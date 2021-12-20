@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expyre.schedulers package &#8212; ExPyRe  documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="expyre.cli package" href="expyre.cli.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ExPyRe  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic_use.html">
+   Basic use
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="resources.html">
+   Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="config.html">
+   Scheduler Configuration file
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="restarting.html">
+   Restarting an interrupted process
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="environment_variables.html">
+   Environment Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="command_line.html">
+   Command line utilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="unit_testing.html">
+   Unit testing
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="expyre.html">
+   expyre package
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="expyre.cli.html">
+     expyre.cli package
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     expyre.schedulers package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/expyre.schedulers.rst.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-expyre.schedulers.base">
+   expyre.schedulers.base module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-expyre.schedulers.local">
+   expyre.schedulers.local module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-expyre.schedulers.pbs">
+   expyre.schedulers.pbs module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-expyre.schedulers.sge">
+   expyre.schedulers.sge module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-expyre.schedulers.slurm">
+   expyre.schedulers.slurm module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-expyre.schedulers">
+   Module contents
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="expyre-schedulers-package">
+<h1>expyre.schedulers package<a class="headerlink" href="#expyre-schedulers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-expyre.schedulers.base">
+<span id="expyre-schedulers-base-module"></span><h2>expyre.schedulers.base module<a class="headerlink" href="#module-expyre.schedulers.base" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="expyre.schedulers.base.Scheduler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expyre.schedulers.base.</span></span><span class="sig-name descname"><span class="pre">Scheduler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remsh_cmd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/base.html#Scheduler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.base.Scheduler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="expyre.schedulers.base.Scheduler.cancel">
+<span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remote_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/base.html#Scheduler.cancel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.base.Scheduler.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>cancel remote job</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>remote_ids</strong> (<em>str</em><em>, </em><em>list</em><em>(</em><em>str</em><em>)</em>) – remote ids of jobs to hold</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expyre.schedulers.base.Scheduler.hold">
+<span class="sig-name descname"><span class="pre">hold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remote_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/base.html#Scheduler.hold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.base.Scheduler.hold" title="Permalink to this definition">¶</a></dt>
+<dd><p>hold remote job</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>remote_ids</strong> (<em>str</em><em>, </em><em>list</em><em>(</em><em>str</em><em>)</em>) – remote ids of jobs to hold</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expyre.schedulers.base.Scheduler.node_dict_env_var_commands">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">node_dict_env_var_commands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/base.html#Scheduler.node_dict_env_var_commands"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.base.Scheduler.node_dict_env_var_commands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expyre.schedulers.base.Scheduler.release">
+<span class="sig-name descname"><span class="pre">release</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remote_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/base.html#Scheduler.release"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.base.Scheduler.release" title="Permalink to this definition">¶</a></dt>
+<dd><p>release remote job</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>remote_ids</strong> (<em>str</em><em>, </em><em>list</em><em>(</em><em>str</em><em>)</em>) – remote ids of jobs to hold</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expyre.schedulers.base.Scheduler.status">
+<span class="sig-name descname"><span class="pre">status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remote_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/base.html#Scheduler.status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.base.Scheduler.status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expyre.schedulers.base.Scheduler.submit">
+<span class="sig-name descname"><span class="pre">submit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_default_header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/base.html#Scheduler.submit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.base.Scheduler.submit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-expyre.schedulers.local">
+<span id="expyre-schedulers-local-module"></span><h2>expyre.schedulers.local module<a class="headerlink" href="#module-expyre.schedulers.local" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="expyre.schedulers.local.Local">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expyre.schedulers.local.</span></span><span class="sig-name descname"><span class="pre">Local</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remsh_cmd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/local.html#Local"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.local.Local" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#expyre.schedulers.base.Scheduler" title="expyre.schedulers.base.Scheduler"><code class="xref py py-class docutils literal notranslate"><span class="pre">expyre.schedulers.base.Scheduler</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-expyre.schedulers.pbs">
+<span id="expyre-schedulers-pbs-module"></span><h2>expyre.schedulers.pbs module<a class="headerlink" href="#module-expyre.schedulers.pbs" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="expyre.schedulers.pbs.PBS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expyre.schedulers.pbs.</span></span><span class="sig-name descname"><span class="pre">PBS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remsh_cmd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/pbs.html#PBS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.pbs.PBS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#expyre.schedulers.base.Scheduler" title="expyre.schedulers.base.Scheduler"><code class="xref py py-class docutils literal notranslate"><span class="pre">expyre.schedulers.base.Scheduler</span></code></a></p>
+<p>Create Slurm object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – username and host for ssh/rsync <a class="reference external" href="mailto:username&#37;&#52;&#48;machine&#46;fqdn">username<span>&#64;</span>machine<span>&#46;</span>fqdn</a></p></li>
+<li><p><strong>remsh_cmd</strong> (<em>str</em><em>, </em><em>default EXPYRE_RSH env var</em><em> or </em><em>'ssh'</em>) – remote shell command to use</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="expyre.schedulers.pbs.PBS.status">
+<span class="sig-name descname"><span class="pre">status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remote_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/pbs.html#PBS.status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.pbs.PBS.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>determine status of remote jobs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>remote_ids</strong> (<em>str</em><em>, </em><em>list</em><em>(</em><em>str</em><em>)</em>) – list of remote ids to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dict { str remote_id</strong> –     “queued”, “held”, “running”,   “done”, “failed”, “timeout”, “other”
+all remote ids passed in are guaranteed to be keys in dict, specific jobs that are
+not listed by queueing system have status “done”</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str status},  status is one of :</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expyre.schedulers.pbs.PBS.submit">
+<span class="sig-name descname"><span class="pre">submit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_default_header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/pbs.html#PBS.submit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.pbs.PBS.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit a job on a remote machine</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – unique job id (local)</p></li>
+<li><p><strong>remote_dir</strong> (<em>str</em>) – remote directory where files have already been prepared and job will run</p></li>
+<li><p><strong>partition</strong> (<em>str</em>) – partition (or queue or node type)</p></li>
+<li><p><strong>commands</strong> (<em>list</em><em>(</em><em>str</em><em>)</em>) – list of commands to run in script</p></li>
+<li><p><strong>max_time</strong> (<em>int</em>) – time in seconds to run</p></li>
+<li><p><strong>header</strong> (<em>list</em><em>(</em><em>str</em><em>)</em>) – list of header directives, not including walltime specific directive</p></li>
+<li><p><strong>node_dict</strong> (<em>dict</em>) – properties related to node selection.
+Fields: nnodes, tot_ntasks, tot_ncores, ncores_per_node, ppn, id, max_time, partition</p></li>
+<li><p><strong>no_default_header</strong> (<em>bool</em><em>, </em><em>default False</em>) – do not add normal header fields, only use what’s passed in in “header”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>remote job id (str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-expyre.schedulers.sge">
+<span id="expyre-schedulers-sge-module"></span><h2>expyre.schedulers.sge module<a class="headerlink" href="#module-expyre.schedulers.sge" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="expyre.schedulers.sge.SGE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expyre.schedulers.sge.</span></span><span class="sig-name descname"><span class="pre">SGE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remsh_cmd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/sge.html#SGE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.sge.SGE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#expyre.schedulers.base.Scheduler" title="expyre.schedulers.base.Scheduler"><code class="xref py py-class docutils literal notranslate"><span class="pre">expyre.schedulers.base.Scheduler</span></code></a></p>
+<p>Create SGE object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – username and host for ssh/rsync <a class="reference external" href="mailto:username&#37;&#52;&#48;machine&#46;fqdn">username<span>&#64;</span>machine<span>&#46;</span>fqdn</a></p></li>
+<li><p><strong>remsh_cmd</strong> (<em>str</em><em>, </em><em>default EXPYRE_RSH env var</em><em> or </em><em>'ssh'</em>) – remote shell command to use</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="expyre.schedulers.sge.SGE.status">
+<span class="sig-name descname"><span class="pre">status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remote_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/sge.html#SGE.status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.sge.SGE.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>determine status of remote jobs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>remote_ids</strong> (<em>str</em><em>, </em><em>list</em><em>(</em><em>str</em><em>)</em>) – list of remote ids to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dict { str remote_id</strong> –     “queued”, “held”, “running”,  “done”, “failed”, “timeout”, “other”
+all remote ids passed in are guaranteed to be keys in dict, specific jobs that are
+not listed by queueing system have status “done”</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str status},  status is one of :</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expyre.schedulers.sge.SGE.submit">
+<span class="sig-name descname"><span class="pre">submit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_default_header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/sge.html#SGE.submit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.sge.SGE.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit a job on a remote machine</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – unique job id (local)</p></li>
+<li><p><strong>remote_dir</strong> (<em>str</em>) – remote directory where files have already been prepared and job will run</p></li>
+<li><p><strong>partition</strong> (<em>str</em>) – partition (or queue or node type)</p></li>
+<li><p><strong>commands</strong> (<em>list</em><em>(</em><em>str</em><em>)</em>) – list of commands to run in script</p></li>
+<li><p><strong>max_time</strong> (<em>int</em>) – time in seconds to run</p></li>
+<li><p><strong>header</strong> (<em>list</em><em>(</em><em>str</em><em>)</em>) – list of header directives, not including walltime specific directive</p></li>
+<li><p><strong>node_dict</strong> (<em>dict</em>) – properties related to node selection.
+Fields: nnodes, tot_ntasks, tot_ncores, ncores_per_node, ppn, id, max_time, partition</p></li>
+<li><p><strong>no_default_header</strong> (<em>bool</em><em>, </em><em>default False</em>) – do not add normal header fields, only use what’s passed in in “header”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str remote job id</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-expyre.schedulers.slurm">
+<span id="expyre-schedulers-slurm-module"></span><h2>expyre.schedulers.slurm module<a class="headerlink" href="#module-expyre.schedulers.slurm" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="expyre.schedulers.slurm.Slurm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expyre.schedulers.slurm.</span></span><span class="sig-name descname"><span class="pre">Slurm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remsh_cmd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/slurm.html#Slurm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.slurm.Slurm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#expyre.schedulers.base.Scheduler" title="expyre.schedulers.base.Scheduler"><code class="xref py py-class docutils literal notranslate"><span class="pre">expyre.schedulers.base.Scheduler</span></code></a></p>
+<p>Create Slurm object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – username and host for ssh/rsync <a class="reference external" href="mailto:username&#37;&#52;&#48;machine&#46;fqdn">username<span>&#64;</span>machine<span>&#46;</span>fqdn</a></p></li>
+<li><p><strong>remsh_cmd</strong> (<em>str</em><em>, </em><em>default EXPYRE_RSH env var</em><em> or </em><em>'ssh'</em>) – remote shell command to use</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="expyre.schedulers.slurm.Slurm.status">
+<span class="sig-name descname"><span class="pre">status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remote_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/slurm.html#Slurm.status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.slurm.Slurm.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>determine status of remote jobs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>remote_ids</strong> (<em>str</em><em>, </em><em>list</em><em>(</em><em>str</em><em>)</em>) – list of remote ids to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dict { str remote_id</strong> –     “queued”, “held”, “running”,   “done”, “failed”, “timeout”, “other”
+all remote ids passed in are guaranteed to be keys in dict, specific jobs that are
+not listed by queueing system have status “done”</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str status},  status is one of :</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expyre.schedulers.slurm.Slurm.submit">
+<span class="sig-name descname"><span class="pre">submit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_default_header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/schedulers/slurm.html#Slurm.submit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.schedulers.slurm.Slurm.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit a job on a remote machine</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – unique job id (local)</p></li>
+<li><p><strong>remote_dir</strong> (<em>str</em>) – remote directory where files have already been prepared and job will run</p></li>
+<li><p><strong>partition</strong> (<em>str</em>) – partition (or queue or node type)</p></li>
+<li><p><strong>commands</strong> (<em>list</em><em>(</em><em>str</em><em>)</em>) – list of commands to run in script</p></li>
+<li><p><strong>max_time</strong> (<em>int</em>) – time in seconds to run</p></li>
+<li><p><strong>header</strong> (<em>list</em><em>(</em><em>str</em><em>)</em>) – list of header directives, not including walltime specific directive</p></li>
+<li><p><strong>node_dict</strong> (<em>dict</em>) – properties related to node selection.
+Fields: nnodes, tot_ntasks, tot_ncores, ncores_per_node, ppn, id, max_time, partition</p></li>
+<li><p><strong>no_default_header</strong> (<em>bool</em><em>, </em><em>default False</em>) – do not add normal header fields, only use what’s passed in in “header”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str remote job id</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-expyre.schedulers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-expyre.schedulers" title="Permalink to this headline">¶</a></h2>
+<p>Top level interface to all the implemented schedulers in expyre.schedulers_impl</p>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="expyre.cli.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">expyre.cli package</p>
+        </div>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright .<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

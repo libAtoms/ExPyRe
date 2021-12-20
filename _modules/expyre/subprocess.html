@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expyre.subprocess &#8212; ExPyRe  documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ExPyRe  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../basic_use.html">
+   Basic use
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../resources.html">
+   Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../config.html">
+   Scheduler Configuration file
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../restarting.html">
+   Restarting an interrupted process
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../environment_variables.html">
+   Environment Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../command_line.html">
+   Command line utilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../unit_testing.html">
+   Unit testing
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../expyre.html">
+   expyre package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../expyre.cli.html">
+     expyre.cli package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../expyre.schedulers.html">
+     expyre.schedulers package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <h1>Source code for expyre.subprocess</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Functions dealing with running subprocesses, optionally on remote machines, handling</span>
+<span class="sd">quoting/shell escping, encoding/decoding, environment, and making sure that optional</span>
+<span class="sd">arguments needed for things like kerberized-ssh are set correctly.  &quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">shlex</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+
+
+<div class="viewcode-block" id="FailedSubprocessWarning"><a class="viewcode-back" href="../../expyre.html#expyre.subprocess.FailedSubprocessWarning">[docs]</a><span class="k">class</span> <span class="nc">FailedSubprocessWarning</span><span class="p">(</span><span class="ne">RuntimeWarning</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;always&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">FailedSubprocessWarning</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_my_warn</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;pytest&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+        <span class="c1"># also print to stderr since pytest shows all warnings</span>
+        <span class="c1"># separately, and it&#39;s harder to use them to debug</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">FailedSubprocessWarning</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_optionally_remote_args</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">shell</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="p">,</span> <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;_HOME_&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert args array into a shell call, optionally preceded by an ssh command</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    args: list(str)</span>
+<span class="sd">        arguments to run</span>
+<span class="sd">    shell: str</span>
+<span class="sd">        shell to use</span>
+<span class="sd">    host: str</span>
+<span class="sd">        [username@]host to pass to ssh, None to run locally but act like ssh, i.e. start in $HOME,</span>
+<span class="sd">    remsh_cmd: str, list(str)</span>
+<span class="sd">        remote shell command (usually ssh)</span>
+<span class="sd">    in_dir: str, default _HOME_</span>
+<span class="sd">        directory to cd into before running args, _HOME_ for home dir, _PWD_ for python current working directory (only for host == None)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    args list(str)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># make args appropriate for passing to subprocess.Popen, either directly</span>
+    <span class="c1"># or preceded by an ssh command, with the shell as an explicit arg</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">remsh_cmd</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">remsh_cmd</span> <span class="o">=</span> <span class="n">remsh_cmd</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+    <span class="c1"># NOTE: quoting below may be bash specific</span>
+
+    <span class="k">if</span> <span class="n">in_dir</span> <span class="o">==</span> <span class="s1">&#39;_PWD_&#39;</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">host</span> <span class="ow">is</span> <span class="kc">None</span>
+
+    <span class="c1"># get ready to pass args into bash as a single command:</span>
+    <span class="c1"># join args into a single string, backslash escaping some chars in it, namely: &#39;, &quot;, space, (, )</span>
+    <span class="c1"># start with &quot;cd $HOME&quot; so that whether or not there&#39;s an ssh, operations start relative to home dir</span>
+    <span class="n">cmd_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">in_dir</span> <span class="o">==</span> <span class="s1">&#39;_HOME_&#39;</span><span class="p">:</span>
+        <span class="n">cmd_str</span> <span class="o">=</span> <span class="s1">&#39;cd $HOME&#39;</span>
+    <span class="k">elif</span> <span class="n">in_dir</span> <span class="o">!=</span> <span class="s1">&#39;_PWD_&#39;</span><span class="p">:</span>
+        <span class="n">cmd_str</span> <span class="o">=</span> <span class="s1">&#39;cd &#39;</span> <span class="o">+</span> <span class="n">in_dir</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd_str</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cmd_str</span> <span class="o">+=</span> <span class="s1">&#39; &amp;&amp; &#39;</span>
+        <span class="n">cmd_str</span> <span class="o">+=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([</span><span class="se">\&#39;</span><span class="s1">&quot; \(\)])&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">\1&#39;</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">])</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="n">cmd_str</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">host</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># pass remote command to an ssh command, in single quotes</span>
+        <span class="c1"># args[0:-1] are shell itself and its flags, args[-1] is the command to run</span>
+        <span class="c1">#     which needs to be single quoted</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">remsh_cmd</span> <span class="o">+</span> <span class="p">[</span><span class="n">host</span><span class="p">]</span> <span class="o">+</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="n">args</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">args</span>
+
+
+<div class="viewcode-block" id="subprocess_run"><a class="viewcode-back" href="../../expyre.html#expyre.subprocess.subprocess_run">[docs]</a><span class="k">def</span> <span class="nf">subprocess_run</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">script</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="s1">&#39;bash -lc&#39;</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;_HOME_&#39;</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;run a subprocess, optionally via ssh on a remote machine.  Raises RuntimeError for non-zero</span>
+<span class="sd">    return status.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    host: str</span>
+<span class="sd">        [username]@machine.domain, or None for a locally run process</span>
+<span class="sd">    args: list(str)</span>
+<span class="sd">        arguments to run, starting with command and followed by its command line args</span>
+<span class="sd">    script: str, default None</span>
+<span class="sd">        text to write to process&#39;s standard input</span>
+<span class="sd">    shell: str, default &#39;bash -lc&#39;</span>
+<span class="sd">        shell to use, including any flags necessary for it to interpret the next argument</span>
+<span class="sd">        as the commands to run (-c for bash)</span>
+<span class="sd">    remsh_command: str | list(str), default env var EXPYRE_RSH or &#39;ssh&#39;</span>
+<span class="sd">        command to start on remote host, usually ssh</span>
+<span class="sd">    retry: (int, int), default env var EXPYRE_RETRY.split() or (2, 5)</span>
+<span class="sd">        number of times to retry and number of seconds to wait between each trial</span>
+<span class="sd">    in_dir: str, default _HOME_</span>
+<span class="sd">        directory to cd into before running args, _HOME_ for home dir, _PWD_ for python current working directory (only for host == None)</span>
+<span class="sd">    verbose: bool, default False</span>
+<span class="sd">        verbose output</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    stdout, stderr: output and error of subprocess, as strings (bytes.decode())</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">remsh_cmd</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">remsh_cmd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;EXPYRE_RSH&#39;</span><span class="p">,</span> <span class="s1">&#39;ssh&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">retry</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_RETRY&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">retry</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">_ii</span><span class="p">)</span> <span class="k">for</span> <span class="n">_ii</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;EXPYRE_RETRY&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">retry</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># always run at least once, and wait a valid (&gt;= 0) amount of time</span>
+    <span class="n">retry</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">retry</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">retry</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">))</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">_optionally_remote_args</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">shell</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="p">,</span> <span class="n">in_dir</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dry_run</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;DRY-RUN COMMAND:&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RUNNING COMMAND:&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">shlex</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">script</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SCRIPT:&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">script</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="n">script</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">script</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">dry_run</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">,</span> <span class="n">script</span>
+
+    <span class="k">for</span> <span class="n">i_try</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">retry</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">close_fds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">)</span>
+            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">script</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Failed to run command &quot;{&quot; &quot;.join(args)}&quot; with err {stderr.decode()}&#39;</span><span class="p">)</span>
+
+            <span class="c1"># success</span>
+            <span class="k">if</span> <span class="n">i_try</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">_my_warn</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Succeeded to run &quot;{&quot; &quot;.join(args)}&quot; on attempt </span><span class="si">{i_try}</span><span class="s1"> after failure(s), trying again&#39;</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i_try</span> <span class="o">==</span> <span class="n">retry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># last try</span>
+                <span class="n">_my_warn</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Failed to run &quot;{&quot; &quot;.join(args)}&quot; on attempt </span><span class="si">{i_try}</span><span class="s1"> for the last time, giving up&#39;</span><span class="p">)</span>
+
+                <span class="c1"># failed last chance</span>
+                <span class="k">raise</span>
+            <span class="n">_my_warn</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Failed to run &quot;{&quot; &quot;.join(args)}&quot; on attempt </span><span class="si">{i_try}</span><span class="s1">, trying again&#39;</span><span class="p">)</span>
+
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">retry</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GOT STDOUT:&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GOT STDERR:&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span> <span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="subprocess_copy"><a class="viewcode-back" href="../../expyre.html#expyre.subprocess.subprocess_copy">[docs]</a><span class="k">def</span> <span class="nf">subprocess_copy</span><span class="p">(</span><span class="n">from_files</span><span class="p">,</span> <span class="n">to_file</span><span class="p">,</span> <span class="n">from_host</span><span class="o">=</span><span class="s1">&#39;_LOCAL_&#39;</span><span class="p">,</span> <span class="n">to_host</span><span class="o">=</span><span class="s1">&#39;_LOCAL_&#39;</span><span class="p">,</span>
+                    <span class="n">rcp_args</span><span class="o">=</span><span class="s1">&#39;-a&#39;</span><span class="p">,</span> <span class="n">rcp_cmd</span><span class="o">=</span><span class="s1">&#39;rsync&#39;</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remsh_flags</span><span class="o">=</span><span class="s1">&#39;-e&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run a remote copy (e.g. rsync) in a subprocess, optionally to/from remote machine.  Exactly one</span>
+<span class="sd">    machine has to be specified, and relative paths on that machine are relative to its home dir, like</span>
+<span class="sd">    rsync.  If the specified machine is None the copy is local, but relative paths are still relative to</span>
+<span class="sd">    home dir.</span>
+
+<span class="sd">    Raises RuntimeError for non-zero return status.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    from_files: str, Path, list(str), list(Path)</span>
+<span class="sd">        one or more files/directories to copy from (not including &#39;user@host:&#39; part)</span>
+<span class="sd">    to_file: str, Path</span>
+<span class="sd">        _one_ file/directory to copy to (not including &#39;user@host:&#39; part)</span>
+<span class="sd">    from_host: str, optional</span>
+<span class="sd">        [username@]host.domain to copy from (no &quot;:&quot;), mutually exclusive with to_host, one is required.</span>
+<span class="sd">        If None, use a local dir, but make relative paths relative to $HOME instead of to $PWD (like rsync with a host)</span>
+<span class="sd">    to_host: str, optional</span>
+<span class="sd">        [username@]host.domain to copy to (no &quot;:&quot;), mutually exclusive with from_host, one is required.</span>
+<span class="sd">        If None, use a local dir, but make relative paths relative to $HOME instead of to $PWD (like rsync with a host)</span>
+<span class="sd">    rcp_args: str, default &#39;-a&#39;</span>
+<span class="sd">        non-filename arguments to remote copy command</span>
+<span class="sd">    rcp_cmd: str, default &#39;rsync&#39;</span>
+<span class="sd">        command to do copy</span>
+<span class="sd">    remsh_cmd: str, default EXPYRE_RSH env var or ssh</span>
+<span class="sd">        arguments to set shell command for rcp_cmd to use</span>
+<span class="sd">    retry: optional</span>
+<span class="sd">        passed as retry argument to subprocess_run</span>
+<span class="sd">    remsh_flags: str, default &#39;-e&#39;</span>
+<span class="sd">        flag to prefix to remsh_cmd when calling rcp_cmd</span>
+<span class="sd">    verbose: bool, default False</span>
+<span class="sd">        verbose output</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># exactly one of from_host, to_host must be provided</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">([</span><span class="n">from_host</span> <span class="o">==</span> <span class="s1">&#39;_LOCAL_&#39;</span><span class="p">,</span> <span class="n">to_host</span> <span class="o">==</span> <span class="s1">&#39;_LOCAL_&#39;</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Exactly one of source host &quot;</span><span class="si">{from_host}</span><span class="s1">&quot; or target host &quot;</span><span class="si">{to_host}</span><span class="s1">&quot; must passed in&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">remsh_cmd</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">remsh_cmd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;EXPYRE_RSH&#39;</span><span class="p">,</span> <span class="s1">&#39;ssh&#39;</span><span class="p">)</span>
+    <span class="n">rcp_args</span> <span class="o">=</span> <span class="n">remsh_flags</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">remsh_cmd</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">rcp_args</span>
+
+    <span class="c1"># make from_files plain str or Path into list</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">from_files</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">from_files</span><span class="p">,</span> <span class="n">Path</span><span class="p">):</span>
+        <span class="n">from_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">from_files</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">from_host</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># local dir, but relative is relative to home dir rather than current dir, like rsync</span>
+        <span class="n">abs_from_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">from_files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">():</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="n">f</span>
+            <span class="n">abs_from_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">abs_from_files</span> <span class="o">=</span> <span class="n">from_files</span>
+    <span class="k">if</span> <span class="n">from_host</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">from_host</span> <span class="o">==</span> <span class="s1">&#39;_LOCAL_&#39;</span><span class="p">:</span>
+        <span class="c1"># make into string that can be prepended</span>
+        <span class="n">from_host</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="n">to_host</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="n">to_file</span><span class="p">)</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">():</span>
+        <span class="c1"># local dir, but relative is relative to home dir rather than current dir, like rsync</span>
+        <span class="n">abs_to_file</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="n">to_file</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">abs_to_file</span> <span class="o">=</span> <span class="n">to_file</span>
+    <span class="k">if</span> <span class="n">to_host</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">to_host</span> <span class="o">==</span> <span class="s1">&#39;_LOCAL_&#39;</span><span class="p">:</span>
+        <span class="c1"># make into string that can be prepended</span>
+        <span class="n">to_host</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="c1"># add &#39;:&#39; after non-blank host</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">from_host</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">from_host</span> <span class="o">+=</span> <span class="s1">&#39;:&#39;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">to_host</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">to_host</span> <span class="o">+=</span> <span class="s1">&#39;:&#39;</span>
+
+    <span class="c1"># prepend host parts to from_files and to_file</span>
+    <span class="n">abs_from_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">from_host</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">abs_from_files</span><span class="p">]</span>
+    <span class="n">abs_to_file</span> <span class="o">=</span> <span class="n">to_host</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">abs_to_file</span><span class="p">)</span>
+
+    <span class="c1"># do copy (or dry run)</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="n">subprocess_run</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="n">rcp_cmd</span><span class="p">]</span> <span class="o">+</span> <span class="n">rcp_args</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="o">+</span> <span class="n">abs_from_files</span> <span class="o">+</span> <span class="p">[</span><span class="n">abs_to_file</span><span class="p">],</span> <span class="n">retry</span><span class="o">=</span><span class="n">retry</span><span class="p">,</span> <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;_PWD_&#39;</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="n">dry_run</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dry_run</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">retval</span></div>
+</pre></div>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+            &copy; Copyright .<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
