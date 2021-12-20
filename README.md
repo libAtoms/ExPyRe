@@ -10,7 +10,7 @@ ssh).
 
 For examples and more information see documentation. 
 
-Documentation may be built with
+Documentation may be checked out from `gh-pages` branch or built with
 
 ```
 cd docs
