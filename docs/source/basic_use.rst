@@ -64,7 +64,7 @@ And ExPyRe-modified script:
 
 In addition, the following (modified appropriately) should be placed at ``~/.expyre/config.json``
 
-.. code-block:: json
+.. code-block:: 
 
     { "systems": {
         "remtote": { "host": 'my-cluster',

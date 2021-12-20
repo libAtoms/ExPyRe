@@ -11,7 +11,7 @@ At expyre runtime
 - ``EXPYRE_ROOT``: override path to root directory for ``config.json``, ``JobsDB``, and stage directories
 - ``EXPYRE_RSH``: default remote shell command if not specified in system configuration, overall default ``ssh``
 - ``EXPYRE_SYS``: default system to start remote functions on, if not specified in call to ``ExPyRe.start()``
-- ``EXPYRE_TIMING_VERBOSE`: print trace (to stderr) with timing info to determine what operation is taking time
+- ``EXPYRE_TIMING_VERBOSE``: print trace (to stderr) with timing info to determine what operation is taking time
 
 Available in submitted job scripts
 ================================================================

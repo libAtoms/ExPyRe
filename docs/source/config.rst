@@ -17,7 +17,7 @@ the system when evaluating the function).  See ``expyre.System`` docstring for f
 
 - ``"host"``: string hostname, with optional ``username@`, or ``null`` for localhost without ssh.
 - ``"scheduler"``: string indicating type of scheduler, currently ``"slurm"``, ``"pbs"`` or ``"sge"``
-- ``"commands"``: optional list(str) with commands to run at beginning of every script on system, usually for things that set up the runtime such as environment modules (e.g. ``module load vasp`)
+- ``"commands"``: optional list(str) with commands to run at beginning of every script on system, usually for things that set up the runtime such as environment modules (e.g. ``module load vasp``)
 - ``"header"``: list(str) queuing system header lines.  Actual header is created by applying string formatting, i.e.  ``str.format(**kwargs)``, replacing substrings such as ``{nnodes}``.
 - ``rundir``: str, optional, default ``"run_expyre"``. Place for all remote files and remote execution. 
 - ``no_default_header``: bool, optional, default False``. Do not put default lines (such as ``#$ -cwd`` or automatically setting the job name) to the job submission script. 
@@ -42,16 +42,15 @@ Additional keys that are used by the internally generated parts of the header:
 - ``"id"``: str (supposed to be guaranteed to be unique among current jobs within project) job id
 - ``"partition"``: str partition/queue/node type
 - ``"max_time_HMS"``: str max runtime in ``hours:minutes:seconds`` format
-- ``"partitions"`: dict with partitions/queues/node-type names as keys and dict of properties as values.
+- ``"partitions"``: dict with partitions/queues/node-type names as keys and dict of properties as values.
 
 Property dict includes
 
 - ``"ncores"``: int number of cores per node
 - ``"max_time"``: max time, int for seconds, str for ``"<N>[smhd]"`` (case insensitive) or ``"<dd>-<hh>:<mm>:<ss>"``. Leading parts are optional, so N1:N2 is N1 minutes + N2 seconds.
 - ``"max_mem"``: max mem per node, int for kB, str for ``"<N>[kmgt]b?"`` (case insensitive).
-- ``"remsh_cmd"``: optional string remote shell command, default ``"ssh"`
-- ``"no_default_header"``: bool, default false disable automatic setting of queuing system header for job name,
-partition/queue, max runtime, and stdout and stderr files
+- ``"remsh_cmd"``: optional string remote shell command, default ``"ssh"``
+- ``"no_default_header"``: bool, default false disable automatic setting of queuing system header for job name, partition/queue, max runtime, and stdout and stderr files
 - ``"rundir"``: string for a path where the remote jobs should be run
 
 

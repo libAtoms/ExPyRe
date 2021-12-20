@@ -15,7 +15,7 @@ A job is identical if the hash of the pickles are identical
 for all of the following:
 
 - function
-- input arguments (except those listed in ``hash_ignore`, for example any output-only arguments)
+- input arguments (except those listed in ``hash_ignore``, for example any output-only arguments)
 - input file names
 - input file contents
 
