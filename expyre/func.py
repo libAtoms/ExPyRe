@@ -543,9 +543,9 @@ class ExPyRe:
         Parameters
         ----------
         timeout: int, default 3600
-            Max time to wait for job to complete, in sec
+            Max time (in sec) to wait for job to complete, None or int <= 0 to wait forever
         check_interval: int, default 30
-            Time to wait between checks of job completion
+            Time to wait (in sec) between checks of job completion
         sync: bool, default True
             Synchronize remote files before checking for results
             Note that if this is False and job is finished on remote system but output files haven't been
@@ -659,7 +659,7 @@ class ExPyRe:
                 # should (can?) we pickle the exception and reraise it here?
                 raise RuntimeError(f'Remote job {self.id} failed with status {remote_status} error_msg {error_msg}')
 
-            out_of_time = time.time() - start_time > timeout
+            out_of_time = (timeout is not None) and (timeout > 0) and (time.time() - start_time > timeout)
 
             if not quiet:
                 if n_iter == 0:
