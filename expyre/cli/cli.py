@@ -114,6 +114,8 @@ def cli_rm(ctx, id, name, status, system, yes, clean):
                 sys.stderr.write('\n')
                 continue
 
+        if clean:
+            xpr.cancel()
         xpr.clean(wipe=True, dry_run=not clean)
         config.db.remove(xpr.id)
         if not clean:

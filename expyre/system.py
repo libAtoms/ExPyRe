@@ -210,7 +210,9 @@ class System:
                              f'    fi\n'
                              f'done\n'), dry_run=dry_run, verbose=verbose)
         else:
-            self.run(['rm', '-rf', str(job_remote_rundir)], dry_run=dry_run, verbose=verbose)
+            self.run(['bash'],
+                     sript="find " + str(job_remote_rundir) + " -type d -exec chmod u+rwx {} \; ; rm -rf " + str(job_remote_rundir),
+                     dry_run=dry_run, verbose=verbose)
 
 
     def __str__(self):

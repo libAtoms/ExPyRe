@@ -16,6 +16,7 @@ from pathlib import Path
 from . import config
 from .subprocess import subprocess_run
 from .resources import Resources
+from .jobsdb import JobsDB
 
 
 class ExPyRe:
@@ -361,6 +362,13 @@ class ExPyRe:
         return expyres
 
 
+    def cancel(self, verbose=False):
+        if self.remote_id is None:
+            return
+        if self.status in JobsDB.status_group['ongoing']:
+            config.systems[self.system_name].scheduler.cancel(self.remote_id, verbose=verbose)
+
+
     def start(self, resources, system_name=os.environ.get('EXPYRE_SYS', None),
               exact_fit=True, partial_node=False, python_cmd='python3'):
         """Start a job on a remote machine
@@ -502,6 +510,8 @@ class ExPyRe:
                 # delete remote stage dir
                 system.clean_rundir(self.stage_dir, None, dry_run=dry_run, verbose=verbose or dry_run)
             # delete local stage dir
+            subprocess_run(None, ['find', str(self.stage_dir), '-type', 'd', '-exec', 'chmod', 'u+rwx', '{}', '\;'],
+                           dry_run=dry_run, verbose=verbose or dry_run)
             subprocess_run(None, ['rm', '-rf', str(self.stage_dir)], dry_run=dry_run, verbose=verbose or dry_run)
         else:
             if system is not None:
