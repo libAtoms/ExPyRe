@@ -17,6 +17,7 @@ from . import config
 from .subprocess import subprocess_run
 from .resources import Resources
 from .jobsdb import JobsDB
+from .units import time_to_sec
 
 
 class ExPyRe:
@@ -542,8 +543,8 @@ class ExPyRe:
         """Get results from a remote job
         Parameters
         ----------
-        timeout: int, default 3600
-            Max time (in sec) to wait for job to complete, None or int <= 0 to wait forever
+        timeout: int or str, default 3600
+            Max time (in sec if int, time spec if str) to wait for job to complete, None or int <= 0 to wait forever
         check_interval: int, default 30
             Time to wait (in sec) between checks of job completion
         sync: bool, default True
@@ -570,6 +571,7 @@ class ExPyRe:
         if self.status == 'processed' or self.status == 'cleaned':
             raise RuntimeError(f'Job {self.id} has status {self.status}, results are no longer available')
 
+        timeout = time_to_sec(timeout)
         system = config.systems[self.system_name]
         start_time = time.time()
         problem_last_chance = False
