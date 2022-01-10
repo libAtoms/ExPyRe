@@ -665,7 +665,7 @@ class ExPyRe:
 
             if not quiet:
                 if n_iter == 0:
-                    sys.stderr.write(f'Waiting for job {self.id}: \n')
+                    sys.stderr.write(f'Waiting for job {self.id} up to {timeout} s: \n')
                     sys.stderr.flush()
 
                 # progress info to stderr
