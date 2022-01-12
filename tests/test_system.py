@@ -1,5 +1,6 @@
 import sys
 import time
+import warnings
 
 import pytest
 
@@ -7,7 +8,7 @@ from pathlib import Path
 
 from expyre.resources import Resources
 
-def test_system_same_machine(tmp_path, expyre_config):
+def test_system(tmp_path, expyre_config):
     from expyre.config import systems
 
     for sys_name, system in systems.items():
@@ -25,6 +26,11 @@ def do_system(tmp_path, system, job_name):
 
     assert not (stage_dir / 'out').exists()
 
+    if system.host is not None:
+        # May need to clean up remote stage dir.
+        warnings.warn('If remote system still has stage_dir {stage_dir} from a previous run, this test will fail')
+
+    # submit job
     remote_id = system.submit(job_name, stage_dir,
                            resources=Resources(n=(2, 'nodes'), max_time='5m'),
                            commands=['pwd', 'echo BOB > out', 'sleep 20'])
