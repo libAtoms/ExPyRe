@@ -487,9 +487,12 @@ class ExPyRe:
             # get remote statuses and update in JobsDB
             status_of_remote_id = system.scheduler.status([j['remote_id'] for j in jobs_to_sync], verbose=verbose)
             for j in jobs_to_sync:
-                if cli:
-                    sys.stderr.write(f'Update remote status of {j["id"]} to {status_of_remote_id[j["remote_id"]]}\n')
-                config.db.update(j['id'], remote_status=status_of_remote_id[j['remote_id']])
+                old_remote_status = list(config.db.jobs(id=j['id']))[0]['remote_status']
+                new_remote_status = status_of_remote_id[j['remote_id']]
+                if old_remote_status != new_remote_status:
+                    if cli:
+                        sys.stderr.write(f'Update remote status of {j["id"]} to {status_of_remote_id[j["remote_id"]]}\n')
+                    config.db.update(j['id'], remote_status=status_of_remote_id[j['remote_id']])
 
             # get remote files only _AFTER_ getting remote status, since otherwise might result in
             # a race condition:
