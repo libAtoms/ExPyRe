@@ -72,7 +72,7 @@ class ExPyRe:
             raise RuntimeError('Configuration file was not found, ExPyRe object cannot be created')
 
         # name will be used as part of path, can't have a few special things
-        assert ('/' not in name and '[' not in name and ']' not in name and 
+        assert ('/' not in name and '[' not in name and ']' not in name and
                 '{' not in name and '}' not in name and '*' not in name and '\\' not in name)
 
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
@@ -422,7 +422,11 @@ class ExPyRe:
 
 
     def sync_remote_results_status(self, sync_all=True, force_sync=False, verbose=False):
-        """Sync files associated with results from remote machine to local stage dirs
+        """Sync files associated with results from remote machine to local stage dirs and
+        updates 'remote_status' in jobsdb.  Note that both have to happen because other
+        functions assume that if remote status has been updated files have been staged back
+        as well.
+
         Parameters
         ----------
         sync_all: bool, default True
@@ -451,7 +455,9 @@ class ExPyRe:
 
     @classmethod
     def sync_remote_results_status_ll(cls, jobs_to_sync, n_group=250, cli=False, verbose=False):
-        """Low level part of syncing jobs
+        """Low level part of syncing jobs.  Gets remote files _and_ updates 'remote_status'
+        field in jobsdb.  Note that both have to happen because other functions assume that
+        if remote status has been updated files have been staged back as well.
 
         Parameters
         ----------
@@ -462,6 +468,9 @@ class ExPyRe:
         n_group: int, default 250
             number of jobs to do in a group with each rsync call
         """
+        if len(jobs_to_sync) == 0:
+            return
+
         def _grouper(n, iterable):
             it = iter(iterable)
             while True:
@@ -470,22 +479,29 @@ class ExPyRe:
                     return
                 yield chunk
 
-        if len(jobs_to_sync) > 0:
-            for system_name in set([j['system'] for j in jobs_to_sync]):
-                system = config.systems[system_name]
-                # assume all jobs are staged from same place
-                stage_root = Path(jobs_to_sync[0]['from_dir']).parent
-                # get remote files
-                for job_group in _grouper(n_group, jobs_to_sync):
-                    system.get_remotes(stage_root, subdir_glob=[Path(j['from_dir']).name for j in job_group],
-                                       verbose=verbose)
+        for system_name in set([j['system'] for j in jobs_to_sync]):
+            system = config.systems[system_name]
+            # assume all jobs are staged from same place
+            stage_root = Path(jobs_to_sync[0]['from_dir']).parent
 
-                # get remote statuses and update in JobsDB
-                status_of_remote_id = system.scheduler.status([j['remote_id'] for j in jobs_to_sync], verbose=verbose)
-                for j in jobs_to_sync:
+            # get remote statuses and update in JobsDB
+            status_of_remote_id = system.scheduler.status([j['remote_id'] for j in jobs_to_sync], verbose=verbose)
+            for j in jobs_to_sync:
+                old_remote_status = list(config.db.jobs(id=j['id']))[0]['remote_status']
+                new_remote_status = status_of_remote_id[j['remote_id']]
+                if old_remote_status != new_remote_status:
                     if cli:
                         sys.stderr.write(f'Update remote status of {j["id"]} to {status_of_remote_id[j["remote_id"]]}\n')
                     config.db.update(j['id'], remote_status=status_of_remote_id[j['remote_id']])
+
+            # get remote files only _AFTER_ getting remote status, since otherwise might result in
+            # a race condition:
+            #    copy files while job is running, so not all files are ready
+            #    while files are being copied, job finishes (but some files were not copied)
+            #    update status, showing job as done (despite missing files)
+            for job_group in _grouper(n_group, jobs_to_sync):
+                system.get_remotes(stage_root, subdir_glob=[Path(j['from_dir']).name for j in job_group],
+                                   verbose=verbose)
 
 
     def clean(self, wipe=False, dry_run=False, verbose=False):
@@ -582,11 +598,19 @@ class ExPyRe:
             # sync remote results and status.  This used to be inside test for status and/or succeeded/failed
             # file existence, but that's probably not useful.  If we're in this loop we have to sync, since if
             # sync isn't needed, loop should have been exited on previous iteration
-            self.sync_remote_results_status(sync_all, force_sync, verbose=verbose)
 
-            # get remote status of job from db (was set by call to self.sync_remote_results_status() just above)
-            # remote_status: queued, held,       running,    done, failed, timeout, other
+            # get remote status of job from db (either unset or was set by call to
+            #     self.sync_remote_results_status() in previous iter)
+            # remote_status values: queued, held,       running,    done, failed, timeout, other
             remote_status = list(config.db.jobs(id=re.escape(self.id)))[0]['remote_status']
+            if remote_status != 'done':
+                # If previous status was not 'done', need to sync remote status.
+                # If it was pre-done, we obviously need current state and results.
+                # If it was something else (even 'failed'), lets try again just in case it needed
+                #     more time or was fixed manually.
+                self.sync_remote_results_status(sync_all, force_sync, verbose=verbose)
+
+                remote_status = list(config.db.jobs(id=re.escape(self.id)))[0]['remote_status']
 
             # poke filesystem, since on some machines Path.exists() fails even if file appears to be there when doing ls
             _ = list(self.stage_dir.glob('_expyre_job_*'))
