@@ -79,7 +79,7 @@ class System:
         return f'{self.remote_rundir}/{stage_dir.name}'
 
 
-    def submit(self, id, stage_dir, resources, commands, exact_fit=True, partial_node=False, verbose=False):
+    def submit(self, id, stage_dir, resources, header, commands, exact_fit=True, partial_node=False, verbose=False):
         """Submit a job on a remote machine, including staging out files
 
         Parameters
@@ -88,8 +88,10 @@ class System:
             unique id for job
         stage_dir: str, Path
             directory in which files have been prepared
-        resoures: Resources
+        resources: Resources
             resources to use for job
+        header: list(str), optional
+            list of lines to append to system header for this job
         commands: list(str)
             commands to run in job script after per-machine commands
         exact_fit: bool, default True
@@ -143,7 +145,7 @@ class System:
             sys.stderr.write(f'system {self.id} submit start scheduler submit {time.time()}\n')
         try:
             r = self.scheduler.submit(id, str(job_remote_rundir), partition,
-                                      commands, resources.max_time, self.queuing_sys_header,
+                                      commands, resources.max_time, self.queuing_sys_header + header,
                                       node_dict, no_default_header=self.no_default_header, verbose=verbose)
         except Exception:
             if not self.host is None:
