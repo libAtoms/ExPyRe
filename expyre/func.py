@@ -370,7 +370,7 @@ class ExPyRe:
             config.systems[self.system_name].scheduler.cancel(self.remote_id, verbose=verbose)
 
 
-    def start(self, resources, system_name=os.environ.get('EXPYRE_SYS', None),
+    def start(self, resources, system_name=os.environ.get('EXPYRE_SYS', None), header_extra=[],
               exact_fit=True, partial_node=False, python_cmd='python3'):
         """Start a job on a remote machine
         Parameters
@@ -379,6 +379,8 @@ class ExPyRe:
             resources to use for job, either Resources or dict of Resources constructor kwargs
         system_name: str
             name of system in config.systems
+        header_extra: list(str), optional
+            list of lines to add to queuing system header, appended to System.header[]
         exact_fit: bool, default True
             use only nodes that exactly match number of tasks
         partial_node: bool, default False
@@ -407,7 +409,7 @@ class ExPyRe:
             post_run_commands = fin.readlines()
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
             sys.stderr.write(f'ExPyRe {self.id} start() calling system.submit {time.time()}\n')
-        self.remote_id = system.submit(self.id, self.stage_dir, resources=resources,
+        self.remote_id = system.submit(self.id, self.stage_dir, resources=resources, header_extra=header_extra,
                                        commands=(pre_run_commands + [f'{python_cmd} _expyre_script_core.py'] +
                                                  post_run_commands),
                                        exact_fit=exact_fit, partial_node=partial_node)

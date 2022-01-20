@@ -41,7 +41,7 @@ def expyre_dummy_config(tmp_path):
 @pytest.fixture()
 def expyre_config(tmp_path):
     if not str(tmp_path).startswith(str(Path.home())):
-        pytest.xfail(reason='expyre tests require tmp_path be under $HOME, pass "--basetemp $HOME/pytest"')
+        pytest.fail(reason='expyre tests require tmp_path be under $HOME, pass "--basetemp $HOME/pytest"')
 
     # make a root directory, copy in config.json
     expyre_root = Path(tmp_path / '.expyre')
@@ -71,7 +71,7 @@ def expyre_config(tmp_path):
             system.remote_rundir = str(tmp_path / f'pytest_expyre_rundir_{sys_name}' / orig_remote_rundir[sys_name])
         else:
             # NOTE: should make this something unique for each run
-            system.remote_rundir = f'pytest_expyre_rundir_{sys_name}/' + str(Path(tmp_path).name) + '/' + orig_remote_rundir[sys_name]
+            system.remote_rundir = str(Path(f'pytest_expyre_rundir_{sys_name}') / tmp_path.name / orig_remote_rundir[sys_name])
 
         system.run(['mkdir', '-p', system.remote_rundir])
 
