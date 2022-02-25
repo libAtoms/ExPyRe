@@ -19,6 +19,8 @@ from .resources import Resources
 from .jobsdb import JobsDB
 from .units import time_to_sec
 
+class ExPyReJobDied(Exception):
+    pass
 
 class ExPyRe:
     """Interface for remotely running python functions.  It pickles the function and
@@ -28,7 +30,7 @@ class ExPyRe:
     to return function result.  It also creates/updates the JobsDB entry for the job
     as it does these steps.
 
-    Possible status (see JobsDB): created, submitted, started, succeeded/failed, processed, cleaned
+    Possible status (see JobsDB): created, submitted, started, succeeded/failed/died, processed, cleaned
     """
 
     def __init__(self, name, *, input_files=[], env_vars=[], pre_run_commands=[], post_run_commands=[],
@@ -157,7 +159,7 @@ class ExPyRe:
                 # reconstruct job
                 self.stage_dir = old_stage_dir
 
-                # confirm that JobsDB id and self.id, as they must be since self.id
+                # confirm that JobsDB id and self.id match, as they must be since self.id
                 # is derived from self.stage_dir (that's why self.stage_dir has to be set
                 # first) but they are stored separately in JobsDB
                 assert self.id == job['id']
@@ -232,12 +234,14 @@ class ExPyRe:
                        '    with open(f"_tmp_expyre_job_succeeded", "wb") as fout:\n'
                        '        pickle.dump(results, fout)\n'
                        'except Exception as exc:\n'
+                       '    with open(f"_expyre_exception", "wb") as fout:\n'
+                       '        pickle.dump(exc, fout)\n'
                        '    with open(f"_expyre_error", "w") as fout:\n'
                        '        fout.write(f"{exc}\\n")\n'
                        '        traceback.print_exc(file=fout)\n'
                        '        raise\n')
 
-        # commands to check status and create final _succeeded or _failed files
+        # commands to check status and create final _succeeded or _error files
         post_run_commands = (['error_stat=$?'] + post_run_commands +
                              ['exit $error_stat', ')',
                               'error_stat=$?',
@@ -245,18 +249,21 @@ class ExPyRe:
                               '    if [ -e _tmp_expyre_job_succeeded ]; then',
                               '        mv _tmp_expyre_job_succeeded _expyre_job_succeeded',
                               '    else',
-                              '        echo "No error code but _tmp_expyre_job_succeeded does not exist" > _tmp_expyre_job_failed',
+                              '        echo "No error code but _tmp_expyre_job_succeeded does not exist" > _tmp_expyre_job_error',
                               '        if [ -f _expyre_error ]; then',
-                              '            cat _expyre_error >> _tmp_expyre_job_failed',
+                              '            cat _expyre_error >> _tmp_expyre_job_error',
                               '        fi',
-                              '        mv _tmp_expyre_job_failed _expyre_job_failed',
+                              '        mv _tmp_expyre_job_error _expyre_job_error',
                               '    fi',
                               'else',
+                              '    if [ -e _expyre_exception ]; then',
+                              '        mv _expyre_exception _expyre_job_exception',
+                              '    fi',
                               '    if [ -e _expyre_error ]; then',
-                              '        mv _expyre_error _expyre_job_failed',
+                              '        mv _expyre_error _expyre_job_error',
                               '    else',
-                              '        echo "UNKNOWN ERROR $error_stat" > _tmp_expyre_job_failed',
-                              '        mv _tmp_expyre_job_failed _expyre_job_failed',
+                              '        echo "UNKNOWN ERROR $error_stat" > _tmp_expyre_job_error',
+                              '        mv _tmp_expyre_job_error _expyre_job_error',
                               '    fi',
                               'fi',
                               ''])
@@ -389,10 +396,9 @@ class ExPyRe:
             name of python interpreter to use on remote machine
         """
         if self.status != 'created':
+            # If job is not newly created, return instead of resubmitting
+            # First check that it is newly recreated, otherwise this shouldn't be happening
             assert self.recreated
-            # Only newly created jobs can be started.  At any later state it just confuses things,
-            # but this might be a call after constructor recreated job from old stage dir and database
-            # record, and if so just return
             return
 
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
@@ -630,10 +636,10 @@ class ExPyRe:
                 except Exception as exc:
                     raise RuntimeError(f'Job {self.id} got "_succeeded" file, but failed to parse it with error {exc}')
                 self.status = 'succeeded'
-            elif (self.stage_dir / '_expyre_job_failed').exists():
+            elif (self.stage_dir / '_expyre_job_error').exists():
                 # job created final failed file
                 assert remote_status not in ['queued', 'held']
-                with open(self.stage_dir / '_expyre_job_failed') as fin:
+                with open(self.stage_dir / '_expyre_job_error') as fin:
                     error_msg = ''.join(fin.readlines())
                 self.status = 'failed'
             else:
@@ -644,15 +650,14 @@ class ExPyRe:
                     # problem - job does not seem to be queued (even held) or running
                     if problem_last_chance:
                         # already on last chance, giving up
-                        # NOTE: should this really be status 'failed', or some other status that the calling
-                        # program can deal with separately?
-                        self.status = 'failed'
+                        self.status = 'died'
                         config.db.update(self.id, status=self.status)
-                        raise RuntimeError(f'Job {self.id} got remote status {remote_status} which is not '
-                                            '"queued", "running", or "held", but neither "_succeeded" nor '
-                                            '"_failed" file exists')
+                        raise ExPyReJobDied(f'Job {self.id} has remote status {remote_status} but no _succeeded or _error faile')
+                        # raise RuntimeError(f'Job {self.id} got remote status {remote_status} which is not '
+                                            # '"queued", "running", or "held", but neither "_succeeded" nor '
+                                            # '"_error" file exists')
                     # give it one more chance, perhaps queuing system status and file are slow to sync to head node
-                    warnings.warn(f'Job {self.id} has no _succeeded or _failed file, but status is not queued, held, or running. Giving it one more chance')
+                    warnings.warn(f'Job {self.id} has no _succeeded or _error file, but status is not queued, held, or running. Giving it one more chance')
                     problem_last_chance = True
                 else:
                     # No apparent problem, just not done yet, leave status as is, but check for timeout
@@ -684,8 +689,12 @@ class ExPyRe:
                     # newline after one or more 'q|r' progress characters
                     sys.stderr.write('\n')
                     sys.stderr.flush()
-                # should (can?) we pickle the exception and reraise it here?
-                raise RuntimeError(f'Remote job {self.id} failed with status {remote_status} error_msg {error_msg}')
+                if (self.stage_dir / "_expyre_job_exception").is_file():
+                    with open(self.stage_dir / "_expyre_job_exception", "rb") as fin:
+                        exc = pickle.load(fin)
+                    raise exc
+                else:
+                    raise RuntimeError(f'Remote job {self.id} failed with no exception but remot status {remote_status} error_msg {error_msg}')
 
             out_of_time = (timeout is not None) and (timeout > 0) and (time.time() - start_time > timeout)
 
