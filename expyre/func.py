@@ -374,7 +374,10 @@ class ExPyRe:
         if self.remote_id is None:
             return
         if self.status in JobsDB.status_group['ongoing']:
-            config.systems[self.system_name].scheduler.cancel(self.remote_id, verbose=verbose)
+            try:
+                config.systems[self.system_name].scheduler.cancel(self.remote_id, verbose=verbose)
+            except Exception:
+                pass
 
 
     def start(self, resources, system_name=os.environ.get('EXPYRE_SYS', None), header_extra=[],
