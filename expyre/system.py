@@ -109,6 +109,13 @@ class System:
 
         partition, node_dict = resources.find_nodes(self.partitions, exact_fit=exact_fit,
                                                     partial_node=partial_node)
+        # add partition-specific header after per-system header but before header specific
+        # to this submission
+        header_extra = self.partitions[partition].get("header", []) + header_extra
+        # override default partition name from dict key (but after using dict key to look up
+        # other things like header above)
+        actual_partition = self.partitions[partition].get("partition", partition)
+
         commands = self.commands + commands
 
         stage_dir = Path(stage_dir)
@@ -144,7 +151,7 @@ class System:
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
             sys.stderr.write(f'system {self.id} submit start scheduler submit {time.time()}\n')
         try:
-            r = self.scheduler.submit(id, str(job_remote_rundir), partition,
+            r = self.scheduler.submit(id, str(job_remote_rundir), actual_partition,
                                       commands, resources.max_time, self.queuing_sys_header + header_extra,
                                       node_dict, no_default_header=self.no_default_header, verbose=verbose)
         except Exception:
