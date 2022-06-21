@@ -84,8 +84,6 @@ class Slurm(Scheduler):
 
         commands = pre_commands + commands
 
-        print("BOB node_dict", node_dict)
-        print("BOB header", header)
         script = '#!/bin/bash -l\n'
         script += '\n'.join([line.rstrip().format(**node_dict) for line in header]) + '\n'
         script += '\n' + '\n'.join([line.rstrip() for line in commands]) + '\n'
