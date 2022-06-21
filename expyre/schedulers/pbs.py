@@ -79,15 +79,15 @@ class PBS(Scheduler):
             header.append('#PBS -S /bin/bash')
             header.append('#PBS -r n')
 
-        # set EXPYRE_NCORES_PER_NODE using scheduler-specific info, to support jobs
+        # set EXPYRE_NUM_CORES_PER_NODE using scheduler-specific info, to support jobs
         # that do not know exact node type at submit time.  All related quantities
         # in node_dict are set based on this one by superclass Scheduler static method
         pre_commands = ['if [ ! -z $PBS_NUM_PPN ]; then',
-                        '    export EXPYRE_NCORES_PER_NODE=$PBS_NUM_PPN',
+                        '    export EXPYRE_NUM_CORES_PER_NODE=$PBS_NUM_PPN',
                         'elif [ ! -z $PBS_NODEFILE ]; then',
-                        '    export EXPYRE_NCORES_PER_NODE=$(sort -k1 $PBS_NODEFILE | uniq -c | head -1 | awk \'{{print $1}}\')',
+                        '    export EXPYRE_NUM_CORES_PER_NODE=$(sort -k1 $PBS_NODEFILE | uniq -c | head -1 | awk \'{{print $1}}\')',
                         'else',
-                       f'    export EXPYRE_NCORES_PER_NODE={node_dict["ncores_per_node"]}',
+                       f'    export EXPYRE_NUM_CORES_PER_NODE={node_dict["ncores_per_node"]}',
                         'fi'
                        ] + Scheduler.node_dict_env_var_commands(node_dict)
         pre_commands = [l.format(**node_dict) for l in pre_commands]

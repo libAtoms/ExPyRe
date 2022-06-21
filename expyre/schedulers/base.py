@@ -77,19 +77,19 @@ class Scheduler:
     def node_dict_env_var_commands(node_dict):
         # set env vars for node_dict, with max flexibility in case only some are known at submit time
 
-        # EXPYRE_NCORES_PER_NODE is defined by scheduler before these commands are run
+        # EXPYRE_NUM_CORES_PER_NODE is defined by scheduler before these commands are run
 
         pre_commands = []
 
         # either nnodes or ncores must be known at submit time, so compute each in terms of the other
         if node_dict.get('nnodes', None) is None:
-            pre_commands.append('export EXPYRE_NNODES=$(( {ncores} / $EXPYRE_NCORES_PER_NODE ))')
+            pre_commands.append('export EXPYRE_NUM_NODES=$(( {ncores} / $EXPYRE_NUM_CORES_PER_NODE ))')
         else:
-            pre_commands.append('export EXPYRE_NNODES={nnodes}')
+            pre_commands.append('export EXPYRE_NUM_NODES={nnodes}')
 
         if node_dict.get('ncores', None) is None:
-            pre_commands.append('export EXPYRE_NCORES=$(( {nnodes} * $EXPYRE_NCORES_PER_NODE ))')
+            pre_commands.append('export EXPYRE_NUM_CORES=$(( {nnodes} * $EXPYRE_NUM_CORES_PER_NODE ))')
         else:
-            pre_commands.append('export EXPYRE_NCORES={ncores}')
+            pre_commands.append('export EXPYRE_NUM_CORES={ncores}')
 
         return pre_commands

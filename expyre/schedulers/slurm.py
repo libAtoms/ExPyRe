@@ -62,16 +62,16 @@ class Slurm(Scheduler):
             header.append('#SBATCH --output=job.{id}.stdout')
             header.append('#SBATCH --error=job.{id}.stderr')
 
-        # set EXPYRE_NCORES_PER_NODE using scheduler-specific info, to support jobs
+        # set EXPYRE_NUM_CORES_PER_NODE using scheduler-specific info, to support jobs
         # that do not know exact node type at submit time.  All related quantities
         # in node_dict are set based on this one by superclass Scheduler static method
         pre_commands = ['if [ ! -z $SLURM_TASKS_PER_NODE ]; then',
                         '    if echo "${{SLURM_TASKS_PER_NODE}}"| grep -q ","; then',
                         '        echo "Using only first part of hetereogeneous tasks per node spec ${{SLURM_TASKS_PER_NODE}}"',
                         '    fi',
-                        '    export EXPYRE_NCORES_PER_NODE=$(echo $SLURM_TASKS_PER_NODE | sed "s/(.*//")',
+                        '    export EXPYRE_NUM_CORES_PER_NODE=$(echo $SLURM_TASKS_PER_NODE | sed "s/(.*//")',
                         'else',
-                       f'    export EXPYRE_NCORES_PER_NODE={node_dict["ncores_per_node"]}',
+                       f'    export EXPYRE_NUM_CORES_PER_NODE={node_dict["ncores_per_node"]}',
                         'fi'
                        ] + Scheduler.node_dict_env_var_commands(node_dict)
         pre_commands = [l.format(**node_dict) for l in pre_commands]
