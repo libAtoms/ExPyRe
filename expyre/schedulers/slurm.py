@@ -1,4 +1,3 @@
-import os
 import re
 
 from ..subprocess import subprocess_run
@@ -43,7 +42,7 @@ class Slurm(Scheduler):
             list of header directives, not including walltime specific directive
         node_dict: dict
             properties related to node selection.
-            Fields: nnodes, tot_ntasks, tot_ncores, ncores_per_node, ppn, id, max_time, partition
+            Fields: nnodes, ncores, ncores_per_node, ppn, id, max_time, partition
         no_default_header: bool, default False
             do not add normal header fields, only use what's passed in in "header"
 
@@ -72,7 +71,7 @@ class Slurm(Scheduler):
                         '    fi',
                         '    export EXPYRE_NCORES_PER_NODE=$(echo $SLURM_TASKS_PER_NODE | sed "s/(.*//")',
                         'else',
-                        '    export EXPYRE_NCORES_PER_NODE={ntasks_per_node}',
+                       f'    export EXPYRE_NCORES_PER_NODE={node_dict["ncores_per_node"]}',
                         'fi'
                        ] + Scheduler.node_dict_env_var_commands(node_dict)
         pre_commands = [l.format(**node_dict) for l in pre_commands]
@@ -85,15 +84,13 @@ class Slurm(Scheduler):
 
         commands = pre_commands + commands
 
+        print("BOB node_dict", node_dict)
+        print("BOB header", header)
         script = '#!/bin/bash -l\n'
         script += '\n'.join([line.rstrip().format(**node_dict) for line in header]) + '\n'
         script += '\n' + '\n'.join([line.rstrip() for line in commands]) + '\n'
 
-        submit_args = []
-        if 'WFL_SCHEDULER_IGNORE_ENV' in os.environ:
-            for v in os.environ:
-                if v.startswith('SLURM_'):
-                    submit_args += ['unset', f'{v}', '&&']
+        submit_args = Scheduler.unset_scheduler_env_vars("SLURM")
         submit_args += ['cd', remote_dir, '&&', 'cat', '>', 'job.script.slurm',
                        '&&', 'sbatch', 'job.script.slurm']
 

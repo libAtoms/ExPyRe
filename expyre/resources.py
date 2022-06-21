@@ -4,32 +4,34 @@ from .units import time_to_sec, mem_to_kB
 
 
 class Resources:
-    """Resources required for a task, including time, memory, cores/nodes/tasks, and particular
+    """Resources required for a task, including time, memory, cores/nodes, and particular
     partitions.  Mainly consists of code that selects appropriate partition from the list
     associated with each System.
     """
 
-    def __init__(self, max_time, n, ncores_per_task=1, max_mem_per_task=None, partitions=None):
+    def __init__(self, max_time, n, max_mem=None, partitions=None):
         """Create Resources object
         Parameters
         ----------
-        max_time: int, str
-            max time for job in s (int) or time spec (str)
+        max_time: int / str
+            max time for job in sec (int) or time spec (str)
         n: (int, str)
-            int number of tasks or nodes to use and str 'tasks' or 'nodes'
-        ncores_per_task: int, default 1
-            cores per task, 0 for all cores in node
-        max_mem_per_task: int, str, default None
-            max mem per task in kB (int) or memory spec (str)
+            int number of cores or nodes to use and str 'cores' or 'nodes'
+        max_mem_per_core: (int/str, str), default None
+            max mem in kB (int) or memory spec (str) per 'per_core' or 'tot' (str)
         partitions: list(str), default None
             regexps for types of node that can be used
         """
-        assert n[1] in ['nodes', 'tasks']
+        assert n[1] in ['nodes', 'cores']
+        if max_mem is not None:
+            assert max_mem[1] in ['per_core', 'tot']
 
         self.max_time = time_to_sec(max_time)
         self.n = n
-        self.ncores_per_task = ncores_per_task
-        self.max_mem_per_task = mem_to_kB(max_mem_per_task)
+        if max_mem is None:
+            self.max_mem = None
+        else:
+            self.max_mem = (mem_to_kB(max_mem[0]), max_mem[1])
         self.partitions = partitions
         if isinstance(self.partitions, str):
             self.partitions = [self.partitions]
@@ -42,9 +44,9 @@ class Resources:
         partitions: dict
             properties of available partitions
         exact_fit: bool, default True
-            only return nodes that exactly satisfy the number of tasks
+            only return nodes that exactly satisfy the number of cores
         partial_node: bool, default False
-            allow jobs that take less than an entire node, overrides exact_fit
+            allow jobs that take less than one entire node, overrides exact_fit
 
         Returns
         -------
@@ -52,11 +54,8 @@ class Resources:
             name of partition selected
         dict: various quantities of node
             nnodes: int, total number of nodes needed
-            tot_ncores: int, total number of cores needed
+            ncores: int, total number of cores needed
             ncores_per_node: int, number of cores per node for selected nodes
-            tot_ntasks: int, total number of (mpi) tasks to run
-            ncores_per_task: int, cores per task
-            ntasks_per_node: int, tasks per node (only if exact_fit=True, otherwise None)
         """
         selected_partitions = []
 
@@ -64,6 +63,8 @@ class Resources:
             exact_fit=False
 
         for partition, node_spec in partitions.items():
+            nnodes, ncores = self._get_nnodes_ncores(node_spec) 
+
             if self.partitions is not None and all([re.search('^'+nt_re+'$', partition) is None for nt_re in self.partitions]):
                 # wrong node type
                 continue
@@ -72,14 +73,13 @@ class Resources:
                 # too much time
                 continue
 
-            if exact_fit and self.n[1] == 'tasks' and (self.n[0] * self.ncores_per_task) % node_spec['ncores'] != 0:
+            if exact_fit and self.n[1] == 'cores' and self.n[0] % node_spec['ncores'] != 0:
                 # wrong number of cores
                 continue
 
-            if self.max_mem_per_task is not None and node_spec['max_mem'] is not None:
-                nnodes, tot_ntasks, _ = self._get_nnodes_ntasks_ncores_per_task(node_spec)
-                max_mem_per_node = self.max_mem_per_task * tot_ntasks / nnodes
-                if max_mem_per_node > node_spec['max_mem']:
+            if self.max_mem is not None and node_spec['max_mem'] is not None:
+                if ((self.max_mem[1] == 'per_core' and (self.max_mem[0] > node_spec['max_mem'] / node_spec['ncores'])) or
+                    (self.max_mem[1] == 'tot'  and (self.max_mem[0] > node_spec['max_mem'] * nnodes))):
                     # too much memory
                     continue
 
@@ -90,68 +90,65 @@ class Resources:
                                f'for {self} with exact_fit={exact_fit}')
 
         if len(selected_partitions) > 1:
-            wasted_cores = []
+            excess_cores = []
             for nt in selected_partitions:
                 node_spec = partitions[nt]
-                _, tot_ntasks, ncores_per_task = self._get_nnodes_ntasks_ncores_per_task(node_spec)
-                wasted_cores.append((node_spec['ncores'] - (tot_ntasks * ncores_per_task) % node_spec['ncores']) % node_spec['ncores'])
+                _, ncores = self._get_nnodes_ncores(node_spec) 
+                excess_cores.append((node_spec['ncores'] - ncores % node_spec['ncores']) % node_spec['ncores'])
 
             try:
                 # look for first one that matches exactly
-                partition_i = wasted_cores.index(0)
+                partition_i = excess_cores.index(0)
             except ValueError:
                 # pick best among remaining
-                max_extra = min(wasted_cores)
-                partition_i = wasted_cores.index(max_extra)
+                max_extra = min(excess_cores)
+                partition_i = excess_cores.index(max_extra)
             selected_partitions = [selected_partitions[partition_i]]
 
         partition = selected_partitions[0]
 
-        nnodes, tot_ntasks, ncores_per_task = self._get_nnodes_ntasks_ncores_per_task(partitions[partition])
+        nnodes, ncores = self._get_nnodes_ncores(partitions[partition])
 
-        if not exact_fit:
-            ntasks_per_node = None
+        if partial_node:
+            if ncores <= partitions[partition]['ncores']:
+                # partial node
+                ncores_per_node = ncores
+            else:
+                raise ValueError('partial_node only supported when it can be satisfied by 1 node')
         else:
-            ntasks_per_node = int(tot_ntasks // nnodes)
+            # entire nodes
+            ncores_per_node = partitions[partition]['ncores']
+            ncores = nnodes * ncores_per_node
 
-        # by default use entire nodes
-        ncores_per_node = partitions[partition]['ncores']
-        tot_ncores = nnodes * ncores_per_node
-        if partial_node and tot_ntasks * ncores_per_task < partitions[partition]['ncores']:
-            # partial node
-            tot_ncores = tot_ntasks * ncores_per_task
-            ncores_per_node = tot_ncores
-
-        return partition, {'nnodes': nnodes, 'tot_ncores': tot_ncores,
-                           'ncores_per_node': ncores_per_node,
-                           'tot_ntasks': tot_ntasks, 'ncores_per_task': ncores_per_task, 'ntasks_per_node': ntasks_per_node}
+        return partition, {'nnodes': nnodes, 'ncores': ncores, 'ncores_per_node': ncores_per_node}
 
 
-    def _get_nnodes_ntasks_ncores_per_task(self, node_spec):
-        if self.ncores_per_task == 0:
-            # one task per node
-            nnodes = self.n[0]
-            tot_ntasks = nnodes
-            ncores_per_task = node_spec['ncores']
+    def _get_nnodes_ncores(self, node_spec):
+        """ get totals numbers of nodes and cores for this task
+        Parameters
+        ----------
+        node_spec: dict 
+            node type, from partitions dict
 
-            return nnodes, tot_ntasks, ncores_per_task
-
+        Returns
+        -------
+        nnodes, ncores: total number of sufficient nodes and cores 
+        """
         if self.n[1] == 'nodes':
             # fill up requested # of nodes
             nnodes = self.n[0]
-            tot_ntasks = int(nnodes * node_spec['ncores'] // self.ncores_per_task)
-        elif self.n[1] == 'tasks':
+            ncores = nnodes * node_spec['ncores']
+        elif self.n[1] == 'cores':
             # determine how many nodes are necessary
-            tot_ntasks = self.n[0]
-            nnodes = int(tot_ntasks * self.ncores_per_task // node_spec['ncores'])
-            if nnodes * node_spec['ncores'] < tot_ntasks * self.ncores_per_task:
+            ncores = self.n[0]
+            nnodes = ncores // node_spec['ncores']
+            if nnodes * node_spec['ncores'] < ncores:
                 nnodes += 1
         else:
-            raise ValueError(f'number of unknown quantity {self.n[1]}, not "nodes" or "tasks"')
+            raise ValueError(f'number of unknown quantity {self.n[1]}, not "nodes" or "cores"')
 
-        return nnodes, tot_ntasks, self.ncores_per_task
+        return nnodes, ncores
 
 
     def __repr__(self):
-        return (f'time={self.max_time} n={self.n} ncores_per_task={self.ncores_per_task} '
-                f'mem={self.max_mem_per_task} partitions={self.partitions}')
+        return (f'time={self.max_time} n={self.n} mem={self.max_mem} partitions={self.partitions}')

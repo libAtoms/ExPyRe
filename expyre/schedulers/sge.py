@@ -42,7 +42,7 @@ class SGE(Scheduler):
             list of header directives, not including walltime specific directive
         node_dict: dict
             properties related to node selection.
-            Fields: nnodes, tot_ntasks, tot_ncores, ncores_per_node, ppn, id, max_time, partition
+            Fields: nnodes, ncores, ncores_per_node, ppn, id, max_time, partition
         no_default_header: bool, default False
             do not add normal header fields, only use what's passed in in "header"
 
@@ -75,7 +75,7 @@ class SGE(Scheduler):
         pre_commands = ['if [ ! -z $NSLOTS ] && [ ! -z $NHOSTS ]; then',
                         '    export EXPYRE_NCORES_PER_NODE=$(( ${{NSLOTS}} / ${{NHOSTS}} ))',
                         'else',
-                        '    export EXPYRE_NCORES_PER_NODE={ntasks_per_node}',
+                       f'    export EXPYRE_NCORES_PER_NODE={node_dict["ncores_per_node"]}',
                         'fi'
                        ] + Scheduler.node_dict_env_var_commands(node_dict)
         pre_commands = [l.format(**node_dict) for l in pre_commands]
@@ -92,8 +92,9 @@ class SGE(Scheduler):
         script += '\n'.join([line.rstrip().format(**node_dict) for line in header]) + '\n'
         script += '\n' + '\n'.join([line.rstrip() for line in commands]) + '\n'
 
-        submit_args = ['cd', remote_dir, '&&', 'cat', '>', 'job.script.sge',
-                       '&&', 'qsub', 'job.script.sge']
+        submit_args = Scheduler.unset_scheduler_env_vars("SGE")
+        submit_args += ['cd', remote_dir, '&&', 'cat', '>', 'job.script.sge',
+                        '&&', 'qsub', 'job.script.sge']
 
         stdout, stderr = subprocess_run(self.host, args=submit_args, script=script, remsh_cmd=self.remsh_cmd, verbose=verbose)
 

@@ -95,7 +95,7 @@ class System:
         header_extra: list(str), optional
             list of lines to append to system header for this job
         exact_fit: bool, default True
-            only match partitions that have nodes with exact match to number of tasks
+            only match partitions that have nodes with exact match to number of cores
         partial_node: bool, default False
             allow jobs that take less than an entire node
 
