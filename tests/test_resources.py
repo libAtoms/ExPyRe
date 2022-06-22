@@ -84,3 +84,32 @@ def test_time(expyre_dummy_config):
                                                                                              'ncores_per_node': 40 })
     assert Resources(max_time='2-1:10:05', num_nodes=1).find_nodes(nodes) == ('standard', {'nnodes': 1, 'ncores': 40,
                                                                                               'ncores_per_node': 40 })
+
+def test_partitions_queues(expyre_dummy_config):
+    import expyre.config
+
+    for sys_name in '_sys_timelimited', '_sys_queues':
+        nodes = expyre.config.systems[sys_name].partitions
+
+        # partitions exact str
+        assert Resources(max_time='30m', num_nodes=1, partitions='debug').find_nodes(nodes) == ('debug', {'nnodes': 1, 'ncores': 40,
+                                                                                                'ncores_per_node': 40 })
+        # partitions exact str 1 item list
+        assert Resources(max_time='30m', num_nodes=1, partitions=['debug']).find_nodes(nodes) == ('debug', {'nnodes': 1, 'ncores': 40,
+                                                                                                  'ncores_per_node': 40 })
+        # partitions exact str 2 item list
+        assert Resources(max_time='30m', num_nodes=1, partitions=['standard', 'debug']).find_nodes(nodes) == ('debug', {'nnodes': 1, 'ncores': 40,
+                                                                                                              'ncores_per_node': 40 })
+        # partitions regexp list
+        assert Resources(max_time='30m', num_nodes=1, partitions=['deb.*']).find_nodes(nodes) == ('debug', {'nnodes': 1, 'ncores': 40,
+                                                                                                  'ncores_per_node': 40 })
+        # queues
+        assert Resources(max_time='30m', num_nodes=1, queues=['deb.*']).find_nodes(nodes) == ('debug', {'nnodes': 1, 'ncores': 40,
+                                                                                              'ncores_per_node': 40 })
+        # partitions failed str
+        try:
+            assert Resources(max_time='30m', num_nodes=1, partitions=['deb']).find_nodes(nodes) == ('debug', {'nnodes': 1, 'ncores': 40,
+                                                                                                      'ncores_per_node': 40 })
+        except RuntimeError:
+            # no partition named just "deb"
+            pass

@@ -27,7 +27,7 @@ if [ $? != 0 ]; then
     echo "Unexpected number skipped not 0 '$l'" 1>&2
     exit 1
 fi
-echo $l | grep -q ' 25 passed'
+echo $l | grep -q ' 26 passed'
 if [ $? != 0 ]; then
     echo "Unexpected number passed not 24 '$l'" 1>&2
     exit 1

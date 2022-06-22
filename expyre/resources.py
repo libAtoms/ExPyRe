@@ -5,44 +5,32 @@ from .units import time_to_sec, mem_to_kB
 
 class Resources:
     """Resources required for a task, including time, memory, cores/nodes, and particular
-    partitions.  Mainly consists of code that selects appropriate partition from the list
-    associated with each System.
+    partitions/queues.  Mainly consists of code that selects appropriate partition/queue from
+    the list associated with each System.
 
     Parameters
     ----------
     max_time: int, str
-        max time for job in s (int) or time spec (str)
-    n: (int, str)
-        int number of tasks or nodes to use and str 'tasks' or 'nodes'
-    ncores_per_task: int, default 1
-        cores per task, 0 for all cores in node
-    max_mem_per_task: int, str, default None
-        max mem per task in kB (int) or memory spec (str)
-    partitions: list(str), default None
+        max time for job in sec (int) or time spec (str)
+    num_nodes: int
+        number of nodes to use, mutually exclusive with num_cores, one is required
+    num_cores: int
+        number of cores to use, mutually exclusive with num_nodes, one is required
+    max_mem_tot: int/str, default None
+        total max mem in kB (int) or memory spec (str), mutually exclusive with max_mem_per_core
+    max_mem_per_core: int/str, default None
+        per-core max mem in kB (int) or memory spec (str), mutually exclusive with max_mem_tot
+    partitions/queues: list(str), default None
         regexps for types of node that can be used
     """
 
-    def __init__(self, max_time, num_nodes=None, num_cores=None, max_mem_tot=None, max_mem_per_core=None, partitions=None):
-        """Create Resources object
-        Parameters
-        ----------
-        max_time: int / str
-            max time for job in sec (int) or time spec (str)
-        num_nodes: int
-            number of nodes to use, mutually exclusive with num_cores, one is required
-        num_cores: int
-            number of cores to use, mutually exclusive with num_nodes, one is required
-        max_mem_tot: int/str, default None
-            total max mem in kB (int) or memory spec (str), mutually exclusive with max_mem_per_core
-        max_mem_per_core: int/str, default None
-            per-core max mem in kB (int) or memory spec (str), mutually exclusive with max_mem_tot
-        partitions: list(str), default None
-            regexps for types of node that can be used
-        """
+    def __init__(self, max_time, num_nodes=None, num_cores=None, max_mem_tot=None, max_mem_per_core=None, partitions=None, queues=None):
         if sum([num_nodes is None, num_cores is None]) != 1:
             raise ValueError(f"exactly one of num_nodes {num_nodes} and num_cores {num_cores} is required")
         if sum([max_mem_tot is None, max_mem_per_core is None]) not in [1, 2]:
             raise ValueError(f"at most one of max_mem_tot {max_mem_tot} and max_mem_per_core {max_mem_per_core} is required")
+        if sum([partitions is None, queues is None]) not in [1, 2]:
+            raise ValueError(f"at most one of partitions {partitions} and queues {queues} is required")
 
         self.max_time = time_to_sec(max_time)
         self.n = (num_nodes, 'nodes') if num_nodes is not None else (num_cores, 'cores')
@@ -63,7 +51,8 @@ class Resources:
         Parameters
         ----------
         partitions: dict
-            properties of available partitions
+            properties of available partitions (only used internally by system.py, so "queues"
+            synonymn is not implemented here).
         exact_fit: bool, default True
             only return nodes that exactly satisfy the number of cores
         partial_node: bool, default False
