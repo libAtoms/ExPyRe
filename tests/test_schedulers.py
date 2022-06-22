@@ -28,9 +28,9 @@ def test_working_job(tmp_path, expyre_config):
 
 def test_definitely_queued_job(tmp_path, expyre_config):
     if 'EXPYRE_PYTEST_QUEUED_JOB_RESOURCES' not in os.environ:
-        pytest.xfail('test_definitely_queued_job() needs EXPYRE_PYTEST_QUEUED_JOB_RESOURCES '
-                     'env var containing resources for job that uses all resources, so it '
-                     'will definitely get stuck in queued state (see README)')
+        pytest.skip('test_definitely_queued_job() needs EXPYRE_PYTEST_QUEUED_JOB_RESOURCES '
+                    'env var containing resources for job that uses all resources, so it '
+                    'will definitely get stuck in queued state (see README)')
 
     from expyre.config import systems
 

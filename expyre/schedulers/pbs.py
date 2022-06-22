@@ -19,6 +19,14 @@ class PBS(Scheduler):
     """
 
     def __init__(self, host, remsh_cmd=None):
+        """Create PBS object
+        Parameters
+        ----------
+        host: str
+            username and host for ssh/rsync username@machine.fqdn
+        remsh_cmd: str, default EXPYRE_RSH env var or 'ssh'
+            remote shell command to use
+        """
         self.host = host
         self.hold_command = ['qhold']
         self.release_command = ['qrls']
@@ -45,7 +53,7 @@ class PBS(Scheduler):
             list of header directives, not including walltime specific directive
         node_dict: dict
             properties related to node selection.
-            Fields: nnodes, tot_ntasks, tot_ncores, ncores_per_node, ppn, id, max_time, partition
+            Fields: nnodes, ncores, ncores_per_node, ppn, id, max_time, partition
         no_default_header: bool, default False
             do not add normal header fields, only use what's passed in in "header"
 
@@ -82,15 +90,15 @@ class PBS(Scheduler):
             header.append('#PBS -S /bin/bash')
             header.append('#PBS -r n')
 
-        # set EXPYRE_NCORES_PER_NODE using scheduler-specific info, to support jobs
+        # set EXPYRE_NUM_CORES_PER_NODE using scheduler-specific info, to support jobs
         # that do not know exact node type at submit time.  All related quantities
         # in node_dict are set based on this one by superclass Scheduler static method
         pre_commands = ['if [ ! -z $PBS_NUM_PPN ]; then',
-                        '    export EXPYRE_NCORES_PER_NODE=$PBS_NUM_PPN',
+                        '    export EXPYRE_NUM_CORES_PER_NODE=$PBS_NUM_PPN',
                         'elif [ ! -z $PBS_NODEFILE ]; then',
-                        '    export EXPYRE_NCORES_PER_NODE=$(sort -k1 $PBS_NODEFILE | uniq -c | head -1 | awk \'{{print $1}}\')',
+                        '    export EXPYRE_NUM_CORES_PER_NODE=$(sort -k1 $PBS_NODEFILE | uniq -c | head -1 | awk \'{{print $1}}\')',
                         'else',
-                       f'    export EXPYRE_NCORES_PER_NODE={node_dict["ntasks_per_node"]}',
+                       f'    export EXPYRE_NUM_CORES_PER_NODE={node_dict["ncores_per_node"]}',
                         'fi'
                        ] + Scheduler.node_dict_env_var_commands(node_dict)
         pre_commands = [l.format(**node_dict) for l in pre_commands]
@@ -107,8 +115,9 @@ class PBS(Scheduler):
         script += '\n'.join([line.rstrip().format(**node_dict) for line in header]) + '\n'
         script += '\n' + '\n'.join([line.rstrip() for line in commands]) + '\n'
 
-        submit_args = ['cd', remote_dir, '&&', 'cat', '>', 'job.script.pbs',
-                       '&&', 'qsub', 'job.script.pbs']
+        submit_args = Scheduler.unset_scheduler_env_vars("PBS")
+        submit_args += ['cd', remote_dir, '&&', 'cat', '>', 'job.script.pbs',
+                        '&&', 'qsub', 'job.script.pbs']
 
         stdout, stderr = subprocess_run(self.host, args=submit_args, script=script, remsh_cmd=self.remsh_cmd, verbose=verbose)
 

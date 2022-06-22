@@ -1,3 +1,5 @@
+import os
+
 from ..subprocess import subprocess_run
 from .. import util
 
@@ -69,34 +71,32 @@ class Scheduler:
 
 
     @staticmethod
+    def unset_scheduler_env_vars(prefix):
+        unset_cmds = []
+        if 'WFL_SCHEDULER_IGNORE_ENV' in os.environ:
+            for v in os.environ:
+                if v.startswith(prefix + '_'):
+                    unset_cmds += ['unset', f'{v}', '&&']
+        return unset_cmds
+
+
+    @staticmethod
     def node_dict_env_var_commands(node_dict):
         # set env vars for node_dict, with max flexibility in case only some are known at submit time
 
-        # EXPYRE_NCORES_PER_NODE is defined by scheduler before these commands are run
+        # EXPYRE_NUM_CORES_PER_NODE is defined by scheduler before these commands are run
 
-        # ncores per task is alawys set by resources
-        pre_commands = ['export EXPYRE_NCORES_PER_TASK={ncores_per_task}']
+        pre_commands = []
 
-        # either nnodes or tot_ncores must be known at submit time, so compute each in terms of the other
-        if node_dict['nnodes'] is None:
-            pre_commands.append('export EXPYRE_NNODES=$(( {tot_ncores} / $EXPYRE_NCORES_PER_NODE ))')
+        # either nnodes or ncores must be known at submit time, so compute each in terms of the other
+        if node_dict.get('nnodes', None) is None:
+            pre_commands.append('export EXPYRE_NUM_NODES=$(( {ncores} / $EXPYRE_NUM_CORES_PER_NODE ))')
         else:
-            pre_commands.append('export EXPYRE_NNODES={nnodes}')
-        if node_dict['tot_ncores'] is None:
-            pre_commands.append('export EXPYRE_TOT_NCORES=$(( {nnodes} * $EXPYRE_NCORES_PER_NODE ))')
-        else:
-            pre_commands.append('export EXPYRE_TOT_NCORES={tot_ncores}')
+            pre_commands.append('export EXPYRE_NUM_NODES={nnodes}')
 
-        # compute from ncores_per_node and ncores_per_task
-        if node_dict['ntasks_per_node'] is None:
-            pre_commands.append('export EXPYRE_NTASKS_PER_NODE=$(( $EXPYRE_NCORES_PER_NODE / $EXPYRE_NCORES_PER_TASK ))')
+        if node_dict.get('ncores', None) is None:
+            pre_commands.append('export EXPYRE_NUM_CORES=$(( {nnodes} * $EXPYRE_NUM_CORES_PER_NODE ))')
         else:
-            pre_commands.append('export EXPYRE_NTASKS_PER_NODE={ntasks_per_node}')
-
-        # compute from nnodes and ntasks_per_node
-        if node_dict['tot_ntasks'] is None:
-            pre_commands.append('export EXPYRE_TOT_NTASKS=$(( $EXPYRE_NNODES * $EXPYRE_NTASKS_PER_NODE ))')
-        else:
-            pre_commands.append('export EXPYRE_TOT_NTASKS={tot_ntasks}')
+            pre_commands.append('export EXPYRE_NUM_CORES={ncores}')
 
         return pre_commands
