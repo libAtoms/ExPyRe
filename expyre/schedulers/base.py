@@ -7,6 +7,7 @@ from .. import util
 class Scheduler:
     def __init__(self, host, remsh_cmd=None):
         """Create Scheduler object.  [NEED MORE INFO ABOUT HOW SCRIPTS WILL BE SET UP, THEIR ENVIRONMENT, ETC]
+
         Parameters
         ----------
         host: str
@@ -29,7 +30,9 @@ class Scheduler:
 
     def hold(self, remote_ids, verbose=False):
         """hold remote job
-        Parameters:
+
+        Parameters
+        ----------
         remote_ids: str, list(str)
             remote ids of jobs to hold
         """
@@ -41,7 +44,9 @@ class Scheduler:
 
     def release(self, remote_ids, verbose=False):
         """release remote job
-        Parameters:
+
+        Parameters
+        ----------
         remote_ids: str, list(str)
             remote ids of jobs to hold
         """
@@ -53,7 +58,9 @@ class Scheduler:
 
     def cancel(self, remote_ids, verbose=False):
         """cancel remote job
-        Parameters:
+
+        Parameters
+        ----------
         remote_ids: str, list(str)
             remote ids of jobs to hold
         """

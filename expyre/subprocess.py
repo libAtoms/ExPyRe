@@ -1,4 +1,4 @@
-"""functions dealing with running subprocesses, optionally on remote machines, handling
+"""Functions dealing with running subprocesses, optionally on remote machines, handling
 quoting/shell escping, encoding/decoding, environment, and making sure that optional
 arguments needed for things like kerberized-ssh are set correctly.  """
 

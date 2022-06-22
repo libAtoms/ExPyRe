@@ -7,6 +7,19 @@ class Resources:
     """Resources required for a task, including time, memory, cores/nodes, and particular
     partitions.  Mainly consists of code that selects appropriate partition from the list
     associated with each System.
+
+    Parameters
+    ----------
+    max_time: int, str
+        max time for job in s (int) or time spec (str)
+    n: (int, str)
+        int number of tasks or nodes to use and str 'tasks' or 'nodes'
+    ncores_per_task: int, default 1
+        cores per task, 0 for all cores in node
+    max_mem_per_task: int, str, default None
+        max mem per task in kB (int) or memory spec (str)
+    partitions: list(str), default None
+        regexps for types of node that can be used
     """
 
     def __init__(self, max_time, n, max_mem=None, partitions=None):
@@ -39,6 +52,7 @@ class Resources:
 
     def find_nodes(self, partitions, exact_fit=True, partial_node=False):
         """find a node type that accomodates requested resources
+
         Parameters
         ----------
         partitions: dict
@@ -52,10 +66,12 @@ class Resources:
         -------
         partition: str
             name of partition selected
-        dict: various quantities of node
-            nnodes: int, total number of nodes needed
-            ncores: int, total number of cores needed
-            ncores_per_node: int, number of cores per node for selected nodes
+        node_dict: dict
+            various quantities of node
+
+            * nnodes: int, total number of nodes needed
+            * ncores: int, total number of cores needed
+            * ncores_per_node: int, number of cores per node for selected nodes
         """
         selected_partitions = []
 
