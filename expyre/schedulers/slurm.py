@@ -1,3 +1,4 @@
+import os
 import re
 
 from ..subprocess import subprocess_run
@@ -91,7 +92,12 @@ class Slurm(Scheduler):
         script += '\n'.join([line.rstrip().format(**node_dict) for line in header]) + '\n'
         script += '\n' + '\n'.join([line.rstrip() for line in commands]) + '\n'
 
-        submit_args = ['cd', remote_dir, '&&', 'cat', '>', 'job.script.slurm',
+        submit_args = []
+        if 'WFL_SCHEDULER_IGNORE_ENV' in os.environ:
+            for v in os.environ:
+                if v.startswith('SLURM_'):
+                    submit_args += ['unset', f'{v}', '&&']
+        submit_args += ['cd', remote_dir, '&&', 'cat', '>', 'job.script.slurm',
                        '&&', 'sbatch', 'job.script.slurm']
 
         stdout, stderr = subprocess_run(self.host, args=submit_args, script=script, remsh_cmd=self.remsh_cmd, verbose=verbose)

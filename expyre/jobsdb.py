@@ -21,20 +21,20 @@ class JobsDB:
     """Database of jobs, currently implemented with sqlite.  Saves essential information
     on jobs, including local and remote id, local directory it's staged to, system
     its been submitted to, and status.
-    Status may be one of: 
-    * created - job has been created, but not yet submitted to run
-    * submitted - job has been submitted to some queuing system
-    * started - job has started running
-    * succeeded - job has finished successfully, and results are available
-    * failed - job has failed
-    * processed - job has been processed, and results no longer need to be saved
-    * cleaned - job stage dir (local and remote) has been cleaned (large files overwritten or all files wiped)
+
+    Status: created - job has been created, but not yet submitted to run
+            submitted - job has been submitted to some queuing system
+            started - job has started running
+            succeeded - job has finished successfully, and results are available
+            failed - job has failed
+            died - job died without producing expected low level output
+            processed - job has been processed, and results no longer need to be saved
+            cleaned - job stage dir (local and remote) has been cleaned (large files overwritten or all files wiped)
     """
 
-    possible_status = ['created', 'submitted', 'started', 'succeeded', 'failed', 'processed', 'cleaned']
+    possible_status = ['created', 'submitted', 'started', 'succeeded', 'failed', 'died', 'processed', 'cleaned']
     status_group = {'ongoing': ['created', 'submitted', 'started'],
-                    'unprocessed': ['succeeded', 'failed'],
-                    'can_produce_results': ['created', 'submitted', 'started', 'succeeded']}
+                    'can_produce_results': ['created', 'submitted', 'started', 'succeeded', 'died']}
 
 
     def _execute(self, cmd, retry_n=3, retry_wait=1):

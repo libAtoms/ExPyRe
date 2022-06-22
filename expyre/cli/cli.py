@@ -114,6 +114,8 @@ def cli_rm(ctx, id, name, status, system, yes, clean):
                 sys.stderr.write('\n')
                 continue
 
+        if clean:
+            xpr.cancel()
         xpr.clean(wipe=True, dry_run=not clean)
         config.db.remove(xpr.id)
         if not clean:
@@ -134,7 +136,7 @@ def cli_sync(ctx, id, name, status, system):
 
     jobs = _get_jobs(id=id, name=name, status=status, system=system)
 
-    ExPyRe.sync_remote_results_status(jobs, cli=True)
+    ExPyRe.sync_remote_results_status_ll(jobs, cli=True)
 
 
 @cli.command("db_unlock")

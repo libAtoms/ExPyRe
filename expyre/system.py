@@ -81,7 +81,7 @@ class System:
         return f'{self.remote_rundir}/{stage_dir.name}'
 
 
-    def submit(self, id, stage_dir, resources, commands, exact_fit=True, partial_node=False, verbose=False):
+    def submit(self, id, stage_dir, resources, commands, header_extra=[], exact_fit=True, partial_node=False, verbose=False):
         """Submit a job on a remote machine, including staging out files
 
         Parameters
@@ -90,10 +90,12 @@ class System:
             unique id for job
         stage_dir: str, Path
             directory in which files have been prepared
-        resoures: Resources
+        resources: Resources
             resources to use for job
         commands: list(str)
             commands to run in job script after per-machine commands
+        header_extra: list(str), optional
+            list of lines to append to system header for this job
         exact_fit: bool, default True
             only match partitions that have nodes with exact match to number of tasks
         partial_node: bool, default False
@@ -109,6 +111,13 @@ class System:
 
         partition, node_dict = resources.find_nodes(self.partitions, exact_fit=exact_fit,
                                                     partial_node=partial_node)
+        # add partition-specific header after per-system header but before header specific
+        # to this submission
+        header_extra = self.partitions[partition].get("header", []) + header_extra
+        # override default partition name from dict key (but after using dict key to look up
+        # other things like header above)
+        actual_partition = self.partitions[partition].get("partition", partition)
+
         commands = self.commands + commands
 
         stage_dir = Path(stage_dir)
@@ -144,8 +153,8 @@ class System:
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
             sys.stderr.write(f'system {self.id} submit start scheduler submit {time.time()}\n')
         try:
-            r = self.scheduler.submit(id, str(job_remote_rundir), partition,
-                                      commands, resources.max_time, self.queuing_sys_header,
+            r = self.scheduler.submit(id, str(job_remote_rundir), actual_partition,
+                                      commands, resources.max_time, self.queuing_sys_header + header_extra,
                                       node_dict, no_default_header=self.no_default_header, verbose=verbose)
         except Exception:
             if not self.host is None:
@@ -212,7 +221,9 @@ class System:
                              f'    fi\n'
                              f'done\n'), dry_run=dry_run, verbose=verbose)
         else:
-            self.run(['rm', '-rf', str(job_remote_rundir)], dry_run=dry_run, verbose=verbose)
+            self.run(['bash'],
+                     script="find " + str(job_remote_rundir) + " -type d -exec chmod u+rwx {} \; ; rm -rf " + str(job_remote_rundir),
+                     dry_run=dry_run, verbose=verbose)
 
 
     def __str__(self):

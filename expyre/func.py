@@ -25,7 +25,11 @@ from pathlib import Path
 from . import config
 from .subprocess import subprocess_run
 from .resources import Resources
+from .jobsdb import JobsDB
+from .units import time_to_sec
 
+class ExPyReJobDied(Exception):
+    pass
 
 class ExPyRe:
     """
@@ -64,6 +68,7 @@ class ExPyRe:
     _from_db_info: dict, optional (intended for internal use)
     	restart is from db, and dict contains special arguments: remote_id, system_name, status, stage_dir
 
+    Possible status (see JobsDB): created, submitted, started, succeeded/failed/died, processed, cleaned
     """
 
     def __init__(self, name, *, input_files=[], env_vars=[], pre_run_commands=[], post_run_commands=[],
@@ -76,7 +81,7 @@ class ExPyRe:
             raise RuntimeError('Configuration file was not found, ExPyRe object cannot be created')
 
         # name will be used as part of path, can't have a few special things
-        assert ('/' not in name and '[' not in name and ']' not in name and 
+        assert ('/' not in name and '[' not in name and ']' not in name and
                 '{' not in name and '}' not in name and '*' not in name and '\\' not in name)
 
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
@@ -161,7 +166,7 @@ class ExPyRe:
                 # reconstruct job
                 self.stage_dir = old_stage_dir
 
-                # confirm that JobsDB id and self.id, as they must be since self.id
+                # confirm that JobsDB id and self.id match, as they must be since self.id
                 # is derived from self.stage_dir (that's why self.stage_dir has to be set
                 # first) but they are stored separately in JobsDB
                 assert self.id == job['id']
@@ -236,12 +241,14 @@ class ExPyRe:
                        '    with open(f"_tmp_expyre_job_succeeded", "wb") as fout:\n'
                        '        pickle.dump(results, fout)\n'
                        'except Exception as exc:\n'
+                       '    with open(f"_expyre_exception", "wb") as fout:\n'
+                       '        pickle.dump(exc, fout)\n'
                        '    with open(f"_expyre_error", "w") as fout:\n'
                        '        fout.write(f"{exc}\\n")\n'
                        '        traceback.print_exc(file=fout)\n'
                        '        raise\n')
 
-        # commands to check status and create final _succeeded or _failed files
+        # commands to check status and create final _succeeded or _error files
         post_run_commands = (['error_stat=$?'] + post_run_commands +
                              ['exit $error_stat', ')',
                               'error_stat=$?',
@@ -249,18 +256,21 @@ class ExPyRe:
                               '    if [ -e _tmp_expyre_job_succeeded ]; then',
                               '        mv _tmp_expyre_job_succeeded _expyre_job_succeeded',
                               '    else',
-                              '        echo "No error code but _tmp_expyre_job_succeeded does not exist" > _tmp_expyre_job_failed',
+                              '        echo "No error code but _tmp_expyre_job_succeeded does not exist" > _tmp_expyre_job_error',
                               '        if [ -f _expyre_error ]; then',
-                              '            cat _expyre_error >> _tmp_expyre_job_failed',
+                              '            cat _expyre_error >> _tmp_expyre_job_error',
                               '        fi',
-                              '        mv _tmp_expyre_job_failed _expyre_job_failed',
+                              '        mv _tmp_expyre_job_error _expyre_job_error',
                               '    fi',
                               'else',
+                              '    if [ -e _expyre_exception ]; then',
+                              '        mv _expyre_exception _expyre_job_exception',
+                              '    fi',
                               '    if [ -e _expyre_error ]; then',
-                              '        mv _expyre_error _expyre_job_failed',
+                              '        mv _expyre_error _expyre_job_error',
                               '    else',
-                              '        echo "UNKNOWN ERROR $error_stat" > _tmp_expyre_job_failed',
-                              '        mv _tmp_expyre_job_failed _expyre_job_failed',
+                              '        echo "UNKNOWN ERROR $error_stat" > _tmp_expyre_job_error',
+                              '        mv _tmp_expyre_job_error _expyre_job_error',
                               '    fi',
                               'fi',
                               ''])
@@ -371,7 +381,17 @@ class ExPyRe:
         return expyres
 
 
-    def start(self, resources, system_name=os.environ.get('EXPYRE_SYS', None),
+    def cancel(self, verbose=False):
+        if self.remote_id is None:
+            return
+        if self.status in JobsDB.status_group['ongoing']:
+            try:
+                config.systems[self.system_name].scheduler.cancel(self.remote_id, verbose=verbose)
+            except Exception:
+                pass
+
+
+    def start(self, resources, system_name=os.environ.get('EXPYRE_SYS', None), header_extra=[],
               exact_fit=True, partial_node=False, python_cmd='python3'):
         """Start a job on a remote machine
 
@@ -381,6 +401,8 @@ class ExPyRe:
             resources to use for job, either Resources or dict of Resources constructor kwargs
         system_name: str
             name of system in config.systems
+        header_extra: list(str), optional
+            list of lines to add to queuing system header, appended to System.header[]
         exact_fit: bool, default True
             use only nodes that exactly match number of tasks
         partial_node: bool, default False
@@ -389,10 +411,9 @@ class ExPyRe:
             name of python interpreter to use on remote machine
         """
         if self.status != 'created':
+            # If job is not newly created, return instead of resubmitting
+            # First check that it is newly recreated, otherwise this shouldn't be happening
             assert self.recreated
-            # Only newly created jobs can be started.  At any later state it just confuses things,
-            # but this might be a call after constructor recreated job from old stage dir and database
-            # record, and if so just return
             return
 
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
@@ -409,7 +430,7 @@ class ExPyRe:
             post_run_commands = fin.readlines()
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
             sys.stderr.write(f'ExPyRe {self.id} start() calling system.submit {time.time()}\n')
-        self.remote_id = system.submit(self.id, self.stage_dir, resources=resources,
+        self.remote_id = system.submit(self.id, self.stage_dir, resources=resources, header_extra=header_extra,
                                        commands=(pre_run_commands + [f'{python_cmd} _expyre_script_core.py'] +
                                                  post_run_commands),
                                        exact_fit=exact_fit, partial_node=partial_node)
@@ -424,8 +445,11 @@ class ExPyRe:
 
 
     def sync_remote_results_status(self, sync_all=True, force_sync=False, verbose=False):
-        """Sync files associated with results from remote machine to local stage dirs
-        
+        """Sync files associated with results from remote machine to local stage dirs and
+        updates 'remote_status' in jobsdb.  Note that both have to happen because other
+        functions assume that if remote status has been updated files have been staged back
+        as well.
+
         Parameters
         ----------
         sync_all: bool, default True
@@ -454,7 +478,9 @@ class ExPyRe:
 
     @classmethod
     def sync_remote_results_status_ll(cls, jobs_to_sync, n_group=250, cli=False, verbose=False):
-        """Low level part of syncing jobs
+        """Low level part of syncing jobs.  Gets remote files _and_ updates 'remote_status'
+        field in jobsdb.  Note that both have to happen because other functions assume that
+        if remote status has been updated files have been staged back as well.
 
         Parameters
         ----------
@@ -465,6 +491,9 @@ class ExPyRe:
         n_group: int, default 250
             number of jobs to do in a group with each rsync call
         """
+        if len(jobs_to_sync) == 0:
+            return
+
         def _grouper(n, iterable):
             it = iter(iterable)
             while True:
@@ -473,22 +502,29 @@ class ExPyRe:
                     return
                 yield chunk
 
-        if len(jobs_to_sync) > 0:
-            for system_name in set([j['system'] for j in jobs_to_sync]):
-                system = config.systems[system_name]
-                # assume all jobs are staged from same place
-                stage_root = Path(jobs_to_sync[0]['from_dir']).parent
-                # get remote files
-                for job_group in _grouper(n_group, jobs_to_sync):
-                    system.get_remotes(stage_root, subdir_glob=[Path(j['from_dir']).name for j in job_group],
-                                       verbose=verbose)
+        for system_name in set([j['system'] for j in jobs_to_sync]):
+            system = config.systems[system_name]
+            # assume all jobs are staged from same place
+            stage_root = Path(jobs_to_sync[0]['from_dir']).parent
 
-                # get remote statuses and update in JobsDB
-                status_of_remote_id = system.scheduler.status([j['remote_id'] for j in jobs_to_sync], verbose=verbose)
-                for j in jobs_to_sync:
+            # get remote statuses and update in JobsDB
+            status_of_remote_id = system.scheduler.status([j['remote_id'] for j in jobs_to_sync], verbose=verbose)
+            for j in jobs_to_sync:
+                old_remote_status = list(config.db.jobs(id=j['id']))[0]['remote_status']
+                new_remote_status = status_of_remote_id[j['remote_id']]
+                if old_remote_status != new_remote_status:
                     if cli:
                         sys.stderr.write(f'Update remote status of {j["id"]} to {status_of_remote_id[j["remote_id"]]}\n')
                     config.db.update(j['id'], remote_status=status_of_remote_id[j['remote_id']])
+
+            # get remote files only _AFTER_ getting remote status, since otherwise might result in
+            # a race condition:
+            #    copy files while job is running, so not all files are ready
+            #    while files are being copied, job finishes (but some files were not copied)
+            #    update status, showing job as done (despite missing files)
+            for job_group in _grouper(n_group, jobs_to_sync):
+                system.get_remotes(stage_root, subdir_glob=[Path(j['from_dir']).name for j in job_group],
+                                   verbose=verbose)
 
 
     def clean(self, wipe=False, dry_run=False, verbose=False):
@@ -516,6 +552,8 @@ class ExPyRe:
                 # delete remote stage dir
                 system.clean_rundir(self.stage_dir, None, dry_run=dry_run, verbose=verbose or dry_run)
             # delete local stage dir
+            subprocess_run(None, ['find', str(self.stage_dir), '-type', 'd', '-exec', 'chmod', 'u+rwx', '{}', '\;'],
+                           dry_run=dry_run, verbose=verbose or dry_run)
             subprocess_run(None, ['rm', '-rf', str(self.stage_dir)], dry_run=dry_run, verbose=verbose or dry_run)
         else:
             if system is not None:
@@ -547,10 +585,10 @@ class ExPyRe:
 
         Parameters
         ----------
-        timeout: int, default 3600
-            Max time to wait for job to complete, in sec
+        timeout: int or str, default 3600
+            Max time (in sec if int, time spec if str) to wait for job to complete, None or int <= 0 to wait forever
         check_interval: int, default 30
-            Time to wait between checks of job completion
+            Time to wait (in sec) between checks of job completion
         sync: bool, default True
             Synchronize remote files before checking for results
             Note that if this is False and job is finished on remote system but output files haven't been
@@ -576,6 +614,7 @@ class ExPyRe:
         if self.status == 'processed' or self.status == 'cleaned':
             raise RuntimeError(f'Job {self.id} has status {self.status}, results are no longer available')
 
+        timeout = time_to_sec(timeout)
         system = config.systems[self.system_name]
         start_time = time.time()
         problem_last_chance = False
@@ -586,11 +625,19 @@ class ExPyRe:
             # sync remote results and status.  This used to be inside test for status and/or succeeded/failed
             # file existence, but that's probably not useful.  If we're in this loop we have to sync, since if
             # sync isn't needed, loop should have been exited on previous iteration
-            self.sync_remote_results_status(sync_all, force_sync, verbose=verbose)
 
-            # get remote status of job from db (was set by call to self.sync_remote_results_status() just above)
-            # remote_status: queued, held,       running,    done, failed, timeout, other
+            # get remote status of job from db (either unset or was set by call to
+            #     self.sync_remote_results_status() in previous iter)
+            # remote_status values: queued, held,       running,    done, failed, timeout, other
             remote_status = list(config.db.jobs(id=re.escape(self.id)))[0]['remote_status']
+            if remote_status != 'done':
+                # If previous status was not 'done', need to sync remote status.
+                # If it was pre-done, we obviously need current state and results.
+                # If it was something else (even 'failed'), lets try again just in case it needed
+                #     more time or was fixed manually.
+                self.sync_remote_results_status(sync_all, force_sync, verbose=verbose)
+
+                remote_status = list(config.db.jobs(id=re.escape(self.id)))[0]['remote_status']
 
             # poke filesystem, since on some machines Path.exists() fails even if file appears to be there when doing ls
             _ = list(self.stage_dir.glob('_expyre_job_*'))
@@ -608,10 +655,10 @@ class ExPyRe:
                 except Exception as exc:
                     raise RuntimeError(f'Job {self.id} got "_succeeded" file, but failed to parse it with error {exc}')
                 self.status = 'succeeded'
-            elif (self.stage_dir / '_expyre_job_failed').exists():
+            elif (self.stage_dir / '_expyre_job_error').exists():
                 # job created final failed file
                 assert remote_status not in ['queued', 'held']
-                with open(self.stage_dir / '_expyre_job_failed') as fin:
+                with open(self.stage_dir / '_expyre_job_error') as fin:
                     error_msg = ''.join(fin.readlines())
                 self.status = 'failed'
             else:
@@ -622,15 +669,14 @@ class ExPyRe:
                     # problem - job does not seem to be queued (even held) or running
                     if problem_last_chance:
                         # already on last chance, giving up
-                        # NOTE: should this really be status 'failed', or some other status that the calling
-                        # program can deal with separately?
-                        self.status = 'failed'
+                        self.status = 'died'
                         config.db.update(self.id, status=self.status)
-                        raise RuntimeError(f'Job {self.id} got remote status {remote_status} which is not '
-                                            '"queued", "running", or "held", but neither "_succeeded" nor '
-                                            '"_failed" file exists')
+                        raise ExPyReJobDied(f'Job {self.id} has remote status {remote_status} but no _succeeded or _error faile')
+                        # raise RuntimeError(f'Job {self.id} got remote status {remote_status} which is not '
+                                            # '"queued", "running", or "held", but neither "_succeeded" nor '
+                                            # '"_error" file exists')
                     # give it one more chance, perhaps queuing system status and file are slow to sync to head node
-                    warnings.warn(f'Job {self.id} has no _succeeded or _failed file, but status is not queued, held, or running. Giving it one more chance')
+                    warnings.warn(f'Job {self.id} has no _succeeded or _error file, but status is not queued, held, or running. Giving it one more chance')
                     problem_last_chance = True
                 else:
                     # No apparent problem, just not done yet, leave status as is, but check for timeout
@@ -662,14 +708,18 @@ class ExPyRe:
                     # newline after one or more 'q|r' progress characters
                     sys.stderr.write('\n')
                     sys.stderr.flush()
-                # should (can?) we pickle the exception and reraise it here?
-                raise RuntimeError(f'Remote job {self.id} failed with status {remote_status} error_msg {error_msg}')
+                if (self.stage_dir / "_expyre_job_exception").is_file():
+                    with open(self.stage_dir / "_expyre_job_exception", "rb") as fin:
+                        exc = pickle.load(fin)
+                    raise exc
+                else:
+                    raise RuntimeError(f'Remote job {self.id} failed with no exception but remot status {remote_status} error_msg {error_msg}')
 
-            out_of_time = time.time() - start_time > timeout
+            out_of_time = (timeout is not None) and (timeout > 0) and (time.time() - start_time > timeout)
 
             if not quiet:
                 if n_iter == 0:
-                    sys.stderr.write(f'Waiting for job {self.id}: \n')
+                    sys.stderr.write(f'Waiting for job {self.id} up to {timeout} s: \n')
                     sys.stderr.flush()
 
                 # progress info to stderr

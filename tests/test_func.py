@@ -179,7 +179,7 @@ def do_work(sys_name):
     # wipe existing job objects
     xpr = None
     # recreate from JobsDB
-    xpr = ExPyRe.from_jobsdb(db.jobs(status=['ongoing', 'unprocessed']))
+    xpr = ExPyRe.from_jobsdb(db.jobs(status=['ongoing']))
     assert len(xpr) == 1
     xpr = xpr[0]
 

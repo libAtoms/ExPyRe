@@ -153,11 +153,11 @@ def subprocess_run(host, args, script=None, shell='bash -lc', remsh_cmd=None, re
         except Exception:
             if i_try == retry[0]-1:
                 # last try
-                _my_warn(f'Failed to run "{" ".join(args)}" on attempt {i_try} for the last time, giving up')
+                _my_warn(f'Failed to run "{" ".join(args)}" on attempt {i_try} for the last time, giving up.\nSTDERR\n{stderr.decode()}')
 
                 # failed last chance
                 raise
-            _my_warn(f'Failed to run "{" ".join(args)}" on attempt {i_try}, trying again')
+            _my_warn(f'Failed to run "{" ".join(args)}" on attempt {i_try}, trying again.\nSTDERR\n{stderr.decode()}')
 
         time.sleep(retry[1])
 
