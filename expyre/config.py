@@ -121,6 +121,10 @@ def init(root_dir=None, verbose=False):
     systems = {}
     for _sys_name in _config_data['systems']:
         _sys_data = _config_data['systems'][_sys_name]
+        if 'queues' in _sys_data:
+            if 'partitions' in _sys_data:
+                raise ValueError("config systems data contains both partitions and queues")
+            _sys_data['partitions'] = _sys_data.pop('queues')
         if _sys_data['partitions'] is not None:
             for _partitions in _sys_data['partitions']:
                 _sys_data['partitions'][_partitions]['max_time'] = time_to_sec(_sys_data['partitions'][_partitions]['max_time'])

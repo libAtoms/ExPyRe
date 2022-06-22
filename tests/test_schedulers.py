@@ -58,7 +58,7 @@ def test_definitely_queued_job(tmp_path, expyre_config):
 
 
 def do_working_job(system, remote_rundir, tmp_path, copy_back_host):
-    r = Resources(n=(2, 'nodes'), max_time='5m')
+    r = Resources(num_nodes=int(os.environ.get('EXPYRE_PYTEST_MAX_NUM_NODES', 2)), max_time='5m')
     partition, node_dict = r.find_nodes(system.partitions)
 
     sched = system.scheduler

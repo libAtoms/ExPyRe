@@ -9,7 +9,7 @@ def do_remote_exception(sys_name):
     from expyre import ExPyRe
 
     xpr = ExPyRe('test_exception', function=math.log, args=[-1.0])
-    xpr.start(resources=Resources(n=(1, 'nodes'), max_time='1m'), system_name=sys_name)
+    xpr.start(resources=Resources(num_nodes=1, max_time='1m'), system_name=sys_name)
 
     with pytest.raises(ValueError):
         results = xpr.get_results(check_interval=5)

@@ -140,7 +140,7 @@ def do_stdouterr(sys_name):
 
     xpr = ExPyRe('test_stdout', function=print, args=['stdout content'])
 
-    xpr.start(resources=Resources(n=(1, 'nodes'), max_time='5m'), system_name=sys_name)
+    xpr.start(resources=Resources(num_nodes=1, max_time='5m'), system_name=sys_name)
     results, stdout, stderr = xpr.get_results(check_interval=10)
 
     assert results is None
@@ -151,7 +151,7 @@ def do_stdouterr(sys_name):
     import warnings
     xpr = ExPyRe('test_stderr', function=warnings.warn, args=['stderr warning'])
 
-    xpr.start(resources=Resources(n=(1, 'nodes'), max_time='5m'), system_name=sys_name)
+    xpr.start(resources=Resources(num_nodes=1, max_time='5m'), system_name=sys_name)
     results, stdout, stderr = xpr.get_results(check_interval=10)
 
     assert results is None
@@ -174,7 +174,7 @@ def do_work(sys_name):
     assert (Path(root) / f'run_{xpr.id}' / '_expyre_script_core.py').exists()
     assert (Path(root) / f'run_{xpr.id}' / '_expyre_task_in.pckl').exists()
 
-    xpr.start(resources=Resources(n=(1, 'nodes'), max_time='5m'), system_name=sys_name)
+    xpr.start(resources=Resources(num_nodes=1, max_time='5m'), system_name=sys_name)
 
     # wipe existing job objects
     xpr = None
@@ -199,7 +199,7 @@ def do_clean(sys_name, dry_run):
     system = systems[sys_name]
 
     xpr = ExPyRe('test', function=sum, args=[list(range(1000))])
-    xpr.start(resources=Resources(n=(1, 'nodes'), max_time='5m'), system_name=sys_name)
+    xpr.start(resources=Resources(num_nodes=1, max_time='5m'), system_name=sys_name)
     r, stdout, stderr = xpr.get_results(check_interval=10)
 
     if dry_run:
@@ -252,8 +252,11 @@ def do_restart(sys_name):
     print('initial job id', xpr.id)
 
     t0 = time.time()
-    xpr.start(resources=Resources(n=(1, 'nodes'), max_time='5m'), system_name=sys_name)
-    res, stdout, stderr = xpr.get_results()
+    print("BOB restart starting")
+    xpr.start(resources=Resources(num_nodes=1, max_time='5m'), system_name=sys_name)
+    print("BOB restart getting results first time")
+    #BOB res, stdout, stderr = xpr.get_results()
+    res, stdout, stderr = xpr.get_results(verbose=True)
     print('status after get_results', xpr.status)
 
     assert time.time() - t0 > 29
@@ -267,7 +270,7 @@ def do_restart(sys_name):
     print('status after recreation', xpr.status)
 
     t0 = time.time()
-    xpr.start(resources=Resources(n=(1, 'nodes'), max_time='5m'), system_name=sys_name)
+    xpr.start(resources=Resources(num_nodes=1, max_time='5m'), system_name=sys_name)
     res, stdout, stderr = xpr.get_results()
 
     # recreated run should be nearly instantaneous

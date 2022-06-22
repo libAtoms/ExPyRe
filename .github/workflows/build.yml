@@ -1,11 +1,8 @@
-name: Build
+name: Build and test
 
+# on all push actions AND can be triggered manually as well
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
   workflow_dispatch:
 
 jobs:
@@ -20,6 +17,25 @@ jobs:
         run: |
           pip install flake8 pytest pytest-cov
           pip install .
+          sudo apt-get install -y slurm-wlm mailutils
+
+      - name: Start slurmd
+        run: |
+          host_s=$( hostname -s )
+          sudo cp .github/workflows_assets/slurm.conf /etc/slurm-llnl/
+          sudo sed -i -e "s/_HOST_/$host_s/g" /etc/slurm-llnl/slurm.conf
+          sudo mkdir /var/log/slurm
+          sudo mkdir /var/spool/slurmd
+          sudo service slurmd start
+          sudo service slurmctld start
+          sleep 5
+          echo "sinfo -s --long"
+          sinfo -s --long
+
+      - name: setup expyre config
+        run: |
+          mkdir $HOME/.expyre
+          cp .github/workflows_assets/config.json $HOME/.expyre
 
       - name: Lint with flake8
         run: | 
@@ -28,16 +44,21 @@ jobs:
           # exit-zero treats all errors as warnings.
           flake8 expyre/ --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
 
-      - name: Test with pytest - coverage
+      - name: Test with pytest - no coverage
         run: |
-          pytest -v --cov=expyre --cov-report term --cov-report html --cov-config=tests/.coveragerc --cov-report term-missing --cov-report term:skip-covered
+          # env EXPYRE_PYTEST_SYSTEMS=github EXPYRE_PYTEST_MAX_NUM_NODES=1 pytest -v --clean -rxXs --basetemp $HOME/pytest
+          env EXPYRE_PYTEST_SYSTEMS=github EXPYRE_PYTEST_MAX_NUM_NODES=1 pytest -v --clean -rxXs --basetemp $HOME/pytest
 
-      - name: Upload Coverage Data
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-html
-          path: coverage-html/
-          retention-days: 7
+      # - name: Test with pytest - coverage
+      # run: |
+        # pytest -v --cov=expyre --cov-report term --cov-report html --cov-config=tests/.coveragerc --cov-report term-missing --cov-report term:skip-covered --clean --basetemp $HOME/pytest
+
+      # - name: Upload Coverage Data
+        # uses: actions/upload-artifact@v2
+        # with:
+          # name: coverage-html
+          # path: coverage-html/
+          # retention-days: 7
 
   docs:
 
