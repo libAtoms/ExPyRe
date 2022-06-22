@@ -14,7 +14,7 @@ cat<<EOF > definitely_queued_job.json
 EOF
 export EXPYRE_PYTEST_QUEUED_JOB_RESOURCES=$PWD/definitely_queued_job.json
 
-rm -rf $HOME/pytest_expyre
+rm -rf $HOME/pytest_expyre*
 if [[ $EXPYRE_PYTEST_SYSTEMS =~ mustang ]]; then
     ssh $KMUSTANG rm -rf pytest_expyre_rundir_mustang
 fi
@@ -27,7 +27,7 @@ if [ $? != 0 ]; then
     echo "Unexpected number skipped not 0 '$l'" 1>&2
     exit 1
 fi
-echo $l | grep -q ' 24 passed'
+echo $l | grep -q ' 25 passed'
 if [ $? != 0 ]; then
     echo "Unexpected number passed not 24 '$l'" 1>&2
     exit 1
