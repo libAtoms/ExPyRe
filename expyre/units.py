@@ -12,12 +12,15 @@ def time_to_HMS(t):
 
 def time_to_sec(t):
     """convert time to seconds
+
     Parameters
     ----------
     t: str, int
-        int: time in sec
-        str format "float[sSmMhHdD]" number of seconds, minutes, hours, days, or "days(int)-HMS"
-            or "HMS", with HMS being (HHHH:MM:SS | MM:SS | SS)
+
+        * int: time in sec
+        * str: format "float[sSmMhHdD]" number of seconds, minutes, hours, days, or "days(int)-HMS" \
+        or "HMS", with HMS being (HHHH:MM:SS | MM:SS | SS)
+
     Returns
     -------
     int time in seconds
@@ -58,6 +61,7 @@ def time_to_sec(t):
 
 def mem_to_kB(mem):
     """convert memory to kB
+
     Parameters
     ----------
     mem: str | int

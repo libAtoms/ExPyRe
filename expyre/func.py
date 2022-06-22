@@ -1,3 +1,12 @@
+"""Interface for remotely running python functions.  It pickles the function and
+    its arguments, stages files (pickles as well as additional requested input files)
+    to a local directory, submits to remote System (which stages out inputs, submits
+    on remote queuing system, and stages outputs back in), and then unpickles results
+    to return function result.  It also creates/updates the JobsDB entry for the job
+    as it does these steps.
+
+    Possible status (see JobsDB): created, submitted, started, succeeded/failed, processed, cleaned
+"""
 import sys
 import os
 import time
@@ -23,12 +32,41 @@ class ExPyReJobDied(Exception):
     pass
 
 class ExPyRe:
-    """Interface for remotely running python functions.  It pickles the function and
-    its arguments, stages files (pickles as well as additional requested input files)
-    to a local directory, submits to remote System (which stages out inputs, submits
-    on remote queuing system, and stages outputs back in), and then unpickles results
-    to return function result.  It also creates/updates the JobsDB entry for the job
-    as it does these steps.
+    """
+    Create Queued Remote Function object, pickles function and inputs, stores files
+    in local stage dir, and adds to job database.
+
+    Parameters
+    ----------
+    
+    name: str
+    	name of job
+    input_files: list(str | Path), optional
+    	input files that function will need.  Relative paths without '..' path components
+    	files will be copied to same path relative to remote rundir on remote machine.
+    	Absolute paths will result in files copied into top level remote rundir
+    env_vars: list(str), optional
+    	list of env vars to set in remote queuing script
+    pre_run_commands: list(str), optional
+    	list of commands, one per line, to run at start of remote queuing script, after commands
+    	in config.json that are used for system
+    post_run_commands: list(str), optional
+    	list of commands, one per line, to run at end of remote queuing script, after actual task
+    output_files: list(str), optional
+    	output files to be copied back after evaluation is done
+    try_restart_from_prev: bool, default True
+    	try to restart from previous call, based on hash of function, arguments, and input files
+    hash_ignore: list(int or str), optional
+    	args elements (int) or kwargs items (str) to ignore when making hash to determine if run is
+    	identical to some previous one
+    function: Callable
+    	function to call
+    args: list
+    	positional arguments to function
+    kwargs: dict
+    	keyword arguments to function
+    _from_db_info: dict, optional (intended for internal use)
+    	restart is from db, and dict contains special arguments: remote_id, system_name, status, stage_dir
 
     Possible status (see JobsDB): created, submitted, started, succeeded/failed/died, processed, cleaned
     """
@@ -37,39 +75,8 @@ class ExPyRe:
                  output_files=[], try_restart_from_prev=True, hash_ignore=[],
                  function=None, args=[], kwargs={},
                  _from_db_info=None):
-        """Create Queued Remote Function object, pickles function and inputs, stores files
-        in local stage dir, and adds to job database.
-        Parameters
-        ----------
-        name: str
-            name of job
-        input_files: list(str | Path), optional
-            input files that function will need.  Relative paths without '..' path components
-            files will be copied to same path relative to remote rundir on remote machine.
-            Absolute paths will result in files copied into top level remote rundir
-        env_vars: list(str), optional
-            list of env vars to set in remote queuing script
-        pre_run_commands: list(str), optional
-            list of commands, one per line, to run at start of remote queuing script, after commands
-            in config.json that are used for system
-        post_run_commands: list(str), optional
-            list of commands, one per line, to run at end of remote queuing script, after actual task
-        output_files: list(str), optional
-            output files to be copied back after evaluation is done
-        try_restart_from_prev: bool, default True
-            try to restart from previous call, based on hash of function, arguments, and input files
-        hash_ignore: list(int or str), optional
-            args elements (int) or kwargs items (str) to ignore when making hash to determine if run is
-            identical to some previous one
-        function: Callable
-            function to call
-        args: list
-            positional arguments to function
-        kwargs: dict
-            keyword arguments to function
-        _from_db_info: dict, optional (intended for internal use)
-            restart is from db, and dict contains special arguments: remote_id, system_name, status, stage_dir
-        """
+        
+
         if len(config.systems) == 0 or config.db is None:
             raise RuntimeError('Configuration file was not found, ExPyRe object cannot be created')
 
@@ -350,13 +357,17 @@ class ExPyRe:
     @staticmethod
     def from_jobsdb(db_jobs):
         """Create a list of ExPyRe objects from JobsDB records
-        Parameters:
+
+        Parameters
+		----------
+
         db_jobs: dict or list(dict)
-            one or more jobs records returned from JobsDB.jobs()
+            one or more jobs records returned from ``JobsDB.jobs()``
 
         Returns
         -------
-        list(ExPyRe): created objects
+        list(ExPyRe)
+            created objects
         """
         if isinstance(db_jobs, dict):
             db_jobs = [db_jobs]
@@ -383,6 +394,7 @@ class ExPyRe:
     def start(self, resources, system_name=os.environ.get('EXPYRE_SYS', None), header_extra=[],
               exact_fit=True, partial_node=False, python_cmd='python3'):
         """Start a job on a remote machine
+
         Parameters
         ----------
         resoures: dict or Resources
@@ -517,8 +529,10 @@ class ExPyRe:
 
     def clean(self, wipe=False, dry_run=False, verbose=False):
         """clean the local and remote stage directories
+
         Parameters
         ----------
+
         wipe: bool, default False
             wipe directory completely, opposed to just writing CLEANED into files that could be large
             like python function input and output (NOTE: other staged in files or files that are created
@@ -568,6 +582,7 @@ class ExPyRe:
 
     def get_results(self, timeout=3600, check_interval=30, sync=True, sync_all=True, force_sync=False, quiet=False, verbose=False):
         """Get results from a remote job
+
         Parameters
         ----------
         timeout: int or str, default 3600
@@ -577,7 +592,7 @@ class ExPyRe:
         sync: bool, default True
             Synchronize remote files before checking for results
             Note that if this is False and job is finished on remote system but output files haven't been
-                previously synchronize, this will wait one check_interval then raise an error
+            previously synchronize, this will wait one check_interval then raise an error
         sync_all: bool, default True
             Sync files from all jobs (not just this one), to reduce number of separate remote copy calls
         force_sync: bool, default False
@@ -591,10 +606,11 @@ class ExPyRe:
         Returns
         -------
         return, stdout, stderr:
-            value of function
-            string containing stdout during function
-            string containing stderr during function
+            * value of function
+            * string containing stdout during function
+            * string containing stderr during function
         """
+
         if self.status == 'processed' or self.status == 'cleaned':
             raise RuntimeError(f'Job {self.id} has status {self.status}, results are no longer available')
 

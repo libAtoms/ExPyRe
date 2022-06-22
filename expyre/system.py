@@ -13,34 +13,36 @@ class System:
     a local directory to a (config-specified) remote directory, submitting it with the correct
     kind of Scheduler, and staging back the results from the remote directory.  Does not report
     any other status directly.
+
+    Parameters
+    ----------
+    host: str
+        [username@]machine.fqdn
+    partitions: dict
+        dictionary describing partitions types
+    scheduler: str, Scheduler
+        type of scheduler
+    header: list(str), optional
+        list of batch system header to use in every job, typically for system-specific things
+        like selecting nodes
+    no_default_header: bool, default False
+        do not automatically add default header fields, namely job name, partition/queue,
+        max runtime, and stdout/stderr files
+    commands: list(str), optional
+        list of commands to run at start of every job on machine
+    rundir: str, default 'run_expyre'
+        path on remote machine to run in.  If absolute, used as if, and if relative, relative
+        to (remote) home directory
+    remsh_cmd: str, default EXPYRE_RSH or 'ssh'
+        remote shell command to use with this system
+    rundir_extra: str, default None
+        extra string to add to remote_rundir, e.g. per-project part of path
     """
     def __init__(self, host, partitions, scheduler, header=[], no_default_header=False, commands=[],
                  rundir='run_expyre', rundir_extra=None, remsh_cmd=None):
         """Create a remote system object
 
-        Parameters
-        ----------
-        host: str
-            [username@]machine.fqdn
-        partitions: dict
-            dictionary describing partitions types
-        scheduler: str, Scheduler
-            type of scheduler
-        header: list(str), optional
-            list of batch system header to use in every job, typically for system-specific things
-            like selecting nodes
-        no_default_header: bool, default False
-            do not automatically add default header fields, namely job name, partition/queue,
-            max runtime, and stdout/stderr files
-        commands: list(str), optional
-            list of commands to run at start of every job on machine
-        rundir: str, default 'run_expyre'
-            path on remote machine to run in.  If absolute, used as if, and if relative, relative
-            to (remote) home directory
-        remsh_cmd: str, default EXPYRE_RSH or 'ssh'
-            remote shell command to use with this system
-        rundir_extra: str, default None
-            extra string to add to remote_rundir, e.g. per-project part of path
+
         """
         self.host = host
         self.remote_rundir = rundir
