@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# export EXPYRE_PYTEST_SYSTEMS='(tin|mustang)'
+export EXPYRE_PYTEST_SYSTEMS='tin'
+
+echo  "GIT VERSION " $( git describe --always --tags --dirty ) > pytest_complete_test.out 
+echo "" >> pytest_complete_test.out 
+
+cat<<EOF > definitely_queued_job.json
+{"tin":
+    [ {"max_time": "1h", "num_nodes": 1, "partitions": "n2019"},
+      {"max_time": "1h", "num_nodes": 38, "partitions": "n2019"} ]
+}
+EOF
+export EXPYRE_PYTEST_QUEUED_JOB_RESOURCES=$PWD/definitely_queued_job.json
+
+rm -rf $HOME/pytest_expyre
+if [[ $EXPYRE_PYTEST_SYSTEMS =~ mustang ]]; then
+    ssh $KMUSTANG rm -rf pytest_expyre_rundir_mustang
+fi
+pytest --clean --basetemp $HOME/pytest_expyre >> pytest_complete_test.out 2>&1
+
+l=`egrep '^\s*=+.* passed' pytest_complete_test.out`
+
+echo $l | grep -q -v 'skipped'
+if [ $? != 0 ]; then
+    echo "Unexpected number skipped not 0 '$l'" 1>&2
+    exit 1
+fi
+echo $l | grep -q ' 24 passed'
+if [ $? != 0 ]; then
+    echo "Unexpected number passed not 24 '$l'" 1>&2
+    exit 1
+fi
+echo $l | grep -q 'xfailed'
+if [ $? != 0 ]; then
+    echo "Unexpected number xfailed not 0 '$l'" 1>&2
+    exit 1
+fi

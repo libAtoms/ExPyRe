@@ -32,7 +32,7 @@ def do_system(tmp_path, system, job_name):
 
     # submit job
     remote_id = system.submit(job_name, stage_dir,
-                           resources=Resources(n=(2, 'nodes'), max_time='5m'),
+                           resources=Resources(num_nodes=2, max_time='5m'),
                            commands=['pwd', 'echo BOB > out', 'sleep 20'])
 
     # wait to finish

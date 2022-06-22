@@ -32,7 +32,7 @@ def do_qsub_failure_atomic(expyre_config, sys_name, monkeypatch):
     xpr = ExPyRe('test', function=sum, args=[[1, 2, 3]])
     try:
         with pytest.warns(FailedSubprocessWarning):
-            xpr.start(resources=Resources(n=(1, 'nodes'), max_time='5m'), system_name=sys_name)
+            xpr.start(resources=Resources(num_nodes=1, max_time='5m'), system_name=sys_name)
         raise Exception
     except RuntimeError:
         print('ExPyRe.start failed, checking state of remote dir')
