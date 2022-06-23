@@ -1,0 +1,4 @@
+{ "github": [
+    {"max_time": "1h", "num_nodes": 1, "partitions": "standard"},
+    {"max_time": "1h", "num_nodes": 1, "partitions": "standard"}
+] }
