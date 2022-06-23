@@ -51,7 +51,7 @@ jobs:
 
       - name: Test with pytest - coverage
         run: |
-          env EXPYRE_PYTEST_QUEUED_JOB_RESOURCES=$PWD/.github/workflow_assets/EXPYRE_PYTEST_QUEUED_JOB_RESOURCES.json EXPYRE_PYTEST_SYSTEMS=github EXPYRE_PYTEST_MAX_NUM_NODES=1 pytest -v --cov=expyre --cov-report term --cov-report html --cov-config=tests/.coveragerc --cov-report term-missing --cov-report term:skip-covered --clean -rxXs --basetemp $HOME/pytest
+          env EXPYRE_PYTEST_QUEUED_JOB_RESOURCES=$PWD/.github/workflows_assets/EXPYRE_PYTEST_QUEUED_JOB_RESOURCES.json EXPYRE_PYTEST_SYSTEMS=github EXPYRE_PYTEST_MAX_NUM_NODES=1 pytest -v --cov=expyre --cov-report term --cov-report html --cov-config=tests/.coveragerc --cov-report term-missing --cov-report term:skip-covered --clean -rxXs --basetemp $HOME/pytest
 
       # - name: Upload Coverage Data
         # uses: actions/upload-artifact@v2
