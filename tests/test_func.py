@@ -252,11 +252,8 @@ def do_restart(sys_name):
     print('initial job id', xpr.id)
 
     t0 = time.time()
-    print("BOB restart starting")
     xpr.start(resources=Resources(num_nodes=1, max_time='5m'), system_name=sys_name)
-    print("BOB restart getting results first time")
-    #BOB res, stdout, stderr = xpr.get_results()
-    res, stdout, stderr = xpr.get_results(verbose=True)
+    res, stdout, stderr = xpr.get_results()
     print('status after get_results', xpr.status)
 
     assert time.time() - t0 > 29
