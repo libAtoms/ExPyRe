@@ -28,4 +28,4 @@ Only for pytest
 
 - ``EXPYRE_PYTEST_SSH``: path to ssh to use (instead of ``/usr/bin/ssh``) in pytest ``test_subprocess.py`` (all higher level tests use ``remsh_cmd`` item for system in ``config.json``
 - ``EXPYRE_PYTEST_SYSTEMS``: regexp to use to filter systems from those available in ``$HOME/.expyre/config.json``
-- ``EXPYRE_PYTEST_QUEUED_JOB_RESOURCES``: JSON or filename with JSON that defines an array of two dicts, each with Resources kwargs so that first one is a small job, and second one is large enough that it's guaranteed to be queued once   the first has been submitted (e.g. using _all_ available nodes).
+- ``EXPYRE_PYTEST_QUEUED_JOB_RESOURCES``: JSON or filename with JSON that defines a dict with system names as keys and arrays as values. Each array has two dicts, each with Resources kwargs so that first one is a small job that runs for a substantial amount of time, and second one is large enough that it's guaranteed to be queued (not running) once the first has been submitted (e.g. using _all_ available nodes).
