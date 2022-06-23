@@ -5,58 +5,54 @@ from .units import time_to_sec, mem_to_kB
 
 class Resources:
     """Resources required for a task, including time, memory, cores/nodes, and particular
-    partitions.  Mainly consists of code that selects appropriate partition from the list
-    associated with each System.
+    partitions/queues.  Mainly consists of code that selects appropriate partition/queue from
+    the list associated with each System.
 
     Parameters
     ----------
     max_time: int, str
-        max time for job in s (int) or time spec (str)
-    n: (int, str)
-        int number of tasks or nodes to use and str 'tasks' or 'nodes'
-    ncores_per_task: int, default 1
-        cores per task, 0 for all cores in node
-    max_mem_per_task: int, str, default None
-        max mem per task in kB (int) or memory spec (str)
-    partitions: list(str), default None
+        max time for job in sec (int) or time spec (str)
+    num_nodes: int
+        number of nodes to use, mutually exclusive with num_cores, one is required
+    num_cores: int
+        number of cores to use, mutually exclusive with num_nodes, one is required
+    max_mem_tot: int/str, default None
+        total max mem in kB (int) or memory spec (str), mutually exclusive with max_mem_per_core
+    max_mem_per_core: int/str, default None
+        per-core max mem in kB (int) or memory spec (str), mutually exclusive with max_mem_tot
+    partitions/queues: list(str), default None
         regexps for types of node that can be used
     """
 
-    def __init__(self, max_time, n, max_mem=None, partitions=None):
-        """Create Resources object
-        Parameters
-        ----------
-        max_time: int / str
-            max time for job in sec (int) or time spec (str)
-        n: (int, str)
-            int number of cores or nodes to use and str 'cores' or 'nodes'
-        max_mem_per_core: (int/str, str), default None
-            max mem in kB (int) or memory spec (str) per 'per_core' or 'tot' (str)
-        partitions: list(str), default None
-            regexps for types of node that can be used
-        """
-        assert n[1] in ['nodes', 'cores']
-        if max_mem is not None:
-            assert max_mem[1] in ['per_core', 'tot']
+    def __init__(self, max_time, num_nodes=None, num_cores=None, max_mem_tot=None, max_mem_per_core=None, partitions=None, queues=None):
+        if sum([num_nodes is None, num_cores is None]) != 1:
+            raise ValueError(f"exactly one of num_nodes {num_nodes} and num_cores {num_cores} is required")
+        if sum([max_mem_tot is None, max_mem_per_core is None]) not in [1, 2]:
+            raise ValueError(f"at most one of max_mem_tot {max_mem_tot} and max_mem_per_core {max_mem_per_core} is required")
+        if sum([partitions is None, queues is None]) not in [1, 2]:
+            raise ValueError(f"at most one of partitions {partitions} and queues {queues} is required")
 
         self.max_time = time_to_sec(max_time)
-        self.n = n
-        if max_mem is None:
-            self.max_mem = None
+        self.n = (num_nodes, 'nodes') if num_nodes is not None else (num_cores, 'cores')
+        if max_mem_tot is not None:
+            self.max_mem = (mem_to_kB(max_mem_tot), 'tot')
+        elif max_mem_per_core is not None:
+            self.max_mem = (mem_to_kB(max_mem_per_core), 'per_core')
         else:
-            self.max_mem = (mem_to_kB(max_mem[0]), max_mem[1])
+            self.max_mem = None
         self.partitions = partitions
         if isinstance(self.partitions, str):
             self.partitions = [self.partitions]
 
 
     def find_nodes(self, partitions, exact_fit=True, partial_node=False):
-        """find a node type that accomodates requested resources
+        """find a node type that accommodates requested resources
 
         Parameters
         ----------
         partitions: dict
-            properties of available partitions
+            properties of available partitions (only used internally by system.py, so "queues"
+            synonymn is not implemented here).
         exact_fit: bool, default True
             only return nodes that exactly satisfy the number of cores
         partial_node: bool, default False
@@ -79,7 +75,7 @@ class Resources:
             exact_fit=False
 
         for partition, node_spec in partitions.items():
-            nnodes, ncores = self._get_nnodes_ncores(node_spec) 
+            nnodes, ncores = self._get_nnodes_ncores(node_spec)
 
             if self.partitions is not None and all([re.search('^'+nt_re+'$', partition) is None for nt_re in self.partitions]):
                 # wrong node type
@@ -109,7 +105,7 @@ class Resources:
             excess_cores = []
             for nt in selected_partitions:
                 node_spec = partitions[nt]
-                _, ncores = self._get_nnodes_ncores(node_spec) 
+                _, ncores = self._get_nnodes_ncores(node_spec)
                 excess_cores.append((node_spec['ncores'] - ncores % node_spec['ncores']) % node_spec['ncores'])
 
             try:
@@ -143,12 +139,12 @@ class Resources:
         """ get totals numbers of nodes and cores for this task
         Parameters
         ----------
-        node_spec: dict 
+        node_spec: dict
             node type, from partitions dict
 
         Returns
         -------
-        nnodes, ncores: total number of sufficient nodes and cores 
+        nnodes, ncores: total number of sufficient nodes and cores
         """
         if self.n[1] == 'nodes':
             # fill up requested # of nodes

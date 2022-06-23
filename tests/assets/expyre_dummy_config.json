@@ -18,6 +18,12 @@
         "partitions": { "debug":    { "ncores" : 40, "max_time" : "1h", "max_mem" : "120GB" },
                         "standard": { "ncores" : 40, "max_time" : "168h", "max_mem" : "120GB" }
         }
+    },
+    "_sys_queues": { "host": null,
+        "scheduler": "slurm",
+        "queues": { "debug":    { "ncores" : 40, "max_time" : "1h", "max_mem" : "120GB" },
+                    "standard": { "ncores" : 40, "max_time" : "168h", "max_mem" : "120GB" }
+        }
     }
 
 }
