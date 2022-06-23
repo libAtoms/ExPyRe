@@ -4,7 +4,7 @@
         "scheduler": "slurm",
         "commands": [ "module purge", "module load python vasp" ],
         "header": ["#SBATCH --nodes={nnodes}",
-                   "#SBATCH --ntasks={tot_ntasks}",
+                   "#SBATCH --ntasks={ncores}",
                    "#SBATCH --ntasks-per-node={ncores_per_node}"],
         "partitions": { "node16_1,node16_2":  { "ncores" : 16, "max_time" : null, "max_mem" : "60GB" },
                         "node36":             { "ncores" : 36, "max_time" : null, "max_mem" : "180GB" },

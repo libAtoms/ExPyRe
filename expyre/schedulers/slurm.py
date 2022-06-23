@@ -130,7 +130,7 @@ class Slurm(Scheduler):
             remote_ids = [remote_ids]
 
         stdout, stderr = subprocess_run(self.host,
-            ['squeue', '--user', '$LOGNAME', '--noheader', '-O', 'jobid:20,state:30,reason:200'],
+            ['squeue', '--user', '$USER', '--noheader', '-O', 'jobid:20,state:30,reason:200'],
             remsh_cmd=self.remsh_cmd, verbose=verbose)
 
         id_status_reasons = [line.strip().split(maxsplit=2) for line in stdout.splitlines()

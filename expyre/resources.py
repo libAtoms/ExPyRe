@@ -32,6 +32,11 @@ class Resources:
         if sum([partitions is None, queues is None]) not in [1, 2]:
             raise ValueError(f"at most one of partitions {partitions} and queues {queues} is required")
 
+        if num_nodes is not None and not isinstance(num_nodes, int):
+            raise ValueError(f"got num_nodes {num_nodes} not int")
+        if num_cores is not None and not isinstance(num_cores, int):
+            raise ValueError(f"got num_cores {num_cores} not int")
+
         self.max_time = time_to_sec(max_time)
         self.n = (num_nodes, 'nodes') if num_nodes is not None else (num_cores, 'cores')
         if max_mem_tot is not None:

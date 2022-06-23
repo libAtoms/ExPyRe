@@ -552,7 +552,7 @@ class ExPyRe:
                 # delete remote stage dir
                 system.clean_rundir(self.stage_dir, None, dry_run=dry_run, verbose=verbose or dry_run)
             # delete local stage dir
-            subprocess_run(None, ['find', str(self.stage_dir), '-type', 'd', '-exec', 'chmod', 'u+rwx', '{}', '\;'],
+            subprocess_run(None, ['find', str(self.stage_dir), '-type', 'd', '-exec', 'chmod', 'u+rwx', '{}', '\\;'],
                            dry_run=dry_run, verbose=verbose or dry_run)
             subprocess_run(None, ['rm', '-rf', str(self.stage_dir)], dry_run=dry_run, verbose=verbose or dry_run)
         else:
