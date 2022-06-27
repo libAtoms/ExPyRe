@@ -280,6 +280,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#file-format">
    File format
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-property-dict-includes">
+     Node property dict includes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#format-keys-used-in-header">
+     format() keys used in header
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#configuration-file-location-and-project-scope">
@@ -314,6 +326,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#file-format">
    File format
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node-property-dict-includes">
+     Node property dict includes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#format-keys-used-in-header">
+     format() keys used in header
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#configuration-file-location-and-project-scope">
@@ -340,47 +364,46 @@ title="Print to PDF"
 <p>The description of the available systems and associated resources is in a <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</p>
 <div class="section" id="file-format">
 <h2>File format<a class="headerlink" href="#file-format" title="Permalink to this heading">#</a></h2>
-<p>The top level structure is a dict with one <code class="docutils literal notranslate"><span class="pre">&quot;systems&quot;</span></code> key with a dict value, containing
+<p>The top level structure is a single dict with one <code class="docutils literal notranslate"><span class="pre">&quot;systems&quot;</span></code> key with a dict value, containing
 one key-value pair for each system. The key is the name of the system (used to select
 the system when evaluating the function).  See <code class="docutils literal notranslate"><span class="pre">expyre.System</span></code> docstring for full list. The value is a dict with the following keys:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;host&quot;</span></code>: string hostname, with optional <code class="docutils literal notranslate"><span class="pre">username&#64;`,</span> <span class="pre">or</span> <span class="pre">``null</span></code> for localhost without ssh.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;scheduler&quot;</span></code>: string indicating type of scheduler, currently <code class="docutils literal notranslate"><span class="pre">&quot;slurm&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;pbs&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;sge&quot;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;commands&quot;</span></code>: optional list(str) with commands to run at beginning of every script on system, usually for things that set up the runtime such as environment modules (e.g. <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">vasp</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;header&quot;</span></code>: list(str) queuing system header lines.  Actual header is created by applying string formatting, i.e.  <code class="docutils literal notranslate"><span class="pre">str.format(**kwargs)</span></code>, replacing substrings such as <code class="docutils literal notranslate"><span class="pre">{nnodes}</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;header&quot;</span></code>: list(str) queuing system header lines.  Actual header is created by applying string formatting, i.e.  <code class="docutils literal notranslate"><span class="pre">str.format(**node_dict)</span></code>, replacing substrings such as <code class="docutils literal notranslate"><span class="pre">{nnodes}</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">rundir</span></code>: str, optional, default <code class="docutils literal notranslate"><span class="pre">&quot;run_expyre&quot;</span></code>. Place for all remote files and remote execution.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">no_default_header</span></code>: bool, optional, default False``. Do not put default lines (such as <code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-cwd</span></code> or automatically setting the job name) to the job submission script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">no_default_header</span></code>: bool, optional, default <code class="docutils literal notranslate"><span class="pre">False</span></code>. Do not put default lines (such as <code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-cwd</span></code> or automatically setting the job name) to the job submission script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;remsh_cmd&quot;</span></code>: optional string remote shell command, default <code class="docutils literal notranslate"><span class="pre">&quot;ssh&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;no_default_header&quot;</span></code>: bool, default false disable automatic setting of queuing system header for job name, partition/queue, max runtime, and stdout and stderr files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;rundir&quot;</span></code>: string for a path where the remote jobs should be run</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;partitions&quot;</span></code>: dict with partitions/queues/node-type names as keys and dict of node properties as values.</p></li>
 </ul>
-<p>Available keys in <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> which are normally used in this template:</p>
+<div class="section" id="node-property-dict-includes">
+<h3>Node property dict includes<a class="headerlink" href="#node-property-dict-includes" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ncores&quot;</span></code>: int number of cores per node</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;max_time&quot;</span></code>: max time, int for seconds, str for <code class="docutils literal notranslate"><span class="pre">&quot;&lt;N&gt;[smhd]&quot;</span></code> (case insensitive) or <code class="docutils literal notranslate"><span class="pre">&quot;&lt;dd&gt;-&lt;hh&gt;:&lt;mm&gt;:&lt;ss&gt;&quot;</span></code>. Leading parts are optional, so N1:N2 is N1 minutes + N2 seconds.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;max_mem&quot;</span></code>: max mem per node, int for kB, str for <code class="docutils literal notranslate"><span class="pre">&quot;&lt;N&gt;[kmgt]b?&quot;</span></code> (case insensitive).</p></li>
+</ul>
+</div>
+<div class="section" id="format-keys-used-in-header">
+<h3>format() keys used in header<a class="headerlink" href="#format-keys-used-in-header" title="Permalink to this heading">#</a></h3>
+<p>Available keys in <code class="docutils literal notranslate"><span class="pre">node_dict</span></code> which are normally used in this template:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;nnodes&quot;</span></code>: int total number of nodes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ncores&quot;</span></code>: int total number of cores</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;ncores_per_node&quot;</span></code>: int number of cores per node</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;tot_ncores&quot;</span></code>: int total number of cores</p></li>
 </ul>
 <p>Note that if <code class="docutils literal notranslate"><span class="pre">partial_node=True</span></code> is passed to <code class="docutils literal notranslate"><span class="pre">find_nodes</span></code> and the total number of cores is less
-than the number per node, <code class="docutils literal notranslate"><span class="pre">tot_ncores</span></code> and <code class="docutils literal notranslate"><span class="pre">ncores_per_node</span></code> are <em>not</em> rounded up to an entire node.</p>
-<p>Additional keys that are not normally used for the header (having to do with two level parallelism where each task may be allocated more than 1 node):</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;tot_ntasks&quot;</span></code>: int total number of tasks (<code class="docutils literal notranslate"><span class="pre">tot_ncores</span> <span class="pre">/</span> <span class="pre">ncores_per_task</span></code> or <code class="docutils literal notranslate"><span class="pre">nnodes</span> <span class="pre">*</span> <span class="pre">ntasks_per_node</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ncores_per_task&quot;</span></code>: int cores per task (specified in resources)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ntasks_per_node&quot;</span></code>: int tasks per node (<code class="docutils literal notranslate"><span class="pre">ncores_per_node</span> <span class="pre">/</span> <span class="pre">ncores_per_task</span></code>)</p></li>
-</ul>
+than the number per node, <code class="docutils literal notranslate"><span class="pre">ncores</span></code> and <code class="docutils literal notranslate"><span class="pre">ncores_per_node</span></code> are <em>not</em> rounded up to an entire node.</p>
 <p>Additional keys that are used by the internally generated parts of the header:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code>: str (supposed to be guaranteed to be unique among current jobs within project) job id</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;partition&quot;</span></code>: str partition/queue/node type</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;max_time_HMS&quot;</span></code>: str max runtime in <code class="docutils literal notranslate"><span class="pre">hours:minutes:seconds</span></code> format</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;partitions&quot;</span></code>: dict with partitions/queues/node-type names as keys and dict of properties as values.</p></li>
 </ul>
-<p>Property dict includes</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ncores&quot;</span></code>: int number of cores per node</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;max_time&quot;</span></code>: max time, int for seconds, str for <code class="docutils literal notranslate"><span class="pre">&quot;&lt;N&gt;[smhd]&quot;</span></code> (case insensitive) or <code class="docutils literal notranslate"><span class="pre">&quot;&lt;dd&gt;-&lt;hh&gt;:&lt;mm&gt;:&lt;ss&gt;&quot;</span></code>. Leading parts are optional, so N1:N2 is N1 minutes + N2 seconds.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;max_mem&quot;</span></code>: max mem per node, int for kB, str for <code class="docutils literal notranslate"><span class="pre">&quot;&lt;N&gt;[kmgt]b?&quot;</span></code> (case insensitive).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;remsh_cmd&quot;</span></code>: optional string remote shell command, default <code class="docutils literal notranslate"><span class="pre">&quot;ssh&quot;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;no_default_header&quot;</span></code>: bool, default false disable automatic setting of queuing system header for job name, partition/queue, max runtime, and stdout and stderr files</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;rundir&quot;</span></code>: string for a path where the remote jobs should be run</p></li>
-</ul>
+</div>
 </div>
 <div class="section" id="configuration-file-location-and-project-scope">
 <h2>Configuration file location and project scope<a class="headerlink" href="#configuration-file-location-and-project-scope" title="Permalink to this heading">#</a></h2>
@@ -404,8 +427,8 @@ the entire <code class="docutils literal notranslate"><span class="pre">&quot;pa
         <span class="nt">&quot;scheduler&quot;</span><span class="p">:</span> <span class="s2">&quot;slurm&quot;</span><span class="p">,</span>
         <span class="nt">&quot;commands&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;module purge&quot;</span><span class="p">,</span> <span class="s2">&quot;module load python/3 compilers/gnu lapack ase quip vasp&quot;</span> <span class="p">],</span>
         <span class="nt">&quot;header&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;#SBATCH --nodes={nnodes}&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;#SBATCH --ntasks={tot_ncores}&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;#SBATCH --ntasks-per-node={ncores_per_node}&quot;</span><span class="p">],</span>
+                   <span class="s2">&quot;#SBATCH --ntasks={ncores}&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;#SBATCH --ntasks-per-node={ncores_per_node}&quot;</span><span class="p">],</span>
         <span class="nt">&quot;partitions&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;node16_old,node16_new&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;ncores&quot;</span> <span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="nt">&quot;max_time&quot;</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;max_mem&quot;</span> <span class="p">:</span> <span class="s2">&quot;60GB&quot;</span> <span class="p">},</span>
                         <span class="nt">&quot;node36&quot;</span><span class="p">:</span>                <span class="p">{</span> <span class="nt">&quot;ncores&quot;</span> <span class="p">:</span> <span class="mi">36</span><span class="p">,</span> <span class="nt">&quot;max_time&quot;</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;max_mem&quot;</span> <span class="p">:</span> <span class="s2">&quot;180GB&quot;</span> <span class="p">},</span>
                         <span class="nt">&quot;node32&quot;</span><span class="p">:</span>                <span class="p">{</span> <span class="nt">&quot;ncores&quot;</span> <span class="p">:</span> <span class="mi">32</span><span class="p">,</span> <span class="nt">&quot;max_time&quot;</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;max_mem&quot;</span> <span class="p">:</span> <span class="s2">&quot;180GB&quot;</span> <span class="p">},</span>
