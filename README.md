@@ -8,12 +8,4 @@ ssh).
 
 In case of remote execution, the package can transfer auxiliary files that are needed for the execution of the function, and transfer back any newly generated files. 
 
-For examples and more information see documentation. 
-
-Documentation may be checked out from `gh-pages` branch or built with
-
-```
-cd docs
-make html 
-open build/html/index.html
-```
+For examples and more information see [documentation](http://libatoms.github.io/ExPyRe). 
