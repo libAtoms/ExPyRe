@@ -47,7 +47,7 @@ And ExPyRe-modified script:
     xpr = ExPyRe('test_task', function=np.sum, args=[array_to_sum], kwargs={'axis': 1})
 
     # resources: run for max 1 hour on 1 node, on a regular partition node
-    res = {'max_time': '1h', 'num_nodes': 1, 'partitions': 'regular'}
+    res = {'max_time': '1h', 'n': (1, 'nodes'), 'partitions': 'regular'}
 
     # submit job
     xpr.start(resources=res, system_name='remote')
