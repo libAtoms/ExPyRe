@@ -88,15 +88,15 @@ class Scheduler:
 
         pre_commands = []
 
-        # either nnodes or ncores must be known at submit time, so compute each in terms of the other
-        if node_dict.get('nnodes', None) is None:
-            pre_commands.append('export EXPYRE_NUM_NODES=$(( {ncores} / $EXPYRE_NUM_CORES_PER_NODE ))')
+        # either num_nodes or num_cores must be known at submit time, so compute each in terms of the other
+        if node_dict.get('num_nodes', None) is None:
+            pre_commands.append('export EXPYRE_NUM_NODES=$(( {num_cores} / $EXPYRE_NUM_CORES_PER_NODE ))')
         else:
-            pre_commands.append('export EXPYRE_NUM_NODES={nnodes}')
+            pre_commands.append('export EXPYRE_NUM_NODES={num_nodes}')
 
-        if node_dict.get('ncores', None) is None:
-            pre_commands.append('export EXPYRE_NUM_CORES=$(( {nnodes} * $EXPYRE_NUM_CORES_PER_NODE ))')
+        if node_dict.get('num_cores', None) is None:
+            pre_commands.append('export EXPYRE_NUM_CORES=$(( {num_nodes} * $EXPYRE_NUM_CORES_PER_NODE ))')
         else:
-            pre_commands.append('export EXPYRE_NUM_CORES={ncores}')
+            pre_commands.append('export EXPYRE_NUM_CORES={num_cores}')
 
         return pre_commands

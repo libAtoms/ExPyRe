@@ -70,9 +70,9 @@ class Resources:
         node_dict: dict
             various quantities of node
 
-            * nnodes: int, total number of nodes needed
-            * ncores: int, total number of cores needed
-            * ncores_per_node: int, number of cores per node for selected nodes
+            * num_nodes: int, total number of nodes needed
+            * num_cores: int, total number of cores needed
+            * num_cores_per_node: int, number of cores per node for selected nodes
         """
         selected_partitions = []
 
@@ -80,7 +80,7 @@ class Resources:
             exact_fit=False
 
         for partition, node_spec in partitions.items():
-            nnodes, ncores = self._get_nnodes_ncores(node_spec)
+            num_nodes, num_cores = self._get_num_nodes_num_cores(node_spec)
 
             if self.partitions is not None and all([re.search('^'+nt_re+'$', partition) is None for nt_re in self.partitions]):
                 # wrong node type
@@ -90,13 +90,13 @@ class Resources:
                 # too much time
                 continue
 
-            if exact_fit and self.n[1] == 'cores' and self.n[0] % node_spec['ncores'] != 0:
+            if exact_fit and self.n[1] == 'cores' and self.n[0] % node_spec['num_cores'] != 0:
                 # wrong number of cores
                 continue
 
             if self.max_mem is not None and node_spec['max_mem'] is not None:
-                if ((self.max_mem[1] == 'per_core' and (self.max_mem[0] > node_spec['max_mem'] / node_spec['ncores'])) or
-                    (self.max_mem[1] == 'tot'  and (self.max_mem[0] > node_spec['max_mem'] * nnodes))):
+                if ((self.max_mem[1] == 'per_core' and (self.max_mem[0] > node_spec['max_mem'] / node_spec['num_cores'])) or
+                    (self.max_mem[1] == 'tot'  and (self.max_mem[0] > node_spec['max_mem'] * num_nodes))):
                     # too much memory
                     continue
 
@@ -110,8 +110,8 @@ class Resources:
             excess_cores = []
             for nt in selected_partitions:
                 node_spec = partitions[nt]
-                _, ncores = self._get_nnodes_ncores(node_spec)
-                excess_cores.append((node_spec['ncores'] - ncores % node_spec['ncores']) % node_spec['ncores'])
+                _, num_cores = self._get_num_nodes_num_cores(node_spec)
+                excess_cores.append((node_spec['num_cores'] - num_cores % node_spec['num_cores']) % node_spec['num_cores'])
 
             try:
                 # look for first one that matches exactly
@@ -124,23 +124,23 @@ class Resources:
 
         partition = selected_partitions[0]
 
-        nnodes, ncores = self._get_nnodes_ncores(partitions[partition])
+        num_nodes, num_cores = self._get_num_nodes_num_cores(partitions[partition])
 
         if partial_node:
-            if ncores <= partitions[partition]['ncores']:
+            if num_cores <= partitions[partition]['num_cores']:
                 # partial node
-                ncores_per_node = ncores
+                num_cores_per_node = num_cores
             else:
                 raise ValueError('partial_node only supported when it can be satisfied by 1 node')
         else:
             # entire nodes
-            ncores_per_node = partitions[partition]['ncores']
-            ncores = nnodes * ncores_per_node
+            num_cores_per_node = partitions[partition]['num_cores']
+            num_cores = num_nodes * num_cores_per_node
 
-        return partition, {'nnodes': nnodes, 'ncores': ncores, 'ncores_per_node': ncores_per_node}
+        return partition, {'num_nodes': num_nodes, 'num_cores': num_cores, 'num_cores_per_node': num_cores_per_node}
 
 
-    def _get_nnodes_ncores(self, node_spec):
+    def _get_num_nodes_num_cores(self, node_spec):
         """ get totals numbers of nodes and cores for this task
         Parameters
         ----------
@@ -149,22 +149,22 @@ class Resources:
 
         Returns
         -------
-        nnodes, ncores: total number of sufficient nodes and cores
+        num_nodes, num_cores: total number of sufficient nodes and cores
         """
         if self.n[1] == 'nodes':
             # fill up requested # of nodes
-            nnodes = self.n[0]
-            ncores = nnodes * node_spec['ncores']
+            num_nodes = self.n[0]
+            num_cores = num_nodes * node_spec['num_cores']
         elif self.n[1] == 'cores':
             # determine how many nodes are necessary
-            ncores = self.n[0]
-            nnodes = ncores // node_spec['ncores']
-            if nnodes * node_spec['ncores'] < ncores:
-                nnodes += 1
+            num_cores = self.n[0]
+            num_nodes = num_cores // node_spec['num_cores']
+            if num_nodes * node_spec['num_cores'] < num_cores:
+                num_nodes += 1
         else:
             raise ValueError(f'number of unknown quantity {self.n[1]}, not "nodes" or "cores"')
 
-        return nnodes, ncores
+        return num_nodes, num_cores
 
 
     def __repr__(self):

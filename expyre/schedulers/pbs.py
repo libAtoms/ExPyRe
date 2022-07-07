@@ -53,7 +53,7 @@ class PBS(Scheduler):
             list of header directives, not including walltime specific directive
         node_dict: dict
             properties related to node selection.
-            Fields: nnodes, ncores, ncores_per_node, ppn, id, max_time, partition
+            Fields: num_nodes, num_cores, num_cores_per_node, ppn, id, max_time, partition (and its synonum queue)
         no_default_header: bool, default False
             do not add normal header fields, only use what's passed in in "header"
 
@@ -74,9 +74,9 @@ class PBS(Scheduler):
         # sanitization outside to prevent this, but it'd have to be superset of everything needed
         # for every scheduler.
         node_dict['id'] = id.replace('=', 'EQ')
-
         node_dict['max_time'] = time_to_HMS(max_time)
         node_dict['partition'] = partition
+        node_dict['queue'] = partition
 
         header = header.copy()
         if not no_default_header:
@@ -98,7 +98,7 @@ class PBS(Scheduler):
                         'elif [ ! -z $PBS_NODEFILE ]; then',
                         '    export EXPYRE_NUM_CORES_PER_NODE=$(sort -k1 $PBS_NODEFILE | uniq -c | head -1 | awk \'{{print $1}}\')',
                         'else',
-                       f'    export EXPYRE_NUM_CORES_PER_NODE={node_dict["ncores_per_node"]}',
+                       f'    export EXPYRE_NUM_CORES_PER_NODE={node_dict["num_cores_per_node"]}',
                         'fi'
                        ] + Scheduler.node_dict_env_var_commands(node_dict)
         pre_commands = [l.format(**node_dict) for l in pre_commands]
