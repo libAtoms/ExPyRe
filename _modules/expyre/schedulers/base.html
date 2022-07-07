@@ -321,16 +321,16 @@ title="Fullscreen mode"
 
         <span class="n">pre_commands</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="c1"># either nnodes or ncores must be known at submit time, so compute each in terms of the other</span>
-        <span class="k">if</span> <span class="n">node_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nnodes&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;export EXPYRE_NUM_NODES=$(( </span><span class="si">{ncores}</span><span class="s1"> / $EXPYRE_NUM_CORES_PER_NODE ))&#39;</span><span class="p">)</span>
+        <span class="c1"># either num_nodes or num_cores must be known at submit time, so compute each in terms of the other</span>
+        <span class="k">if</span> <span class="n">node_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;num_nodes&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;export EXPYRE_NUM_NODES=$(( </span><span class="si">{num_cores}</span><span class="s1"> / $EXPYRE_NUM_CORES_PER_NODE ))&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;export EXPYRE_NUM_NODES=</span><span class="si">{nnodes}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;export EXPYRE_NUM_NODES=</span><span class="si">{num_nodes}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">node_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ncores&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;export EXPYRE_NUM_CORES=$(( </span><span class="si">{nnodes}</span><span class="s1"> * $EXPYRE_NUM_CORES_PER_NODE ))&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">node_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;num_cores&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;export EXPYRE_NUM_CORES=$(( </span><span class="si">{num_nodes}</span><span class="s1"> * $EXPYRE_NUM_CORES_PER_NODE ))&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;export EXPYRE_NUM_CORES=</span><span class="si">{ncores}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;export EXPYRE_NUM_CORES=</span><span class="si">{num_cores}</span><span class="s1">&#39;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">pre_commands</span></div></div>
 </pre></div>

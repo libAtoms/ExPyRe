@@ -47,7 +47,7 @@ And ExPyRe-modified script:
     xpr = ExPyRe('test_task', function=np.sum, args=[array_to_sum], kwargs={'axis': 1})
 
     # resources: run for max 1 hour on 1 node, on a regular partition node
-    res = {'max_time': '1h', 'n': (1, 'nodes'), 'partitions': 'regular'}
+    res = {'max_time': '1h', 'num_nodes': 1, 'partitions': 'regular'}
 
     # submit job
     xpr.start(resources=res, system_name='remote')
@@ -69,9 +69,9 @@ In addition, the following (modified appropriately) should be placed at ``~/.exp
     { "systems": {
         "remtote": { "host": 'my-cluster',
                     "scheduler": "sge",
-                    "header": ["#$ -pe smp {ncores_per_node}"],
-                    "partitions": {"regular" : {"ncores": 16, "max_time" : "168h", "max_mem": "50GB"},
-                                "large-mem" : {"ncores": 32, "max_time": "168h", "max_mem": "200GB"},
+                    "header": ["#$ -pe smp {num_cores_per_node}"],
+                    "partitions": {"regular" : {"num_cores": 16, "max_time" : "168h", "max_mem": "50GB"},
+                                "large-mem" : {"num_cores": 32, "max_time": "168h", "max_mem": "200GB"},
             }
         }
     }

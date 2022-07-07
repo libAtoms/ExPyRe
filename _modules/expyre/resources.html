@@ -303,9 +303,9 @@ title="Fullscreen mode"
 <span class="sd">        node_dict: dict</span>
 <span class="sd">            various quantities of node</span>
 
-<span class="sd">            * nnodes: int, total number of nodes needed</span>
-<span class="sd">            * ncores: int, total number of cores needed</span>
-<span class="sd">            * ncores_per_node: int, number of cores per node for selected nodes</span>
+<span class="sd">            * num_nodes: int, total number of nodes needed</span>
+<span class="sd">            * num_cores: int, total number of cores needed</span>
+<span class="sd">            * num_cores_per_node: int, number of cores per node for selected nodes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">selected_partitions</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -313,7 +313,7 @@ title="Fullscreen mode"
             <span class="n">exact_fit</span><span class="o">=</span><span class="kc">False</span>
 
         <span class="k">for</span> <span class="n">partition</span><span class="p">,</span> <span class="n">node_spec</span> <span class="ow">in</span> <span class="n">partitions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">nnodes</span><span class="p">,</span> <span class="n">ncores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_nnodes_ncores</span><span class="p">(</span><span class="n">node_spec</span><span class="p">)</span>
+            <span class="n">num_nodes</span><span class="p">,</span> <span class="n">num_cores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_num_nodes_num_cores</span><span class="p">(</span><span class="n">node_spec</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">([</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;^&#39;</span><span class="o">+</span><span class="n">nt_re</span><span class="o">+</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="n">partition</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">nt_re</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitions</span><span class="p">]):</span>
                 <span class="c1"># wrong node type</span>
@@ -323,13 +323,13 @@ title="Fullscreen mode"
                 <span class="c1"># too much time</span>
                 <span class="k">continue</span>
 
-            <span class="k">if</span> <span class="n">exact_fit</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;cores&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">exact_fit</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;cores&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="c1"># wrong number of cores</span>
                 <span class="k">continue</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_mem&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">if</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;per_core&#39;</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_mem&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">]))</span> <span class="ow">or</span>
-                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;tot&#39;</span>  <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_mem&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">nnodes</span><span class="p">))):</span>
+                <span class="k">if</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;per_core&#39;</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_mem&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]))</span> <span class="ow">or</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;tot&#39;</span>  <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_mem&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_nodes</span><span class="p">))):</span>
                     <span class="c1"># too much memory</span>
                     <span class="k">continue</span>
 
@@ -343,8 +343,8 @@ title="Fullscreen mode"
             <span class="n">excess_cores</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">nt</span> <span class="ow">in</span> <span class="n">selected_partitions</span><span class="p">:</span>
                 <span class="n">node_spec</span> <span class="o">=</span> <span class="n">partitions</span><span class="p">[</span><span class="n">nt</span><span class="p">]</span>
-                <span class="n">_</span><span class="p">,</span> <span class="n">ncores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_nnodes_ncores</span><span class="p">(</span><span class="n">node_spec</span><span class="p">)</span>
-                <span class="n">excess_cores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">ncores</span> <span class="o">%</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">])</span> <span class="o">%</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">])</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">num_cores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_num_nodes_num_cores</span><span class="p">(</span><span class="n">node_spec</span><span class="p">)</span>
+                <span class="n">excess_cores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">num_cores</span> <span class="o">%</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">])</span> <span class="o">%</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">])</span>
 
             <span class="k">try</span><span class="p">:</span>
                 <span class="c1"># look for first one that matches exactly</span>
@@ -357,23 +357,23 @@ title="Fullscreen mode"
 
         <span class="n">partition</span> <span class="o">=</span> <span class="n">selected_partitions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="n">nnodes</span><span class="p">,</span> <span class="n">ncores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_nnodes_ncores</span><span class="p">(</span><span class="n">partitions</span><span class="p">[</span><span class="n">partition</span><span class="p">])</span>
+        <span class="n">num_nodes</span><span class="p">,</span> <span class="n">num_cores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_num_nodes_num_cores</span><span class="p">(</span><span class="n">partitions</span><span class="p">[</span><span class="n">partition</span><span class="p">])</span>
 
         <span class="k">if</span> <span class="n">partial_node</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">ncores</span> <span class="o">&lt;=</span> <span class="n">partitions</span><span class="p">[</span><span class="n">partition</span><span class="p">][</span><span class="s1">&#39;ncores&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">num_cores</span> <span class="o">&lt;=</span> <span class="n">partitions</span><span class="p">[</span><span class="n">partition</span><span class="p">][</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]:</span>
                 <span class="c1"># partial node</span>
-                <span class="n">ncores_per_node</span> <span class="o">=</span> <span class="n">ncores</span>
+                <span class="n">num_cores_per_node</span> <span class="o">=</span> <span class="n">num_cores</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;partial_node only supported when it can be satisfied by 1 node&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># entire nodes</span>
-            <span class="n">ncores_per_node</span> <span class="o">=</span> <span class="n">partitions</span><span class="p">[</span><span class="n">partition</span><span class="p">][</span><span class="s1">&#39;ncores&#39;</span><span class="p">]</span>
-            <span class="n">ncores</span> <span class="o">=</span> <span class="n">nnodes</span> <span class="o">*</span> <span class="n">ncores_per_node</span>
+            <span class="n">num_cores_per_node</span> <span class="o">=</span> <span class="n">partitions</span><span class="p">[</span><span class="n">partition</span><span class="p">][</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span>
+            <span class="n">num_cores</span> <span class="o">=</span> <span class="n">num_nodes</span> <span class="o">*</span> <span class="n">num_cores_per_node</span>
 
-        <span class="k">return</span> <span class="n">partition</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;nnodes&#39;</span><span class="p">:</span> <span class="n">nnodes</span><span class="p">,</span> <span class="s1">&#39;ncores&#39;</span><span class="p">:</span> <span class="n">ncores</span><span class="p">,</span> <span class="s1">&#39;ncores_per_node&#39;</span><span class="p">:</span> <span class="n">ncores_per_node</span><span class="p">}</span></div>
+        <span class="k">return</span> <span class="n">partition</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;num_nodes&#39;</span><span class="p">:</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="s1">&#39;num_cores&#39;</span><span class="p">:</span> <span class="n">num_cores</span><span class="p">,</span> <span class="s1">&#39;num_cores_per_node&#39;</span><span class="p">:</span> <span class="n">num_cores_per_node</span><span class="p">}</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_get_nnodes_ncores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_spec</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_get_num_nodes_num_cores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_spec</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; get totals numbers of nodes and cores for this task</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -382,22 +382,22 @@ title="Fullscreen mode"
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        nnodes, ncores: total number of sufficient nodes and cores</span>
+<span class="sd">        num_nodes, num_cores: total number of sufficient nodes and cores</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;nodes&#39;</span><span class="p">:</span>
             <span class="c1"># fill up requested # of nodes</span>
-            <span class="n">nnodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">ncores</span> <span class="o">=</span> <span class="n">nnodes</span> <span class="o">*</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">]</span>
+            <span class="n">num_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">num_cores</span> <span class="o">=</span> <span class="n">num_nodes</span> <span class="o">*</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;cores&#39;</span><span class="p">:</span>
             <span class="c1"># determine how many nodes are necessary</span>
-            <span class="n">ncores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">nnodes</span> <span class="o">=</span> <span class="n">ncores</span> <span class="o">//</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">nnodes</span> <span class="o">*</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;ncores&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ncores</span><span class="p">:</span>
-                <span class="n">nnodes</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">num_cores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">num_nodes</span> <span class="o">=</span> <span class="n">num_cores</span> <span class="o">//</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">num_nodes</span> <span class="o">*</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">num_cores</span><span class="p">:</span>
+                <span class="n">num_nodes</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;number of unknown quantity </span><span class="si">{self.n[1]}</span><span class="s1">, not &quot;nodes&quot; or &quot;cores&quot;&#39;</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">nnodes</span><span class="p">,</span> <span class="n">ncores</span>
+        <span class="k">return</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">num_cores</span>
 
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

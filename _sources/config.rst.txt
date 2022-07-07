@@ -11,47 +11,47 @@ File format
 **********************************
 
 
-The top level structure is a dict with one ``"systems"`` key with a dict value, containing
+The top level structure is a single dict with one ``"systems"`` key with a dict value, containing
 one key-value pair for each system. The key is the name of the system (used to select
 the system when evaluating the function).  See ``expyre.System`` docstring for full list. The value is a dict with the following keys:
 
 - ``"host"``: string hostname, with optional ``username@`, or ``null`` for localhost without ssh.
 - ``"scheduler"``: string indicating type of scheduler, currently ``"slurm"``, ``"pbs"`` or ``"sge"``
 - ``"commands"``: optional list(str) with commands to run at beginning of every script on system, usually for things that set up the runtime such as environment modules (e.g. ``module load vasp``)
-- ``"header"``: list(str) queuing system header lines.  Actual header is created by applying string formatting, i.e.  ``str.format(**kwargs)``, replacing substrings such as ``{nnodes}``.
+- ``"header"``: list(str) queuing system header lines.  Actual header is created by applying string formatting, i.e.  ``str.format(**node_dict)``, replacing substrings such as ``{num_nodes}``.
 - ``rundir``: str, optional, default ``"run_expyre"``. Place for all remote files and remote execution. 
-- ``no_default_header``: bool, optional, default False``. Do not put default lines (such as ``#$ -cwd`` or automatically setting the job name) to the job submission script. 
-
-Available keys in ``kwargs`` which are normally used in this template:
-
-- ``"nnodes"``: int total number of nodes
-- ``"ncores_per_node"``: int number of cores per node
-- ``"tot_ncores"``: int total number of cores
-
-Note that if ``partial_node=True`` is passed to ``find_nodes`` and the total number of cores is less
-than the number per node, ``tot_ncores`` and ``ncores_per_node`` are *not* rounded up to an entire node.
-
-Additional keys that are not normally used for the header (having to do with two level parallelism where each task may be allocated more than 1 node):
-
-- ``"tot_ntasks"``: int total number of tasks (``tot_ncores / ncores_per_task`` or ``nnodes * ntasks_per_node``)
-- ``"ncores_per_task"``: int cores per task (specified in resources)
-- ``"ntasks_per_node"``: int tasks per node (``ncores_per_node / ncores_per_task``)
-
-Additional keys that are used by the internally generated parts of the header:
-
-- ``"id"``: str (supposed to be guaranteed to be unique among current jobs within project) job id
-- ``"partition"``: str partition/queue/node type
-- ``"max_time_HMS"``: str max runtime in ``hours:minutes:seconds`` format
-- ``"partitions"``: dict with partitions/queues/node-type names as keys and dict of properties as values.
-
-Property dict includes
-
-- ``"ncores"``: int number of cores per node
-- ``"max_time"``: max time, int for seconds, str for ``"<N>[smhd]"`` (case insensitive) or ``"<dd>-<hh>:<mm>:<ss>"``. Leading parts are optional, so N1:N2 is N1 minutes + N2 seconds.
-- ``"max_mem"``: max mem per node, int for kB, str for ``"<N>[kmgt]b?"`` (case insensitive).
+- ``no_default_header``: bool, optional, default ``False``. Do not put default lines (such as ``#$ -cwd`` or automatically setting the job name) to the job submission script. 
 - ``"remsh_cmd"``: optional string remote shell command, default ``"ssh"``
 - ``"no_default_header"``: bool, default false disable automatic setting of queuing system header for job name, partition/queue, max runtime, and stdout and stderr files
 - ``"rundir"``: string for a path where the remote jobs should be run
+- ``"partitions"`` or ``"queues"``: dict with partitions/queues/node-type names as keys and dict of node properties as values.
+
+===========================
+Node property dict includes
+===========================
+
+- ``"num_cores"``: int number of cores per node
+- ``"max_time"``: max time, int for seconds, str for ``"<N>[smhd]"`` (case insensitive) or ``"<dd>-<hh>:<mm>:<ss>"``. Leading parts are optional, so N1:N2 is N1 minutes + N2 seconds.
+- ``"max_mem"``: max mem per node, int for kB, str for ``"<N>[kmgt]b?"`` (case insensitive).
+
+==========================
+format() keys used in header
+==========================
+
+Available keys in ``node_dict`` which are normally used in this template:
+
+- ``"num_nodes"``: int total number of nodes
+- ``"num_cores"``: int total number of cores
+- ``"num_cores_per_node"``: int number of cores per node
+
+Note that if ``partial_node=True`` is passed to ``find_nodes`` and the total number of cores is less
+than the number per node, ``num_cores`` and ``num_cores_per_node`` are *not* rounded up to an entire node.
+
+Additional keys that are generally only used by the internally generated parts of the header:
+
+- ``"id"``: str (supposed to be guaranteed to be unique among current jobs within project) job id
+- ``"partition"`` and ``"queue"``: str partition/queue/node type
+- ``"max_time_HMS"``: str max runtime in ``hours:minutes:seconds`` format
 
 
 **********************************************
@@ -83,14 +83,14 @@ config.json example
             "remsh_cmd": "/usr/bin/ssh",
             "scheduler": "slurm",
             "commands": [ "module purge", "module load python/3 compilers/gnu lapack ase quip vasp" ],
-            "header": ["#SBATCH --nodes={nnodes}",
-                    "#SBATCH --ntasks={tot_ncores}",
-                    "#SBATCH --ntasks-per-node={ncores_per_node}"],
-            "partitions": { "node16_old,node16_new": { "ncores" : 16, "max_time" : null, "max_mem" : "60GB" },
-                            "node36":                { "ncores" : 36, "max_time" : null, "max_mem" : "180GB" },
-                            "node32":                { "ncores" : 32, "max_time" : null, "max_mem" : "180GB" },
-                            "node56_bigmem":         { "ncores" : 56, "max_time" : "48:00:00", "max_mem" : "1500GB" },
-                            "node72_bigmem":         { "ncores" : 72, "max_time" : "48h", "max_mem" : "1500GB" }
+            "header": ["#SBATCH --nodes={num_nodes}",
+                       "#SBATCH --ntasks={num_cores}",
+                       "#SBATCH --ntasks-per-node={num_cores_per_node}"],
+            "partitions": { "node16_old,node16_new": { "num_cores" : 16, "max_time" : null, "max_mem" : "60GB" },
+                            "node36":                { "num_cores" : 36, "max_time" : null, "max_mem" : "180GB" },
+                            "node32":                { "num_cores" : 32, "max_time" : null, "max_mem" : "180GB" },
+                            "node56_bigmem":         { "num_cores" : 56, "max_time" : "48:00:00", "max_mem" : "1500GB" },
+                            "node72_bigmem":         { "num_cores" : 72, "max_time" : "48h", "max_mem" : "1500GB" }
             }
         }
     }
