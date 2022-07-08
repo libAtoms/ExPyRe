@@ -29,7 +29,7 @@ if [ $? != 0 ]; then
 fi
 echo $l | grep -q ' 26 passed'
 if [ $? != 0 ]; then
-    echo "Unexpected number passed not 24 '$l'" 1>&2
+    echo "Unexpected number passed not 26 '$l'" 1>&2
     exit 1
 fi
 echo $l | grep -q 'xfailed'

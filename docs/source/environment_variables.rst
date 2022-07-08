@@ -16,12 +16,9 @@ At expyre runtime
 Available in submitted job scripts
 ================================================================
 
-- ``EXPYRE_NNODES``
-- ``EXPYRE_TOT_NCORES``
-- ``EXPYRE_TOT_NTASKS``
-- ``EXPYRE_NCORES_PER_NODE``
-- ``EXPYRE_NTASKS_PER_NODE``
-- ``EXPYRE_NCORES_PER_TASK``
+- ``EXPYRE_NUM_NODES``
+- ``EXPYRE_NUM_CORES``
+- ``EXPYRE_NUM_CORES_PER_NODE``
 
 Only for pytest
 ================================================================

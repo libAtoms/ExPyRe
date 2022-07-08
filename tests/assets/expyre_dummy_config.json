@@ -3,26 +3,26 @@
     "_sys_default": { "host": null,
         "scheduler": "slurm",
         "commands": [ "module purge", "module load python vasp" ],
-        "header": ["#SBATCH --nodes={nnodes}",
-                   "#SBATCH --ntasks={ncores}",
-                   "#SBATCH --ntasks-per-node={ncores_per_node}"],
-        "partitions": { "node16_1,node16_2":  { "ncores" : 16, "max_time" : null, "max_mem" : "60GB" },
-                        "node36":             { "ncores" : 36, "max_time" : null, "max_mem" : "180GB" },
-                        "node32":             { "ncores" : 32, "max_time" : null, "max_mem" : "180GB" },
-                        "node_bigmem":        { "ncores" : 56, "max_time" : null, "max_mem" : "1500GB" },
-                        "node_bigmem_72":     { "ncores" : 72, "max_time" : null, "max_mem" : "1500GB" }
+        "header": ["#SBATCH --nodes={num_nodes}",
+                   "#SBATCH --ntasks={num_cores}",
+                   "#SBATCH --ntasks-per-node={num_cores_per_node}"],
+        "partitions": { "node16_1,node16_2":  { "num_cores" : 16, "max_time" : null, "max_mem" : "60GB" },
+                        "node36":             { "num_cores" : 36, "max_time" : null, "max_mem" : "180GB" },
+                        "node32":             { "num_cores" : 32, "max_time" : null, "max_mem" : "180GB" },
+                        "node_bigmem":        { "num_cores" : 56, "max_time" : null, "max_mem" : "1500GB" },
+                        "node_bigmem_72":     { "num_cores" : 72, "max_time" : null, "max_mem" : "1500GB" }
         }
     },
     "_sys_timelimited": { "host": null,
         "scheduler": "slurm",
-        "partitions": { "debug":    { "ncores" : 40, "max_time" : "1h", "max_mem" : "120GB" },
-                        "standard": { "ncores" : 40, "max_time" : "168h", "max_mem" : "120GB" }
+        "partitions": { "debug":    { "num_cores" : 40, "max_time" : "1h", "max_mem" : "120GB" },
+                        "standard": { "num_cores" : 40, "max_time" : "168h", "max_mem" : "120GB" }
         }
     },
     "_sys_queues": { "host": null,
         "scheduler": "slurm",
-        "queues": { "debug":    { "ncores" : 40, "max_time" : "1h", "max_mem" : "120GB" },
-                    "standard": { "ncores" : 40, "max_time" : "168h", "max_mem" : "120GB" }
+        "queues": { "debug":    { "num_cores" : 40, "max_time" : "1h", "max_mem" : "120GB" },
+                    "standard": { "num_cores" : 40, "max_time" : "168h", "max_mem" : "120GB" }
         }
     }
 
