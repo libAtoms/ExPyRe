@@ -1,3 +1,5 @@
+import os
+import json
 import re
 
 from ..subprocess import subprocess_run
@@ -89,6 +91,8 @@ class PBS(Scheduler):
             header.append('#PBS -e job.{id}.stderr')
             header.append('#PBS -S /bin/bash')
             header.append('#PBS -r n')
+
+        header.extend(json.loads(os.environ.get("EXPYRE_HEADER_EXTRA", "[]")))
 
         # set EXPYRE_NUM_CORES_PER_NODE using scheduler-specific info, to support jobs
         # that do not know exact node type at submit time.  All related quantities
