@@ -1,3 +1,5 @@
+import os
+import json
 import re
 
 from ..subprocess import subprocess_run
@@ -65,6 +67,8 @@ class Slurm(Scheduler):
             header.append('#SBATCH --time={max_time}')
             header.append('#SBATCH --output=job.{id}.stdout')
             header.append('#SBATCH --error=job.{id}.stderr')
+
+        header.extend(json.loads(os.environ.get("EXPYRE_HEADER_EXTRA", "[]")))
 
         # set EXPYRE_NUM_CORES_PER_NODE using scheduler-specific info, to support jobs
         # that do not know exact node type at submit time.  All related quantities

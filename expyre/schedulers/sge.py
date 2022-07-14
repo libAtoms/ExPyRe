@@ -1,3 +1,5 @@
+import os
+import json
 import re
 
 from ..subprocess import subprocess_run
@@ -70,6 +72,8 @@ class SGE(Scheduler):
             header.append('#$ -S /bin/bash')
             header.append('#$ -r n')
             header.append('#$ -cwd')
+
+        header.extend(json.loads(os.environ.get("EXPYRE_HEADER_EXTRA", "[]")))
 
         # set EXPYRE_NUM_CORES_PER_NODE using scheduler-specific info, to support jobs
         # that do not know exact node type at submit time.  All related quantities
