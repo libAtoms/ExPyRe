@@ -231,7 +231,9 @@ title="Fullscreen mode"
               <div>
                 
   <h1>Source code for expyre.schedulers.slurm</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">re</span>
 
 <span class="kn">from</span> <span class="nn">..subprocess</span> <span class="k">import</span> <span class="n">subprocess_run</span>
 <span class="kn">from</span> <span class="nn">..units</span> <span class="k">import</span> <span class="n">time_to_HMS</span>
@@ -298,6 +300,8 @@ title="Fullscreen mode"
             <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#SBATCH --time=</span><span class="si">{max_time}</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#SBATCH --output=job.</span><span class="si">{id}</span><span class="s1">.stdout&#39;</span><span class="p">)</span>
             <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#SBATCH --error=job.</span><span class="si">{id}</span><span class="s1">.stderr&#39;</span><span class="p">)</span>
+
+        <span class="n">header</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EXPYRE_HEADER_EXTRA&quot;</span><span class="p">,</span> <span class="s2">&quot;[]&quot;</span><span class="p">)))</span>
 
         <span class="c1"># set EXPYRE_NUM_CORES_PER_NODE using scheduler-specific info, to support jobs</span>
         <span class="c1"># that do not know exact node type at submit time.  All related quantities</span>
