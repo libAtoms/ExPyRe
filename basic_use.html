@@ -20,7 +20,7 @@
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -30,7 +30,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Resources" href="resources.html" />
@@ -293,7 +293,7 @@ title="Print to PDF"
 </ol>
 <p>For ExPyRe to automatically manage these steps, one needs to</p>
 <ol class="arabic simple">
-<li><p>Specify hpc’s queueing system in <code class="docutils literal notranslate"><span class="pre">conf.json</span></code> (once ever),</p></li>
+<li><p>Specify hpc’s queueing system in <code class="docutils literal notranslate"><span class="pre">config.json</span></code> (once ever),</p></li>
 <li><p>Wrap the resources-heavy part in ExPyRe functions (once per script),</p></li>
 <li><p>Clean the files with <code class="docutils literal notranslate"><span class="pre">xpr</span></code> command line utility function (once after running the script).</p></li>
 </ol>
@@ -345,7 +345,7 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>First, we create an ExPyRe object (<code class="docutils literal notranslate"><span class="pre">xpr</span></code>). Instead of calling a function directly, we need to specify the function, its arguments and keyword arguments separately for them to be pickled and stored in the local stage directory (<code class="docutils literal notranslate"><span class="pre">~/.expyre/...</span></code> by default). Any files used by the function and some utility files are also stored there. This step also makes an entry in the jobs database (also at <code class="docutils literal notranslate"><span class="pre">~/.expyre/jobs.db</span></code>), in preparation to tracking the remote jobs, so that the parent script can be restarted if interrupted.</p>
-<p><code class="docutils literal notranslate"><span class="pre">xpr.start()</span></code> starts the job on the remote machine. It copies files from the local stage directory to remote (<code class="docutils literal notranslate"><span class="pre">~/run_expyre/</span></code>, by default) via a passwordless ssh command to <code class="docutils literal notranslate"><span class="pre">my-cluster</span></code> (i.e. <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">my-cluster</span></code> from “local” computer should work and login to the “remote” machine). The partition (or queue) is picked from the ones defined in <code class="docutils literal notranslate"><span class="pre">~/.expryre/config.json</span></code>, based on the resources specified in <code class="docutils literal notranslate"><span class="pre">res</span></code>. Scheduler-specific submission script is prepared and submitted on the “remote” computer and the status and details about the remote job are updated in the “local” <code class="docutils literal notranslate"><span class="pre">jobs.db</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">xpr.start()</span></code> starts the job on the remote machine. It copies files from the local stage directory to remote (<code class="docutils literal notranslate"><span class="pre">~/run_expyre/</span></code>, by default) via a passwordless ssh command to <code class="docutils literal notranslate"><span class="pre">my-cluster</span></code> (i.e. <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">my-cluster</span></code> from “local” computer should work and login to the “remote” machine). The partition (or queue) is picked from the ones defined in <code class="docutils literal notranslate"><span class="pre">~/.expyre/config.json</span></code>, based on the resources specified in <code class="docutils literal notranslate"><span class="pre">res</span></code>. Scheduler-specific submission script is prepared and submitted on the “remote” computer and the status and details about the remote job are updated in the “local” <code class="docutils literal notranslate"><span class="pre">jobs.db</span></code>.</p>
 <p>Based on all above, the Sun Grid Engine submission script has the following header:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
 <span class="c1">#$ -pe smp 16</span>

@@ -20,7 +20,7 @@
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -30,7 +30,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Scheduler Configuration file" href="config.html" />
@@ -280,7 +280,7 @@ title="Print to PDF"
                 
   <div class="section" id="resources">
 <span id="id1"></span><h1>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h1>
-<p>Argument for <code class="docutils literal notranslate"><span class="pre">ExPyRe.run()</span></code>. Specifies the resources to be allocated for each remotely submitted job. The fomrat is:</p>
+<p>Argument for <code class="docutils literal notranslate"><span class="pre">ExPyRe.start()</span></code>. Specifies the resources to be allocated for each remotely submitted job. The fomrat is:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;max_time&quot;</span></code>: maximum runtime. <code class="docutils literal notranslate"><span class="pre">int</span></code> for seconds, <code class="docutils literal notranslate"><span class="pre">str</span></code> for “&lt;N&gt;[smhd]” (case insensitive) or <code class="docutils literal notranslate"><span class="pre">&lt;dd&gt;-&lt;hh&gt;:&lt;mm&gt;:&lt;ss&gt;</span></code> (with leading parts optional, so N1:N2 is N1 minutes + N2 seconds)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;num_nodes&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> number of nodes (mutually exclusive with <code class="docutils literal notranslate"><span class="pre">num_cores</span></code>)</p></li>
@@ -292,7 +292,7 @@ title="Print to PDF"
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;max_mem_tot&quot;</span></code>: max memory for entire job. <code class="docutils literal notranslate"><span class="pre">int</span></code> for kB, <code class="docutils literal notranslate"><span class="pre">str</span></code> for “&lt;N&gt;[kmgt]b?” (case insensitive) (mutually exclusive with <code class="docutils literal notranslate"><span class="pre">max_mem_per_core</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;max_mem_per_core&quot;</span></code>: max memory per core. <code class="docutils literal notranslate"><span class="pre">int</span></code> for kB, <code class="docutils literal notranslate"><span class="pre">str</span></code> for “&lt;N&gt;[kmgt]b?” (case insensitive). (mutually exclusive with <code class="docutils literal notranslate"><span class="pre">max_mem_tot</span></code>)</p></li>
 </ul>
-<p>For clusters that do not operate in node-exclusive way (multiple jobs with a handful of cores each may run on the same node) it might be useful to set <code class="docutils literal notranslate"><span class="pre">partial_node=True</span></code> in <code class="docutils literal notranslate"><span class="pre">Expyre.run()</span></code>. This allows to select partitions that wouldn’t have all their cores filled by the submitted job.</p>
+<p>For clusters that do not operate in node-exclusive way (multiple jobs with a handful of cores each may run on the same node) it might be useful to set <code class="docutils literal notranslate"><span class="pre">partial_node=True</span></code> in <code class="docutils literal notranslate"><span class="pre">Expyre.start()</span></code>. This allows to select partitions that wouldn’t have all their cores filled by the submitted job.</p>
 </div>
 
 

@@ -15,7 +15,7 @@ An example of where ExPyRe might be useful is a resourse-heavy step in a Python 
 
 For ExPyRe to automatically manage these steps, one needs to
 
-1. Specify hpc's queueing system in ``conf.json`` (once ever), 
+1. Specify hpc's queueing system in ``config.json`` (once ever), 
 2. Wrap the resources-heavy part in ExPyRe functions (once per script), 
 3. Clean the files with ``xpr`` command line utility function (once after running the script). 
 
@@ -78,7 +78,7 @@ In addition, the following (modified appropriately) should be placed at ``~/.exp
 
 First, we create an ExPyRe object (``xpr``). Instead of calling a function directly, we need to specify the function, its arguments and keyword arguments separately for them to be pickled and stored in the local stage directory (``~/.expyre/...`` by default). Any files used by the function and some utility files are also stored there. This step also makes an entry in the jobs database (also at ``~/.expyre/jobs.db``), in preparation to tracking the remote jobs, so that the parent script can be restarted if interrupted. 
 
-``xpr.start()`` starts the job on the remote machine. It copies files from the local stage directory to remote (``~/run_expyre/``, by default) via a passwordless ssh command to ``my-cluster`` (i.e. ``ssh my-cluster`` from "local" computer should work and login to the "remote" machine). The partition (or queue) is picked from the ones defined in ``~/.expryre/config.json``, based on the resources specified in ``res``. Scheduler-specific submission script is prepared and submitted on the "remote" computer and the status and details about the remote job are updated in the "local" ``jobs.db``. 
+``xpr.start()`` starts the job on the remote machine. It copies files from the local stage directory to remote (``~/run_expyre/``, by default) via a passwordless ssh command to ``my-cluster`` (i.e. ``ssh my-cluster`` from "local" computer should work and login to the "remote" machine). The partition (or queue) is picked from the ones defined in ``~/.expyre/config.json``, based on the resources specified in ``res``. Scheduler-specific submission script is prepared and submitted on the "remote" computer and the status and details about the remote job are updated in the "local" ``jobs.db``. 
 
 Based on all above, the Sun Grid Engine submission script has the following header: 
 
