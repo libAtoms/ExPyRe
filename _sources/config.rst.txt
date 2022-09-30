@@ -72,6 +72,58 @@ each system each key-value pair is overwritten, so you cannot directly disable o
 the entire ``"partitions"`` dict.
 
 
+**********************************
+Default header lines
+**********************************
+
+Below are the default headder lines added to every submission script. 
+Values between curly brackets get filled in from `Resources` dictionary.
+
+==================================
+Slurm
+==================================
+
+.. code-block:: bash
+
+    #SBATCH --job-name={id}
+    #SBATCH --partition={partition}
+    #SBATCH --time={max_time}
+    #SBATCH --output=job.{id}.stdout
+    #SBATCH --error=job.{id}.stderr
+
+
+==================================
+Sun Grid Engine
+==================================
+
+.. code-block:: bash
+
+    #$ -N N_{id}
+    #$ -q {partition}
+    #$ -l h_rt={max_time}
+    #$ -o job.{id}.stdout
+    #$ -e job.{id}.stderr
+    #$ -S /bin/bash
+    #$ -r n
+    #$ -cwd
+
+
+==================================
+PBS
+==================================
+
+.. code-block:: bash
+
+    #PBS -N N_{id}
+    #PBS -q {partition}
+    #PBS -l walltime={max_time}
+    #PBS -o job.{id}.stdout
+    #PBS -e job.{id}.stderr
+    #PBS -S /bin/bash
+    #PBS -r n
+
+
+
 ***************************
 config.json example
 ***************************

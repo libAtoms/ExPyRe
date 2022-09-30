@@ -30,6 +30,7 @@
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -235,11 +236,11 @@ title="Fullscreen mode"
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
-<span class="kn">from</span> <span class="nn">..subprocess</span> <span class="k">import</span> <span class="n">subprocess_run</span>
-<span class="kn">from</span> <span class="nn">..units</span> <span class="k">import</span> <span class="n">time_to_HMS</span>
-<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">..subprocess</span> <span class="kn">import</span> <span class="n">subprocess_run</span>
+<span class="kn">from</span> <span class="nn">..units</span> <span class="kn">import</span> <span class="n">time_to_HMS</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">util</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">Scheduler</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Scheduler</span>
 
 
 <div class="viewcode-block" id="Slurm"><a class="viewcode-back" href="../../../expyre.schedulers.html#expyre.schedulers.slurm.Slurm">[docs]</a><span class="k">class</span> <span class="nc">Slurm</span><span class="p">(</span><span class="n">Scheduler</span><span class="p">):</span>
@@ -252,7 +253,7 @@ title="Fullscreen mode"
 <span class="sd">    remsh_cmd: str, default EXPYRE_RSH env var or &#39;ssh&#39;</span>
 <span class="sd">        remote shell command to use</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;scontrol&#39;</span><span class="p">,</span> <span class="s1">&#39;hold&#39;</span><span class="p">]</span>
@@ -312,16 +313,16 @@ title="Fullscreen mode"
                         <span class="s1">&#39;    fi&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;    export EXPYRE_NUM_CORES_PER_NODE=$(echo $SLURM_TASKS_PER_NODE | sed &quot;s/(.*//&quot;)&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;else&#39;</span><span class="p">,</span>
-                       <span class="n">f</span><span class="s1">&#39;    export EXPYRE_NUM_CORES_PER_NODE=</span><span class="si">{node_dict[&quot;num_cores_per_node&quot;]}</span><span class="s1">&#39;</span><span class="p">,</span>
+                       <span class="sa">f</span><span class="s1">&#39;    export EXPYRE_NUM_CORES_PER_NODE=</span><span class="si">{</span><span class="n">node_dict</span><span class="p">[</span><span class="s2">&quot;num_cores_per_node&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;fi&#39;</span>
                        <span class="p">]</span> <span class="o">+</span> <span class="n">Scheduler</span><span class="o">.</span><span class="n">node_dict_env_var_commands</span><span class="p">(</span><span class="n">node_dict</span><span class="p">)</span>
         <span class="n">pre_commands</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">node_dict</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">pre_commands</span><span class="p">]</span>
 
         <span class="c1"># add &quot;cd remote_dir&quot; before any other command</span>
         <span class="k">if</span> <span class="n">remote_dir</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
-            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;cd </span><span class="si">{remote_dir}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cd </span><span class="si">{</span><span class="n">remote_dir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;cd ${{HOME}}/</span><span class="si">{remote_dir}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">pre_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cd $</span><span class="se">{{</span><span class="s1">HOME</span><span class="se">}}</span><span class="s1">/</span><span class="si">{</span><span class="n">remote_dir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
         <span class="n">commands</span> <span class="o">=</span> <span class="n">pre_commands</span> <span class="o">+</span> <span class="n">commands</span>
 
@@ -379,7 +380,7 @@ title="Fullscreen mode"
             <span class="k">try</span><span class="p">:</span>
                 <span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">reason</span><span class="p">)</span> <span class="o">=</span> <span class="n">id_status_reason</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;failed to parse id_status_reason </span><span class="si">{id_status_reason}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;failed to parse id_status_reason </span><span class="si">{</span><span class="n">id_status_reason</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;RUNNING&#39;</span><span class="p">,</span> <span class="s1">&#39;COMPLETING&#39;</span><span class="p">]:</span>
                 <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;running&#39;</span>

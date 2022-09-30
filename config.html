@@ -30,6 +30,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -299,6 +300,28 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#default-header-lines">
+   Default header lines
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slurm">
+     Slurm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sun-grid-engine">
+     Sun Grid Engine
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pbs">
+     PBS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#config-json-example">
    config.json example
   </a>
@@ -343,6 +366,28 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#configuration-file-location-and-project-scope">
    Configuration file location and project scope
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#default-header-lines">
+   Default header lines
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slurm">
+     Slurm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sun-grid-engine">
+     Sun Grid Engine
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pbs">
+     PBS
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#config-json-example">
@@ -419,24 +464,64 @@ system).  New systems are added, and a system dict value of <code class="docutil
 each system each key-value pair is overwritten, so you cannot directly disable one partition, only redefine
 the entire <code class="docutils literal notranslate"><span class="pre">&quot;partitions&quot;</span></code> dict.</p>
 </div>
+<div class="section" id="default-header-lines">
+<h2>Default header lines<a class="headerlink" href="#default-header-lines" title="Permalink to this heading">#</a></h2>
+<p>Below are the default headder lines added to every submission script.
+Values between curly brackets get filled in from <cite>Resources</cite> dictionary.</p>
+<div class="section" id="slurm">
+<h3>Slurm<a class="headerlink" href="#slurm" title="Permalink to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --job-name={id}</span>
+<span class="c1">#SBATCH --partition={partition}</span>
+<span class="c1">#SBATCH --time={max_time}</span>
+<span class="c1">#SBATCH --output=job.{id}.stdout</span>
+<span class="c1">#SBATCH --error=job.{id}.stderr</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sun-grid-engine">
+<h3>Sun Grid Engine<a class="headerlink" href="#sun-grid-engine" title="Permalink to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#$ -N N_{id}</span>
+<span class="c1">#$ -q {partition}</span>
+<span class="c1">#$ -l h_rt={max_time}</span>
+<span class="c1">#$ -o job.{id}.stdout</span>
+<span class="c1">#$ -e job.{id}.stderr</span>
+<span class="c1">#$ -S /bin/bash</span>
+<span class="c1">#$ -r n</span>
+<span class="c1">#$ -cwd</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pbs">
+<h3>PBS<a class="headerlink" href="#pbs" title="Permalink to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#PBS -N N_{id}</span>
+<span class="c1">#PBS -q {partition}</span>
+<span class="c1">#PBS -l walltime={max_time}</span>
+<span class="c1">#PBS -o job.{id}.stdout</span>
+<span class="c1">#PBS -e job.{id}.stderr</span>
+<span class="c1">#PBS -S /bin/bash</span>
+<span class="c1">#PBS -r n</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="config-json-example">
 <h2>config.json example<a class="headerlink" href="#config-json-example" title="Permalink to this heading">#</a></h2>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="nt">&quot;systems&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;local&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;remsh_cmd&quot;</span><span class="p">:</span> <span class="s2">&quot;/usr/bin/ssh&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;scheduler&quot;</span><span class="p">:</span> <span class="s2">&quot;slurm&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;commands&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;module purge&quot;</span><span class="p">,</span> <span class="s2">&quot;module load python/3 compilers/gnu lapack ase quip vasp&quot;</span> <span class="p">],</span>
-        <span class="nt">&quot;header&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;#SBATCH --nodes={num_nodes}&quot;</span><span class="p">,</span>
-                   <span class="s2">&quot;#SBATCH --ntasks={num_cores}&quot;</span><span class="p">,</span>
-                   <span class="s2">&quot;#SBATCH --ntasks-per-node={num_cores_per_node}&quot;</span><span class="p">],</span>
-        <span class="nt">&quot;partitions&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;node16_old,node16_new&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;num_cores&quot;</span> <span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="nt">&quot;max_time&quot;</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;max_mem&quot;</span> <span class="p">:</span> <span class="s2">&quot;60GB&quot;</span> <span class="p">},</span>
-                        <span class="nt">&quot;node36&quot;</span><span class="p">:</span>                <span class="p">{</span> <span class="nt">&quot;num_cores&quot;</span> <span class="p">:</span> <span class="mi">36</span><span class="p">,</span> <span class="nt">&quot;max_time&quot;</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;max_mem&quot;</span> <span class="p">:</span> <span class="s2">&quot;180GB&quot;</span> <span class="p">},</span>
-                        <span class="nt">&quot;node32&quot;</span><span class="p">:</span>                <span class="p">{</span> <span class="nt">&quot;num_cores&quot;</span> <span class="p">:</span> <span class="mi">32</span><span class="p">,</span> <span class="nt">&quot;max_time&quot;</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nt">&quot;max_mem&quot;</span> <span class="p">:</span> <span class="s2">&quot;180GB&quot;</span> <span class="p">},</span>
-                        <span class="nt">&quot;node56_bigmem&quot;</span><span class="p">:</span>         <span class="p">{</span> <span class="nt">&quot;num_cores&quot;</span> <span class="p">:</span> <span class="mi">56</span><span class="p">,</span> <span class="nt">&quot;max_time&quot;</span> <span class="p">:</span> <span class="s2">&quot;48:00:00&quot;</span><span class="p">,</span> <span class="nt">&quot;max_mem&quot;</span> <span class="p">:</span> <span class="s2">&quot;1500GB&quot;</span> <span class="p">},</span>
-                        <span class="nt">&quot;node72_bigmem&quot;</span><span class="p">:</span>         <span class="p">{</span> <span class="nt">&quot;num_cores&quot;</span> <span class="p">:</span> <span class="mi">72</span><span class="p">,</span> <span class="nt">&quot;max_time&quot;</span> <span class="p">:</span> <span class="s2">&quot;48h&quot;</span><span class="p">,</span> <span class="nt">&quot;max_mem&quot;</span> <span class="p">:</span> <span class="s2">&quot;1500GB&quot;</span> <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;systems&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;local&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;remsh_cmd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/usr/bin/ssh&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;scheduler&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;slurm&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;module purge&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;module load python/3 compilers/gnu lapack ase quip vasp&quot;</span><span class="w"> </span><span class="p">],</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;header&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;#SBATCH --nodes={num_nodes}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                   </span><span class="s2">&quot;#SBATCH --ntasks={num_cores}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                   </span><span class="s2">&quot;#SBATCH --ntasks-per-node={num_cores_per_node}&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;partitions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;node16_old,node16_new&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;num_cores&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max_time&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max_mem&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;60GB&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;node36&quot;</span><span class="p">:</span><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;num_cores&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max_time&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max_mem&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;180GB&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;node32&quot;</span><span class="p">:</span><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;num_cores&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max_time&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max_mem&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;180GB&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;node56_bigmem&quot;</span><span class="p">:</span><span class="w">         </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;num_cores&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max_time&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;48:00:00&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max_mem&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1500GB&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;node72_bigmem&quot;</span><span class="p">:</span><span class="w">         </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;num_cores&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max_time&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;48h&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;max_mem&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1500GB&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>For this system:</p>

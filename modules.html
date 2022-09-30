@@ -30,6 +30,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -303,15 +304,72 @@ title="Print to PDF"
 <li class="toctree-l2"><a class="reference internal" href="expyre.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.config">expyre.config module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="expyre.html#global-variables">Global variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.config.init"><code class="docutils literal notranslate"><span class="pre">init()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.func">expyre.func module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.jobsdb">expyre.jobsdb module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.resources">expyre.resources module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.subprocess">expyre.subprocess module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.system">expyre.system module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.units">expyre.units module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.util">expyre.util module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.func">expyre.func module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.func.ExPyRe"><code class="docutils literal notranslate"><span class="pre">ExPyRe</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.func.ExPyRe.cancel"><code class="docutils literal notranslate"><span class="pre">ExPyRe.cancel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.func.ExPyRe.clean"><code class="docutils literal notranslate"><span class="pre">ExPyRe.clean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.func.ExPyRe.from_jobsdb"><code class="docutils literal notranslate"><span class="pre">ExPyRe.from_jobsdb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.func.ExPyRe.get_results"><code class="docutils literal notranslate"><span class="pre">ExPyRe.get_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.func.ExPyRe.id"><code class="docutils literal notranslate"><span class="pre">ExPyRe.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.func.ExPyRe.mark_processed"><code class="docutils literal notranslate"><span class="pre">ExPyRe.mark_processed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.func.ExPyRe.start"><code class="docutils literal notranslate"><span class="pre">ExPyRe.start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.func.ExPyRe.sync_remote_results_status"><code class="docutils literal notranslate"><span class="pre">ExPyRe.sync_remote_results_status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.func.ExPyRe.sync_remote_results_status_ll"><code class="docutils literal notranslate"><span class="pre">ExPyRe.sync_remote_results_status_ll()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.func.ExPyReJobDied"><code class="docutils literal notranslate"><span class="pre">ExPyReJobDied</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.jobsdb">expyre.jobsdb module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.jobsdb.JobsDB"><code class="docutils literal notranslate"><span class="pre">JobsDB</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.jobsdb.JobsDB.add"><code class="docutils literal notranslate"><span class="pre">JobsDB.add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.jobsdb.JobsDB.jobs"><code class="docutils literal notranslate"><span class="pre">JobsDB.jobs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.jobsdb.JobsDB.possible_status"><code class="docutils literal notranslate"><span class="pre">JobsDB.possible_status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.jobsdb.JobsDB.remove"><code class="docutils literal notranslate"><span class="pre">JobsDB.remove()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.jobsdb.JobsDB.status_group"><code class="docutils literal notranslate"><span class="pre">JobsDB.status_group</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.jobsdb.JobsDB.unlock"><code class="docutils literal notranslate"><span class="pre">JobsDB.unlock()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.jobsdb.JobsDB.update"><code class="docutils literal notranslate"><span class="pre">JobsDB.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.resources">expyre.resources module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.resources.Resources"><code class="docutils literal notranslate"><span class="pre">Resources</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.resources.Resources.find_nodes"><code class="docutils literal notranslate"><span class="pre">Resources.find_nodes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.subprocess">expyre.subprocess module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.subprocess.FailedSubprocessWarning"><code class="docutils literal notranslate"><span class="pre">FailedSubprocessWarning</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.subprocess.subprocess_copy"><code class="docutils literal notranslate"><span class="pre">subprocess_copy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.subprocess.subprocess_run"><code class="docutils literal notranslate"><span class="pre">subprocess_run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.system">expyre.system module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.system.System"><code class="docutils literal notranslate"><span class="pre">System</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.system.System.clean_rundir"><code class="docutils literal notranslate"><span class="pre">System.clean_rundir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.system.System.get_remotes"><code class="docutils literal notranslate"><span class="pre">System.get_remotes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.system.System.initialize_remote_rundir"><code class="docutils literal notranslate"><span class="pre">System.initialize_remote_rundir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.system.System.run"><code class="docutils literal notranslate"><span class="pre">System.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.html#expyre.system.System.submit"><code class="docutils literal notranslate"><span class="pre">System.submit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.units">expyre.units module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.units.mem_to_kB"><code class="docutils literal notranslate"><span class="pre">mem_to_kB()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.units.time_to_HMS"><code class="docutils literal notranslate"><span class="pre">time_to_HMS()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.units.time_to_sec"><code class="docutils literal notranslate"><span class="pre">time_to_sec()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre.util">expyre.util module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expyre.html#expyre.util.remsh_cmd"><code class="docutils literal notranslate"><span class="pre">remsh_cmd()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="expyre.html#module-expyre">Module contents</a></li>
 </ul>
 </li>

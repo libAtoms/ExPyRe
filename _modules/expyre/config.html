@@ -30,6 +30,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -246,7 +247,7 @@ title="Fullscreen mode"
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="c1"># read config.json file from expyre root (~/.expyre or EXPYRE_ROOT),</span>
 <span class="c1"># and save important parts (root, systems, db) as symbols in this module</span>
@@ -338,9 +339,9 @@ title="Fullscreen mode"
 
     <span class="kn">import</span> <span class="nn">os</span>
 
-    <span class="kn">from</span> <span class="nn">.units</span> <span class="k">import</span> <span class="n">time_to_sec</span><span class="p">,</span> <span class="n">mem_to_kB</span>
-    <span class="kn">from</span> <span class="nn">.system</span> <span class="k">import</span> <span class="n">System</span>
-    <span class="kn">from</span> <span class="nn">.jobsdb</span> <span class="k">import</span> <span class="n">JobsDB</span>
+    <span class="kn">from</span> <span class="nn">.units</span> <span class="kn">import</span> <span class="n">time_to_sec</span><span class="p">,</span> <span class="n">mem_to_kB</span>
+    <span class="kn">from</span> <span class="nn">.system</span> <span class="kn">import</span> <span class="n">System</span>
+    <span class="kn">from</span> <span class="nn">.jobsdb</span> <span class="kn">import</span> <span class="n">JobsDB</span>
 
     <span class="k">global</span> <span class="n">root</span><span class="p">,</span> <span class="n">systems</span><span class="p">,</span> <span class="n">db</span>
 
@@ -366,7 +367,7 @@ title="Fullscreen mode"
 
     <span class="n">db</span> <span class="o">=</span> <span class="n">JobsDB</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s1">&#39;jobs.db&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;expyre config got systems {list(systems.keys())}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;expyre config got systems </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">systems</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 
 <span class="k">if</span> <span class="s1">&#39;pytest&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>

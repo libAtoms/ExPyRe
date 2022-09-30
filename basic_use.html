@@ -30,6 +30,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -299,14 +300,14 @@ title="Print to PDF"
 </ol>
 <p>Below is a minimal example of running a simple Numpy function remotely, with a breif explanation of options and behaviour. For more information, see the dedicated page.</p>
 <p>Original Python script:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">array_to_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
 <span class="n">array_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">array_to_sum</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">array_sum</span> <span class="o">-</span> <span class="p">[</span><span class="mf">50.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span> <span class="o">==</span> <span class="mf">0.0</span>
 </pre></div>
 </div>
 <p>And ExPyRe-modified script:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">expyre.func</span> <span class="kn">import</span> <span class="n">ExPyRe</span>
 
 <span class="c1"># input for function</span>
@@ -325,8 +326,8 @@ title="Print to PDF"
 <span class="k">try</span><span class="p">:</span>
     <span class="n">array_sum</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">xpr</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
     <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">array_sum</span> <span class="o">-</span> <span class="p">[</span><span class="mf">50.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span> <span class="o">==</span> <span class="mf">0.0</span>
-<span class="k">except</span> <span class="n">TimeoutError</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;job did not run in alloted time&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">TimeoutError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;job did not run in alloted time&#39;</span><span class="p">)</span>
 
 <span class="c1"># mark as processed in jobs db in case of restarts</span>
 <span class="n">xpr</span><span class="o">.</span><span class="n">mark_processed</span><span class="p">()</span>
