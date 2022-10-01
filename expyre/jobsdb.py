@@ -188,7 +188,10 @@ class JobsDB:
             assert all([stat in JobsDB.possible_status or stat in JobsDB.status_group for stat in status])
 
         def _col_match(col_res, col_val):
-            return col_res is None or any([col_val is not None and re.search('^' + col_re + '$', col_val) for col_re in col_res])
+            try:
+                return col_res is None or any([col_val is not None and re.search('^' + col_re + '$', col_val) for col_re in col_res])
+            except re.error as exc:
+                raise ValueError(f"Bad regexp in {col_res}") from exc
 
         # do selection in python, not SQL query
         for row in self._execute('SELECT * FROM jobs'):
