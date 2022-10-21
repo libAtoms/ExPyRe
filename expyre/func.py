@@ -28,7 +28,7 @@ from .resources import Resources
 from .jobsdb import JobsDB
 from .units import time_to_sec
 
-class ExPyReJobDied(Exception):
+class ExPyReJobDiedError(Exception):
     pass
 
 class ExPyReTimeoutError(TimeoutError):
@@ -395,7 +395,7 @@ class ExPyRe:
 
 
     def start(self, resources, system_name=os.environ.get('EXPYRE_SYS', None), header_extra=[],
-              exact_fit=True, partial_node=False, python_cmd='python3'):
+              exact_fit=True, partial_node=False, python_cmd='python3', force_rerun=False):
         """Start a job on a remote machine
 
         Parameters
@@ -410,10 +410,12 @@ class ExPyRe:
             use only nodes that exactly match number of tasks
         partial_node: bool, default False
             allow jobs that take less than an entire node
-        python_cmd: std, default python3
+        python_cmd: str, default python3
             name of python interpreter to use on remote machine
+        force_rerun: bool, default False
+            force a rerun even if self.status is not "created"
         """
-        if self.status != 'created':
+        if not force_rerun and self.status != 'created':
             # If job is not newly created, return instead of resubmitting
             # First check that it is newly recreated, otherwise this shouldn't be happening
             assert self.recreated
@@ -674,7 +676,7 @@ class ExPyRe:
                         # already on last chance, giving up
                         self.status = 'died'
                         config.db.update(self.id, status=self.status)
-                        raise ExPyReJobDied(f'Job {self.id} has remote status {remote_status} but no _succeeded or _error faile')
+                        raise ExPyReJobDiedError(f'Job {self.id} has remote status {remote_status} but no _succeeded or _error faile')
                         # raise RuntimeError(f'Job {self.id} got remote status {remote_status} which is not '
                                             # '"queued", "running", or "held", but neither "_succeeded" nor '
                                             # '"_error" file exists')
