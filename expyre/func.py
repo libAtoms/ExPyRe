@@ -31,6 +31,9 @@ from .units import time_to_sec
 class ExPyReJobDied(Exception):
     pass
 
+class ExPyReTimeoutError(TimeoutError):
+    pass
+
 class ExPyRe:
     """
     Create Queued Remote Function object, pickles function and inputs, stores files
@@ -684,7 +687,7 @@ class ExPyRe:
                         if not quiet and n_iter > 0:
                             sys.stderr.write('\n')
                             sys.stderr.flush()
-                        raise TimeoutError
+                        raise ExPyReTimeoutError
 
             # update status in database
             config.db.update(self.id, status=self.status)
