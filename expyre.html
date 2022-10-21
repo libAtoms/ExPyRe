@@ -406,10 +406,10 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#expyre.func.ExPyReJobDied">
+    <a class="reference internal nav-link" href="#expyre.func.ExPyReJobDiedError">
      <code class="docutils literal notranslate">
       <span class="pre">
-       ExPyReJobDied
+       ExPyReJobDiedError
       </span>
      </code>
     </a>
@@ -833,10 +833,10 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#expyre.func.ExPyReJobDied">
+    <a class="reference internal nav-link" href="#expyre.func.ExPyReJobDiedError">
      <code class="docutils literal notranslate">
       <span class="pre">
-       ExPyReJobDied
+       ExPyReJobDiedError
       </span>
      </code>
     </a>
@@ -1332,7 +1332,7 @@ Note: together with sync_all this can lead to rsync having to compare many files
 
 <dl class="py method">
 <dt class="sig sig-object py" id="expyre.func.ExPyRe.start">
-<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact_fit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partial_node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_cmd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'python3'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/func.html#ExPyRe.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.func.ExPyRe.start" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact_fit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partial_node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">python_cmd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'python3'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_rerun</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/func.html#ExPyRe.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.func.ExPyRe.start" title="Permalink to this definition">#</a></dt>
 <dd><p>Start a job on a remote machine</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1342,7 +1342,8 @@ Note: together with sync_all this can lead to rsync having to compare many files
 <li><p><strong>header_extra</strong> (<em>list</em><em>(</em><em>str</em><em>)</em><em>, </em><em>optional</em>) – list of lines to add to queuing system header, appended to System.header[]</p></li>
 <li><p><strong>exact_fit</strong> (<em>bool</em><em>, </em><em>default True</em>) – use only nodes that exactly match number of tasks</p></li>
 <li><p><strong>partial_node</strong> (<em>bool</em><em>, </em><em>default False</em>) – allow jobs that take less than an entire node</p></li>
-<li><p><strong>python_cmd</strong> (<em>std</em><em>, </em><em>default python3</em>) – name of python interpreter to use on remote machine</p></li>
+<li><p><strong>python_cmd</strong> (<em>str</em><em>, </em><em>default python3</em>) – name of python interpreter to use on remote machine</p></li>
+<li><p><strong>force_rerun</strong> (<em>bool</em><em>, </em><em>default False</em>) – force a rerun even if self.status is not “created”</p></li>
 </ul>
 </dd>
 </dl>
@@ -1386,8 +1387,8 @@ if remote status has been updated files have been staged back as well.</p>
 </dd></dl>
 
 <dl class="py exception">
-<dt class="sig sig-object py" id="expyre.func.ExPyReJobDied">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expyre.func.</span></span><span class="sig-name descname"><span class="pre">ExPyReJobDied</span></span><a class="reference internal" href="_modules/expyre/func.html#ExPyReJobDied"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.func.ExPyReJobDied" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="expyre.func.ExPyReJobDiedError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expyre.func.</span></span><span class="sig-name descname"><span class="pre">ExPyReJobDiedError</span></span><a class="reference internal" href="_modules/expyre/func.html#ExPyReJobDiedError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.func.ExPyReJobDiedError" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 

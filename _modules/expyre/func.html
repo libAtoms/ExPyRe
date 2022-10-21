@@ -262,7 +262,7 @@ title="Fullscreen mode"
 <span class="kn">from</span> <span class="nn">.jobsdb</span> <span class="kn">import</span> <span class="n">JobsDB</span>
 <span class="kn">from</span> <span class="nn">.units</span> <span class="kn">import</span> <span class="n">time_to_sec</span>
 
-<div class="viewcode-block" id="ExPyReJobDied"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyReJobDied">[docs]</a><span class="k">class</span> <span class="nc">ExPyReJobDied</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<div class="viewcode-block" id="ExPyReJobDiedError"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyReJobDiedError">[docs]</a><span class="k">class</span> <span class="nc">ExPyReJobDiedError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="ExPyReTimeoutError"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyReTimeoutError">[docs]</a><span class="k">class</span> <span class="nc">ExPyReTimeoutError</span><span class="p">(</span><span class="ne">TimeoutError</span><span class="p">):</span>
@@ -629,7 +629,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="ExPyRe.start"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">system_name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;EXPYRE_SYS&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">header_extra</span><span class="o">=</span><span class="p">[],</span>
-              <span class="n">exact_fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">partial_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">python_cmd</span><span class="o">=</span><span class="s1">&#39;python3&#39;</span><span class="p">):</span>
+              <span class="n">exact_fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">partial_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">python_cmd</span><span class="o">=</span><span class="s1">&#39;python3&#39;</span><span class="p">,</span> <span class="n">force_rerun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Start a job on a remote machine</span>
 
 <span class="sd">        Parameters</span>
@@ -644,10 +644,12 @@ title="Fullscreen mode"
 <span class="sd">            use only nodes that exactly match number of tasks</span>
 <span class="sd">        partial_node: bool, default False</span>
 <span class="sd">            allow jobs that take less than an entire node</span>
-<span class="sd">        python_cmd: std, default python3</span>
+<span class="sd">        python_cmd: str, default python3</span>
 <span class="sd">            name of python interpreter to use on remote machine</span>
+<span class="sd">        force_rerun: bool, default False</span>
+<span class="sd">            force a rerun even if self.status is not &quot;created&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">!=</span> <span class="s1">&#39;created&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">force_rerun</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">!=</span> <span class="s1">&#39;created&#39;</span><span class="p">:</span>
             <span class="c1"># If job is not newly created, return instead of resubmitting</span>
             <span class="c1"># First check that it is newly recreated, otherwise this shouldn&#39;t be happening</span>
             <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">recreated</span>
@@ -908,7 +910,7 @@ title="Fullscreen mode"
                         <span class="c1"># already on last chance, giving up</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;died&#39;</span>
                         <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
-                        <span class="k">raise</span> <span class="n">ExPyReJobDied</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> has remote status </span><span class="si">{</span><span class="n">remote_status</span><span class="si">}</span><span class="s1"> but no _succeeded or _error faile&#39;</span><span class="p">)</span>
+                        <span class="k">raise</span> <span class="n">ExPyReJobDiedError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> has remote status </span><span class="si">{</span><span class="n">remote_status</span><span class="si">}</span><span class="s1"> but no _succeeded or _error faile&#39;</span><span class="p">)</span>
                         <span class="c1"># raise RuntimeError(f&#39;Job {self.id} got remote status {remote_status} which is not &#39;</span>
                                             <span class="c1"># &#39;&quot;queued&quot;, &quot;running&quot;, or &quot;held&quot;, but neither &quot;_succeeded&quot; nor &#39;</span>
                                             <span class="c1"># &#39;&quot;_error&quot; file exists&#39;)</span>
