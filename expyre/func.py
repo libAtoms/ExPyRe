@@ -421,6 +421,7 @@ class ExPyRe:
             assert self.recreated
             return
 
+
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
             sys.stderr.write(f'ExPyRe {self.id} start() start {time.time()}\n')
 
@@ -444,6 +445,9 @@ class ExPyRe:
 
         self.status = 'submitted'
         config.db.update(self.id, status=self.status, system=self.system_name, remote_id=self.remote_id)
+        # make sure remote status is not done, so get_results() actually syncs new status before giving up
+        if force_rerun:
+            config.db.update(self.id, remote_status=None)
 
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
             sys.stderr.write(f'ExPyRe {self.id} start() end {time.time()}\n')
@@ -478,11 +482,11 @@ class ExPyRe:
 
         jobs_to_sync = list(config.db.jobs(system=self.system_name, id=job_id, status=status))
 
-        ExPyRe.sync_remote_results_status_ll(jobs_to_sync, verbose=verbose)
+        ExPyRe._sync_remote_results_status_ll(jobs_to_sync, verbose=verbose)
 
 
     @classmethod
-    def sync_remote_results_status_ll(cls, jobs_to_sync, n_group=250, cli=False, verbose=False):
+    def _sync_remote_results_status_ll(cls, jobs_to_sync, n_group=250, cli=False, verbose=False):
         """Low level part of syncing jobs.  Gets remote files _and_ updates 'remote_status'
         field in jobsdb.  Note that both have to happen because other functions assume that
         if remote status has been updated files have been staged back as well.
@@ -532,7 +536,7 @@ class ExPyRe:
                                    verbose=verbose)
 
 
-    def clean(self, wipe=False, dry_run=False, verbose=False):
+    def clean(self, wipe=False, dry_run=False, remote_only=False, verbose=False):
         """clean the local and remote stage directories
 
         Parameters
@@ -544,6 +548,8 @@ class ExPyRe:
             are not cleaned if wipe=False)
         dry_run: bool, default False
             dry run only, print what will happen but do not actually delete or overwrite anything
+        remote_only: bool, default False
+            wipe only remote dir (ignored when wipe is False)
         verbose: bool, default False
             verbose output
         """
@@ -557,9 +563,10 @@ class ExPyRe:
                 # delete remote stage dir
                 system.clean_rundir(self.stage_dir, None, dry_run=dry_run, verbose=verbose or dry_run)
             # delete local stage dir
-            subprocess_run(None, ['find', str(self.stage_dir), '-type', 'd', '-exec', 'chmod', 'u+rwx', '{}', '\\;'],
-                           dry_run=dry_run, verbose=verbose or dry_run)
-            subprocess_run(None, ['rm', '-rf', str(self.stage_dir)], dry_run=dry_run, verbose=verbose or dry_run)
+            if not remote_only:
+                subprocess_run(None, ['find', str(self.stage_dir), '-type', 'd', '-exec', 'chmod', 'u+rwx', '{}', '\\;'],
+                               dry_run=dry_run, verbose=verbose or dry_run)
+                subprocess_run(None, ['rm', '-rf', str(self.stage_dir)], dry_run=dry_run, verbose=verbose or dry_run)
         else:
             if system is not None:
                 # clean remote stage dir
@@ -676,7 +683,7 @@ class ExPyRe:
                         # already on last chance, giving up
                         self.status = 'died'
                         config.db.update(self.id, status=self.status)
-                        raise ExPyReJobDiedError(f'Job {self.id} has remote status {remote_status} but no _succeeded or _error faile')
+                        raise ExPyReJobDiedError(f'Job {self.id} has remote status {remote_status} but no _succeeded or _error')
                         # raise RuntimeError(f'Job {self.id} got remote status {remote_status} which is not '
                                             # '"queued", "running", or "held", but neither "_succeeded" nor '
                                             # '"_error" file exists')
