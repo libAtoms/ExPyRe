@@ -695,14 +695,10 @@ class ExPyRe:
                     with open(self.stage_dir / '_expyre_job_succeeded', 'rb') as fin:
                         results = pickle.load(fin)
                 except Exception as exc:
-                    results_exc = exc
-                    results = None
-
-                stdout, stderr, job_stdout, job_stderr = self._read_stdout_err()
-
-                if results is None:
-                    raise RuntimeError(f'Job {self.id} got "_succeeded" file, but failed to parse it with error {results_exc}\n'
+                    stdout, stderr, job_stdout, job_stderr = self._read_stdout_err()
+                    raise RuntimeError(f'Job {self.id} got "_succeeded" file, but failed to parse it with error {exc}\n'
                                        f'stdout: {stdout}\nstderr: {stderr}\njob stdout: {job_stdout}\njob stderr: {job_stderr}')
+
                 self.status = 'succeeded'
             elif (self.stage_dir / '_expyre_job_error').exists():
                 # job created final failed file
