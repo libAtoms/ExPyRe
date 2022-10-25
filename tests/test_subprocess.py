@@ -6,6 +6,7 @@ import pytest
 from expyre.subprocess import subprocess_run, subprocess_copy
 
 local_ssh = os.environ.get('EXPYRE_PYTEST_SSH', '/usr/bin/ssh')
+local_host = os.environ.get('EXPYRE_LOCAL_HOST', os.environ.get('HOSTNAME'))
 
 def prep(d):
     with open(d / 'file1', 'w') as fout:
@@ -27,10 +28,11 @@ def test_run_local(tmp_path):
 def test_run_remote_same_machine(tmp_path):
     prep(tmp_path)
 
-    stdout, stderr = subprocess_run(os.environ.get('EXPYRE_LOCAL_HOST', "localhost"), ['cd', str(tmp_path), ';', 'ls', 'file1', ';', 'echo', '$USER'], remsh_cmd=local_ssh)
+
+    stdout, stderr = subprocess_run(local_host, ['cd', str(tmp_path), ';', 'ls', 'file1', ';', 'echo', '$USER'], remsh_cmd=local_ssh)
     assert stdout.splitlines() == ['file1', os.environ['USER']]
 
-    stdout, stderr = subprocess_run(os.environ.get('EXPYRE_LOCAL_HOST', "localhost"), ['cd', str(tmp_path), ';', 'ls', 'file 2'], remsh_cmd=local_ssh)
+    stdout, stderr = subprocess_run(local_host, ['cd', str(tmp_path), ';', 'ls', 'file 2'], remsh_cmd=local_ssh)
     assert stdout.splitlines() == ['file 2']
 
 
@@ -53,21 +55,21 @@ def test_copy_same_machine(tmp_path, change_test_dir):
 
     # copy from rel, rel to remote absolute dir
     os.chdir(tmp_path)
-    subprocess_copy(['test_file_1', 'test_file_2'], to_dir, to_host=os.environ.get('EXPYRE_LOCAL_HOST', "localhost"), remsh_cmd=local_ssh)
+    subprocess_copy(['test_file_1', 'test_file_2'], to_dir, to_host=local_host, remsh_cmd=local_ssh)
     with open(to_dir / 'test_file_1') as fin:
         assert fin.readlines() == [ '1\n' ]
     with open(to_dir / 'test_file_2') as fin:
         assert fin.readlines() == [ '2\n' ]
 
     # from rel, abs to remote absolute dir
-    subprocess_copy(['test_file_1', tmp_path / 'from_dir' / 'test_file_3'], to_dir, to_host=os.environ.get('EXPYRE_LOCAL_HOST', "localhost"), remsh_cmd=local_ssh)
+    subprocess_copy(['test_file_1', tmp_path / 'from_dir' / 'test_file_3'], to_dir, to_host=local_host, remsh_cmd=local_ssh)
     with open(to_dir / 'test_file_1') as fin:
         assert fin.readlines() == [ '1\n' ]
     with open(to_dir / 'test_file_3') as fin:
         assert fin.readlines() == [ '3\n' ]
 
     # from rel_dir to remote absolute dir
-    subprocess_copy('from_dir', to_dir, to_host=os.environ.get('EXPYRE_LOCAL_HOST', "localhost"), remsh_cmd=local_ssh)
+    subprocess_copy('from_dir', to_dir, to_host=local_host, remsh_cmd=local_ssh)
     with open(to_dir / 'from_dir' / 'test_file_3') as fin:
         assert fin.readlines() == [ '3\n' ]
 
@@ -75,7 +77,7 @@ def test_copy_same_machine(tmp_path, change_test_dir):
     assert not (Path.home() / 'pytest_test_file_4').exists()
     with open(Path.home() / 'pytest_test_file_4', 'w') as fout:
         fout.write('4\n')
-    subprocess_copy('pytest_test_file_4', to_dir, from_host=os.environ.get('EXPYRE_LOCAL_HOST', "localhost"), remsh_cmd=local_ssh)
+    subprocess_copy('pytest_test_file_4', to_dir, from_host=local_host, remsh_cmd=local_ssh)
     with open(to_dir / 'pytest_test_file_4') as fin:
         assert fin.readlines() == [ '4\n' ]
     (Path.home() / 'pytest_test_file_4').unlink()
