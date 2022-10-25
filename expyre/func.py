@@ -247,7 +247,7 @@ class ExPyRe:
                        '    with open(f"_expyre_exception", "wb") as fout:\n'
                        '        pickle.dump(exc, fout)\n'
                        '    with open(f"_expyre_error", "w") as fout:\n'
-                       '        fout.write(f"{exc}\\n")\n'
+                       '        fout.write(f"Exception: {exc}\\n")\n'
                        '        traceback.print_exc(file=fout)\n'
                        '        raise\n')
 
@@ -272,7 +272,7 @@ class ExPyRe:
                               '    if [ -e _expyre_error ]; then',
                               '        mv _expyre_error _expyre_job_error',
                               '    else',
-                              '        echo "UNKNOWN ERROR $error_stat" > _tmp_expyre_job_error',
+                              '        echo "ERROR STATUS FROM python $error_stat" > _tmp_expyre_job_error',
                               '        mv _tmp_expyre_job_error _expyre_job_error',
                               '    fi',
                               'fi',
@@ -595,6 +595,37 @@ class ExPyRe:
             config.db.update(self.id, status=self.status)
 
 
+    def _read_stdout_err(self):
+        """Read all stdout and stderr files, from python run and from submitted job
+
+        Returns
+        -------
+        stdout, stderr, job_stdout, job_stderr: str
+        """
+        try:
+            with open(self.stage_dir / '_expyre_stdout') as fin:
+                stdout = fin.read()
+        except:
+            stdout = None
+        try:
+            with open(self.stage_dir / '_expyre_stderr') as fin:
+                stderr = fin.read()
+        except:
+            stderr = None
+        try:
+            with open(self.stage_dir / f'job.{self.id}.stdout') as fin:
+                job_stdout = fin.read()
+        except:
+            job_stdout = None
+        try:
+            with open(self.stage_dir / f'job.{self.id}.stderr') as fin:
+                job_stderr = fin.read()
+        except:
+            job_stderr = None
+
+        return stdout, stderr, job_stdout, job_stderr
+
+
     def get_results(self, timeout=3600, check_interval=30, sync=True, sync_all=True, force_sync=False, quiet=False, verbose=False):
         """Get results from a remote job
 
@@ -656,6 +687,9 @@ class ExPyRe:
 
             # poke filesystem, since on some machines Path.exists() fails even if file appears to be there when doing ls
             _ = list(self.stage_dir.glob('_expyre_job_*'))
+            # read all text output
+            stdout, stderr, job_stdout, job_stderr = self._read_stdout_err()
+
             # update state depending on presence of various progress files and remote status
             if (self.stage_dir / '_expyre_job_succeeded').exists():
                 # job created final succeeded file
@@ -663,22 +697,15 @@ class ExPyRe:
                 try:
                     with open(self.stage_dir / '_expyre_job_succeeded', 'rb') as fin:
                         results = pickle.load(fin)
-                    with open(self.stage_dir / '_expyre_stdout') as fin:
-                        stdout = fin.read()
-                    with open(self.stage_dir / '_expyre_stderr') as fin:
-                        stderr = fin.read()
                 except Exception as exc:
-                    raise RuntimeError(f'Job {self.id} got "_succeeded" file, but failed to parse it with error {exc}')
+                    raise RuntimeError(f'Job {self.id} got "_succeeded" file, but failed to parse it with error {exc}\n'
+                                       f'stdout: {stdout}\nstderr: {stderr}\njob stdout: {job_stdout}\njob stderr: {job_stderr}')
                 self.status = 'succeeded'
             elif (self.stage_dir / '_expyre_job_error').exists():
                 # job created final failed file
                 assert remote_status not in ['queued', 'held']
                 with open(self.stage_dir / '_expyre_job_error') as fin:
                     error_msg = fin.read()
-                with open(self.stage_dir / '_expyre_stdout') as fin:
-                    stdout = fin.read()
-                with open(self.stage_dir / '_expyre_stderr') as fin:
-                    stderr = fin.read()
                 self.status = 'failed'
             else:
                 if (self.stage_dir / '_expyre_job_started').exists():
@@ -690,7 +717,8 @@ class ExPyRe:
                         # already on last chance, giving up
                         self.status = 'died'
                         config.db.update(self.id, status=self.status)
-                        raise ExPyReJobDiedError(f'Job {self.id} has remote status {remote_status} but no _succeeded or _error')
+                        raise ExPyReJobDiedError(f'Job {self.id} has remote status {remote_status} but no _succeeded or _error\n'
+                                                 f'stdout: {stdout}\nstderr: {stderr}\njob stdout: {job_stdout}\njob stderr: {job_stderr}')
                         # raise RuntimeError(f'Job {self.id} got remote status {remote_status} which is not '
                                             # '"queued", "running", or "held", but neither "_succeeded" nor '
                                             # '"_error" file exists')
@@ -734,7 +762,7 @@ class ExPyRe:
                     raise exc
                 else:
                     raise RuntimeError(f'Remote job {self.id} failed with no exception but remote status {remote_status} error_msg {error_msg}\n'
-                                       f'stdout: {stdout}\nstderr: {stderr}')
+                                       f'stdout: {stdout}\nstderr: {stderr}\njob stdout: {job_stdout}\njob stderr: {job_stderr}')
 
             out_of_time = (timeout is not None) and (timeout >= 0) and (time.time() - start_time > timeout)
 
