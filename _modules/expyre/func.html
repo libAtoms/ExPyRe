@@ -481,7 +481,7 @@ title="Fullscreen mode"
                        <span class="s1">&#39;    with open(f&quot;_expyre_exception&quot;, &quot;wb&quot;) as fout:</span><span class="se">\n</span><span class="s1">&#39;</span>
                        <span class="s1">&#39;        pickle.dump(exc, fout)</span><span class="se">\n</span><span class="s1">&#39;</span>
                        <span class="s1">&#39;    with open(f&quot;_expyre_error&quot;, &quot;w&quot;) as fout:</span><span class="se">\n</span><span class="s1">&#39;</span>
-                       <span class="s1">&#39;        fout.write(f&quot;</span><span class="si">{exc}</span><span class="se">\\</span><span class="s1">n&quot;)</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;        fout.write(f&quot;Exception: </span><span class="si">{exc}</span><span class="se">\\</span><span class="s1">n&quot;)</span><span class="se">\n</span><span class="s1">&#39;</span>
                        <span class="s1">&#39;        traceback.print_exc(file=fout)</span><span class="se">\n</span><span class="s1">&#39;</span>
                        <span class="s1">&#39;        raise</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
@@ -506,7 +506,7 @@ title="Fullscreen mode"
                               <span class="s1">&#39;    if [ -e _expyre_error ]; then&#39;</span><span class="p">,</span>
                               <span class="s1">&#39;        mv _expyre_error _expyre_job_error&#39;</span><span class="p">,</span>
                               <span class="s1">&#39;    else&#39;</span><span class="p">,</span>
-                              <span class="s1">&#39;        echo &quot;UNKNOWN ERROR $error_stat&quot; &gt; _tmp_expyre_job_error&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;        echo &quot;ERROR STATUS FROM python $error_stat&quot; &gt; _tmp_expyre_job_error&#39;</span><span class="p">,</span>
                               <span class="s1">&#39;        mv _tmp_expyre_job_error _expyre_job_error&#39;</span><span class="p">,</span>
                               <span class="s1">&#39;    fi&#39;</span><span class="p">,</span>
                               <span class="s1">&#39;fi&#39;</span><span class="p">,</span>
@@ -829,6 +829,37 @@ title="Fullscreen mode"
             <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">)</span></div>
 
 
+    <span class="k">def</span> <span class="nf">_read_stdout_err</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read all stdout and stderr files, from python run and from submitted job</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        stdout, stderr, job_stdout, job_stderr: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_stdout&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                <span class="n">stdout</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">stdout</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_stderr&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                <span class="n">stderr</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">stderr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;job.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">.stdout&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                <span class="n">job_stdout</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">job_stdout</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;job.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">.stderr&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                <span class="n">job_stderr</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">job_stderr</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">job_stdout</span><span class="p">,</span> <span class="n">job_stderr</span>
+
+
 <div class="viewcode-block" id="ExPyRe.get_results"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.get_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span> <span class="n">check_interval</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sync_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force_sync</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get results from a remote job</span>
 
@@ -890,6 +921,9 @@ title="Fullscreen mode"
 
             <span class="c1"># poke filesystem, since on some machines Path.exists() fails even if file appears to be there when doing ls</span>
             <span class="n">_</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;_expyre_job_*&#39;</span><span class="p">))</span>
+            <span class="c1"># read all text output</span>
+            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">job_stdout</span><span class="p">,</span> <span class="n">job_stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_stdout_err</span><span class="p">()</span>
+
             <span class="c1"># update state depending on presence of various progress files and remote status</span>
             <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_succeeded&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
                 <span class="c1"># job created final succeeded file</span>
@@ -897,22 +931,15 @@ title="Fullscreen mode"
                 <span class="k">try</span><span class="p">:</span>
                     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_succeeded&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
                         <span class="n">results</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
-                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_stdout&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-                        <span class="n">stdout</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_stderr&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-                        <span class="n">stderr</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> got &quot;_succeeded&quot; file, but failed to parse it with error </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> got &quot;_succeeded&quot; file, but failed to parse it with error </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                       <span class="sa">f</span><span class="s1">&#39;stdout: </span><span class="si">{</span><span class="n">stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">stderr: </span><span class="si">{</span><span class="n">stderr</span><span class="si">}</span><span class="se">\n</span><span class="s1">job stdout: </span><span class="si">{</span><span class="n">job_stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">job stderr: </span><span class="si">{</span><span class="n">job_stderr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;succeeded&#39;</span>
             <span class="k">elif</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_error&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
                 <span class="c1"># job created final failed file</span>
                 <span class="k">assert</span> <span class="n">remote_status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;queued&#39;</span><span class="p">,</span> <span class="s1">&#39;held&#39;</span><span class="p">]</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_error&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
                     <span class="n">error_msg</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_stdout&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-                    <span class="n">stdout</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_stderr&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-                    <span class="n">stderr</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;failed&#39;</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_started&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
@@ -924,7 +951,8 @@ title="Fullscreen mode"
                         <span class="c1"># already on last chance, giving up</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;died&#39;</span>
                         <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
-                        <span class="k">raise</span> <span class="n">ExPyReJobDiedError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> has remote status </span><span class="si">{</span><span class="n">remote_status</span><span class="si">}</span><span class="s1"> but no _succeeded or _error&#39;</span><span class="p">)</span>
+                        <span class="k">raise</span> <span class="n">ExPyReJobDiedError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> has remote status </span><span class="si">{</span><span class="n">remote_status</span><span class="si">}</span><span class="s1"> but no _succeeded or _error</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                                 <span class="sa">f</span><span class="s1">&#39;stdout: </span><span class="si">{</span><span class="n">stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">stderr: </span><span class="si">{</span><span class="n">stderr</span><span class="si">}</span><span class="se">\n</span><span class="s1">job stdout: </span><span class="si">{</span><span class="n">job_stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">job stderr: </span><span class="si">{</span><span class="n">job_stderr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
                         <span class="c1"># raise RuntimeError(f&#39;Job {self.id} got remote status {remote_status} which is not &#39;</span>
                                             <span class="c1"># &#39;&quot;queued&quot;, &quot;running&quot;, or &quot;held&quot;, but neither &quot;_succeeded&quot; nor &#39;</span>
                                             <span class="c1"># &#39;&quot;_error&quot; file exists&#39;)</span>
@@ -968,7 +996,7 @@ title="Fullscreen mode"
                     <span class="k">raise</span> <span class="n">exc</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Remote job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> failed with no exception but remote status </span><span class="si">{</span><span class="n">remote_status</span><span class="si">}</span><span class="s1"> error_msg </span><span class="si">{</span><span class="n">error_msg</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
-                                       <span class="sa">f</span><span class="s1">&#39;stdout: </span><span class="si">{</span><span class="n">stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">stderr: </span><span class="si">{</span><span class="n">stderr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                                       <span class="sa">f</span><span class="s1">&#39;stdout: </span><span class="si">{</span><span class="n">stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">stderr: </span><span class="si">{</span><span class="n">stderr</span><span class="si">}</span><span class="se">\n</span><span class="s1">job stdout: </span><span class="si">{</span><span class="n">job_stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">job stderr: </span><span class="si">{</span><span class="n">job_stderr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
             <span class="n">out_of_time</span> <span class="o">=</span> <span class="p">(</span><span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">timeout</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&gt;</span> <span class="n">timeout</span><span class="p">)</span>
 
