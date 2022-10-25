@@ -18,7 +18,7 @@ rm -rf $HOME/pytest_expyre*
 if [[ $EXPYRE_PYTEST_SYSTEMS =~ mustang ]]; then
     ssh $KMUSTANG rm -rf pytest_expyre_rundir_mustang
 fi
-pytest --clean --basetemp $HOME/pytest_expyre >> pytest_complete_test.out 2>&1
+pytest --clean --basetemp $HOME/pytest_expyre "$@" >> pytest_complete_test.out 2>&1
 
 l=`egrep '^\s*=+.* passed' pytest_complete_test.out`
 
