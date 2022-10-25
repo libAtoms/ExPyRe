@@ -421,6 +421,9 @@ class ExPyRe:
             assert self.recreated
             return
 
+        if force_rerun:
+            # make sure remote dir is gone, otherwise submission below will fail
+            self.clean(wipe=True, remote_only=True)
 
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
             sys.stderr.write(f'ExPyRe {self.id} start() start {time.time()}\n')
