@@ -13,6 +13,7 @@ cat<<EOF > definitely_queued_job.json
 }
 EOF
 export EXPYRE_PYTEST_QUEUED_JOB_RESOURCES=$PWD/definitely_queued_job.json
+export EXPYRE_LOCAL_HOST=tin
 
 rm -rf $HOME/pytest_expyre*
 if [[ $EXPYRE_PYTEST_SYSTEMS =~ mustang ]]; then
