@@ -687,6 +687,9 @@ class ExPyRe:
 
             # poke filesystem, since on some machines Path.exists() fails even if file appears to be there when doing ls
             _ = list(self.stage_dir.glob('_expyre_job_*'))
+            # read all text output
+            stdout, stderr, job_stdout, job_stderr = self._read_stdout_err()
+
             # update state depending on presence of various progress files and remote status
             if (self.stage_dir / '_expyre_job_succeeded').exists():
                 # job created final succeeded file
@@ -695,17 +698,14 @@ class ExPyRe:
                     with open(self.stage_dir / '_expyre_job_succeeded', 'rb') as fin:
                         results = pickle.load(fin)
                 except Exception as exc:
-                    stdout, stderr, job_stdout, job_stderr = self._read_stdout_err()
                     raise RuntimeError(f'Job {self.id} got "_succeeded" file, but failed to parse it with error {exc}\n'
                                        f'stdout: {stdout}\nstderr: {stderr}\njob stdout: {job_stdout}\njob stderr: {job_stderr}')
-
                 self.status = 'succeeded'
             elif (self.stage_dir / '_expyre_job_error').exists():
                 # job created final failed file
                 assert remote_status not in ['queued', 'held']
                 with open(self.stage_dir / '_expyre_job_error') as fin:
                     error_msg = fin.read()
-                stdout, stderr, job_stdout, job_stderr = self._read_stdout_err()
                 self.status = 'failed'
             else:
                 if (self.stage_dir / '_expyre_job_started').exists():
@@ -715,7 +715,6 @@ class ExPyRe:
                     # problem - job does not seem to be queued (even held) or running
                     if problem_last_chance:
                         # already on last chance, giving up
-                        stdout, stderr, job_stdout, job_stderr = self._read_stdout_err()
                         self.status = 'died'
                         config.db.update(self.id, status=self.status)
                         raise ExPyReJobDiedError(f'Job {self.id} has remote status {remote_status} but no _succeeded or _error\n'
