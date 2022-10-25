@@ -674,7 +674,11 @@ class ExPyRe:
                 # job created final failed file
                 assert remote_status not in ['queued', 'held']
                 with open(self.stage_dir / '_expyre_job_error') as fin:
-                    error_msg = ''.join(fin.readlines())
+                    error_msg = fin.read()
+                with open(self.stage_dir / '_expyre_stdout') as fin:
+                    stdout = fin.read()
+                with open(self.stage_dir / '_expyre_stderr') as fin:
+                    stderr = fin.read()
                 self.status = 'failed'
             else:
                 if (self.stage_dir / '_expyre_job_started').exists():
@@ -691,7 +695,8 @@ class ExPyRe:
                                             # '"queued", "running", or "held", but neither "_succeeded" nor '
                                             # '"_error" file exists')
                     # give it one more chance, perhaps queuing system status and file are slow to sync to head node
-                    warnings.warn(f'Job {self.id} has no _succeeded or _error file, but remote status {remote_status} is not "queued", "held", or "running". Giving it one more chance')
+                    warnings.warn(f'Job {self.id} has no _succeeded or _error file, but remote status {remote_status} is '
+                                   'not "queued", "held", or "running". Giving it one more chance.')
                     problem_last_chance = True
                 else:
                     # No apparent problem, just not done yet, leave status as is, but check for timeout
@@ -728,7 +733,8 @@ class ExPyRe:
                         exc = pickle.load(fin)
                     raise exc
                 else:
-                    raise RuntimeError(f'Remote job {self.id} failed with no exception but remot status {remote_status} error_msg {error_msg}')
+                    raise RuntimeError(f'Remote job {self.id} failed with no exception but remote status {remote_status} error_msg {error_msg}\n'
+                                       f'stdout: {stdout}\nstderr: {stderr}')
 
             out_of_time = (timeout is not None) and (timeout >= 0) and (time.time() - start_time > timeout)
 
