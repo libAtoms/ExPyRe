@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,16 +28,14 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="expyre package" href="expyre.html" />
     <link rel="prev" title="Command line utilities" href="command_line.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
+    <meta name="docsearch:language" content="None">
     
 
     <!-- Google Analytics -->
@@ -280,7 +278,7 @@ title="Print to PDF"
               <div>
                 
   <div class="section" id="unit-testing">
-<span id="id1"></span><h1>Unit testing<a class="headerlink" href="#unit-testing" title="Permalink to this heading">#</a></h1>
+<span id="id1"></span><h1>Unit testing<a class="headerlink" href="#unit-testing" title="Permalink to this headline">#</a></h1>
 <p>Unit tests use <code class="docutils literal notranslate"><span class="pre">pytest`,</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">``tests</span></code> subdirectory.  The only flag that’s essentially required is <code class="docutils literal notranslate"><span class="pre">--basetemp</span></code>, since many queuing systems won’t work if you try to submit jobs from a temporary directory like <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, which
 <cite>pytest`</cite> uses by default, because those are not shared between the head node and compute nodes.  Pass <code class="docutils literal notranslate"><span class="pre">--basetemp</span></code>
 a directory under your home directory instead.  The <code class="docutils literal notranslate"><span class="pre">--clean</span></code> flag is recommended unless you are worried that something

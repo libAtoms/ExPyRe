@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,16 +28,14 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Command line utilities" href="command_line.html" />
     <link rel="prev" title="Restarting an interrupted process" href="restarting.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
+    <meta name="docsearch:language" content="None">
     
 
     <!-- Google Analytics -->
@@ -337,9 +335,9 @@ title="Print to PDF"
               <div>
                 
   <div class="section" id="environment-variables">
-<span id="id1"></span><h1>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this heading">#</a></h1>
+<span id="id1"></span><h1>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">#</a></h1>
 <div class="section" id="at-expyre-runtime">
-<h2>At expyre runtime<a class="headerlink" href="#at-expyre-runtime" title="Permalink to this heading">#</a></h2>
+<h2>At expyre runtime<a class="headerlink" href="#at-expyre-runtime" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">EXPYRE_RETRY</span></code>: ‘n t’ number of tries <code class="docutils literal notranslate"><span class="pre">n</span></code> and wait time in seconds <code class="docutils literal notranslate"><span class="pre">t</span></code> if subprocess run fails, default ‘3 5’</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">EXPYRE_ROOT</span></code>: override path to root directory for <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, <code class="docutils literal notranslate"><span class="pre">JobsDB</span></code>, and stage directories</p></li>
@@ -349,7 +347,7 @@ title="Print to PDF"
 </ul>
 </div>
 <div class="section" id="available-in-submitted-job-scripts">
-<h2>Available in submitted job scripts<a class="headerlink" href="#available-in-submitted-job-scripts" title="Permalink to this heading">#</a></h2>
+<h2>Available in submitted job scripts<a class="headerlink" href="#available-in-submitted-job-scripts" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">EXPYRE_NUM_NODES</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">EXPYRE_NUM_CORES</span></code></p></li>
@@ -357,7 +355,7 @@ title="Print to PDF"
 </ul>
 </div>
 <div class="section" id="only-for-pytest">
-<h2>Only for pytest<a class="headerlink" href="#only-for-pytest" title="Permalink to this heading">#</a></h2>
+<h2>Only for pytest<a class="headerlink" href="#only-for-pytest" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">EXPYRE_PYTEST_SSH</span></code>: path to ssh to use (instead of <code class="docutils literal notranslate"><span class="pre">/usr/bin/ssh</span></code>) in pytest <code class="docutils literal notranslate"><span class="pre">test_subprocess.py</span></code> (all higher level tests use <code class="docutils literal notranslate"><span class="pre">remsh_cmd</span></code> item for system in <code class="docutils literal notranslate"><span class="pre">config.json</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">EXPYRE_PYTEST_SYSTEMS</span></code>: regexp to use to filter systems from those available in <code class="docutils literal notranslate"><span class="pre">$HOME/.expyre/config.json</span></code></p></li>

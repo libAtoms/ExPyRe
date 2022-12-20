@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,16 +28,14 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Restarting an interrupted process" href="restarting.html" />
     <link rel="prev" title="Resources" href="resources.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
+    <meta name="docsearch:language" content="None">
     
 
     <!-- Google Analytics -->
@@ -405,10 +403,10 @@ title="Print to PDF"
               <div>
                 
   <div class="section" id="scheduler-configuration-file">
-<span id="config"></span><h1>Scheduler Configuration file<a class="headerlink" href="#scheduler-configuration-file" title="Permalink to this heading">#</a></h1>
+<span id="config"></span><h1>Scheduler Configuration file<a class="headerlink" href="#scheduler-configuration-file" title="Permalink to this headline">#</a></h1>
 <p>The description of the available systems and associated resources is in a <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</p>
 <div class="section" id="file-format">
-<h2>File format<a class="headerlink" href="#file-format" title="Permalink to this heading">#</a></h2>
+<h2>File format<a class="headerlink" href="#file-format" title="Permalink to this headline">#</a></h2>
 <p>The top level structure is a single dict with one <code class="docutils literal notranslate"><span class="pre">&quot;systems&quot;</span></code> key with a dict value, containing
 one key-value pair for each system. The key is the name of the system (used to select
 the system when evaluating the function).  See <code class="docutils literal notranslate"><span class="pre">expyre.System</span></code> docstring for full list. The value is a dict with the following keys:</p>
@@ -425,7 +423,7 @@ the system when evaluating the function).  See <code class="docutils literal not
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;partitions&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;queues&quot;</span></code>: dict with partitions/queues/node-type names as keys and dict of node properties as values.</p></li>
 </ul>
 <div class="section" id="node-property-dict-includes">
-<h3>Node property dict includes<a class="headerlink" href="#node-property-dict-includes" title="Permalink to this heading">#</a></h3>
+<h3>Node property dict includes<a class="headerlink" href="#node-property-dict-includes" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;num_cores&quot;</span></code>: int number of cores per node</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;max_time&quot;</span></code>: max time, int for seconds, str for <code class="docutils literal notranslate"><span class="pre">&quot;&lt;N&gt;[smhd]&quot;</span></code> (case insensitive) or <code class="docutils literal notranslate"><span class="pre">&quot;&lt;dd&gt;-&lt;hh&gt;:&lt;mm&gt;:&lt;ss&gt;&quot;</span></code>. Leading parts are optional, so N1:N2 is N1 minutes + N2 seconds.</p></li>
@@ -433,7 +431,7 @@ the system when evaluating the function).  See <code class="docutils literal not
 </ul>
 </div>
 <div class="section" id="format-keys-used-in-header">
-<h3>format() keys used in header<a class="headerlink" href="#format-keys-used-in-header" title="Permalink to this heading">#</a></h3>
+<h3>format() keys used in header<a class="headerlink" href="#format-keys-used-in-header" title="Permalink to this headline">#</a></h3>
 <p>Available keys in <code class="docutils literal notranslate"><span class="pre">node_dict</span></code> which are normally used in this template:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;num_nodes&quot;</span></code>: int total number of nodes</p></li>
@@ -451,7 +449,7 @@ than the number per node, <code class="docutils literal notranslate"><span class
 </div>
 </div>
 <div class="section" id="configuration-file-location-and-project-scope">
-<h2>Configuration file location and project scope<a class="headerlink" href="#configuration-file-location-and-project-scope" title="Permalink to this heading">#</a></h2>
+<h2>Configuration file location and project scope<a class="headerlink" href="#configuration-file-location-and-project-scope" title="Permalink to this headline">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">expyre</span></code> root dir is the location of the jobs database and staging directories for each function call.
 By setting this appropriately the namespace associated with different projects can be separated.</p>
 <p>If the <code class="docutils literal notranslate"><span class="pre">EXPYRE_ROOT</span></code> env var is set, it is used as location for <code class="docutils literal notranslate"><span class="pre">config.json</span></code> as well as the <code class="docutils literal notranslate"><span class="pre">expyre</span></code> root.
@@ -465,11 +463,11 @@ each system each key-value pair is overwritten, so you cannot directly disable o
 the entire <code class="docutils literal notranslate"><span class="pre">&quot;partitions&quot;</span></code> dict.</p>
 </div>
 <div class="section" id="default-header-lines">
-<h2>Default header lines<a class="headerlink" href="#default-header-lines" title="Permalink to this heading">#</a></h2>
+<h2>Default header lines<a class="headerlink" href="#default-header-lines" title="Permalink to this headline">#</a></h2>
 <p>Below are the default headder lines added to every submission script.
 Values between curly brackets get filled in from <cite>Resources</cite> dictionary.</p>
 <div class="section" id="slurm">
-<h3>Slurm<a class="headerlink" href="#slurm" title="Permalink to this heading">#</a></h3>
+<h3>Slurm<a class="headerlink" href="#slurm" title="Permalink to this headline">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --job-name={id}</span>
 <span class="c1">#SBATCH --partition={partition}</span>
 <span class="c1">#SBATCH --time={max_time}</span>
@@ -479,7 +477,7 @@ Values between curly brackets get filled in from <cite>Resources</cite> dictiona
 </div>
 </div>
 <div class="section" id="sun-grid-engine">
-<h3>Sun Grid Engine<a class="headerlink" href="#sun-grid-engine" title="Permalink to this heading">#</a></h3>
+<h3>Sun Grid Engine<a class="headerlink" href="#sun-grid-engine" title="Permalink to this headline">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#$ -N N_{id}</span>
 <span class="c1">#$ -q {partition}</span>
 <span class="c1">#$ -l h_rt={max_time}</span>
@@ -492,7 +490,7 @@ Values between curly brackets get filled in from <cite>Resources</cite> dictiona
 </div>
 </div>
 <div class="section" id="pbs">
-<h3>PBS<a class="headerlink" href="#pbs" title="Permalink to this heading">#</a></h3>
+<h3>PBS<a class="headerlink" href="#pbs" title="Permalink to this headline">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#PBS -N N_{id}</span>
 <span class="c1">#PBS -q {partition}</span>
 <span class="c1">#PBS -l walltime={max_time}</span>
@@ -505,7 +503,7 @@ Values between curly brackets get filled in from <cite>Resources</cite> dictiona
 </div>
 </div>
 <div class="section" id="config-json-example">
-<h2>config.json example<a class="headerlink" href="#config-json-example" title="Permalink to this heading">#</a></h2>
+<h2>config.json example<a class="headerlink" href="#config-json-example" title="Permalink to this headline">#</a></h2>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;systems&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;local&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">        </span><span class="nt">&quot;remsh_cmd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/usr/bin/ssh&quot;</span><span class="p">,</span><span class="w"></span>
