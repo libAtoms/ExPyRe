@@ -29,9 +29,16 @@ from .jobsdb import JobsDB
 from .units import time_to_sec
 
 class ExPyReJobDiedError(Exception):
+    """Exception that is raised when ExPyRe remote job appears to have been killed
+    for reasons other than the python process raising an exception, e.g. if it was
+    out of time in the queuing system.
+    """
     pass
 
 class ExPyReTimeoutError(TimeoutError):
+    """Exception raised when ExPyRe gave up waiting for a job to finish because it
+    exceeded the timeout value
+    """
     pass
 
 class ExPyRe:
@@ -719,9 +726,6 @@ class ExPyRe:
                         config.db.update(self.id, status=self.status)
                         raise ExPyReJobDiedError(f'Job {self.id} has remote status {remote_status} but no _succeeded or _error\n'
                                                  f'stdout: {stdout}\nstderr: {stderr}\njob stdout: {job_stdout}\njob stderr: {job_stderr}')
-                        # raise RuntimeError(f'Job {self.id} got remote status {remote_status} which is not '
-                                            # '"queued", "running", or "held", but neither "_succeeded" nor '
-                                            # '"_error" file exists')
                     # give it one more chance, perhaps queuing system status and file are slow to sync to head node
                     warnings.warn(f'Job {self.id} has no _succeeded or _error file, but remote status {remote_status} is '
                                    'not "queued", "held", or "running". Giving it one more chance.')
@@ -757,12 +761,15 @@ class ExPyRe:
                     sys.stderr.write('\n')
                     sys.stderr.flush()
                 if (self.stage_dir / "_expyre_job_exception").is_file():
+                    # reraise python exception that caused job to fail
                     with open(self.stage_dir / "_expyre_job_exception", "rb") as fin:
                         exc = pickle.load(fin)
                     raise exc
                 else:
-                    raise RuntimeError(f'Remote job {self.id} failed with no exception but remote status {remote_status} error_msg {error_msg}\n'
-                                       f'stdout: {stdout}\nstderr: {stderr}\njob stdout: {job_stdout}\njob stderr: {job_stderr}')
+                    raise ExPyReJobDiedError(f'Remote job {self.id} failed with no exception but remote status {remote_status} '
+                                             f'error_msg {error_msg}\n'
+                                             f'stdout: {stdout}\nstderr: {stderr}\n'
+                                             f'job stdout: {job_stdout}\njob stderr: {job_stderr}')
 
             out_of_time = (timeout is not None) and (timeout >= 0) and (time.time() - start_time > timeout)
 
