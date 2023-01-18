@@ -261,20 +261,20 @@ title="Fullscreen mode"
 <span class="kn">from</span> <span class="nn">.units</span> <span class="kn">import</span> <span class="n">time_to_sec</span>
 
 <div class="viewcode-block" id="ExPyReJobDiedError"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyReJobDiedError">[docs]</a><span class="k">class</span> <span class="nc">ExPyReJobDiedError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Exception that is raised when ExPyRe remote job appears to have been killed</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception that is raised when ExPyRe remote job appears to have been killed</span>
 <span class="sd">    for reasons other than the python process raising an exception, e.g. if it was</span>
 <span class="sd">    out of time in the queuing system.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="ExPyReTimeoutError"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyReTimeoutError">[docs]</a><span class="k">class</span> <span class="nc">ExPyReTimeoutError</span><span class="p">(</span><span class="ne">TimeoutError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Exception raised when ExPyRe gave up waiting for a job to finish because it</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception raised when ExPyRe gave up waiting for a job to finish because it</span>
 <span class="sd">    exceeded the timeout value</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="ExPyRe"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe">[docs]</a><span class="k">class</span> <span class="nc">ExPyRe</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create Queued Remote Function object, pickles function and inputs, stores files</span>
 <span class="sd">    in local stage dir, and adds to job database.</span>
 
@@ -529,7 +529,7 @@ title="Fullscreen mode"
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_copy</span><span class="p">(</span><span class="n">in_dir</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">file_glob</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Copy files from in_dir to out_dir, including globs in filenames.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Copy files from in_dir to out_dir, including globs in filenames.</span>
 <span class="sd">        If file_glob is absolute, file or directory is copied into out_dir with all of file&#39;s</span>
 <span class="sd">            leading path components remove, i.e. file_glob -&gt; out_dir / file_glob.name</span>
 <span class="sd">        Otherwise, file_glob is copied into out_dir with all its (relative) components preserved,</span>
@@ -598,7 +598,7 @@ title="Fullscreen mode"
 
 <div class="viewcode-block" id="ExPyRe.from_jobsdb"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.from_jobsdb">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">from_jobsdb</span><span class="p">(</span><span class="n">db_jobs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a list of ExPyRe objects from JobsDB records</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a list of ExPyRe objects from JobsDB records</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">		----------</span>
@@ -635,7 +635,7 @@ title="Fullscreen mode"
 
 <div class="viewcode-block" id="ExPyRe.start"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">system_name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;EXPYRE_SYS&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">header_extra</span><span class="o">=</span><span class="p">[],</span>
               <span class="n">exact_fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">partial_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">python_cmd</span><span class="o">=</span><span class="s1">&#39;python3&#39;</span><span class="p">,</span> <span class="n">force_rerun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Start a job on a remote machine</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start a job on a remote machine</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -696,7 +696,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="ExPyRe.sync_remote_results_status"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.sync_remote_results_status">[docs]</a>    <span class="k">def</span> <span class="nf">sync_remote_results_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sync_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force_sync</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Sync files associated with results from remote machine to local stage dirs and</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sync files associated with results from remote machine to local stage dirs and</span>
 <span class="sd">        updates &#39;remote_status&#39; in jobsdb.  Note that both have to happen because other</span>
 <span class="sd">        functions assume that if remote status has been updated files have been staged back</span>
 <span class="sd">        as well.</span>
@@ -729,7 +729,7 @@ title="Fullscreen mode"
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_sync_remote_results_status_ll</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">jobs_to_sync</span><span class="p">,</span> <span class="n">n_group</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">cli</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Low level part of syncing jobs.  Gets remote files _and_ updates &#39;remote_status&#39;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Low level part of syncing jobs.  Gets remote files _and_ updates &#39;remote_status&#39;</span>
 <span class="sd">        field in jobsdb.  Note that both have to happen because other functions assume that</span>
 <span class="sd">        if remote status has been updated files have been staged back as well.</span>
 
@@ -779,7 +779,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="ExPyRe.clean"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.clean">[docs]</a>    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wipe</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">remote_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;clean the local and remote stage directories</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;clean the local and remote stage directories</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -815,9 +815,9 @@ title="Fullscreen mode"
                 <span class="n">system</span><span class="o">.</span><span class="n">clean_rundir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;_expyre_task_in.pckl&#39;</span><span class="p">,</span> <span class="s1">&#39;_expyre_job_succeeded&#39;</span><span class="p">],</span>
                                 <span class="n">dry_run</span><span class="o">=</span><span class="n">dry_run</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span> <span class="ow">or</span> <span class="n">dry_run</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">dry_run</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dry-run overwrite local dirs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_task_in.pckl&#39;</span><span class="si">}</span><span class="s2"> and &quot;</span>
-                      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_succeeded&#39;</span><span class="si">}</span><span class="s2">, and create &quot;</span>
-                      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_cleaned&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dry-run overwrite local dirs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;_expyre_task_in.pckl&#39;</span><span class="si">}</span><span class="s2"> and &quot;</span>
+                      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;_expyre_job_succeeded&#39;</span><span class="si">}</span><span class="s2">, and create &quot;</span>
+                      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;_expyre_job_cleaned&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># clean local stage dir</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_task_in.pckl&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
@@ -835,7 +835,7 @@ title="Fullscreen mode"
 
 
     <span class="k">def</span> <span class="nf">_read_stdout_err</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read all stdout and stderr files, from python run and from submitted job</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read all stdout and stderr files, from python run and from submitted job</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -866,7 +866,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="ExPyRe.get_results"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.get_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span> <span class="n">check_interval</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sync_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force_sync</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Get results from a remote job</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get results from a remote job</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1012,7 +1012,7 @@ title="Fullscreen mode"
 
                 <span class="c1"># progress info to stderr</span>
                 <span class="k">if</span> <span class="n">n_iter</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">10</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="p">(</span><span class="n">n_iter</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="p">(</span><span class="n">n_iter</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">remote_status</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                 <span class="k">if</span> <span class="n">n_iter</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">100</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
@@ -1025,7 +1025,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="ExPyRe.mark_processed"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.mark_processed">[docs]</a>    <span class="k">def</span> <span class="nf">mark_processed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Mark job as processed (usually after results have been stored someplace)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mark job as processed (usually after results have been stored someplace)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;processed&#39;</span>
         <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">)</span></div>

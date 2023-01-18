@@ -241,7 +241,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="System"><a class="viewcode-back" href="../../expyre.html#expyre.system.System">[docs]</a><span class="k">class</span> <span class="nc">System</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Interface for a System that can run jobs remotely, including staging files from</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Interface for a System that can run jobs remotely, including staging files from</span>
 <span class="sd">    a local directory to a (config-specified) remote directory, submitting it with the correct</span>
 <span class="sd">    kind of Scheduler, and staging back the results from the remote directory.  Does not report</span>
 <span class="sd">    any other status directly.</span>
@@ -272,7 +272,7 @@ title="Fullscreen mode"
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">partitions</span><span class="p">,</span> <span class="n">scheduler</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="p">[],</span> <span class="n">no_default_header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">commands</span><span class="o">=</span><span class="p">[],</span>
                  <span class="n">rundir</span><span class="o">=</span><span class="s1">&#39;run_expyre&#39;</span><span class="p">,</span> <span class="n">rundir_extra</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a remote system object</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a remote system object</span>
 
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -314,7 +314,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="System.submit"><a class="viewcode-back" href="../../expyre.html#expyre.system.System.submit">[docs]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">stage_dir</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">header_extra</span><span class="o">=</span><span class="p">[],</span> <span class="n">exact_fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">partial_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Submit a job on a remote machine, including staging out files</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Submit a job on a remote machine, including staging out files</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -400,7 +400,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="System.get_remotes"><a class="viewcode-back" href="../../expyre.html#expyre.system.System.get_remotes">[docs]</a>    <span class="k">def</span> <span class="nf">get_remotes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_dir</span><span class="p">,</span> <span class="n">subdir_glob</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;get data from directories of remotely running jobs</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;get data from directories of remotely running jobs</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -426,7 +426,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="System.clean_rundir"><a class="viewcode-back" href="../../expyre.html#expyre.system.System.clean_rundir">[docs]</a>    <span class="k">def</span> <span class="nf">clean_rundir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage_dir</span><span class="p">,</span> <span class="n">filenames</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;clean a remote stage directory</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;clean a remote stage directory</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>

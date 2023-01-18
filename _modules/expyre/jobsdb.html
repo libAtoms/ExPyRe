@@ -250,7 +250,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="JobsDB"><a class="viewcode-back" href="../../expyre.html#expyre.jobsdb.JobsDB">[docs]</a><span class="k">class</span> <span class="nc">JobsDB</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Database of jobs, currently implemented with sqlite.  Saves essential information</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Database of jobs, currently implemented with sqlite.  Saves essential information</span>
 <span class="sd">    on jobs, including local and remote id, local directory it&#39;s staged to, system</span>
 <span class="sd">    its been submitted to, and status.</span>
 
@@ -288,7 +288,7 @@ title="Fullscreen mode"
 
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_filename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create JobsDB obect</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create JobsDB obect</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -318,7 +318,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="JobsDB.add"><a class="viewcode-back" href="../../expyre.html#expyre.jobsdb.JobsDB.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">from_dir</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s1">&#39;created&#39;</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remote_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remote_status</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add a job to the DB</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a job to the DB</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -350,7 +350,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="JobsDB.remove"><a class="viewcode-back" href="../../expyre.html#expyre.jobsdb.JobsDB.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Remove a job from the DB</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove a job from the DB</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -365,7 +365,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="JobsDB.update"><a class="viewcode-back" href="../../expyre.html#expyre.jobsdb.JobsDB.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Update some field of job</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update some field of job</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -390,7 +390,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="JobsDB.jobs"><a class="viewcode-back" href="../../expyre.html#expyre.jobsdb.JobsDB.jobs">[docs]</a>    <span class="k">def</span> <span class="nf">jobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">readable</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Iterate through jobs</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Iterate through jobs</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -453,7 +453,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="JobsDB.unlock"><a class="viewcode-back" href="../../expyre.html#expyre.jobsdb.JobsDB.unlock">[docs]</a>    <span class="k">def</span> <span class="nf">unlock</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;unlocks the sqlite database&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;unlocks the sqlite database&quot;&quot;&quot;</span>
         <span class="c1"># create tmp</span>
         <span class="n">tmp_db_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db_filename</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db_filename</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.tmp&#39;</span><span class="p">)</span>
         <span class="n">new_db</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">tmp_db_file</span><span class="p">)</span>

@@ -262,7 +262,7 @@ title="Fullscreen mode"
 
 
 <span class="k">def</span> <span class="nf">_optionally_remote_args</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">shell</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="p">,</span> <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;_HOME_&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert args array into a shell call, optionally preceded by an ssh command</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert args array into a shell call, optionally preceded by an ssh command</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -314,7 +314,7 @@ title="Fullscreen mode"
 
 
 <div class="viewcode-block" id="subprocess_run"><a class="viewcode-back" href="../../expyre.html#expyre.subprocess.subprocess_run">[docs]</a><span class="k">def</span> <span class="nf">subprocess_run</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">script</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="s1">&#39;bash -lc&#39;</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;_HOME_&#39;</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;run a subprocess, optionally via ssh on a remote machine.  Raises RuntimeError for non-zero</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;run a subprocess, optionally via ssh on a remote machine.  Raises RuntimeError for non-zero</span>
 <span class="sd">    return status.</span>
 
 <span class="sd">    Parameters</span>
@@ -404,7 +404,7 @@ title="Fullscreen mode"
 
 <div class="viewcode-block" id="subprocess_copy"><a class="viewcode-back" href="../../expyre.html#expyre.subprocess.subprocess_copy">[docs]</a><span class="k">def</span> <span class="nf">subprocess_copy</span><span class="p">(</span><span class="n">from_files</span><span class="p">,</span> <span class="n">to_file</span><span class="p">,</span> <span class="n">from_host</span><span class="o">=</span><span class="s1">&#39;_LOCAL_&#39;</span><span class="p">,</span> <span class="n">to_host</span><span class="o">=</span><span class="s1">&#39;_LOCAL_&#39;</span><span class="p">,</span>
                     <span class="n">rcp_args</span><span class="o">=</span><span class="s1">&#39;-a&#39;</span><span class="p">,</span> <span class="n">rcp_cmd</span><span class="o">=</span><span class="s1">&#39;rsync&#39;</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remsh_flags</span><span class="o">=</span><span class="s1">&#39;-e&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Run a remote copy (e.g. rsync) in a subprocess, optionally to/from remote machine.  Exactly one</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a remote copy (e.g. rsync) in a subprocess, optionally to/from remote machine.  Exactly one</span>
 <span class="sd">    machine has to be specified, and relative paths on that machine are relative to its home dir, like</span>
 <span class="sd">    rsync.  If the specified machine is None the copy is local, but relative paths are still relative to</span>
 <span class="sd">    home dir.</span>
