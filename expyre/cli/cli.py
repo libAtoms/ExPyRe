@@ -136,7 +136,7 @@ def cli_sync(ctx, id, name, status, system):
 
     jobs = _get_jobs(id=id, name=name, status=status, system=system)
 
-    ExPyRe.sync_remote_results_status_ll(jobs, cli=True)
+    ExPyRe._sync_remote_results_status_ll(jobs, cli=True)
 
 
 @cli.command("db_unlock")
