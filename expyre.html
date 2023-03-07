@@ -1,437 +1,374 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>expyre package &#8212; ExPyRe  documentation</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'expyre';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="expyre.cli package" href="expyre.cli.html" />
     <link rel="prev" title="Unit testing" href="unit_testing.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">ExPyRe  documentation</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Contents:
- </span>
-</p>
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">ExPyRe  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="basic_use.html">
-   Basic use
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="resources.html">
-   Resources
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="config.html">
-   Scheduler Configuration file
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="restarting.html">
-   Restarting an interrupted process
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="environment_variables.html">
-   Environment Variables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="command_line.html">
-   Command line utilities
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="unit_testing.html">
-   Unit testing
-  </a>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
-   expyre package
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="expyre.cli.html">
-     expyre.cli package
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="expyre.schedulers.html">
-     expyre.schedulers package
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="basic_use.html">Basic use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Scheduler Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="restarting.html">Restarting an interrupted process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment_variables.html">Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line.html">Command line utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unit_testing.html">Unit testing</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">expyre package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="expyre.cli.html">expyre.cli package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html">expyre.schedulers package</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/expyre.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
 
-          
 
 
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/expyre.rst.txt"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.rst</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#subpackages">
-   Subpackages
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#submodules">
-   Submodules
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.config">
-   expyre.config module
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#global-variables">
-     Global variables
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.func">
-   expyre.func module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.jobsdb">
-   expyre.jobsdb module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.resources">
-   expyre.resources module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.subprocess">
-   expyre.subprocess module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.system">
-   expyre.system module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.units">
-   expyre.units module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.util">
-   expyre.util module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre">
-   Module contents
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>expyre package</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#subpackages">
-   Subpackages
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#submodules">
-   Submodules
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.config">
-   expyre.config module
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#global-variables">
-     Global variables
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.func">
-   expyre.func module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.jobsdb">
-   expyre.jobsdb module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.resources">
-   expyre.resources module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.subprocess">
-   expyre.subprocess module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.system">
-   expyre.system module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.units">
-   expyre.units module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre.util">
-   expyre.util module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-expyre">
-   Module contents
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>expyre package</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.config">expyre.config module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-variables">Global variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.config.init"><code class="docutils literal notranslate"><span class="pre">init()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.func">expyre.func module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe"><code class="docutils literal notranslate"><span class="pre">ExPyRe</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.cancel"><code class="docutils literal notranslate"><span class="pre">ExPyRe.cancel()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.clean"><code class="docutils literal notranslate"><span class="pre">ExPyRe.clean()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.from_jobsdb"><code class="docutils literal notranslate"><span class="pre">ExPyRe.from_jobsdb()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.get_results"><code class="docutils literal notranslate"><span class="pre">ExPyRe.get_results()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.id"><code class="docutils literal notranslate"><span class="pre">ExPyRe.id</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.mark_processed"><code class="docutils literal notranslate"><span class="pre">ExPyRe.mark_processed()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.start"><code class="docutils literal notranslate"><span class="pre">ExPyRe.start()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.sync_remote_results_status"><code class="docutils literal notranslate"><span class="pre">ExPyRe.sync_remote_results_status()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyReJobDiedError"><code class="docutils literal notranslate"><span class="pre">ExPyReJobDiedError</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyReTimeoutError"><code class="docutils literal notranslate"><span class="pre">ExPyReTimeoutError</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.jobsdb">expyre.jobsdb module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB"><code class="docutils literal notranslate"><span class="pre">JobsDB</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.add"><code class="docutils literal notranslate"><span class="pre">JobsDB.add()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.jobs"><code class="docutils literal notranslate"><span class="pre">JobsDB.jobs()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.possible_status"><code class="docutils literal notranslate"><span class="pre">JobsDB.possible_status</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.remove"><code class="docutils literal notranslate"><span class="pre">JobsDB.remove()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.status_group"><code class="docutils literal notranslate"><span class="pre">JobsDB.status_group</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.unlock"><code class="docutils literal notranslate"><span class="pre">JobsDB.unlock()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.update"><code class="docutils literal notranslate"><span class="pre">JobsDB.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.resources">expyre.resources module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.resources.Resources"><code class="docutils literal notranslate"><span class="pre">Resources</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.resources.Resources.find_nodes"><code class="docutils literal notranslate"><span class="pre">Resources.find_nodes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.subprocess">expyre.subprocess module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.subprocess.FailedSubprocessWarning"><code class="docutils literal notranslate"><span class="pre">FailedSubprocessWarning</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.subprocess.subprocess_copy"><code class="docutils literal notranslate"><span class="pre">subprocess_copy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.subprocess.subprocess_run"><code class="docutils literal notranslate"><span class="pre">subprocess_run()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.system">expyre.system module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.system.System"><code class="docutils literal notranslate"><span class="pre">System</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.system.System.clean_rundir"><code class="docutils literal notranslate"><span class="pre">System.clean_rundir()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.system.System.get_remotes"><code class="docutils literal notranslate"><span class="pre">System.get_remotes()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.system.System.initialize_remote_rundir"><code class="docutils literal notranslate"><span class="pre">System.initialize_remote_rundir()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.system.System.run"><code class="docutils literal notranslate"><span class="pre">System.run()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.system.System.submit"><code class="docutils literal notranslate"><span class="pre">System.submit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.units">expyre.units module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.units.mem_to_kB"><code class="docutils literal notranslate"><span class="pre">mem_to_kB()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.units.time_to_HMS"><code class="docutils literal notranslate"><span class="pre">time_to_HMS()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.units.time_to_sec"><code class="docutils literal notranslate"><span class="pre">time_to_sec()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.util">expyre.util module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.util.remsh_cmd"><code class="docutils literal notranslate"><span class="pre">remsh_cmd()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre">Module contents</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <div class="section" id="expyre-package">
-<h1>expyre package<a class="headerlink" href="#expyre-package" title="Permalink to this headline">#</a></h1>
+<h1>expyre package<a class="headerlink" href="#expyre-package" title="Permalink to this heading">#</a></h1>
 <div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">#</a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="expyre.cli.html">expyre.cli package</a><ul>
@@ -442,11 +379,47 @@ title="Print to PDF"
 </li>
 <li class="toctree-l1"><a class="reference internal" href="expyre.schedulers.html">expyre.schedulers package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html#module-expyre.schedulers.base">expyre.schedulers.base module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html#module-expyre.schedulers.local">expyre.schedulers.local module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html#module-expyre.schedulers.pbs">expyre.schedulers.pbs module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html#module-expyre.schedulers.sge">expyre.schedulers.sge module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html#module-expyre.schedulers.slurm">expyre.schedulers.slurm module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html#module-expyre.schedulers.base">expyre.schedulers.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.base.Scheduler"><code class="docutils literal notranslate"><span class="pre">Scheduler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.base.Scheduler.cancel"><code class="docutils literal notranslate"><span class="pre">Scheduler.cancel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.base.Scheduler.hold"><code class="docutils literal notranslate"><span class="pre">Scheduler.hold()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.base.Scheduler.node_dict_env_var_commands"><code class="docutils literal notranslate"><span class="pre">Scheduler.node_dict_env_var_commands()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.base.Scheduler.release"><code class="docutils literal notranslate"><span class="pre">Scheduler.release()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.base.Scheduler.status"><code class="docutils literal notranslate"><span class="pre">Scheduler.status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.base.Scheduler.submit"><code class="docutils literal notranslate"><span class="pre">Scheduler.submit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.base.Scheduler.unset_scheduler_env_vars"><code class="docutils literal notranslate"><span class="pre">Scheduler.unset_scheduler_env_vars()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html#module-expyre.schedulers.local">expyre.schedulers.local module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.local.Local"><code class="docutils literal notranslate"><span class="pre">Local</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html#module-expyre.schedulers.pbs">expyre.schedulers.pbs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.pbs.PBS"><code class="docutils literal notranslate"><span class="pre">PBS</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.pbs.PBS.status"><code class="docutils literal notranslate"><span class="pre">PBS.status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.pbs.PBS.submit"><code class="docutils literal notranslate"><span class="pre">PBS.submit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html#module-expyre.schedulers.sge">expyre.schedulers.sge module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.sge.SGE"><code class="docutils literal notranslate"><span class="pre">SGE</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.sge.SGE.status"><code class="docutils literal notranslate"><span class="pre">SGE.status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.sge.SGE.submit"><code class="docutils literal notranslate"><span class="pre">SGE.submit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html#module-expyre.schedulers.slurm">expyre.schedulers.slurm module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.slurm.Slurm"><code class="docutils literal notranslate"><span class="pre">Slurm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.slurm.Slurm.status"><code class="docutils literal notranslate"><span class="pre">Slurm.status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expyre.schedulers.html#expyre.schedulers.slurm.Slurm.submit"><code class="docutils literal notranslate"><span class="pre">Slurm.submit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="expyre.schedulers.html#module-expyre.schedulers">Module contents</a></li>
 </ul>
 </li>
@@ -454,13 +427,13 @@ title="Print to PDF"
 </div>
 </div>
 <div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
 </div>
 <div class="section" id="module-expyre.config">
-<span id="expyre-config-module"></span><h2>expyre.config module<a class="headerlink" href="#module-expyre.config" title="Permalink to this headline">#</a></h2>
+<span id="expyre-config-module"></span><h2>expyre.config module<a class="headerlink" href="#module-expyre.config" title="Permalink to this heading">#</a></h2>
 <p>configuration for expyre, from <code class="docutils literal notranslate"><span class="pre">config.json</span></code> in <code class="docutils literal notranslate"><span class="pre">$EXPYRE_ROOT</span></code> or <code class="docutils literal notranslate"><span class="pre">$HOME/.expyre</span></code></p>
 <div class="section" id="global-variables">
-<h3>Global variables<a class="headerlink" href="#global-variables" title="Permalink to this headline">#</a></h3>
+<h3>Global variables<a class="headerlink" href="#global-variables" title="Permalink to this heading">#</a></h3>
 <dl class="simple">
 <dt>root: str</dt><dd><p>path of root directory for this run</p>
 </dd>
@@ -469,6 +442,7 @@ title="Print to PDF"
 <dt>db: JobsDB</dt><dd><p>expyre.jobsdb.JobsDB database of jobs</p>
 </dd>
 </dl>
+</div>
 <dl class="py function">
 <dt class="sig sig-object py" id="expyre.config.init">
 <span class="sig-prename descclassname"><span class="pre">expyre.config.</span></span><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/config.html#init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.config.init" title="Permalink to this definition">#</a></dt>
@@ -476,9 +450,8 @@ title="Print to PDF"
 </dd></dl>
 
 </div>
-</div>
 <div class="section" id="module-expyre.func">
-<span id="expyre-func-module"></span><h2>expyre.func module<a class="headerlink" href="#module-expyre.func" title="Permalink to this headline">#</a></h2>
+<span id="expyre-func-module"></span><h2>expyre.func module<a class="headerlink" href="#module-expyre.func" title="Permalink to this heading">#</a></h2>
 <p>Interface for remotely running python functions.  It pickles the function and
 its arguments, stages files (pickles as well as additional requested input files)
 to a local directory, submits to remote System (which stages out inputs, submits
@@ -659,7 +632,7 @@ exceeded the timeout value</p>
 
 </div>
 <div class="section" id="module-expyre.jobsdb">
-<span id="expyre-jobsdb-module"></span><h2>expyre.jobsdb module<a class="headerlink" href="#module-expyre.jobsdb" title="Permalink to this headline">#</a></h2>
+<span id="expyre-jobsdb-module"></span><h2>expyre.jobsdb module<a class="headerlink" href="#module-expyre.jobsdb" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="expyre.jobsdb.JobsDB">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expyre.jobsdb.</span></span><span class="sig-name descname"><span class="pre">JobsDB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/jobsdb.html#JobsDB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.jobsdb.JobsDB" title="Permalink to this definition">#</a></dt>
@@ -767,7 +740,7 @@ cleaned - job stage dir (local and remote) has been cleaned (large files overwri
 
 </div>
 <div class="section" id="module-expyre.resources">
-<span id="expyre-resources-module"></span><h2>expyre.resources module<a class="headerlink" href="#module-expyre.resources" title="Permalink to this headline">#</a></h2>
+<span id="expyre-resources-module"></span><h2>expyre.resources module<a class="headerlink" href="#module-expyre.resources" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="expyre.resources.Resources">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expyre.resources.</span></span><span class="sig-name descname"><span class="pre">Resources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_cores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_mem_tot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_mem_per_core</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partitions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">queues</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/resources.html#Resources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.resources.Resources" title="Permalink to this definition">#</a></dt>
@@ -820,7 +793,7 @@ synonymn is not implemented here).</p></li>
 
 </div>
 <div class="section" id="module-expyre.subprocess">
-<span id="expyre-subprocess-module"></span><h2>expyre.subprocess module<a class="headerlink" href="#module-expyre.subprocess" title="Permalink to this headline">#</a></h2>
+<span id="expyre-subprocess-module"></span><h2>expyre.subprocess module<a class="headerlink" href="#module-expyre.subprocess" title="Permalink to this heading">#</a></h2>
 <p>Functions dealing with running subprocesses, optionally on remote machines, handling
 quoting/shell escping, encoding/decoding, environment, and making sure that optional
 arguments needed for things like kerberized-ssh are set correctly.</p>
@@ -888,7 +861,7 @@ as the commands to run (-c for bash)</p></li>
 
 </div>
 <div class="section" id="module-expyre.system">
-<span id="expyre-system-module"></span><h2>expyre.system module<a class="headerlink" href="#module-expyre.system" title="Permalink to this headline">#</a></h2>
+<span id="expyre-system-module"></span><h2>expyre.system module<a class="headerlink" href="#module-expyre.system" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="expyre.system.System">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">expyre.system.</span></span><span class="sig-name descname"><span class="pre">System</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partitions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_default_header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commands</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rundir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'run_expyre'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rundir_extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remsh_cmd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/system.html#System"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.system.System" title="Permalink to this definition">#</a></dt>
@@ -977,7 +950,7 @@ to (remote) home directory</p></li>
 
 </div>
 <div class="section" id="module-expyre.units">
-<span id="expyre-units-module"></span><h2>expyre.units module<a class="headerlink" href="#module-expyre.units" title="Permalink to this headline">#</a></h2>
+<span id="expyre-units-module"></span><h2>expyre.units module<a class="headerlink" href="#module-expyre.units" title="Permalink to this heading">#</a></h2>
 <p>Units-related utilities for converting between various time and memory formats</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="expyre.units.mem_to_kB">
@@ -1019,7 +992,7 @@ str format “float[kKmMgGtT]b?”: memory in KB, MB, GB, TB, float cannot have 
 
 </div>
 <div class="section" id="module-expyre.util">
-<span id="expyre-util-module"></span><h2>expyre.util module<a class="headerlink" href="#module-expyre.util" title="Permalink to this headline">#</a></h2>
+<span id="expyre-util-module"></span><h2>expyre.util module<a class="headerlink" href="#module-expyre.util" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="expyre.util.remsh_cmd">
 <span class="sig-prename descclassname"><span class="pre">expyre.util.</span></span><span class="sig-name descname"><span class="pre">remsh_cmd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expyre/util.html#remsh_cmd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expyre.util.remsh_cmd" title="Permalink to this definition">#</a></dt>
@@ -1039,53 +1012,163 @@ str format “float[kKmMgGtT]b?”: memory in KB, MB, GB, TB, float cannot have 
 
 </div>
 <div class="section" id="module-expyre">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-expyre" title="Permalink to this headline">#</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-expyre" title="Permalink to this heading">#</a></h2>
 </div>
 </div>
 
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="unit_testing.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Unit testing</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="unit_testing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Unit testing</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="expyre.cli.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="expyre.cli.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">expyre.cli package</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.config">expyre.config module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global-variables">Global variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.config.init"><code class="docutils literal notranslate"><span class="pre">init()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.func">expyre.func module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe"><code class="docutils literal notranslate"><span class="pre">ExPyRe</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.cancel"><code class="docutils literal notranslate"><span class="pre">ExPyRe.cancel()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.clean"><code class="docutils literal notranslate"><span class="pre">ExPyRe.clean()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.from_jobsdb"><code class="docutils literal notranslate"><span class="pre">ExPyRe.from_jobsdb()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.get_results"><code class="docutils literal notranslate"><span class="pre">ExPyRe.get_results()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.id"><code class="docutils literal notranslate"><span class="pre">ExPyRe.id</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.mark_processed"><code class="docutils literal notranslate"><span class="pre">ExPyRe.mark_processed()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.start"><code class="docutils literal notranslate"><span class="pre">ExPyRe.start()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyRe.sync_remote_results_status"><code class="docutils literal notranslate"><span class="pre">ExPyRe.sync_remote_results_status()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyReJobDiedError"><code class="docutils literal notranslate"><span class="pre">ExPyReJobDiedError</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.func.ExPyReTimeoutError"><code class="docutils literal notranslate"><span class="pre">ExPyReTimeoutError</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.jobsdb">expyre.jobsdb module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB"><code class="docutils literal notranslate"><span class="pre">JobsDB</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.add"><code class="docutils literal notranslate"><span class="pre">JobsDB.add()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.jobs"><code class="docutils literal notranslate"><span class="pre">JobsDB.jobs()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.possible_status"><code class="docutils literal notranslate"><span class="pre">JobsDB.possible_status</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.remove"><code class="docutils literal notranslate"><span class="pre">JobsDB.remove()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.status_group"><code class="docutils literal notranslate"><span class="pre">JobsDB.status_group</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.unlock"><code class="docutils literal notranslate"><span class="pre">JobsDB.unlock()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.jobsdb.JobsDB.update"><code class="docutils literal notranslate"><span class="pre">JobsDB.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.resources">expyre.resources module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.resources.Resources"><code class="docutils literal notranslate"><span class="pre">Resources</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.resources.Resources.find_nodes"><code class="docutils literal notranslate"><span class="pre">Resources.find_nodes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.subprocess">expyre.subprocess module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.subprocess.FailedSubprocessWarning"><code class="docutils literal notranslate"><span class="pre">FailedSubprocessWarning</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.subprocess.subprocess_copy"><code class="docutils literal notranslate"><span class="pre">subprocess_copy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.subprocess.subprocess_run"><code class="docutils literal notranslate"><span class="pre">subprocess_run()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.system">expyre.system module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.system.System"><code class="docutils literal notranslate"><span class="pre">System</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.system.System.clean_rundir"><code class="docutils literal notranslate"><span class="pre">System.clean_rundir()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.system.System.get_remotes"><code class="docutils literal notranslate"><span class="pre">System.get_remotes()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.system.System.initialize_remote_rundir"><code class="docutils literal notranslate"><span class="pre">System.initialize_remote_rundir()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.system.System.run"><code class="docutils literal notranslate"><span class="pre">System.run()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.system.System.submit"><code class="docutils literal notranslate"><span class="pre">System.submit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.units">expyre.units module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.units.mem_to_kB"><code class="docutils literal notranslate"><span class="pre">mem_to_kB()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.units.time_to_HMS"><code class="docutils literal notranslate"><span class="pre">time_to_HMS()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.units.time_to_sec"><code class="docutils literal notranslate"><span class="pre">time_to_sec()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre.util">expyre.util module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expyre.util.remsh_cmd"><code class="docutils literal notranslate"><span class="pre">remsh_cmd()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-expyre">Module contents</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
   
-      &copy; Copyright .<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
-</div>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
