@@ -16,7 +16,11 @@ import warnings
 
 import shutil
 import tempfile
-import pickle
+try:
+    # use dill if available so that things like lambdas can be pickled
+    import dill as pickle
+except:
+    import pickle
 import hashlib
 import base64
 
@@ -725,7 +729,8 @@ class ExPyRe:
                         self.status = 'died'
                         config.db.update(self.id, status=self.status)
                         raise ExPyReJobDiedError(f'Job {self.id} has remote status {remote_status} but no _succeeded or _error\n'
-                                                 f'stdout: {stdout}\nstderr: {stderr}\njob stdout: {job_stdout}\njob stderr: {job_stderr}')
+                                                 f'stdout: {stdout}\nstderr: {stderr}\n'
+                                                 f'job stdout: {job_stdout}\njob stderr: {job_stderr}\n')
                     # give it one more chance, perhaps queuing system status and file are slow to sync to head node
                     warnings.warn(f'Job {self.id} has no _succeeded or _error file, but remote status {remote_status} is '
                                    'not "queued", "held", or "running". Giving it one more chance.')
