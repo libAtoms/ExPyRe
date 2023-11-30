@@ -205,8 +205,8 @@ def subprocess_copy(from_files, to_file, from_host='_LOCAL_', to_host='_LOCAL_',
         verbose output
     """
     # exactly one of from_host, to_host must be provided
-    if sum([from_host == '_LOCAL_', to_host == '_LOCAL_']) != 1:
-        raise RuntimeError(f'Exactly one of source host "{from_host}" or target host "{to_host}" must passed in')
+    if from_host != '_LOCAL_' and to_host != '_LOCAL_':
+        raise RuntimeError(f'Cannot have remote machine for both of source host "{from_host}" and "{to_host}"')
 
     if remsh_cmd is None:
         remsh_cmd = os.environ.get('EXPYRE_RSH', 'ssh')

@@ -68,12 +68,14 @@ def expyre_config(tmp_path):
             orig_remote_rundir[sys_name] = system.remote_rundir
 
         if system.host is None:
-            system.remote_rundir = str(tmp_path / f'pytest_expyre_rundir_{sys_name}' / orig_remote_rundir[sys_name])
+            if system.remote_rundir is not None:
+                system.remote_rundir = str(tmp_path / f'pytest_expyre_rundir_{sys_name}' / orig_remote_rundir[sys_name])
         else:
             # NOTE: should make this something unique for each run
             system.remote_rundir = str(Path(f'pytest_expyre_rundir_{sys_name}') / tmp_path.name / orig_remote_rundir[sys_name])
 
-        system.run(['mkdir', '-p', system.remote_rundir])
+        if system.remote_rundir is not None:
+            system.run(['mkdir', '-p', system.remote_rundir])
 
 
 # from https://stackoverflow.com/questions/62044541/change-pytest-working-directory-to-test-case-directory
