@@ -18,7 +18,8 @@ def test_working_job(tmp_path, expyre_config):
         if sys_name.startswith('_'):
             continue
 
-        remote_rundir = str(Path(systems[sys_name].remote_rundir) / f'stage_dummy_working_{sys_name}')
+        remote_rundir = Path(system.remote_rundir) if system.remote_rundir is not None else tmp_path
+        remote_rundir = str(remote_rundir / f'stage_dummy_working_{sys_name}')
         subprocess_run(system.host, ['rm', '-r', f'{remote_rundir}', ';', 'mkdir', '-p', f'{remote_rundir}'],
                        remsh_cmd=system.remsh_cmd)
 
@@ -110,25 +111,27 @@ def do_definitely_queued_job(tmp_path, expyre_config, sys_name, queued_job_resou
 
     sched = system.scheduler
 
+    remote_rundir = system.remote_rundir if system.remote_rundir is not None else str(tmp_path)
+
     # one job to take space, queued or running
-    system.run(['mkdir', '-p', system.remote_rundir + '/stage_dummy_queued_2'])
+    system.run(['mkdir', '-p', remote_rundir + '/stage_dummy_queued_2'])
 
     queued_job_resources[0]['max_time'] = '5m'
     r = Resources(**(queued_job_resources[0]))
     partition, node_dict = r.find_nodes(system.partitions)
-    remote_job_0 = sched.submit(id='dummy_id_2', remote_dir=system.remote_rundir + '/stage_dummy_queued_2', partition=partition,
+    remote_job_0 = sched.submit(id='dummy_id_2', remote_dir=remote_rundir + '/stage_dummy_queued_2', partition=partition,
                               commands=['pwd', 'echo BOB', 'sleep 120'], max_time=r.max_time,
                               header=system.queuing_sys_header, node_dict=node_dict)
     assert isinstance(remote_job_0, str) and len(remote_job_0) > 0
 
     # one job to get stuck
-    system.run(['mkdir', '-p', system.remote_rundir + '/stage_dummy_queued_3'])
+    system.run(['mkdir', '-p', remote_rundir + '/stage_dummy_queued_3'])
 
     queued_job_resources[1]['max_time'] = '5m'
     r = Resources(**(queued_job_resources[1]))
     partition, node_dict = r.find_nodes(system.partitions)
 
-    remote_job_1 = sched.submit(id='dummy_id_3', remote_dir=system.remote_rundir + '/stage_dummy_queued_3', partition=partition,
+    remote_job_1 = sched.submit(id='dummy_id_3', remote_dir=remote_rundir + '/stage_dummy_queued_3', partition=partition,
                               commands=['pwd', 'echo BOB', 'sleep 30'], max_time=r.max_time,
                               header=system.queuing_sys_header, node_dict=node_dict)
     assert isinstance(remote_job_1, str) and len(remote_job_1) > 0

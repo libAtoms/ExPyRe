@@ -48,7 +48,8 @@ class System:
             # set default for remote runs
             self.remote_rundir = 'run_expyre'
         if self.host is None and self.remote_rundir is not None and not Path(self.remote_rundir).is_absolute():
-            # make local runs be relative to $HOME
+            # make local runs with non-absolute rundir relative to $HOME, mimicking behavior
+            # of rsync with remote directory specifications
             self.remote_rundir = str(Path.home() / self.remote_rundir)
 
         if self.remote_rundir is not None:
