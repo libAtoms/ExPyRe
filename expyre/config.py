@@ -1,10 +1,14 @@
-"""configuration for expyre, from ``config.json`` in ``$EXPYRE_ROOT`` or ``$HOME/.expyre``
+"""configuration for expyre from ``config.json``. Use env var ``EXPYRE_ROOT`` is set,
+otherwise search from ``HOME`` (or ``/``, if current dir is not below ``HOME``) down to current directory
+for ``.expyre`` or ``_expyre``.  Configuration is parsed in the same order, with deeper directories
+modifying previous ones.  ``local_stage_dir`` is set to deepest directory unless it is set
+explicitly.
 
 Global variables
 ----------------
 
-root: str
-    path of root directory for this run
+local_stage_dir: str
+    path of directory to stage jobs into
 systems: dict
     dict of expyre.system.System that jobs can run on
 db: JobsDB
@@ -15,92 +19,80 @@ import os
 import json
 from pathlib import Path
 
+from copy import deepcopy
+
+def update_dict_leaves(d, d_loc):
+    for k_loc, v_loc in d_loc.items():
+        if v_loc == "_DELETE_" and k_loc in d:
+            del d[k_loc]
+        elif k_loc not in d:
+            # create new
+            d[k_loc] = deepcopy(v_loc)
+        else:
+            # override
+            if isinstance(v_loc, dict):
+                # dict, override leaves inside
+                assert isinstance(d[k_loc], dict)
+                update_dict_leaves(d[k_loc], v_loc)
+            else:
+                # not dict, overwrite
+                d[k_loc] = deepcopy(v_loc)
+
 # read config.json file from expyre root (~/.expyre or EXPYRE_ROOT),
 # and save important parts (root, systems, db) as symbols in this module
 
+def _get_config(root_dir, verbose=False):
+    """get configuration from root dir
+    """
+    if root_dir == "@.":
+        if verbose: print("Searching directories")
+        # search the path
+        dirs = []
+        cur_dir = Path.cwd()
+        while True:
+            if (cur_dir / ".expyre").exists():
+                if (cur_dir / "_expyre").exists():
+                    raise RuntimeError(f"Found both .expyre and _expyre in {cur_dir}")
+                dirs.append(cur_dir / ".expyre")
+            elif (cur_dir / "_expyre").exists():
+                if (cur_dir / ".expyre").exists():
+                    raise RuntimeError(f"Found both .expyre and _expyre in {cur_dir}")
+                dirs.append(cur_dir / "_expyre")
 
-def _rundir_extra(root):
-    if root.name == '.expyre' or root.name == '_expyre':
-        use_root = root.parent
-    else:
-        use_root = root
-    return os.environ.get('HOSTNAME', 'unkownhost') + '-' + str(use_root).replace('/', '_')
-
-
-def _get_config(root_dir):
-    if root_dir is not None:
-        root = Path(root_dir)
-    else:
-        # get global settings from $EXPYRE_ROOT or $HOME/.expyre
-        root = Path(os.environ.get('EXPYRE_ROOT', Path.home() / '.expyre'))
-
-    try:
-        with open(root / 'config.json') as fin:
-            config_data = json.load(fin)
-        found_config = True
-    except FileNotFoundError:
-        config_data = {'systems': {}}
-        found_config = False
-
-    if root_dir is not None or 'EXPYRE_ROOT' in os.environ:
-        # passed in or from env var, so no local overrides
-        return root, _rundir_extra(root), config_data
-
-    systems = config_data['systems']
-
-    # look for local _expyre directories that override these defaults, starting in
-    # $CWD and going up to $HOME (or /)
-    cur_dir = Path.cwd()
-    while cur_dir.absolute() != Path.home().absolute():
-        if (cur_dir / '_expyre').exists():
-            root = cur_dir / '_expyre'
-
-            try:
-                with open(cur_dir / '_expyre' / 'config.json') as fin:
-                    config_data_loc = json.load(fin)
-
-                assert len(config_data_loc) == 0 or set(config_data_loc.keys()) == {'systems'}
-
-                if 'systems' in config_data_loc:
-                    for sys_name, sys_data in config_data_loc['systems'].items():
-                        if sys_data is None:
-                            # delete
-                            try:
-                                del systems[sys_name]
-                            except KeyError:
-                                pass
-                        elif sys_name in systems:
-                            # update
-                            systems[sys_name].update(sys_data)
-                        else:
-                            # add
-                            assert isinstance(sys_data, dict)
-                            systems[sys_name] = sys_data
-
-                found_config = True
+            if cur_dir.parent == cur_dir or cur_dir.absolute() == Path.home().absolute():
+                # reached ~ or /
                 break
 
-            except FileNotFoundError:
-                pass
-
-        if cur_dir.parent == cur_dir:
-            # reached root, do not try to go further up
-            break
-        else:
             cur_dir = cur_dir.parent
+        dirs = list(reversed(dirs))
+    else:
+        if verbose: print("Exact directory", root_dir)
+        dirs = [Path(root_dir)]
 
-    if not found_config:
+    if verbose: print("Using directories", dirs)
+
+    config_data = {}
+    for cur_dir in dirs:
+        if verbose: print(f"Updating dict checking {cur_dir}")
+        if (cur_dir / "config.json").exists():
+            with open(cur_dir / "config.json") as fin:
+                d_loc = json.load(fin)
+                update_dict_leaves(config_data, d_loc)
+
+    if len(config_data) == 0:
         raise FileNotFoundError('Failed to find any config.json file')
 
-    return root, _rundir_extra(root), config_data
+    # use explicitly specified local_stage_dir, otherwise deepest config dir
+    local_stage_dir = config_data.get("local_stage_dir", dirs[-1])
 
+    return local_stage_dir, config_data
 
-root = None
+local_stage_dir = None
 systems = None
 db = None
 
 
-def init(root_dir=None, verbose=False):
+def init(root_dir, verbose=False):
     """Initializes ``root``, ``systems``, ``db``"""
 
     import os
@@ -109,14 +101,22 @@ def init(root_dir=None, verbose=False):
     from .system import System
     from .jobsdb import JobsDB
 
-    global root, systems, db
+    global local_stage_dir, systems, db
 
     try:
-        root, _rundir_extra, _config_data = _get_config(root_dir)
+        root, _config_data = _get_config(root_dir, verbose=verbose)
     except FileNotFoundError:
         systems = {}
         db = None
         return
+
+    if root.name == '.expyre' or root.name == '_expyre':
+        use_root = root.parent
+    else:
+        use_root = root
+    _rundir_extra = os.environ.get('HOSTNAME', 'unkownhost') + '-' + str(use_root).replace('/', '_')
+
+    local_stage_dir = _config_data.get("local_stage_dir", root)
 
     systems = {}
     for _sys_name in _config_data['systems']:
@@ -137,4 +137,4 @@ def init(root_dir=None, verbose=False):
 
 
 if 'pytest' not in sys.modules:
-    init()
+    init(os.environ.get("EXPYRE_ROOT"))
