@@ -134,7 +134,7 @@ def test_stdouterr(expyre_config):
 
 
 def do_stdouterr(sys_name):
-    from expyre.config import root, db
+    from expyre.config import db
 
     from expyre.func import ExPyRe
 
@@ -160,7 +160,8 @@ def do_stdouterr(sys_name):
 
 
 def do_work(sys_name):
-    from expyre.config import root, db
+    from expyre.config import local_stage_dir, db
+    local_stage_dir = Path(local_stage_dir)
 
     # must do this here rather than outside of functions because expyre.func imports config, and it's not
     # yet set up by conftest.py if imported outside the test function
@@ -170,9 +171,9 @@ def do_work(sys_name):
 
     print('job id', xpr.id)
 
-    assert (Path(root) / f'run_{xpr.id}').exists()
-    assert (Path(root) / f'run_{xpr.id}' / '_expyre_script_core.py').exists()
-    assert (Path(root) / f'run_{xpr.id}' / '_expyre_task_in.pckl').exists()
+    assert (local_stage_dir / f'run_{xpr.id}').exists()
+    assert (local_stage_dir / f'run_{xpr.id}' / '_expyre_script_core.py').exists()
+    assert (local_stage_dir / f'run_{xpr.id}' / '_expyre_task_in.pckl').exists()
 
     xpr.start(resources=Resources(num_nodes=1, max_time='5m'), system_name=sys_name)
 
