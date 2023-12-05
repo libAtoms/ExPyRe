@@ -195,7 +195,7 @@ class ExPyRe:
                 return
 
         # didn't find an old run, need to create new and unique stage dir
-        self.stage_dir = Path(tempfile.mkdtemp(prefix=f'run_{name}_{arghash}_', dir=config.root))
+        self.stage_dir = Path(tempfile.mkdtemp(prefix=f'run_{name}_{arghash}_', dir=config.local_stage_dir))
         # id is property derived from stage dir, so it is also unique
 
         if 'EXPYRE_TIMING_VERBOSE' in os.environ:
