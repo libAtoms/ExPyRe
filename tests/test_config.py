@@ -44,7 +44,7 @@ def test_config_nested(expyre_dummy_config, monkeypatch, tmp_path):
     (Path() / "sub1" / ".expyre").mkdir(parents=True)
     monkeypatch.chdir("sub1")
     print("CWD", Path.cwd())
-    config.init("@.", verbose=True)
+    config.init("@", verbose=True)
     print("config.local_stage_dir", config.local_stage_dir)
     # make sure stage dir is in cwd
     assert Path(config.local_stage_dir) == Path.cwd() / ".expyre"
@@ -53,7 +53,7 @@ def test_config_nested(expyre_dummy_config, monkeypatch, tmp_path):
     (Path() / "sub2" / "_expyre").mkdir(parents=True)
     monkeypatch.chdir("sub2")
     print("CWD", Path.cwd())
-    config.init("@.", verbose=True)
+    config.init("@", verbose=True)
     print("config.local_stage_dir", config.local_stage_dir)
     # make sure stage dir is in cwd
     assert Path(config.local_stage_dir) == Path.cwd() / "_expyre"
@@ -62,7 +62,7 @@ def test_config_nested(expyre_dummy_config, monkeypatch, tmp_path):
     (Path() / "sub3").mkdir(parents=True)
     monkeypatch.chdir("sub3")
     print("CWD", Path.cwd())
-    config.init("@.", verbose=True)
+    config.init("@", verbose=True)
     print("config.local_stage_dir", config.local_stage_dir)
     # make sure stage dir is _one above_ cwd
     assert Path(config.local_stage_dir) == Path.cwd().parent / "_expyre"
@@ -86,7 +86,7 @@ def test_config_override(expyre_dummy_config, monkeypatch, tmp_path):
     with open(".expyre/config.json", "w") as fout:
         fout.write(json.dumps({"systems": {sys_name: {"partitions": {"node32": {"max_time": 1}}}}}))
     print("CWD", Path.cwd())
-    config.init("@.", verbose=True)
+    config.init("@", verbose=True)
     print(config.systems[sys_name].partitions)
     
     orig_partitions["node32"]["max_time"] = 1

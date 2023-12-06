@@ -68,7 +68,10 @@ def _get_config(root_dir, verbose=False):
         dirs = list(reversed(dirs))
     else:
         if verbose: print("Exact directory", root_dir)
-        dirs = [Path(root_dir)]
+        root_dir = Path(root_dir)
+        if not root_dir.is_dir():
+            raise ValueError(f"expyre root {root_dir} is not a dir")
+        dirs = [root_dir]
 
     if verbose: print("Using directories", dirs)
 
