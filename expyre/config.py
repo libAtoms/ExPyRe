@@ -87,7 +87,7 @@ def _get_config(root_dir, verbose=False):
         raise FileNotFoundError('Failed to find any config.json file')
 
     # use explicitly specified local_stage_dir, otherwise deepest config dir
-    local_stage_dir = config_data.get("local_stage_dir", dirs[-1])
+    local_stage_dir = Path(config_data.get("local_stage_dir", dirs[-1]))
 
     return local_stage_dir, config_data
 
