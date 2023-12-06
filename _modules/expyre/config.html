@@ -339,7 +339,7 @@ document.write(`
         <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s1">&#39;Failed to find any config.json file&#39;</span><span class="p">)</span>
 
     <span class="c1"># use explicitly specified local_stage_dir, otherwise deepest config dir</span>
-    <span class="n">local_stage_dir</span> <span class="o">=</span> <span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;local_stage_dir&quot;</span><span class="p">,</span> <span class="n">dirs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">local_stage_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;local_stage_dir&quot;</span><span class="p">,</span> <span class="n">dirs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
 
     <span class="k">return</span> <span class="n">local_stage_dir</span><span class="p">,</span> <span class="n">config_data</span>
 
