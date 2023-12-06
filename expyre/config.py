@@ -1,8 +1,9 @@
-"""configuration for expyre from ``config.json``. Use env var ``EXPYRE_ROOT`` is set,
-otherwise search from ``HOME`` (or ``/``, if current dir is not below ``HOME``) down to current directory
-for ``.expyre`` or ``_expyre``.  Configuration is parsed in the same order, with deeper directories
-modifying previous ones.  ``local_stage_dir`` is set to deepest directory unless it is set
-explicitly.
+"""configuration for expyre from ``config.json``. Use env var ``EXPYRE_ROOT`` if set.
+Otherwise (or if env var is set to ``@``), search from ``HOME`` (or ``/``, if current
+dir is not below ``HOME``) down to current directory for ``.expyre`` or ``_expyre``.
+Configuration is parsed in the same order, with deeper directories modifying previous
+ones.  ``local_stage_dir`` is set to deepest directory unless it is set explicitly
+in one of the found ``config.json`` files.
 
 Global variables
 ----------------
@@ -44,7 +45,7 @@ def update_dict_leaves(d, d_loc):
 def _get_config(root_dir, verbose=False):
     """get configuration from root dir
     """
-    if root_dir == "@.":
+    if root_dir == "@":
         if verbose: print("Searching directories")
         # search the path
         dirs = []
@@ -137,4 +138,4 @@ def init(root_dir, verbose=False):
 
 
 if 'pytest' not in sys.modules:
-    init(os.environ.get("EXPYRE_ROOT"))
+    init(os.environ.get("EXPYRE_ROOT", "@"))
