@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expyre.resources &#8212; ExPyRe  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/expyre/resources';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ExPyRe  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../basic_use.html">Basic use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Scheduler Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../restarting.html">Restarting an interrupted process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment_variables.html">Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../command_line.html">Command line utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit_testing.html">Unit testing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../expyre.html">expyre package</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../expyre.cli.html">expyre.cli package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../expyre.schedulers.html">expyre.schedulers package</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for expyre.resources</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">.units</span> <span class="kn">import</span> <span class="n">time_to_sec</span><span class="p">,</span> <span class="n">mem_to_kB</span>
+
+
+<div class="viewcode-block" id="Resources"><a class="viewcode-back" href="../../expyre.html#expyre.resources.Resources">[docs]</a><span class="k">class</span> <span class="nc">Resources</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resources required for a task, including time, memory, cores/nodes, and particular</span>
+<span class="sd">    partitions/queues.  Mainly consists of code that selects appropriate partition/queue from</span>
+<span class="sd">    the list associated with each System.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    max_time: int, str</span>
+<span class="sd">        max time for job in sec (int) or time spec (str)</span>
+<span class="sd">    num_nodes: int</span>
+<span class="sd">        number of nodes to use, mutually exclusive with num_cores, one is required</span>
+<span class="sd">    num_cores: int</span>
+<span class="sd">        number of cores to use, mutually exclusive with num_nodes, one is required</span>
+<span class="sd">    max_mem_tot: int/str, default None</span>
+<span class="sd">        total max mem in kB (int) or memory spec (str), mutually exclusive with max_mem_per_core</span>
+<span class="sd">    max_mem_per_core: int/str, default None</span>
+<span class="sd">        per-core max mem in kB (int) or memory spec (str), mutually exclusive with max_mem_tot</span>
+<span class="sd">    partitions/queues: list(str), default None</span>
+<span class="sd">        regexps for types of node that can be used</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_time</span><span class="p">,</span> <span class="n">num_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_cores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_mem_tot</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_mem_per_core</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partitions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">queues</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">sum</span><span class="p">([</span><span class="n">num_nodes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">num_cores</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;exactly one of num_nodes </span><span class="si">{</span><span class="n">num_nodes</span><span class="si">}</span><span class="s2"> and num_cores </span><span class="si">{</span><span class="n">num_cores</span><span class="si">}</span><span class="s2"> is required&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">sum</span><span class="p">([</span><span class="n">max_mem_tot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_mem_per_core</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">])</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;at most one of max_mem_tot </span><span class="si">{</span><span class="n">max_mem_tot</span><span class="si">}</span><span class="s2"> and max_mem_per_core </span><span class="si">{</span><span class="n">max_mem_per_core</span><span class="si">}</span><span class="s2"> is required&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">sum</span><span class="p">([</span><span class="n">partitions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="n">queues</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">])</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;at most one of partitions </span><span class="si">{</span><span class="n">partitions</span><span class="si">}</span><span class="s2"> and queues </span><span class="si">{</span><span class="n">queues</span><span class="si">}</span><span class="s2"> is required&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">num_nodes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;got num_nodes </span><span class="si">{</span><span class="n">num_nodes</span><span class="si">}</span><span class="s2"> not int&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num_cores</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_cores</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;got num_cores </span><span class="si">{</span><span class="n">num_cores</span><span class="si">}</span><span class="s2"> not int&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_time</span> <span class="o">=</span> <span class="n">time_to_sec</span><span class="p">(</span><span class="n">max_time</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="s1">&#39;nodes&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">num_nodes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">(</span><span class="n">num_cores</span><span class="p">,</span> <span class="s1">&#39;cores&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">max_mem_tot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span> <span class="o">=</span> <span class="p">(</span><span class="n">mem_to_kB</span><span class="p">(</span><span class="n">max_mem_tot</span><span class="p">),</span> <span class="s1">&#39;tot&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">max_mem_per_core</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span> <span class="o">=</span> <span class="p">(</span><span class="n">mem_to_kB</span><span class="p">(</span><span class="n">max_mem_per_core</span><span class="p">),</span> <span class="s1">&#39;per_core&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">partitions</span> <span class="o">=</span> <span class="n">partitions</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partitions</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">partitions</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">partitions</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Resources.find_nodes"><a class="viewcode-back" href="../../expyre.html#expyre.resources.Resources.find_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">find_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partitions</span><span class="p">,</span> <span class="n">exact_fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">partial_node</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;find a node type that accommodates requested resources</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        partitions: dict</span>
+<span class="sd">            properties of available partitions (only used internally by system.py, so &quot;queues&quot;</span>
+<span class="sd">            synonymn is not implemented here).</span>
+<span class="sd">        exact_fit: bool, default True</span>
+<span class="sd">            only return nodes that exactly satisfy the number of cores</span>
+<span class="sd">        partial_node: bool, default False</span>
+<span class="sd">            allow jobs that take less than one entire node, overrides exact_fit</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        partition: str</span>
+<span class="sd">            name of partition selected</span>
+<span class="sd">        node_dict: dict</span>
+<span class="sd">            various quantities of node</span>
+
+<span class="sd">            * num_nodes: int, total number of nodes needed</span>
+<span class="sd">            * num_cores: int, total number of cores needed</span>
+<span class="sd">            * num_cores_per_node: int, number of cores per node for selected nodes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">selected_partitions</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="n">partial_node</span><span class="p">:</span>
+            <span class="n">exact_fit</span><span class="o">=</span><span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">partition</span><span class="p">,</span> <span class="n">node_spec</span> <span class="ow">in</span> <span class="n">partitions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">num_nodes</span><span class="p">,</span> <span class="n">num_cores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_num_nodes_num_cores</span><span class="p">(</span><span class="n">node_spec</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">([</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;^&#39;</span><span class="o">+</span><span class="n">nt_re</span><span class="o">+</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="n">partition</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">nt_re</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitions</span><span class="p">]):</span>
+                <span class="c1"># wrong node type</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_time&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_time</span> <span class="o">&gt;</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_time&#39;</span><span class="p">]:</span>
+                <span class="c1"># too much time</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">exact_fit</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;cores&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># wrong number of cores</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_mem&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;per_core&#39;</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_mem&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]))</span> <span class="ow">or</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;tot&#39;</span>  <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;max_mem&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_nodes</span><span class="p">))):</span>
+                    <span class="c1"># too much memory</span>
+                    <span class="k">continue</span>
+
+            <span class="n">selected_partitions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">partition</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_partitions</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Failed to find acceptable node type &#39;</span>
+                               <span class="sa">f</span><span class="s1">&#39;for </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s1"> with exact_fit=</span><span class="si">{</span><span class="n">exact_fit</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_partitions</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">excess_cores</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">nt</span> <span class="ow">in</span> <span class="n">selected_partitions</span><span class="p">:</span>
+                <span class="n">node_spec</span> <span class="o">=</span> <span class="n">partitions</span><span class="p">[</span><span class="n">nt</span><span class="p">]</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">num_cores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_num_nodes_num_cores</span><span class="p">(</span><span class="n">node_spec</span><span class="p">)</span>
+                <span class="n">excess_cores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">num_cores</span> <span class="o">%</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">])</span> <span class="o">%</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">])</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># look for first one that matches exactly</span>
+                <span class="n">partition_i</span> <span class="o">=</span> <span class="n">excess_cores</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="c1"># pick best among remaining</span>
+                <span class="n">max_extra</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">excess_cores</span><span class="p">)</span>
+                <span class="n">partition_i</span> <span class="o">=</span> <span class="n">excess_cores</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">max_extra</span><span class="p">)</span>
+            <span class="n">selected_partitions</span> <span class="o">=</span> <span class="p">[</span><span class="n">selected_partitions</span><span class="p">[</span><span class="n">partition_i</span><span class="p">]]</span>
+
+        <span class="n">partition</span> <span class="o">=</span> <span class="n">selected_partitions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">num_nodes</span><span class="p">,</span> <span class="n">num_cores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_num_nodes_num_cores</span><span class="p">(</span><span class="n">partitions</span><span class="p">[</span><span class="n">partition</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">partial_node</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">num_cores</span> <span class="o">&lt;=</span> <span class="n">partitions</span><span class="p">[</span><span class="n">partition</span><span class="p">][</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]:</span>
+                <span class="c1"># partial node</span>
+                <span class="n">num_cores_per_node</span> <span class="o">=</span> <span class="n">num_cores</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;partial_node only supported when it can be satisfied by 1 node&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># entire nodes</span>
+            <span class="n">num_cores_per_node</span> <span class="o">=</span> <span class="n">partitions</span><span class="p">[</span><span class="n">partition</span><span class="p">][</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span>
+            <span class="n">num_cores</span> <span class="o">=</span> <span class="n">num_nodes</span> <span class="o">*</span> <span class="n">num_cores_per_node</span>
+
+        <span class="k">return</span> <span class="n">partition</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;num_nodes&#39;</span><span class="p">:</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="s1">&#39;num_cores&#39;</span><span class="p">:</span> <span class="n">num_cores</span><span class="p">,</span> <span class="s1">&#39;num_cores_per_node&#39;</span><span class="p">:</span> <span class="n">num_cores_per_node</span><span class="p">}</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_get_num_nodes_num_cores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_spec</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; get totals numbers of nodes and cores for this task</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        node_spec: dict</span>
+<span class="sd">            node type, from partitions dict</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        num_nodes, num_cores: total number of sufficient nodes and cores</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;nodes&#39;</span><span class="p">:</span>
+            <span class="c1"># fill up requested # of nodes</span>
+            <span class="n">num_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">num_cores</span> <span class="o">=</span> <span class="n">num_nodes</span> <span class="o">*</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;cores&#39;</span><span class="p">:</span>
+            <span class="c1"># determine how many nodes are necessary</span>
+            <span class="n">num_cores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">num_nodes</span> <span class="o">=</span> <span class="n">num_cores</span> <span class="o">//</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">num_nodes</span> <span class="o">*</span> <span class="n">node_spec</span><span class="p">[</span><span class="s1">&#39;num_cores&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">num_cores</span><span class="p">:</span>
+                <span class="n">num_nodes</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;number of unknown quantity </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">, not &quot;nodes&quot; or &quot;cores&quot;&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">num_cores</span>
+
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;time=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_time</span><span class="si">}</span><span class="s1"> n=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="si">}</span><span class="s1"> mem=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_mem</span><span class="si">}</span><span class="s1"> partitions=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">partitions</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

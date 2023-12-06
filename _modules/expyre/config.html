@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expyre.config &#8212; ExPyRe  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/expyre/config';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ExPyRe  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../basic_use.html">Basic use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Scheduler Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../restarting.html">Restarting an interrupted process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment_variables.html">Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../command_line.html">Command line utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit_testing.html">Unit testing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../expyre.html">expyre package</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../expyre.cli.html">expyre.cli package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../expyre.schedulers.html">expyre.schedulers package</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for expyre.config</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;configuration for expyre from ``config.json``. Use env var ``EXPYRE_ROOT`` if set.</span>
+<span class="sd">Otherwise (or if env var is set to ``@``), search from ``HOME`` (or ``/``, if current</span>
+<span class="sd">dir is not below ``HOME``) down to current directory for ``.expyre`` or ``_expyre``.</span>
+<span class="sd">Configuration is parsed in the same order, with deeper directories modifying previous</span>
+<span class="sd">ones.  ``local_stage_dir`` is set to deepest directory unless it is set explicitly</span>
+<span class="sd">in one of the found ``config.json`` files.</span>
+
+<span class="sd">Global variables</span>
+<span class="sd">----------------</span>
+
+<span class="sd">local_stage_dir: str</span>
+<span class="sd">    path of directory to stage jobs into</span>
+<span class="sd">systems: dict</span>
+<span class="sd">    dict of expyre.system.System that jobs can run on</span>
+<span class="sd">db: JobsDB</span>
+<span class="sd">    expyre.jobsdb.JobsDB database of jobs</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<div class="viewcode-block" id="update_dict_leaves"><a class="viewcode-back" href="../../expyre.html#expyre.config.update_dict_leaves">[docs]</a><span class="k">def</span> <span class="nf">update_dict_leaves</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d_loc</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">k_loc</span><span class="p">,</span> <span class="n">v_loc</span> <span class="ow">in</span> <span class="n">d_loc</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">v_loc</span> <span class="o">==</span> <span class="s2">&quot;_DELETE_&quot;</span> <span class="ow">and</span> <span class="n">k_loc</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">d</span><span class="p">[</span><span class="n">k_loc</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">k_loc</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+            <span class="c1"># create new</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">k_loc</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">v_loc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># override</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v_loc</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="c1"># dict, override leaves inside</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">k_loc</span><span class="p">],</span> <span class="nb">dict</span><span class="p">)</span>
+                <span class="n">update_dict_leaves</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">k_loc</span><span class="p">],</span> <span class="n">v_loc</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># not dict, overwrite</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">k_loc</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">v_loc</span><span class="p">)</span></div>
+
+<span class="c1"># read config.json file from expyre root (~/.expyre or EXPYRE_ROOT),</span>
+<span class="c1"># and save important parts (root, systems, db) as symbols in this module</span>
+
+<span class="k">def</span> <span class="nf">_get_config</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;get configuration from root dir</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">root_dir</span> <span class="o">==</span> <span class="s2">&quot;@&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Searching directories&quot;</span><span class="p">)</span>
+        <span class="c1"># search the path</span>
+        <span class="n">dirs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cur_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">cur_dir</span> <span class="o">/</span> <span class="s2">&quot;.expyre&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">cur_dir</span> <span class="o">/</span> <span class="s2">&quot;_expyre&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found both .expyre and _expyre in </span><span class="si">{</span><span class="n">cur_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">dirs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur_dir</span> <span class="o">/</span> <span class="s2">&quot;.expyre&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">cur_dir</span> <span class="o">/</span> <span class="s2">&quot;_expyre&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">cur_dir</span> <span class="o">/</span> <span class="s2">&quot;.expyre&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found both .expyre and _expyre in </span><span class="si">{</span><span class="n">cur_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">dirs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur_dir</span> <span class="o">/</span> <span class="s2">&quot;_expyre&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">cur_dir</span><span class="o">.</span><span class="n">parent</span> <span class="o">==</span> <span class="n">cur_dir</span> <span class="ow">or</span> <span class="n">cur_dir</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span> <span class="o">==</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">.</span><span class="n">absolute</span><span class="p">():</span>
+                <span class="c1"># reached ~ or /</span>
+                <span class="k">break</span>
+
+            <span class="n">cur_dir</span> <span class="o">=</span> <span class="n">cur_dir</span><span class="o">.</span><span class="n">parent</span>
+        <span class="n">dirs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">dirs</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exact directory&quot;</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">)</span>
+        <span class="n">root_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root_dir</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">root_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;expyre root </span><span class="si">{</span><span class="n">root_dir</span><span class="si">}</span><span class="s2"> is not a dir&quot;</span><span class="p">)</span>
+        <span class="n">dirs</span> <span class="o">=</span> <span class="p">[</span><span class="n">root_dir</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using directories&quot;</span><span class="p">,</span> <span class="n">dirs</span><span class="p">)</span>
+
+    <span class="n">config_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">cur_dir</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Updating dict checking </span><span class="si">{</span><span class="n">cur_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cur_dir</span> <span class="o">/</span> <span class="s2">&quot;config.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cur_dir</span> <span class="o">/</span> <span class="s2">&quot;config.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                <span class="n">d_loc</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+                <span class="n">update_dict_leaves</span><span class="p">(</span><span class="n">config_data</span><span class="p">,</span> <span class="n">d_loc</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">config_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s1">&#39;Failed to find any config.json file&#39;</span><span class="p">)</span>
+
+    <span class="c1"># use explicitly specified local_stage_dir, otherwise deepest config dir</span>
+    <span class="n">local_stage_dir</span> <span class="o">=</span> <span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;local_stage_dir&quot;</span><span class="p">,</span> <span class="n">dirs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">local_stage_dir</span><span class="p">,</span> <span class="n">config_data</span>
+
+<span class="n">local_stage_dir</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">systems</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">db</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="init"><a class="viewcode-back" href="../../expyre.html#expyre.config.init">[docs]</a><span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes ``root``, ``systems``, ``db``&quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">os</span>
+
+    <span class="kn">from</span> <span class="nn">.units</span> <span class="kn">import</span> <span class="n">time_to_sec</span><span class="p">,</span> <span class="n">mem_to_kB</span>
+    <span class="kn">from</span> <span class="nn">.system</span> <span class="kn">import</span> <span class="n">System</span>
+    <span class="kn">from</span> <span class="nn">.jobsdb</span> <span class="kn">import</span> <span class="n">JobsDB</span>
+
+    <span class="k">global</span> <span class="n">local_stage_dir</span><span class="p">,</span> <span class="n">systems</span><span class="p">,</span> <span class="n">db</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">root</span><span class="p">,</span> <span class="n">_config_data</span> <span class="o">=</span> <span class="n">_get_config</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="n">systems</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;.expyre&#39;</span> <span class="ow">or</span> <span class="n">root</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;_expyre&#39;</span><span class="p">:</span>
+        <span class="n">use_root</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">parent</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">use_root</span> <span class="o">=</span> <span class="n">root</span>
+    <span class="n">_rundir_extra</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;HOSTNAME&#39;</span><span class="p">,</span> <span class="s1">&#39;unkownhost&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">use_root</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+
+    <span class="n">local_stage_dir</span> <span class="o">=</span> <span class="n">_config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;local_stage_dir&quot;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+
+    <span class="n">systems</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">_sys_name</span> <span class="ow">in</span> <span class="n">_config_data</span><span class="p">[</span><span class="s1">&#39;systems&#39;</span><span class="p">]:</span>
+        <span class="n">_sys_data</span> <span class="o">=</span> <span class="n">_config_data</span><span class="p">[</span><span class="s1">&#39;systems&#39;</span><span class="p">][</span><span class="n">_sys_name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;queues&#39;</span> <span class="ow">in</span> <span class="n">_sys_data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;partitions&#39;</span> <span class="ow">in</span> <span class="n">_sys_data</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;config systems data contains both partitions and queues&quot;</span><span class="p">)</span>
+            <span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_sys_data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;queues&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">_partitions</span> <span class="ow">in</span> <span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">]:</span>
+                <span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">][</span><span class="n">_partitions</span><span class="p">][</span><span class="s1">&#39;max_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_to_sec</span><span class="p">(</span><span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">][</span><span class="n">_partitions</span><span class="p">][</span><span class="s1">&#39;max_time&#39;</span><span class="p">])</span>
+                <span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">][</span><span class="n">_partitions</span><span class="p">][</span><span class="s1">&#39;max_mem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mem_to_kB</span><span class="p">(</span><span class="n">_sys_data</span><span class="p">[</span><span class="s1">&#39;partitions&#39;</span><span class="p">][</span><span class="n">_partitions</span><span class="p">][</span><span class="s1">&#39;max_mem&#39;</span><span class="p">])</span>
+        <span class="n">systems</span><span class="p">[</span><span class="n">_sys_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">System</span><span class="p">(</span><span class="n">rundir_extra</span><span class="o">=</span><span class="n">_rundir_extra</span><span class="p">,</span> <span class="o">**</span><span class="n">_sys_data</span><span class="p">)</span>
+
+    <span class="n">db</span> <span class="o">=</span> <span class="n">JobsDB</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s1">&#39;jobs.db&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;expyre config got systems </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">systems</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="s1">&#39;pytest&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="n">init</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EXPYRE_ROOT&quot;</span><span class="p">,</span> <span class="s2">&quot;@&quot;</span><span class="p">))</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1118 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expyre.func &#8212; ExPyRe  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/expyre/func';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ExPyRe  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../basic_use.html">Basic use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Scheduler Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../restarting.html">Restarting an interrupted process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment_variables.html">Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../command_line.html">Command line utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit_testing.html">Unit testing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../expyre.html">expyre package</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../expyre.cli.html">expyre.cli package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../expyre.schedulers.html">expyre.schedulers package</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for expyre.func</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Interface for remotely running python functions.  It pickles the function and</span>
+<span class="sd">    its arguments, stages files (pickles as well as additional requested input files)</span>
+<span class="sd">    to a local directory, submits to remote System (which stages out inputs, submits</span>
+<span class="sd">    on remote queuing system, and stages outputs back in), and then unpickles results</span>
+<span class="sd">    to return function result.  It also creates/updates the JobsDB entry for the job</span>
+<span class="sd">    as it does these steps.</span>
+
+<span class="sd">    Possible status (see JobsDB): created, submitted, started, succeeded/failed, processed, cleaned</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># use dill if available so that things like lambdas can be pickled</span>
+    <span class="kn">import</span> <span class="nn">dill</span> <span class="k">as</span> <span class="nn">pickle</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">base64</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">.subprocess</span> <span class="kn">import</span> <span class="n">subprocess_run</span>
+<span class="kn">from</span> <span class="nn">.resources</span> <span class="kn">import</span> <span class="n">Resources</span>
+<span class="kn">from</span> <span class="nn">.jobsdb</span> <span class="kn">import</span> <span class="n">JobsDB</span>
+<span class="kn">from</span> <span class="nn">.units</span> <span class="kn">import</span> <span class="n">time_to_sec</span>
+
+<div class="viewcode-block" id="ExPyReJobDiedError"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyReJobDiedError">[docs]</a><span class="k">class</span> <span class="nc">ExPyReJobDiedError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception that is raised when ExPyRe remote job appears to have been killed</span>
+<span class="sd">    for reasons other than the python process raising an exception, e.g. if it was</span>
+<span class="sd">    out of time in the queuing system.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ExPyReTimeoutError"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyReTimeoutError">[docs]</a><span class="k">class</span> <span class="nc">ExPyReTimeoutError</span><span class="p">(</span><span class="ne">TimeoutError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exception raised when ExPyRe gave up waiting for a job to finish because it</span>
+<span class="sd">    exceeded the timeout value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ExPyRe"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe">[docs]</a><span class="k">class</span> <span class="nc">ExPyRe</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create Queued Remote Function object, pickles function and inputs, stores files</span>
+<span class="sd">    in local stage dir, and adds to job database.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    </span>
+<span class="sd">    name: str</span>
+<span class="sd">    	name of job</span>
+<span class="sd">    input_files: list(str | Path), optional</span>
+<span class="sd">    	input files that function will need.  Relative paths without &#39;..&#39; path components</span>
+<span class="sd">    	files will be copied to same path relative to remote rundir on remote machine.</span>
+<span class="sd">    	Absolute paths will result in files copied into top level remote rundir</span>
+<span class="sd">    env_vars: list(str), optional</span>
+<span class="sd">    	list of env vars to set in remote queuing script</span>
+<span class="sd">    pre_run_commands: list(str), optional</span>
+<span class="sd">    	list of commands, one per line, to run at start of remote queuing script, after commands</span>
+<span class="sd">    	in config.json that are used for system</span>
+<span class="sd">    post_run_commands: list(str), optional</span>
+<span class="sd">    	list of commands, one per line, to run at end of remote queuing script, after actual task</span>
+<span class="sd">    output_files: list(str), optional</span>
+<span class="sd">    	output files to be copied back after evaluation is done</span>
+<span class="sd">    try_restart_from_prev: bool, default True</span>
+<span class="sd">    	try to restart from previous call, based on hash of function, arguments, and input files</span>
+<span class="sd">    hash_ignore: list(int or str), optional</span>
+<span class="sd">    	args elements (int) or kwargs items (str) to ignore when making hash to determine if run is</span>
+<span class="sd">    	identical to some previous one</span>
+<span class="sd">    function: Callable</span>
+<span class="sd">    	function to call</span>
+<span class="sd">    args: list</span>
+<span class="sd">    	positional arguments to function</span>
+<span class="sd">    kwargs: dict</span>
+<span class="sd">    	keyword arguments to function</span>
+<span class="sd">    _from_db_info: dict, optional (intended for internal use)</span>
+<span class="sd">    	restart is from db, and dict contains special arguments: remote_id, system_name, status, stage_dir</span>
+
+<span class="sd">    Possible status (see JobsDB): created, submitted, started, succeeded/failed/died, processed, cleaned</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">input_files</span><span class="o">=</span><span class="p">[],</span> <span class="n">env_vars</span><span class="o">=</span><span class="p">[],</span> <span class="n">pre_run_commands</span><span class="o">=</span><span class="p">[],</span> <span class="n">post_run_commands</span><span class="o">=</span><span class="p">[],</span>
+                 <span class="n">output_files</span><span class="o">=</span><span class="p">[],</span> <span class="n">try_restart_from_prev</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">hash_ignore</span><span class="o">=</span><span class="p">[],</span>
+                 <span class="n">function</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[],</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{},</span>
+                 <span class="n">_from_db_info</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">systems</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">config</span><span class="o">.</span><span class="n">db</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Configuration file was not found, ExPyRe object cannot be created&#39;</span><span class="p">)</span>
+
+        <span class="c1"># name will be used as part of path, can&#39;t have a few special things</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="s1">&#39;/&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">name</span> <span class="ow">and</span> <span class="s1">&#39;[&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">name</span> <span class="ow">and</span> <span class="s1">&#39;]&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">name</span> <span class="ow">and</span>
+                <span class="s1">&#39;{&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">name</span> <span class="ow">and</span> <span class="s1">&#39;}&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">name</span> <span class="ow">and</span> <span class="s1">&#39;*&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">name</span> <span class="ow">and</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ExPyRe </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> constructor start </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># arguments that are used when creating from a database entry</span>
+        <span class="k">if</span> <span class="n">_from_db_info</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span> <span class="o">=</span> <span class="n">_from_db_info</span><span class="p">[</span><span class="s1">&#39;remote_id&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">system_name</span> <span class="o">=</span> <span class="n">_from_db_info</span><span class="p">[</span><span class="s1">&#39;system_name&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">_from_db_info</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">_from_db_info</span><span class="p">[</span><span class="s1">&#39;stage_dir&#39;</span><span class="p">])</span>
+            <span class="k">return</span>
+
+        <span class="k">assert</span> <span class="n">function</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">system_name</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;created&#39;</span>
+        <span class="c1"># self.stage_dir is set below</span>
+
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">input_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">Path</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">input_files</span><span class="p">]</span>
+        <span class="n">env_vars</span> <span class="o">=</span> <span class="n">env_vars</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">pre_run_commands</span> <span class="o">=</span> <span class="n">pre_run_commands</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">post_run_commands</span> <span class="o">=</span> <span class="n">post_run_commands</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># check for valid input/output filenames</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">input_files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">([</span><span class="n">p</span> <span class="o">==</span> <span class="s1">&#39;..&#39;</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parts</span><span class="p">]):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Input path with &quot;..&quot; in input file &quot;</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">&quot; not supported&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">output_files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Absolute output path &quot;</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">&quot; not supported&#39;</span><span class="p">)</span>
+
+        <span class="c1"># pickle function and arguments</span>
+        <span class="n">pickled_func</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">((</span><span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ExPyRe </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> constructor starting hash </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># hash for unique identifier</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
+        <span class="c1"># hash on function</span>
+        <span class="n">h</span><span class="o">.</span><span class="n">update</span><span class="p">((</span><span class="n">function</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">+</span> <span class="n">function</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="c1"># hash on args, possibly ignoring some</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">))</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">hash_ignore</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">arg_i</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">arg_i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hash_ignore</span><span class="p">:</span>
+                <span class="n">h</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">arg_key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">arg_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hash_ignore</span><span class="p">:</span>
+                <span class="n">h</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">((</span><span class="n">arg_key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">arg_key</span><span class="p">])))</span>
+        <span class="c1"># hash on input filenames and content</span>
+        <span class="k">for</span> <span class="n">infile</span> <span class="ow">in</span> <span class="n">input_files</span><span class="p">:</span>
+            <span class="n">subfiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">infile</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">infile</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+                <span class="n">subfiles</span> <span class="o">+=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">infile</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">subfile</span> <span class="ow">in</span> <span class="n">subfiles</span><span class="p">:</span>
+                <span class="c1"># filename</span>
+                <span class="n">h</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">subfile</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+                <span class="k">if</span> <span class="n">subfile</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                    <span class="c1"># file contents</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">subfile</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                        <span class="n">h</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="c1"># create deterministic unique identifier that can be part of filename</span>
+        <span class="n">arghash</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">urlsafe_b64encode</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">digest</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">recreated</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="c1"># check if this task was successfully run before with matching id (name + arghash)</span>
+        <span class="k">if</span> <span class="n">try_restart_from_prev</span><span class="p">:</span>
+            <span class="c1"># NOTE: following loop will not match status == &#39;processed&#39; because such jobs are</span>
+            <span class="c1"># not guaranteed to have results available.  Is it a good idea to try to use those,</span>
+            <span class="c1"># if results actually seem to be available?</span>
+            <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">jobs</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">&#39;can_produce_results&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">arghash</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_.*&#39;</span><span class="p">):</span>
+                <span class="n">old_stage_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">&#39;from_dir&#39;</span><span class="p">])</span>
+                <span class="c1"># this also never happen</span>
+                <span class="k">if</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;succeeded&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">old_stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_succeeded&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Found previously run job with matching id &quot;</span><span class="si">{</span><span class="n">job</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&quot; &#39;</span>
+                                       <span class="sa">f</span><span class="s1">&#39;and status</span><span class="si">{</span><span class="n">job</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> but _succeeded file does not exist&#39;</span><span class="p">)</span>
+
+                <span class="c1"># confirm that name is consistent, which it has to be since it&#39;s part of id</span>
+                <span class="k">assert</span> <span class="n">name</span> <span class="o">==</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+
+                <span class="c1"># reconstruct job</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">=</span> <span class="n">old_stage_dir</span>
+
+                <span class="c1"># confirm that JobsDB id and self.id match, as they must be since self.id</span>
+                <span class="c1"># is derived from self.stage_dir (that&#39;s why self.stage_dir has to be set</span>
+                <span class="c1"># first) but they are stored separately in JobsDB</span>
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+
+                <span class="c1"># save remaining attributes</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;remote_id&#39;</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">system_name</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span>
+
+                <span class="c1"># set flag in case later routines need to treat it specially</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">recreated</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">return</span>
+
+        <span class="c1"># didn&#39;t find an old run, need to create new and unique stage dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;run_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">arghash</span><span class="si">}</span><span class="s1">_&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">local_stage_dir</span><span class="p">))</span>
+        <span class="c1"># id is property derived from stage dir, so it is also unique</span>
+
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ExPyRe </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> constructor starting pickle </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># write pickled function and arguments</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_task_in.pckl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+            <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pickled_func</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_output_files&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+                <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_files</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ExPyRe </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> constructor starting stage in files </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># stage in input files</span>
+        <span class="c1"># NOTE: does this require more thought?</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">input_files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">():</span>
+                <span class="c1"># copy absolute path into stage_dir stripping all leading components</span>
+                <span class="n">ExPyRe</span><span class="o">.</span><span class="n">_copy</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ExPyRe</span><span class="o">.</span><span class="n">_copy</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ExPyRe </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> constructor done stage in files </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+
+        <span class="c1"># script commands to touch file indicating job has started</span>
+        <span class="n">pre_run_commands</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;touch _expyre_job_started&#39;</span><span class="p">,</span> <span class="s1">&#39;(&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">pre_run_commands</span>
+
+        <span class="c1"># commands to set extra remote env vars</span>
+        <span class="k">for</span> <span class="n">env_var</span> <span class="ow">in</span> <span class="n">env_vars</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;=&#39;</span> <span class="ow">in</span> <span class="n">env_var</span><span class="p">:</span>
+                <span class="c1"># form is already var=value</span>
+                <span class="n">pre_run_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;export </span><span class="si">{</span><span class="n">env_var</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># get value from current environment</span>
+                <span class="n">pre_run_commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;export </span><span class="si">{</span><span class="n">env_var</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;env_var&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="c1"># save to file in stage dir</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_pre_run_commands&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+            <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pre_run_commands</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Below always write to temporary file and then mv to try to make creation of final files more atomic</span>
+
+        <span class="c1"># create core of remote job script</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_script_core.py&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+            <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;try:</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;    import pickle, traceback, sys</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;    with open(&quot;_expyre_task_in.pckl&quot;, &quot;rb&quot;) as fin:</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;        (function, args, kwargs) = pickle.load(fin)</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;    stdout_orig = sys.stdout</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;    stderr_orig = sys.stderr</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;    sys.stdout = open(&quot;_expyre_stdout&quot;, &quot;w&quot;)</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;    sys.stderr = open(&quot;_expyre_stderr&quot;, &quot;w&quot;)</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;    results = function(*args, **kwargs)</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;    sys.stdout = stdout_orig</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;    sys.stderr = stderr_orig</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;    with open(f&quot;_tmp_expyre_job_succeeded&quot;, &quot;wb&quot;) as fout:</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;        pickle.dump(results, fout)</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;except Exception as exc:</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;    with open(f&quot;_expyre_exception&quot;, &quot;wb&quot;) as fout:</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;        pickle.dump(exc, fout)</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;    with open(f&quot;_expyre_error&quot;, &quot;w&quot;) as fout:</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;        fout.write(f&quot;Exception: </span><span class="si">{exc}</span><span class="se">\\</span><span class="s1">n&quot;)</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;        traceback.print_exc(file=fout)</span><span class="se">\n</span><span class="s1">&#39;</span>
+                       <span class="s1">&#39;        raise</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="c1"># commands to check status and create final _succeeded or _error files</span>
+        <span class="n">post_run_commands</span> <span class="o">=</span> <span class="p">([</span><span class="s1">&#39;error_stat=$?&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">post_run_commands</span> <span class="o">+</span>
+                             <span class="p">[</span><span class="s1">&#39;exit $error_stat&#39;</span><span class="p">,</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;error_stat=$?&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;if [ $error_stat == 0 ]; then&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;    if [ -e _tmp_expyre_job_succeeded ]; then&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;        mv _tmp_expyre_job_succeeded _expyre_job_succeeded&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;    else&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;        echo &quot;No error code but _tmp_expyre_job_succeeded does not exist&quot; &gt; _tmp_expyre_job_error&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;        if [ -f _expyre_error ]; then&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;            cat _expyre_error &gt;&gt; _tmp_expyre_job_error&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;        fi&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;        mv _tmp_expyre_job_error _expyre_job_error&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;    fi&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;else&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;    if [ -e _expyre_exception ]; then&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;        mv _expyre_exception _expyre_job_exception&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;    fi&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;    if [ -e _expyre_error ]; then&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;        mv _expyre_error _expyre_job_error&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;    else&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;        echo &quot;ERROR STATUS FROM python $error_stat&quot; &gt; _tmp_expyre_job_error&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;        mv _tmp_expyre_job_error _expyre_job_error&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;    fi&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;fi&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;&#39;</span><span class="p">])</span>
+
+        <span class="c1"># save to file in stage dir</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_post_run_commands&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+            <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">post_run_commands</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">from_dir</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="p">),</span> <span class="n">status</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ExPyRe </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> constructor end </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_copy</span><span class="p">(</span><span class="n">in_dir</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">file_glob</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Copy files from in_dir to out_dir, including globs in filenames.</span>
+<span class="sd">        If file_glob is absolute, file or directory is copied into out_dir with all of file&#39;s</span>
+<span class="sd">            leading path components remove, i.e. file_glob -&gt; out_dir / file_glob.name</span>
+<span class="sd">        Otherwise, file_glob is copied into out_dir with all its (relative) components preserved,</span>
+<span class="sd">            i.e. in_dir / file_glob -&gt; out_dir / file_glob</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        in_dir: str or Path</span>
+<span class="sd">            input directory, None if file_glob is absolute</span>
+<span class="sd">        out_dir: str or Path</span>
+<span class="sd">            output directory</span>
+<span class="sd">        file_glob: str or Path</span>
+<span class="sd">            glob of file or directory to copy (recursively), absolute iff in_dir is None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">out_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
+        <span class="n">file_glob</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">file_glob</span><span class="p">)</span>
+
+        <span class="n">exclude_glob</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">file_glob</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">():</span>
+            <span class="n">strip_leading</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">assert</span> <span class="n">in_dir</span> <span class="ow">is</span> <span class="kc">None</span>
+
+            <span class="c1"># make in_dir root and file_glob relative to that, so that in_dir.glob(file_glob) works</span>
+            <span class="n">in_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">file_glob</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+            <span class="n">file_glob</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_glob</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file_glob</span><span class="o">.</span><span class="n">root</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">strip_leading</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">assert</span> <span class="n">in_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+            <span class="n">in_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">in_dir</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">in_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_glob</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span>
+                <span class="c1"># don&#39;t stage back internel expyre files</span>
+                <span class="n">exclude_glob</span> <span class="o">=</span> <span class="s1">&#39;_expyre*&#39;</span>
+                <span class="c1"># for some reason Path.glob(&#39;.&#39;) gives an error</span>
+                <span class="n">file_glob</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
+
+        <span class="n">in_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">in_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file_glob</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">exclude_glob</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">excluded_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">in_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">exclude_glob</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">excluded_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">in_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">in_files</span> <span class="k">if</span> <span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">excluded_files</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">in_files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File glob &quot;</span><span class="si">{</span><span class="n">file_glob</span><span class="si">}</span><span class="s1">&quot; (excluding </span><span class="si">{</span><span class="n">exclude_glob</span><span class="si">}</span><span class="s1">) in input_files does not match any files&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">in_file</span> <span class="ow">in</span> <span class="n">in_files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">strip_leading</span><span class="p">:</span>
+                <span class="n">rel_out_file</span> <span class="o">=</span> <span class="n">in_file</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rel_out_file</span> <span class="o">=</span> <span class="n">in_file</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">in_dir</span><span class="p">)</span>
+
+            <span class="n">out_file</span> <span class="o">=</span> <span class="n">out_dir</span> <span class="o">/</span> <span class="n">rel_out_file</span>
+
+            <span class="n">out_file</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">out_file</span><span class="p">,</span> <span class="n">dirs_exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">NotADirectoryError</span><span class="p">:</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">out_file</span><span class="p">)</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;run_&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ExPyRe.from_jobsdb"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.from_jobsdb">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_jobsdb</span><span class="p">(</span><span class="n">db_jobs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a list of ExPyRe objects from JobsDB records</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">		----------</span>
+
+<span class="sd">        db_jobs: dict or list(dict)</span>
+<span class="sd">            one or more jobs records returned from ``JobsDB.jobs()``</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list(ExPyRe)</span>
+<span class="sd">            created objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">db_jobs</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">db_jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">db_jobs</span><span class="p">]</span>
+
+        <span class="n">expyres</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">db_jobs</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+            <span class="n">expyres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ExPyRe</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">j</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+                                    <span class="n">_from_db_info</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;remote_id&#39;</span><span class="p">:</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;remote_id&#39;</span><span class="p">],</span> <span class="s1">&#39;system_name&#39;</span><span class="p">:</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">],</span>
+                                                   <span class="s1">&#39;stage_dir&#39;</span><span class="p">:</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;from_dir&#39;</span><span class="p">],</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]}))</span>
+        <span class="k">return</span> <span class="n">expyres</span></div>
+
+
+<div class="viewcode-block" id="ExPyRe.cancel"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="ow">in</span> <span class="n">JobsDB</span><span class="o">.</span><span class="n">status_group</span><span class="p">[</span><span class="s1">&#39;ongoing&#39;</span><span class="p">]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">systems</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">system_name</span><span class="p">]</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">cancel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="ExPyRe.start"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">system_name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;EXPYRE_SYS&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">header_extra</span><span class="o">=</span><span class="p">[],</span>
+              <span class="n">exact_fit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">partial_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">python_cmd</span><span class="o">=</span><span class="s1">&#39;python3&#39;</span><span class="p">,</span> <span class="n">force_rerun</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start a job on a remote machine</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        resoures: dict or Resources</span>
+<span class="sd">            resources to use for job, either Resources or dict of Resources constructor kwargs</span>
+<span class="sd">        system_name: str</span>
+<span class="sd">            name of system in config.systems</span>
+<span class="sd">        header_extra: list(str), optional</span>
+<span class="sd">            list of lines to add to queuing system header, appended to System.header[]</span>
+<span class="sd">        exact_fit: bool, default True</span>
+<span class="sd">            use only nodes that exactly match number of tasks</span>
+<span class="sd">        partial_node: bool, default False</span>
+<span class="sd">            allow jobs that take less than an entire node</span>
+<span class="sd">        python_cmd: str, default python3</span>
+<span class="sd">            name of python interpreter to use on remote machine</span>
+<span class="sd">        force_rerun: bool, default False</span>
+<span class="sd">            force a rerun even if self.status is not &quot;created&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">force_rerun</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">!=</span> <span class="s1">&#39;created&#39;</span><span class="p">:</span>
+            <span class="c1"># If job is not newly created, return instead of resubmitting</span>
+            <span class="c1"># First check that it is newly recreated, otherwise this shouldn&#39;t be happening</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">recreated</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">force_rerun</span><span class="p">:</span>
+            <span class="c1"># make sure remote dir is gone, otherwise submission below will fail</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clean</span><span class="p">(</span><span class="n">wipe</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remote_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ExPyRe </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> start() start </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resources</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">resources</span> <span class="o">=</span> <span class="n">Resources</span><span class="p">(</span><span class="o">**</span><span class="n">resources</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">system_name</span> <span class="o">=</span> <span class="n">system_name</span>
+        <span class="n">system</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">systems</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">system_name</span><span class="p">]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_pre_run_commands&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+            <span class="n">pre_run_commands</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_post_run_commands&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+            <span class="n">post_run_commands</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ExPyRe </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> start() calling system.submit </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">,</span> <span class="n">header_extra</span><span class="o">=</span><span class="n">header_extra</span><span class="p">,</span>
+                                       <span class="n">commands</span><span class="o">=</span><span class="p">(</span><span class="n">pre_run_commands</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">python_cmd</span><span class="si">}</span><span class="s1"> _expyre_script_core.py&#39;</span><span class="p">]</span> <span class="o">+</span>
+                                                 <span class="n">post_run_commands</span><span class="p">),</span>
+                                       <span class="n">exact_fit</span><span class="o">=</span><span class="n">exact_fit</span><span class="p">,</span> <span class="n">partial_node</span><span class="o">=</span><span class="n">partial_node</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ExPyRe </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> start() done system.submit </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;submitted&#39;</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">system_name</span><span class="p">,</span> <span class="n">remote_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span><span class="p">)</span>
+        <span class="c1"># make sure remote status is not done, so get_results() actually syncs new status before giving up</span>
+        <span class="k">if</span> <span class="n">force_rerun</span><span class="p">:</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">remote_status</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;EXPYRE_TIMING_VERBOSE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ExPyRe </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> start() end </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ExPyRe.sync_remote_results_status"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.sync_remote_results_status">[docs]</a>    <span class="k">def</span> <span class="nf">sync_remote_results_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sync_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force_sync</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sync files associated with results from remote machine to local stage dirs and</span>
+<span class="sd">        updates &#39;remote_status&#39; in jobsdb.  Note that both have to happen because other</span>
+<span class="sd">        functions assume that if remote status has been updated files have been staged back</span>
+<span class="sd">        as well.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sync_all: bool, default True</span>
+<span class="sd">            sync files for all jobs on same system, to minimize number of calls to remote copy</span>
+<span class="sd">        force_sync: bool, default False</span>
+<span class="sd">            sync files even if this job&#39;s status indicates that this has already been done</span>
+<span class="sd">        verbose: bool, default False</span>
+<span class="sd">            verbose output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># sync all jobs</span>
+        <span class="k">if</span> <span class="n">sync_all</span><span class="p">:</span>
+            <span class="n">job_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">job_id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="c1"># sync even if already done</span>
+        <span class="k">if</span> <span class="n">force_sync</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;ongoing&#39;</span>
+
+        <span class="n">jobs_to_sync</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">jobs</span><span class="p">(</span><span class="n">system</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">system_name</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="p">))</span>
+
+        <span class="n">ExPyRe</span><span class="o">.</span><span class="n">_sync_remote_results_status_ll</span><span class="p">(</span><span class="n">jobs_to_sync</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
+
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_sync_remote_results_status_ll</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">jobs_to_sync</span><span class="p">,</span> <span class="n">n_group</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">cli</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Low level part of syncing jobs.  Gets remote files _and_ updates &#39;remote_status&#39;</span>
+<span class="sd">        field in jobsdb.  Note that both have to happen because other functions assume that</span>
+<span class="sd">        if remote status has been updated files have been staged back as well.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cls: class</span>
+<span class="sd">            class for classmethod (unused)</span>
+<span class="sd">        jobs_to_sync: list(dict)</span>
+<span class="sd">            list of job dicts returned by jobsdb.jobs()</span>
+<span class="sd">        n_group: int, default 250</span>
+<span class="sd">            number of jobs to do in a group with each rsync call</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">jobs_to_sync</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">def</span> <span class="nf">_grouper</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">iterable</span><span class="p">):</span>
+            <span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">chunk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">chunk</span><span class="p">:</span>
+                    <span class="k">return</span>
+                <span class="k">yield</span> <span class="n">chunk</span>
+
+        <span class="k">for</span> <span class="n">system_name</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">([</span><span class="n">j</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jobs_to_sync</span><span class="p">]):</span>
+            <span class="n">system</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">systems</span><span class="p">[</span><span class="n">system_name</span><span class="p">]</span>
+            <span class="c1"># assume all jobs are staged from same place</span>
+            <span class="n">stage_root</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">jobs_to_sync</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;from_dir&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">parent</span>
+
+            <span class="c1"># get remote statuses and update in JobsDB</span>
+            <span class="n">status_of_remote_id</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">status</span><span class="p">([</span><span class="n">j</span><span class="p">[</span><span class="s1">&#39;remote_id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jobs_to_sync</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jobs_to_sync</span><span class="p">:</span>
+                <span class="n">old_remote_status</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">jobs</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">j</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;remote_status&#39;</span><span class="p">]</span>
+                <span class="n">new_remote_status</span> <span class="o">=</span> <span class="n">status_of_remote_id</span><span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="s1">&#39;remote_id&#39;</span><span class="p">]]</span>
+                <span class="k">if</span> <span class="n">old_remote_status</span> <span class="o">!=</span> <span class="n">new_remote_status</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">cli</span><span class="p">:</span>
+                        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Update remote status of </span><span class="si">{</span><span class="n">j</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> to </span><span class="si">{</span><span class="n">status_of_remote_id</span><span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="s2">&quot;remote_id&quot;</span><span class="p">]]</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">remote_status</span><span class="o">=</span><span class="n">status_of_remote_id</span><span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="s1">&#39;remote_id&#39;</span><span class="p">]])</span>
+
+            <span class="c1"># get remote files only _AFTER_ getting remote status, since otherwise might result in</span>
+            <span class="c1"># a race condition:</span>
+            <span class="c1">#    copy files while job is running, so not all files are ready</span>
+            <span class="c1">#    while files are being copied, job finishes (but some files were not copied)</span>
+            <span class="c1">#    update status, showing job as done (despite missing files)</span>
+            <span class="k">for</span> <span class="n">job_group</span> <span class="ow">in</span> <span class="n">_grouper</span><span class="p">(</span><span class="n">n_group</span><span class="p">,</span> <span class="n">jobs_to_sync</span><span class="p">):</span>
+                <span class="n">system</span><span class="o">.</span><span class="n">get_remotes</span><span class="p">(</span><span class="n">stage_root</span><span class="p">,</span> <span class="n">subdir_glob</span><span class="o">=</span><span class="p">[</span><span class="n">Path</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="s1">&#39;from_dir&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">job_group</span><span class="p">],</span>
+                                   <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ExPyRe.clean"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.clean">[docs]</a>    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wipe</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">remote_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;clean the local and remote stage directories</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        wipe: bool, default False</span>
+<span class="sd">            wipe directory completely, opposed to just writing CLEANED into files that could be large</span>
+<span class="sd">            like python function input and output (NOTE: other staged in files or files that are created</span>
+<span class="sd">            are not cleaned if wipe=False)</span>
+<span class="sd">        dry_run: bool, default False</span>
+<span class="sd">            dry run only, print what will happen but do not actually delete or overwrite anything</span>
+<span class="sd">        remote_only: bool, default False</span>
+<span class="sd">            wipe only remote dir (ignored when wipe is False)</span>
+<span class="sd">        verbose: bool, default False</span>
+<span class="sd">            verbose output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">system</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">systems</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">system_name</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">system</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">wipe</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">system</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># delete remote stage dir</span>
+                <span class="n">system</span><span class="o">.</span><span class="n">clean_rundir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="n">dry_run</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span> <span class="ow">or</span> <span class="n">dry_run</span><span class="p">)</span>
+            <span class="c1"># delete local stage dir</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">remote_only</span><span class="p">:</span>
+                <span class="n">subprocess_run</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;find&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="p">),</span> <span class="s1">&#39;-type&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;-exec&#39;</span><span class="p">,</span> <span class="s1">&#39;chmod&#39;</span><span class="p">,</span> <span class="s1">&#39;u+rwx&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">;&#39;</span><span class="p">],</span>
+                               <span class="n">dry_run</span><span class="o">=</span><span class="n">dry_run</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span> <span class="ow">or</span> <span class="n">dry_run</span><span class="p">)</span>
+                <span class="n">subprocess_run</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;rm&#39;</span><span class="p">,</span> <span class="s1">&#39;-rf&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="p">)],</span> <span class="n">dry_run</span><span class="o">=</span><span class="n">dry_run</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span> <span class="ow">or</span> <span class="n">dry_run</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">system</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># clean remote stage dir</span>
+                <span class="n">system</span><span class="o">.</span><span class="n">clean_rundir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;_expyre_task_in.pckl&#39;</span><span class="p">,</span> <span class="s1">&#39;_expyre_job_succeeded&#39;</span><span class="p">],</span>
+                                <span class="n">dry_run</span><span class="o">=</span><span class="n">dry_run</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span> <span class="ow">or</span> <span class="n">dry_run</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">dry_run</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dry-run overwrite local dirs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;_expyre_task_in.pckl&#39;</span><span class="si">}</span><span class="s2"> and &quot;</span>
+                      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;_expyre_job_succeeded&#39;</span><span class="si">}</span><span class="s2">, and create &quot;</span>
+                      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;_expyre_job_cleaned&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># clean local stage dir</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_task_in.pckl&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+                    <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;CLEANED</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_succeeded&#39;</span>
+                <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+                        <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;CLEANED</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_cleaned&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+                    <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;CLEANED</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">dry_run</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;cleaned&#39;</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_read_stdout_err</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read all stdout and stderr files, from python run and from submitted job</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        stdout, stderr, job_stdout, job_stderr: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_stdout&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                <span class="n">stdout</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">stdout</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_stderr&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                <span class="n">stderr</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">stderr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;job.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">.stdout&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                <span class="n">job_stdout</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">job_stdout</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;job.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">.stderr&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                <span class="n">job_stderr</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">job_stderr</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">job_stdout</span><span class="p">,</span> <span class="n">job_stderr</span>
+
+
+<div class="viewcode-block" id="ExPyRe.get_results"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.get_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span> <span class="n">check_interval</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sync_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force_sync</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get results from a remote job</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        timeout: int or str, default 3600</span>
+<span class="sd">            Max time (in sec if int, time spec if str) to wait for job to complete, None or int &lt;= 0 to wait forever</span>
+<span class="sd">        check_interval: int, default 30</span>
+<span class="sd">            Time to wait (in sec) between checks of job completion</span>
+<span class="sd">        sync: bool, default True</span>
+<span class="sd">            Synchronize remote files before checking for results</span>
+<span class="sd">            Note that if this is False and job is finished on remote system but output files haven&#39;t been</span>
+<span class="sd">            previously synchronize, this will wait one check_interval then raise an error</span>
+<span class="sd">        sync_all: bool, default True</span>
+<span class="sd">            Sync files from all jobs (not just this one), to reduce number of separate remote copy calls</span>
+<span class="sd">        force_sync: bool, default False</span>
+<span class="sd">            Sync remote files even if job&#39;s DB status indicates that this was already done.</span>
+<span class="sd">            Note: together with sync_all this can lead to rsync having to compare many files.</span>
+<span class="sd">        quiet: bool, default False</span>
+<span class="sd">            No progress info</span>
+<span class="sd">        verbose: bool, default False</span>
+<span class="sd">            Verbose output (from remote system/scheduler commands)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        return, stdout, stderr:</span>
+<span class="sd">            * value of function</span>
+<span class="sd">            * string containing stdout during function</span>
+<span class="sd">            * string containing stderr during function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;processed&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;cleaned&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> has status </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s1">, results are no longer available&#39;</span><span class="p">)</span>
+
+        <span class="n">timeout</span> <span class="o">=</span> <span class="n">time_to_sec</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="n">system</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">systems</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">system_name</span><span class="p">]</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">problem_last_chance</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">out_of_time</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># this is a messy state machine - only fairly sure that there are no deadlocks or infinite loops</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># sync remote results and status.  This used to be inside test for status and/or succeeded/failed</span>
+            <span class="c1"># file existence, but that&#39;s probably not useful.  If we&#39;re in this loop we have to sync, since if</span>
+            <span class="c1"># sync isn&#39;t needed, loop should have been exited on previous iteration</span>
+
+            <span class="c1"># get remote status of job from db (either unset or was set by call to</span>
+            <span class="c1">#     self.sync_remote_results_status() in previous iter)</span>
+            <span class="c1"># remote_status values: queued, held,       running,    done, failed, timeout, other</span>
+            <span class="n">remote_status</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">jobs</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)))[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;remote_status&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">remote_status</span> <span class="o">!=</span> <span class="s1">&#39;done&#39;</span><span class="p">:</span>
+                <span class="c1"># If previous status was not &#39;done&#39;, need to sync remote status.</span>
+                <span class="c1"># If it was pre-done, we obviously need current state and results.</span>
+                <span class="c1"># If it was something else (even &#39;failed&#39;), lets try again just in case it needed</span>
+                <span class="c1">#     more time or was fixed manually.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sync_remote_results_status</span><span class="p">(</span><span class="n">sync_all</span><span class="p">,</span> <span class="n">force_sync</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+                <span class="n">remote_status</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">jobs</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)))[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;remote_status&#39;</span><span class="p">]</span>
+
+            <span class="c1"># poke filesystem, since on some machines Path.exists() fails even if file appears to be there when doing ls</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;_expyre_job_*&#39;</span><span class="p">))</span>
+            <span class="c1"># read all text output</span>
+            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">job_stdout</span><span class="p">,</span> <span class="n">job_stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_stdout_err</span><span class="p">()</span>
+
+            <span class="c1"># update state depending on presence of various progress files and remote status</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_succeeded&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="c1"># job created final succeeded file</span>
+                <span class="k">assert</span> <span class="n">remote_status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;queued&#39;</span><span class="p">,</span> <span class="s1">&#39;held&#39;</span><span class="p">]</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_succeeded&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                        <span class="n">results</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> got &quot;_succeeded&quot; file, but failed to parse it with error </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                       <span class="sa">f</span><span class="s1">&#39;stdout: </span><span class="si">{</span><span class="n">stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">stderr: </span><span class="si">{</span><span class="n">stderr</span><span class="si">}</span><span class="se">\n</span><span class="s1">job stdout: </span><span class="si">{</span><span class="n">job_stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">job stderr: </span><span class="si">{</span><span class="n">job_stderr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;succeeded&#39;</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_error&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="c1"># job created final failed file</span>
+                <span class="k">assert</span> <span class="n">remote_status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;queued&#39;</span><span class="p">,</span> <span class="s1">&#39;held&#39;</span><span class="p">]</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_error&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                    <span class="n">error_msg</span> <span class="o">=</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;failed&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_job_started&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;started&#39;</span>
+                <span class="c1"># job does not _appear_ to have finished</span>
+                <span class="k">if</span> <span class="n">remote_status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;queued&#39;</span><span class="p">,</span> <span class="s1">&#39;held&#39;</span><span class="p">,</span> <span class="s1">&#39;running&#39;</span><span class="p">]:</span>
+                    <span class="c1"># problem - job does not seem to be queued (even held) or running</span>
+                    <span class="k">if</span> <span class="n">problem_last_chance</span><span class="p">:</span>
+                        <span class="c1"># already on last chance, giving up</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;died&#39;</span>
+                        <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+                        <span class="k">raise</span> <span class="n">ExPyReJobDiedError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> has remote status </span><span class="si">{</span><span class="n">remote_status</span><span class="si">}</span><span class="s1"> but no _succeeded or _error</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                                 <span class="sa">f</span><span class="s1">&#39;stdout: </span><span class="si">{</span><span class="n">stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">stderr: </span><span class="si">{</span><span class="n">stderr</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                                 <span class="sa">f</span><span class="s1">&#39;job stdout: </span><span class="si">{</span><span class="n">job_stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">job stderr: </span><span class="si">{</span><span class="n">job_stderr</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="c1"># give it one more chance, perhaps queuing system status and file are slow to sync to head node</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> has no _succeeded or _error file, but remote status </span><span class="si">{</span><span class="n">remote_status</span><span class="si">}</span><span class="s1"> is &#39;</span>
+                                   <span class="s1">&#39;not &quot;queued&quot;, &quot;held&quot;, or &quot;running&quot;. Giving it one more chance.&#39;</span><span class="p">)</span>
+                    <span class="n">problem_last_chance</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># No apparent problem, just not done yet, leave status as is, but check for timeout</span>
+                    <span class="k">if</span> <span class="n">out_of_time</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">quiet</span> <span class="ow">and</span> <span class="n">n_iter</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                            <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                        <span class="k">raise</span> <span class="n">ExPyReTimeoutError</span>
+
+            <span class="c1"># update status in database</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+
+            <span class="c1"># return if succeeded or failed</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;succeeded&#39;</span><span class="p">:</span>
+                <span class="c1"># stage out remotely created files</span>
+                <span class="c1"># should we do this for failed calls?</span>
+                <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_output_files&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s1">&#39;_expyre_output_files&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">in_file</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fin</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]:</span>
+                            <span class="n">ExPyRe</span><span class="o">.</span><span class="n">_copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="p">,</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="n">in_file</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">quiet</span> <span class="ow">and</span> <span class="n">n_iter</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="c1"># newline after one or more &#39;q|r&#39; progress characters</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;failed&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">quiet</span> <span class="ow">and</span> <span class="n">n_iter</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="c1"># newline after one or more &#39;q|r&#39; progress characters</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s2">&quot;_expyre_job_exception&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                    <span class="c1"># reraise python exception that caused job to fail</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span> <span class="o">/</span> <span class="s2">&quot;_expyre_job_exception&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                        <span class="n">exc</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="n">exc</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">ExPyReJobDiedError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Remote job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> failed with no exception but remote status </span><span class="si">{</span><span class="n">remote_status</span><span class="si">}</span><span class="s1"> &#39;</span>
+                                             <span class="sa">f</span><span class="s1">&#39;error_msg </span><span class="si">{</span><span class="n">error_msg</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                             <span class="sa">f</span><span class="s1">&#39;stdout: </span><span class="si">{</span><span class="n">stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">stderr: </span><span class="si">{</span><span class="n">stderr</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                             <span class="sa">f</span><span class="s1">&#39;job stdout: </span><span class="si">{</span><span class="n">job_stdout</span><span class="si">}</span><span class="se">\n</span><span class="s1">job stderr: </span><span class="si">{</span><span class="n">job_stderr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+            <span class="n">out_of_time</span> <span class="o">=</span> <span class="p">(</span><span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">timeout</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&gt;</span> <span class="n">timeout</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">quiet</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">n_iter</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Waiting for job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> up to </span><span class="si">{</span><span class="n">timeout</span><span class="si">}</span><span class="s1"> s: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+                <span class="c1"># progress info to stderr</span>
+                <span class="k">if</span> <span class="n">n_iter</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">10</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="p">(</span><span class="n">n_iter</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">remote_status</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">n_iter</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">100</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+            <span class="c1"># wait for next check</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">check_interval</span><span class="p">)</span>
+            <span class="n">n_iter</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="ExPyRe.mark_processed"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.mark_processed">[docs]</a>    <span class="k">def</span> <span class="nf">mark_processed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mark job as processed (usually after results have been stored someplace)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;processed&#39;</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1"> system=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">system_name</span><span class="si">}</span><span class="s1"> remote_id=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span><span class="si">}</span><span class="s1"> status=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s1"> stage_dir=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_dir</span><span class="si">}</span><span class="s1">&#39;</span></div>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
