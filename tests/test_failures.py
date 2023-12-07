@@ -16,6 +16,9 @@ def test_qsub_failure_atomic(expyre_config, monkeypatch):
 def do_qsub_failure_atomic(expyre_config, sys_name, monkeypatch):
     # make sure that a failed qsub cleans up the remote running directory
 
+    # WARNING: this test will only work if it is being run on same machine as job
+    # was executed on (i.e. not really remote) because it is manually looking in remote_rundir
+
     from expyre.config import systems
     from expyre.resources import Resources
     from expyre.func import ExPyRe
@@ -37,10 +40,11 @@ def do_qsub_failure_atomic(expyre_config, sys_name, monkeypatch):
     except RuntimeError:
         print('ExPyRe.start failed, checking state of remote dir')
 
-    # make sure remote rundir exists
-    stdout, stderr = system.run(['ls', '-d', f'{system.remote_rundir}'])
-    assert system.remote_rundir in stdout
+    if system.remote_rundir is not None:
+        # make sure remote rundir exists
+        stdout, stderr = system.run(['ls', '-d', f'{system.remote_rundir}'])
+        assert system.remote_rundir in stdout
 
-    # make sure job remote rundir does not exist
-    stdout, stderr = system.run(['ls', f'{system.remote_rundir}'])
-    assert xpr.id not in stdout
+        # make sure job remote rundir does not exist
+        stdout, stderr = system.run(['ls', f'{system.remote_rundir}'])
+        assert xpr.id not in stdout

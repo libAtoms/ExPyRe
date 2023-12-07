@@ -30,25 +30,32 @@ class System:
         max runtime, and stdout/stderr files
     commands: list(str), optional
         list of commands to run at start of every job on machine
-    rundir: str, default 'run_expyre'
-        path on remote machine to run in.  If absolute, used as if, and if relative, relative
-        to (remote) home directory
+    rundir: str / None, default 'run_expyre' if host is not None, else None
+        path on remote machine to run in.  If absolute, used as is, and if relative, relative
+        to (remote) home directory. If host is None, rundir is None means run directly
+        in stage directory
     remsh_cmd: str, default EXPYRE_RSH or 'ssh'
         remote shell command to use with this system
     rundir_extra: str, default None
         extra string to add to remote_rundir, e.g. per-project part of path
     """
     def __init__(self, host, partitions, scheduler, header=[], no_default_header=False, commands=[],
-                 rundir='run_expyre', rundir_extra=None, remsh_cmd=None):
-        """Create a remote system object
-
-
-        """
+                 rundir=None, rundir_extra=None, remsh_cmd=None):
         self.host = host
+
         self.remote_rundir = rundir
-        while self.remote_rundir.endswith('/'):
-            self.remote_rundir = self.remote_rundir[:-1]
-        if rundir_extra is not None:
+        if self.remote_rundir is None and self.host is not None:
+            # set default for remote runs
+            self.remote_rundir = 'run_expyre'
+        if self.host is None and self.remote_rundir is not None and not Path(self.remote_rundir).is_absolute():
+            # make local runs with non-absolute rundir relative to $HOME, mimicking behavior
+            # of rsync with remote directory specifications
+            self.remote_rundir = str(Path.home() / self.remote_rundir)
+
+        if self.remote_rundir is not None:
+            while self.remote_rundir.endswith('/'):
+                self.remote_rundir = self.remote_rundir[:-1]
+        if rundir_extra is not None and self.remote_rundir is not None:
             self.remote_rundir += '/' + rundir_extra
         self.partitions = partitions.copy() if partitions is not None else partitions
         self.queuing_sys_header = header.copy()
@@ -70,7 +77,7 @@ class System:
 
 
     def initialize_remote_rundir(self, verbose=False):
-        if self.initialized or self.host is None:
+        if self.initialized or self.remote_rundir is None:
             return
 
         self.run(['mkdir', '-p', str(self.remote_rundir)], verbose=verbose)
@@ -121,7 +128,7 @@ class System:
         commands = self.commands + commands
 
         stage_dir = Path(stage_dir)
-        if self.host is None:
+        if self.remote_rundir is None:
             # no host, so run in stage dir to avoid needless copying
             job_remote_rundir = str(stage_dir)
         else:
@@ -157,8 +164,9 @@ class System:
                                       commands, resources.max_time, self.queuing_sys_header + header_extra,
                                       node_dict, no_default_header=self.no_default_header, verbose=verbose)
         except Exception:
-            if not self.host is None:
-                sys.stderr.write(f'System.submit call to Scheduler.submit failed for job id {id}, cleaning up remote dir {str(self.remote_rundir)}\n')
+            if self.remote_rundir is not None:
+                sys.stderr.write(f'System.submit call to Scheduler.submit failed for job id {id}, '
+                                 f'cleaning up remote dir {str(self.remote_rundir)}\n')
                 self.run(['rm', '-r', str(job_remote_rundir)], verbose=verbose)
             raise
 
@@ -175,7 +183,7 @@ class System:
         subdir_glob: str, list(str), default None
             only get subdirectories that much one or more globs
         """
-        if self.host is None:
+        if self.remote_rundir is None:
             # nothing to "get" since this ran in stage dir
             return
 
@@ -205,7 +213,7 @@ class System:
         verbose: bool, default False
             verbose output
         """
-        if self.host is None:
+        if self.remote_rundir is None:
             # the job remote rundir _is_ the stage dir, so do not delete here
             return
 

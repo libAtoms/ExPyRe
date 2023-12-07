@@ -134,7 +134,7 @@ def test_stdouterr(expyre_config):
 
 
 def do_stdouterr(sys_name):
-    from expyre.config import root, db
+    from expyre.config import db
 
     from expyre.func import ExPyRe
 
@@ -160,7 +160,8 @@ def do_stdouterr(sys_name):
 
 
 def do_work(sys_name):
-    from expyre.config import root, db
+    from expyre.config import local_stage_dir, db
+    local_stage_dir = Path(local_stage_dir)
 
     # must do this here rather than outside of functions because expyre.func imports config, and it's not
     # yet set up by conftest.py if imported outside the test function
@@ -170,9 +171,9 @@ def do_work(sys_name):
 
     print('job id', xpr.id)
 
-    assert (Path(root) / f'run_{xpr.id}').exists()
-    assert (Path(root) / f'run_{xpr.id}' / '_expyre_script_core.py').exists()
-    assert (Path(root) / f'run_{xpr.id}' / '_expyre_task_in.pckl').exists()
+    assert (local_stage_dir / f'run_{xpr.id}').exists()
+    assert (local_stage_dir / f'run_{xpr.id}' / '_expyre_script_core.py').exists()
+    assert (local_stage_dir / f'run_{xpr.id}' / '_expyre_task_in.pckl').exists()
 
     xpr.start(resources=Resources(num_nodes=1, max_time='5m'), system_name=sys_name)
 
@@ -190,6 +191,9 @@ def do_work(sys_name):
 
 
 def do_clean(sys_name, dry_run):
+    # WARNING: this test will only work if it is being run on same machine as job
+    # was executed on (i.e. not really remote) because it is manually looking in remote_rundir
+
     from expyre.config import systems
     from expyre.func import ExPyRe
 
@@ -211,8 +215,8 @@ def do_clean(sys_name, dry_run):
         for f in xpr.stage_dir.glob('*'):
             p = subprocess.run(['wc', '-c', f'{f}'], capture_output=True)
             local_post_clean += p.stdout.decode()
-        if system.host is not None:
-            # If system.host is None run will happen in local stage dir, so there's no remote
+        if system.remote_rundir is not None:
+            # If system.remote_rundir is None run will happen in local stage dir, so there's no remote
             # dir to check
             stdout, _ = system.run(args=['bash'], script=f'cd {system.remote_rundir}/{xpr.stage_dir.name} && wc -c *\n')
             remote_post_clean = stdout
@@ -231,7 +235,7 @@ def do_clean(sys_name, dry_run):
 
     # check that stage directories are gone
     assert dry_run or not xpr.stage_dir.exists()
-    if not dry_run:
+    if not dry_run and system.remote_rundir is not None:
         stdout, _ = system.run(args=['bash'],
                                script=f'if [ -f {system.remote_rundir}/{xpr.stage_dir.name} ]; then\n'
                                        '    echo yes\n'
