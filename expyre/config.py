@@ -108,19 +108,18 @@ def init(root_dir, verbose=False):
     global local_stage_dir, systems, db
 
     try:
-        root, _config_data = _get_config(root_dir, verbose=verbose)
+        local_stage_dir, _config_data = _get_config(root_dir, verbose=verbose)
     except FileNotFoundError:
+        local_stage_dir = None
         systems = {}
         db = None
         return
 
-    if root.name == '.expyre' or root.name == '_expyre':
-        use_root = root.parent
+    if local_stage_dir.name == '.expyre' or local_stage_dir.name == '_expyre':
+        use_local_stage_dir = local_stage_dir.parent
     else:
-        use_root = root
-    _rundir_extra = os.environ.get('HOSTNAME', 'unkownhost') + '-' + str(use_root).replace('/', '_')
-
-    local_stage_dir = _config_data.get("local_stage_dir", root)
+        use_local_stage_dir = local_stage_dir
+    _rundir_extra = os.environ.get('HOSTNAME', 'unkownhost') + '-' + str(use_local_stage_dir).replace('/', '_')
 
     systems = {}
     for _sys_name in _config_data['systems']:
@@ -135,7 +134,7 @@ def init(root_dir, verbose=False):
                 _sys_data['partitions'][_partitions]['max_mem'] = mem_to_kB(_sys_data['partitions'][_partitions]['max_mem'])
         systems[_sys_name] = System(rundir_extra=_rundir_extra, **_sys_data)
 
-    db = JobsDB(root / 'jobs.db')
+    db = JobsDB(local_stage_dir / 'jobs.db')
     if verbose:
         sys.stderr.write(f'expyre config got systems {list(systems.keys())}\n')
 

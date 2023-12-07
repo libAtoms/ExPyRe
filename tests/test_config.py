@@ -3,6 +3,7 @@ import pytest
 from pathlib import Path
 from copy import deepcopy
 import json
+import shutil
 
 
 def test_update_dict_leaves(expyre_dummy_config):
@@ -66,6 +67,25 @@ def test_config_nested(expyre_dummy_config, monkeypatch, tmp_path):
     print("config.local_stage_dir", config.local_stage_dir)
     # make sure stage dir is _one above_ cwd
     assert Path(config.local_stage_dir) == Path.cwd().parent / "_expyre"
+
+
+def test_config_specific_dir_as_str(expyre_dummy_config, monkeypatch, tmp_path):
+    from expyre import config
+    sys_name = list(config.systems)[0]
+    print(config.systems[sys_name].partitions)
+
+    # start at tmp_path
+    monkeypatch.chdir(tmp_path)
+
+    # make a subdirectory with .expyre inside it
+    (Path() / "sub1" / ".expyre").mkdir(parents=True)
+    monkeypatch.chdir("sub1")
+    print("CWD", Path.cwd())
+    shutil.copy(config.local_stage_dir / "config.json", Path.cwd() / ".expyre")
+    config.init(str(Path.cwd() / ".expyre"), verbose=True)
+    print("config.local_stage_dir", config.local_stage_dir)
+    # make sure stage dir is in cwd
+    assert Path(config.local_stage_dir) == Path.cwd() / ".expyre"
 
 
 def test_config_override(expyre_dummy_config, monkeypatch, tmp_path):
