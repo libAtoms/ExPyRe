@@ -81,7 +81,7 @@ def _optionally_remote_args(args, shell, host, remsh_cmd, in_dir='_HOME_'):
     return args
 
 
-def subprocess_run(host, args, script=None, shell='bash -lc', remsh_cmd=None, retry=None, in_dir='_HOME_', dry_run=False, verbose=False):
+def subprocess_run(host, args, script=None, shell='bash -c', remsh_cmd=None, retry=None, in_dir='_HOME_', dry_run=False, verbose=False):
     """run a subprocess, optionally via ssh on a remote machine.  Raises RuntimeError for non-zero
     return status.
 
@@ -93,7 +93,7 @@ def subprocess_run(host, args, script=None, shell='bash -lc', remsh_cmd=None, re
         arguments to run, starting with command and followed by its command line args
     script: str, default None
         text to write to process's standard input
-    shell: str, default 'bash -lc'
+    shell: str, default 'bash -c'
         shell to use, including any flags necessary for it to interpret the next argument
         as the commands to run (-c for bash)
     remsh_command: str | list(str), default env var EXPYRE_RSH or 'ssh'
