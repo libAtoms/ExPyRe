@@ -29,7 +29,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
@@ -42,7 +42,7 @@
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/expyre/subprocess';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -131,7 +131,18 @@
     <p class="title logo__title">ExPyRe  documentation</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="nav bd-sidenav">
@@ -333,7 +344,7 @@ document.write(`
     <span class="k">return</span> <span class="n">args</span>
 
 
-<div class="viewcode-block" id="subprocess_run"><a class="viewcode-back" href="../../expyre.html#expyre.subprocess.subprocess_run">[docs]</a><span class="k">def</span> <span class="nf">subprocess_run</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">script</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="s1">&#39;bash -lc&#39;</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;_HOME_&#39;</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="subprocess_run"><a class="viewcode-back" href="../../expyre.html#expyre.subprocess.subprocess_run">[docs]</a><span class="k">def</span> <span class="nf">subprocess_run</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">script</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="s1">&#39;bash -c&#39;</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;_HOME_&#39;</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;run a subprocess, optionally via ssh on a remote machine.  Raises RuntimeError for non-zero</span>
 <span class="sd">    return status.</span>
 
@@ -345,7 +356,7 @@ document.write(`
 <span class="sd">        arguments to run, starting with command and followed by its command line args</span>
 <span class="sd">    script: str, default None</span>
 <span class="sd">        text to write to process&#39;s standard input</span>
-<span class="sd">    shell: str, default &#39;bash -lc&#39;</span>
+<span class="sd">    shell: str, default &#39;bash -c&#39;</span>
 <span class="sd">        shell to use, including any flags necessary for it to interpret the next argument</span>
 <span class="sd">        as the commands to run (-c for bash)</span>
 <span class="sd">    remsh_command: str | list(str), default env var EXPYRE_RSH or &#39;ssh&#39;</span>
