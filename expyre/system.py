@@ -70,7 +70,7 @@ class System:
             self.scheduler = scheduler(host)
 
 
-    def run(self, args, script=None, shell='bash -c', retry=None, in_dir='_HOME_', dry_run=False, verbose=False):
+    def run(self, args, script=None, shell=None, retry=None, in_dir='_HOME_', dry_run=False, verbose=False):
         # like subprocess_run, but filling in host and remsh command from self
         return subprocess_run(self.host, args, script=script, shell=shell, remsh_cmd=self.remsh_cmd,
                               retry=retry, in_dir=in_dir, dry_run=dry_run, verbose=verbose)
