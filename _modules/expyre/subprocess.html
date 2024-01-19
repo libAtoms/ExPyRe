@@ -348,7 +348,7 @@ document.write(`
     <span class="k">return</span> <span class="n">args</span>
 
 
-<div class="viewcode-block" id="subprocess_run"><a class="viewcode-back" href="../../expyre.html#expyre.subprocess.subprocess_run">[docs]</a><span class="k">def</span> <span class="nf">subprocess_run</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">script</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;_HOME_&#39;</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="subprocess_run"><a class="viewcode-back" href="../../expyre.html#expyre.subprocess.subprocess_run">[docs]</a><span class="k">def</span> <span class="nf">subprocess_run</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">script</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="s1">&#39;bash -c&#39;</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">in_dir</span><span class="o">=</span><span class="s1">&#39;_HOME_&#39;</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;run a subprocess, optionally via ssh on a remote machine.  Raises RuntimeError for non-zero</span>
 <span class="sd">    return status.</span>
 
@@ -360,7 +360,7 @@ document.write(`
 <span class="sd">        arguments to run, starting with command and followed by its command line args</span>
 <span class="sd">    script: str, default None</span>
 <span class="sd">        text to write to process&#39;s standard input</span>
-<span class="sd">    shell: str, default &#39;bash -c&#39; (no host) or &#39;bash -lc&#39; (with host)</span>
+<span class="sd">    shell: str, default &#39;bash -c&#39;</span>
 <span class="sd">        shell to use, including any flags necessary for it to interpret the next argument</span>
 <span class="sd">        as the commands to run (-c for bash)</span>
 <span class="sd">    remsh_command: str | list(str), default env var EXPYRE_RSH or &#39;ssh&#39;</span>
@@ -383,15 +383,6 @@ document.write(`
             <span class="n">retry</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">_ii</span><span class="p">)</span> <span class="k">for</span> <span class="n">_ii</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;EXPYRE_RETRY&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">retry</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">shell</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">host</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># for local shells, &#39;-l&#39; inhibits inheriting of env vars and breaks things like kerberos auth</span>
-            <span class="n">shell</span> <span class="o">=</span> <span class="s1">&#39;bash -c&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># for remote machines, login shell is better since it&#39;s more likely to set up all the relevant</span>
-            <span class="c1"># things</span>
-            <span class="n">shell</span> <span class="o">=</span> <span class="s1">&#39;bash -lc&#39;</span>
 
     <span class="c1"># always run at least once, and wait a valid (&gt;= 0) amount of time</span>
     <span class="n">retry</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">retry</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">retry</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">))</span>
@@ -416,7 +407,8 @@ document.write(`
 
     <span class="k">for</span> <span class="n">i_try</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">retry</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">close_fds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">)</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                                 <span class="n">close_fds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">)</span>
             <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">script</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>

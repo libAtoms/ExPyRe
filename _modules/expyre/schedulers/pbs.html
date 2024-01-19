@@ -277,7 +277,7 @@ document.write(`
 
 
 <div class="viewcode-block" id="PBS"><a class="viewcode-back" href="../../../expyre.schedulers.html#expyre.schedulers.pbs.PBS">[docs]</a><span class="k">class</span> <span class="nc">PBS</span><span class="p">(</span><span class="n">Scheduler</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create Slurm object</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create PBS object</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -286,16 +286,7 @@ document.write(`
 <span class="sd">    remsh_cmd: str, default EXPYRE_RSH env var or &#39;ssh&#39;</span>
 <span class="sd">        remote shell command to use</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create PBS object</span>
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        host: str</span>
-<span class="sd">            username and host for ssh/rsync username@machine.fqdn</span>
-<span class="sd">        remsh_cmd: str, default EXPYRE_RSH env var or &#39;ssh&#39;</span>
-<span class="sd">            remote shell command to use</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;qhold&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">release_command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;qrls&#39;</span><span class="p">]</span>
@@ -303,7 +294,8 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">remsh_cmd</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">remsh_cmd</span><span class="p">(</span><span class="n">remsh_cmd</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="PBS.submit"><a class="viewcode-back" href="../../../expyre.schedulers.html#expyre.schedulers.pbs.PBS.submit">[docs]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">remote_dir</span><span class="p">,</span> <span class="n">partition</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">max_time</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">node_dict</span><span class="p">,</span> <span class="n">no_default_header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PBS.submit"><a class="viewcode-back" href="../../../expyre.schedulers.html#expyre.schedulers.pbs.PBS.submit">[docs]</a>    <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">remote_dir</span><span class="p">,</span> <span class="n">partition</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">max_time</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">node_dict</span><span class="p">,</span> <span class="n">no_default_header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+               <span class="n">script_exec</span><span class="o">=</span><span class="s2">&quot;/bin/bash&quot;</span><span class="p">,</span> <span class="n">pre_submit_cmds</span><span class="o">=</span><span class="p">[],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Submit a job on a remote machine</span>
 
 <span class="sd">        Parameters</span>
@@ -325,10 +317,15 @@ document.write(`
 <span class="sd">            Fields: num_nodes, num_cores, num_cores_per_node, ppn, id, max_time, partition (and its synonum queue)</span>
 <span class="sd">        no_default_header: bool, default False</span>
 <span class="sd">            do not add normal header fields, only use what&#39;s passed in in &quot;header&quot;</span>
+<span class="sd">        script_exec: str, default &#39;/bin/bash&#39;</span>
+<span class="sd">            executable for first line of job script</span>
+<span class="sd">        pre_submit_cmds: list(str), default []</span>
+<span class="sd">            command to run in the remote process that does the submission before the actual submission,</span>
+<span class="sd">            e.g. to fix the environment</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        remote job id (str)</span>
+<span class="sd">        str remote job id</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">node_dict</span> <span class="o">=</span> <span class="n">node_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
@@ -382,11 +379,12 @@ document.write(`
 
         <span class="n">commands</span> <span class="o">=</span> <span class="n">pre_commands</span> <span class="o">+</span> <span class="n">commands</span>
 
-        <span class="n">script</span> <span class="o">=</span> <span class="s1">&#39;#!/bin/bash -l</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">script</span> <span class="o">=</span> <span class="s1">&#39;#!&#39;</span> <span class="o">+</span> <span class="n">script_exec</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">script</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">node_dict</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">header</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">script</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">commands</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
 
         <span class="n">submit_args</span> <span class="o">=</span> <span class="n">Scheduler</span><span class="o">.</span><span class="n">unset_scheduler_env_vars</span><span class="p">(</span><span class="s2">&quot;PBS&quot;</span><span class="p">)</span>
+        <span class="n">submit_args</span> <span class="o">+=</span> <span class="n">pre_submit_cmds</span> <span class="o">+</span> <span class="p">([</span><span class="s1">&#39;&amp;&amp;&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pre_submit_cmds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">[])</span>
         <span class="n">submit_args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;cd&#39;</span><span class="p">,</span> <span class="n">remote_dir</span><span class="p">,</span> <span class="s1">&#39;&amp;&amp;&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;job.script.pbs&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;&amp;&amp;&#39;</span><span class="p">,</span> <span class="s1">&#39;qsub&#39;</span><span class="p">,</span> <span class="s1">&#39;job.script.pbs&#39;</span><span class="p">]</span>
 
