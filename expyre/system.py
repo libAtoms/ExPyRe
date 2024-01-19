@@ -28,19 +28,23 @@ class System:
     no_default_header: bool, default False
         do not automatically add default header fields, namely job name, partition/queue,
         max runtime, and stdout/stderr files
+    script_exec: str, default '/bin/bash'
+        executable for 1st line of script
+    pre_submit_cmds: list(str), optional
+        command to run in process that does submission before actual job submission
     commands: list(str), optional
         list of commands to run at start of every job on machine
     rundir: str / None, default 'run_expyre' if host is not None, else None
         path on remote machine to run in.  If absolute, used as is, and if relative, relative
         to (remote) home directory. If host is None, rundir is None means run directly
         in stage directory
-    remsh_cmd: str, default EXPYRE_RSH or 'ssh'
-        remote shell command to use with this system
     rundir_extra: str, default None
         extra string to add to remote_rundir, e.g. per-project part of path
+    remsh_cmd: str, default EXPYRE_RSH or 'ssh'
+        remote shell command to use with this system
     """
-    def __init__(self, host, partitions, scheduler, header=[], no_default_header=False, commands=[],
-                 rundir=None, rundir_extra=None, remsh_cmd=None):
+    def __init__(self, host, partitions, scheduler, header=[], no_default_header=False, script_exec='/bin/bash',
+                 pre_submit_cmds=[], commands=[], rundir=None, rundir_extra=None, remsh_cmd=None):
         self.host = host
 
         self.remote_rundir = rundir
@@ -60,6 +64,8 @@ class System:
         self.partitions = partitions.copy() if partitions is not None else partitions
         self.queuing_sys_header = header.copy()
         self.no_default_header = no_default_header
+        self.script_exec = script_exec
+        self.pre_submit_cmds = pre_submit_cmds
         self.commands = commands.copy()
         self.remsh_cmd = util.remsh_cmd(remsh_cmd)
         self.initialized = False
@@ -70,7 +76,7 @@ class System:
             self.scheduler = scheduler(host)
 
 
-    def run(self, args, script=None, shell=None, retry=None, in_dir='_HOME_', dry_run=False, verbose=False):
+    def run(self, args, script=None, shell='bash -c', retry=None, in_dir='_HOME_', dry_run=False, verbose=False):
         # like subprocess_run, but filling in host and remsh command from self
         return subprocess_run(self.host, args, script=script, shell=shell, remsh_cmd=self.remsh_cmd,
                               retry=retry, in_dir=in_dir, dry_run=dry_run, verbose=verbose)
@@ -162,7 +168,8 @@ class System:
         try:
             r = self.scheduler.submit(id, str(job_remote_rundir), actual_partition,
                                       commands, resources.max_time, self.queuing_sys_header + header_extra,
-                                      node_dict, no_default_header=self.no_default_header, verbose=verbose)
+                                      node_dict, no_default_header=self.no_default_header, script_exec=self.script_exec,
+                                      pre_submit_cmds=self.pre_submit_cmds, verbose=verbose)
         except Exception:
             if self.remote_rundir is not None:
                 sys.stderr.write(f'System.submit call to Scheduler.submit failed for job id {id}, '

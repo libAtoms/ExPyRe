@@ -20,7 +20,8 @@ class Scheduler:
         self.remsh_cmd = util.remsh_cmd(remsh_cmd)
 
 
-    def submit(self, id, remote_dir, partition, commands, max_time, header, node_dict, no_default_header=False, verbose=False):
+    def submit(self, id, remote_dir, partition, commands, max_time, header, node_dict, no_default_header=False,
+               script_exec="/bin/bash", pre_submit_cmds=[], verbose=False):
         raise RuntimeError('Not implemented')
 
 

@@ -81,7 +81,7 @@ def _optionally_remote_args(args, shell, host, remsh_cmd, in_dir='_HOME_'):
     return args
 
 
-def subprocess_run(host, args, script=None, shell=None, remsh_cmd=None, retry=None, in_dir='_HOME_', dry_run=False, verbose=False):
+def subprocess_run(host, args, script=None, shell='bash -c', remsh_cmd=None, retry=None, in_dir='_HOME_', dry_run=False, verbose=False):
     """run a subprocess, optionally via ssh on a remote machine.  Raises RuntimeError for non-zero
     return status.
 
@@ -93,7 +93,7 @@ def subprocess_run(host, args, script=None, shell=None, remsh_cmd=None, retry=No
         arguments to run, starting with command and followed by its command line args
     script: str, default None
         text to write to process's standard input
-    shell: str, default 'bash -c' (no host) or 'bash -lc' (with host)
+    shell: str, default 'bash -c'
         shell to use, including any flags necessary for it to interpret the next argument
         as the commands to run (-c for bash)
     remsh_command: str | list(str), default env var EXPYRE_RSH or 'ssh'
@@ -116,15 +116,6 @@ def subprocess_run(host, args, script=None, shell=None, remsh_cmd=None, retry=No
             retry = tuple([int(_ii) for _ii in os.environ['EXPYRE_RETRY'].strip().split()])
         else:
             retry = (3, 5)
-
-    if shell is None:
-        if host is None:
-            # for local shells, '-l' inhibits inheriting of env vars and breaks things like kerberos auth
-            shell = 'bash -c'
-        else:
-            # for remote machines, login shell is better since it's more likely to set up all the relevant
-            # things
-            shell = 'bash -lc'
 
     # always run at least once, and wait a valid (>= 0) amount of time
     retry = (max(retry[0], 1), max(retry[1], 0))
@@ -149,7 +140,8 @@ def subprocess_run(host, args, script=None, shell=None, remsh_cmd=None, retry=No
 
     for i_try in range(retry[0]):
         try:
-            p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, close_fds=False, env=os.environ)
+            p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE,
+                                 close_fds=False, env=os.environ)
             stdout, stderr = p.communicate(script)
 
             if p.returncode != 0:
