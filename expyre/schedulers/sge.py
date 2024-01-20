@@ -27,7 +27,8 @@ class SGE(Scheduler):
         self.remsh_cmd = util.remsh_cmd(remsh_cmd)
 
 
-    def submit(self, id, remote_dir, partition, commands, max_time, header, node_dict, no_default_header=False, verbose=False):
+    def submit(self, id, remote_dir, partition, commands, max_time, header, node_dict, no_default_header=False,
+               script_exec="/bin/bash", pre_submit_cmds=[], verbose=False):
         """Submit a job on a remote machine
 
         Parameters
@@ -49,6 +50,11 @@ class SGE(Scheduler):
             Fields: num_nodes, num_cores, num_cores_per_node, ppn, id, max_time, partition (and its synonum queue)
         no_default_header: bool, default False
             do not add normal header fields, only use what's passed in in "header"
+        script_exec: str, default '/bin/bash'
+            executable for first line of job script
+        pre_submit_cmds: list(str), default []
+            command to run in the remote process that does the submission before the actual submission,
+            e.g. to fix the environment
 
         Returns
         -------
@@ -95,11 +101,12 @@ class SGE(Scheduler):
 
         commands = pre_commands + commands
 
-        script = '#!/bin/bash -l\n'
+        script = '#!' + script_exec + '\n'
         script += '\n'.join([line.rstrip().format(**node_dict) for line in header]) + '\n'
         script += '\n' + '\n'.join([line.rstrip() for line in commands]) + '\n'
 
         submit_args = Scheduler.unset_scheduler_env_vars("SGE")
+        submit_args += pre_submit_cmds + (['&&'] if len(pre_submit_cmds) > 0 else [])
         submit_args += ['cd', remote_dir, '&&', 'cat', '>', 'job.script.sge',
                         '&&', 'qsub', 'job.script.sge']
 

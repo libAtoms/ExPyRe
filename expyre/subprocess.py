@@ -140,7 +140,8 @@ def subprocess_run(host, args, script=None, shell='bash -c', remsh_cmd=None, ret
 
     for i_try in range(retry[0]):
         try:
-            p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, close_fds=False, env=os.environ)
+            p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE,
+                                 close_fds=False, env=os.environ)
             stdout, stderr = p.communicate(script)
 
             if p.returncode != 0:
