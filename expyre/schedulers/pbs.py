@@ -82,7 +82,6 @@ class PBS(Scheduler):
             # Make sure that first characer is alphabetic
             # Let's hope there aren't length limitations anymore
             header.append('#PBS -N N_{id}')
-            header.append('#PBS -q {partition}')
             header.append('#PBS -l walltime={max_time}')
             header.append('#PBS -o job.{id}.stdout')
             header.append('#PBS -e job.{id}.stderr')

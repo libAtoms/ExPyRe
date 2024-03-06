@@ -68,7 +68,6 @@ class Slurm(Scheduler):
         header = header.copy()
         if not no_default_header:
             header.append('#SBATCH --job-name={id}')
-            header.append('#SBATCH --partition={partition}')
             header.append('#SBATCH --time={max_time}')
             header.append('#SBATCH --output=job.{id}.stdout')
             header.append('#SBATCH --error=job.{id}.stderr')
