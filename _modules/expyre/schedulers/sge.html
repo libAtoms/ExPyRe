@@ -338,7 +338,6 @@ document.write(`
         <span class="k">if</span> <span class="ow">not</span> <span class="n">no_default_header</span><span class="p">:</span>
             <span class="c1"># Make sure that first characer is alphabetic</span>
             <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#$ -N N_</span><span class="si">{id}</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#$ -q </span><span class="si">{partition}</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#$ -l h_rt=</span><span class="si">{max_time}</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#$ -o job.</span><span class="si">{id}</span><span class="s1">.stdout&#39;</span><span class="p">)</span>
             <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;#$ -e job.</span><span class="si">{id}</span><span class="s1">.stderr&#39;</span><span class="p">)</span>
