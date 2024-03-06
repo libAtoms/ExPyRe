@@ -3,7 +3,6 @@ import shutil
 import subprocess
 from pathlib import Path
 import numpy as np
-import pandas as pd
 
 import click
 from ..jobsdb import JobsDB
@@ -43,7 +42,6 @@ def cli_ls(ctx, id, name, status, system, long_output):
     if len(jobs) == 0:
         print(f"No matching jobs in JobsDB at {config.db.db_filename}")
     else:
-        print("Jobs:")
         # {'id': 'vasp_eval_chunk_0_KEiSzsC7ft8ASaOmurO4yw5PhlCYVLgpAcVxVXvc1e0=_1kxwmf_c',
         # 'name': 'vasp_eval_chunk_0',
         # 'from_dir': '/home/cluster2/bernstei/src/work/Perovskites/ACE/_expyre/run_vasp_eval_chunk_0_KEiSzsC7ft8ASaOmurO4yw5PhlCYVLgpAcVxVXvc1e0=_1kxwmf_c',
@@ -76,13 +74,21 @@ def cli_ls(ctx, id, name, status, system, long_output):
             if long_output:
                 rows['from dir'].append(f"{job['from_dir']}")
 
-        d = pd.DataFrame.from_dict(rows)
-        pd.set_option('display.max_rows', None)
-        pd.set_option('display.max_columns', None)
-        pd.set_option('display.max_colwidth', None)
-        pd.set_option('display.width', None)
-        pd.set_option('display.colheader_justify', 'left')
-        print(d)
+        # add row numbers
+        numbered_rows = {'': list(range(len(rows['id'])))}
+        numbered_rows.update(rows)
+        rows = numbered_rows
+
+        # create formats
+        widths = {col_name: max([len(str(val)) for val in [col_name] + col_vals]) for col_name, col_vals in rows.items()}
+        fmt = " ".join([f'{{:>{w}}}' for w in widths.values()])
+        fmt_header = " ".join([f'{{:<{w}}}' for w in widths.values()])
+
+        # print
+        print("Jobs:")
+        print(fmt_header.format(*list(rows.keys())))
+        for row_i in range(len(rows['id'])):
+            print(fmt.format(*[rows[col_name][row_i] for col_name in rows.keys()]))
 
 
 @cli.command("rm")

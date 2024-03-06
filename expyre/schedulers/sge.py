@@ -71,7 +71,6 @@ class SGE(Scheduler):
         if not no_default_header:
             # Make sure that first characer is alphabetic
             header.append('#$ -N N_{id}')
-            header.append('#$ -q {partition}')
             header.append('#$ -l h_rt={max_time}')
             header.append('#$ -o job.{id}.stdout')
             header.append('#$ -e job.{id}.stderr')
