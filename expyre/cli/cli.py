@@ -142,6 +142,9 @@ def cli_sync(ctx, id, name, status, system):
 
     jobs = _get_jobs(id=id, name=name, status=status, system=system)
 
+    if len(jobs) == 0:
+        warnings.warn(f"sync found no jobs with status {status} to sync")
+
     ExPyRe._sync_remote_results_status_ll(jobs, cli=True)
 
 
@@ -156,3 +159,27 @@ def cli_db_unlock(ctx):
     """
 
     config.db.unlock()
+
+
+@cli.command("reset_status")
+@click.option("--id", "-i", help="comma separated list of regexps for entire job id")
+@click.option("--name", "-n", help="comma separated list of regexps for entire job name")
+@click.option("--status", "-s", help="comma separated list of status values to include, or '*' for all", default='*')
+@click.option("--system", "-S", help="comma separated list of regexps for entire system name")
+@click.argument("new_status", type=click.Choice(JobsDB.possible_status), required=True)
+@click.pass_context
+def cli_reset_status(ctx, id, name, status, system, new_status):
+    """Reset local status of jobs (useful when jobs have been processed but you want to reset their
+    status to something like 'started' to force syncing and processing to happen again, e.g. if you
+    restarted some of them manually)
+    """
+    if status == '*':
+        status = None
+
+    jobs = _get_jobs(id=id, name=name, status=status, system=system)
+
+    if len(jobs) == 0:
+        warnings.warn(f"sync found no jobs with status {status} to reset")
+
+    for job in jobs:
+        config.db.update(job['id'], status=new_status)
