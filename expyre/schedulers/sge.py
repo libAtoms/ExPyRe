@@ -139,7 +139,7 @@ class SGE(Scheduler):
         if isinstance(remote_ids, str):
             remote_ids = [remote_ids]
 
-        stdout, stderr = subprocess_run(self.host,['qstat'],
+        stdout, stderr = subprocess_run(self.host, ['qstat'],
             remsh_cmd=self.remsh_cmd, verbose=verbose)
 
         # first two lines are header
