@@ -406,7 +406,7 @@ document.write(`
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">remote_ids</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">remote_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">remote_ids</span><span class="p">]</span>
 
-        <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">subprocess_run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,[</span><span class="s1">&#39;qstat&#39;</span><span class="p">],</span>
+        <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">subprocess_run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;qstat&#39;</span><span class="p">],</span>
             <span class="n">remsh_cmd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remsh_cmd</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
 
         <span class="c1"># first two lines are header</span>
