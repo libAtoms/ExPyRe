@@ -767,7 +767,7 @@ document.write(`
 
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_sync_remote_results_status_ll</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">jobs_to_sync</span><span class="p">,</span> <span class="n">n_group</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">cli</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_sync_remote_results_status_ll</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">jobs_to_sync</span><span class="p">,</span> <span class="n">n_group</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">cli</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Low level part of syncing jobs.  Gets remote files _and_ updates &#39;remote_status&#39;</span>
 <span class="sd">        field in jobsdb.  Note that both have to happen because other functions assume that</span>
 <span class="sd">        if remote status has been updated files have been staged back as well.</span>
@@ -780,6 +780,12 @@ document.write(`
 <span class="sd">            list of job dicts returned by jobsdb.jobs()</span>
 <span class="sd">        n_group: int, default 250</span>
 <span class="sd">            number of jobs to do in a group with each rsync call</span>
+<span class="sd">        cli: bool, default False</span>
+<span class="sd">            command is being from from cli &#39;xpr sync&#39;</span>
+<span class="sd">        delete: bool, default False</span>
+<span class="sd">            delete local files that are not in remote dir</span>
+<span class="sd">        verbose: bool, default False</span>
+<span class="sd">            verbose output</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">jobs_to_sync</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span>
@@ -814,7 +820,7 @@ document.write(`
             <span class="c1">#    update status, showing job as done (despite missing files)</span>
             <span class="k">for</span> <span class="n">job_group</span> <span class="ow">in</span> <span class="n">_grouper</span><span class="p">(</span><span class="n">n_group</span><span class="p">,</span> <span class="n">jobs_to_sync</span><span class="p">):</span>
                 <span class="n">system</span><span class="o">.</span><span class="n">get_remotes</span><span class="p">(</span><span class="n">stage_root</span><span class="p">,</span> <span class="n">subdir_glob</span><span class="o">=</span><span class="p">[</span><span class="n">Path</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="s1">&#39;from_dir&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">job_group</span><span class="p">],</span>
-                                   <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+                                   <span class="n">delete</span><span class="o">=</span><span class="n">delete</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="ExPyRe.clean"><a class="viewcode-back" href="../../expyre.html#expyre.func.ExPyRe.clean">[docs]</a>    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wipe</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">remote_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>

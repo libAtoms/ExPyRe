@@ -439,7 +439,8 @@ document.write(`
 
 
 <div class="viewcode-block" id="subprocess_copy"><a class="viewcode-back" href="../../expyre.html#expyre.subprocess.subprocess_copy">[docs]</a><span class="k">def</span> <span class="nf">subprocess_copy</span><span class="p">(</span><span class="n">from_files</span><span class="p">,</span> <span class="n">to_file</span><span class="p">,</span> <span class="n">from_host</span><span class="o">=</span><span class="s1">&#39;_LOCAL_&#39;</span><span class="p">,</span> <span class="n">to_host</span><span class="o">=</span><span class="s1">&#39;_LOCAL_&#39;</span><span class="p">,</span>
-                    <span class="n">rcp_args</span><span class="o">=</span><span class="s1">&#39;-a&#39;</span><span class="p">,</span> <span class="n">rcp_cmd</span><span class="o">=</span><span class="s1">&#39;rsync&#39;</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remsh_flags</span><span class="o">=</span><span class="s1">&#39;-e&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                    <span class="n">rcp_args</span><span class="o">=</span><span class="s1">&#39;-a&#39;</span><span class="p">,</span> <span class="n">rcp_cmd</span><span class="o">=</span><span class="s1">&#39;rsync&#39;</span><span class="p">,</span> <span class="n">remsh_cmd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remsh_flags</span><span class="o">=</span><span class="s1">&#39;-e&#39;</span><span class="p">,</span>
+                    <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a remote copy (e.g. rsync) in a subprocess, optionally to/from remote machine.  Exactly one</span>
 <span class="sd">    machine has to be specified, and relative paths on that machine are relative to its home dir, like</span>
 <span class="sd">    rsync.  If the specified machine is None the copy is local, but relative paths are still relative to</span>
@@ -469,8 +470,12 @@ document.write(`
 <span class="sd">        passed as retry argument to subprocess_run</span>
 <span class="sd">    remsh_flags: str, default &#39;-e&#39;</span>
 <span class="sd">        flag to prefix to remsh_cmd when calling rcp_cmd</span>
+<span class="sd">    delete: bool, default False</span>
+<span class="sd">        delete target files that aren&#39;t in source with --delete option</span>
 <span class="sd">    verbose: bool, default False</span>
 <span class="sd">        verbose output</span>
+<span class="sd">    dry_run: bool, default False</span>
+<span class="sd">        dry run, don&#39;t actually copy</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># exactly one of from_host, to_host must be provided</span>
     <span class="k">if</span> <span class="n">from_host</span> <span class="o">!=</span> <span class="s1">&#39;_LOCAL_&#39;</span> <span class="ow">and</span> <span class="n">to_host</span> <span class="o">!=</span> <span class="s1">&#39;_LOCAL_&#39;</span><span class="p">:</span>
@@ -479,6 +484,9 @@ document.write(`
     <span class="k">if</span> <span class="n">remsh_cmd</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">remsh_cmd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;EXPYRE_RSH&#39;</span><span class="p">,</span> <span class="s1">&#39;ssh&#39;</span><span class="p">)</span>
     <span class="n">rcp_args</span> <span class="o">=</span> <span class="n">remsh_flags</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">remsh_cmd</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">rcp_args</span>
+
+    <span class="k">if</span> <span class="n">delete</span><span class="p">:</span>
+        <span class="n">rcp_args</span> <span class="o">+=</span> <span class="s1">&#39; --delete&#39;</span>
 
     <span class="c1"># make from_files plain str or Path into list</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">from_files</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">from_files</span><span class="p">,</span> <span class="n">Path</span><span class="p">):</span>
