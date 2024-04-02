@@ -500,7 +500,7 @@ class ExPyRe:
 
 
     @classmethod
-    def _sync_remote_results_status_ll(cls, jobs_to_sync, n_group=250, cli=False, verbose=False):
+    def _sync_remote_results_status_ll(cls, jobs_to_sync, n_group=250, cli=False, delete=False, verbose=False):
         """Low level part of syncing jobs.  Gets remote files _and_ updates 'remote_status'
         field in jobsdb.  Note that both have to happen because other functions assume that
         if remote status has been updated files have been staged back as well.
@@ -513,6 +513,12 @@ class ExPyRe:
             list of job dicts returned by jobsdb.jobs()
         n_group: int, default 250
             number of jobs to do in a group with each rsync call
+        cli: bool, default False
+            command is being from from cli 'xpr sync'
+        delete: bool, default False
+            delete local files that are not in remote dir
+        verbose: bool, default False
+            verbose output
         """
         if len(jobs_to_sync) == 0:
             return
@@ -547,7 +553,7 @@ class ExPyRe:
             #    update status, showing job as done (despite missing files)
             for job_group in _grouper(n_group, jobs_to_sync):
                 system.get_remotes(stage_root, subdir_glob=[Path(j['from_dir']).name for j in job_group],
-                                   verbose=verbose)
+                                   delete=delete, verbose=verbose)
 
 
     def clean(self, wipe=False, dry_run=False, remote_only=False, verbose=False):
