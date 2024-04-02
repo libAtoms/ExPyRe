@@ -172,7 +172,8 @@ def subprocess_run(host, args, script=None, shell='bash -c', remsh_cmd=None, ret
 
 
 def subprocess_copy(from_files, to_file, from_host='_LOCAL_', to_host='_LOCAL_',
-                    rcp_args='-a', rcp_cmd='rsync', remsh_cmd=None, retry=None, remsh_flags='-e', verbose=False, dry_run=False):
+                    rcp_args='-a', rcp_cmd='rsync', remsh_cmd=None, retry=None, remsh_flags='-e',
+                    delete=False, verbose=False, dry_run=False):
     """Run a remote copy (e.g. rsync) in a subprocess, optionally to/from remote machine.  Exactly one
     machine has to be specified, and relative paths on that machine are relative to its home dir, like
     rsync.  If the specified machine is None the copy is local, but relative paths are still relative to
@@ -202,8 +203,12 @@ def subprocess_copy(from_files, to_file, from_host='_LOCAL_', to_host='_LOCAL_',
         passed as retry argument to subprocess_run
     remsh_flags: str, default '-e'
         flag to prefix to remsh_cmd when calling rcp_cmd
+    delete: bool, default False
+        delete target files that aren't in source with --delete option
     verbose: bool, default False
         verbose output
+    dry_run: bool, default False
+        dry run, don't actually copy
     """
     # exactly one of from_host, to_host must be provided
     if from_host != '_LOCAL_' and to_host != '_LOCAL_':
@@ -212,6 +217,9 @@ def subprocess_copy(from_files, to_file, from_host='_LOCAL_', to_host='_LOCAL_',
     if remsh_cmd is None:
         remsh_cmd = os.environ.get('EXPYRE_RSH', 'ssh')
     rcp_args = remsh_flags + ' ' + remsh_cmd + ' ' + rcp_args
+
+    if delete:
+        rcp_args += ' --delete'
 
     # make from_files plain str or Path into list
     if isinstance(from_files, str) or isinstance(from_files, Path):

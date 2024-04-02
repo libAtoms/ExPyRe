@@ -3,6 +3,7 @@ import shutil
 import subprocess
 import warnings
 from pathlib import Path
+import pickle
 
 import numpy as np
 
@@ -116,7 +117,7 @@ def cli_rm(ctx, id, name, status, system, yes, clean):
             # ask user
             answer = None
             while answer not in ['y', 'n']:
-                answer = input(f'Deleting "{xpr}"\nEnter n to reject or y to accept: ')
+                answer = input(f'Delete "{xpr}"\nEnter n to reject or y to accept: ')
             if answer != 'y':
                 sys.stderr.write(f'Not deleting "{xpr.id}"\n')
                 sys.stderr.write('\n')
@@ -135,8 +136,11 @@ def cli_rm(ctx, id, name, status, system, yes, clean):
 @click.option("--name", "-n", help="comma separated list of regexps for entire job name")
 @click.option("--status", "-s", help="comma separated list of status values to include, or '*' for all", default='ongoing')
 @click.option("--system", "-S", help="comma separated list of regexps for entire system name")
+@click.option("--delete", "-d", is_flag=True, help="delete local files that aren't in remote dir, e.g. if remote job got an "
+                                                   "error, was synced, but was then manually restarted and finished without an error")
+@click.option("--verbose", "-v", is_flag=True, help="verbose output")
 @click.pass_context
-def cli_sync(ctx, id, name, status, system):
+def cli_sync(ctx, id, name, status, system, delete, verbose):
     """Sync remote status and results for jobs fitting criteria (at least one criterion required)
     """
     if status == '*':
@@ -147,7 +151,7 @@ def cli_sync(ctx, id, name, status, system):
     if len(jobs) == 0:
         warnings.warn(f"sync found no jobs with status {status} to sync")
 
-    ExPyRe._sync_remote_results_status_ll(jobs, cli=True)
+    ExPyRe._sync_remote_results_status_ll(jobs, cli=True, delete=delete, verbose=verbose)
 
 
 @cli.command("db_unlock")
@@ -185,3 +189,66 @@ def cli_reset_status(ctx, id, name, status, system, new_status):
 
     for job in jobs:
         config.db.update(job['id'], status=new_status)
+
+
+@cli.command("create_job")
+@click.option("--from_dir", "-d", type=click.Path(exists=True, file_okay=False, dir_okay=True,
+                                                  path_type=Path),
+              help="local stage directory of job to create", required=True)
+@click.option("--system", "-S", help="system of job to create", required=True)
+@click.option("--id", "-i", help="id of job to create, deduced from from_dir if not specified")
+@click.option("--name", "-n", help="name of job to create, deduced from id if not specified")
+@click.pass_context
+def cli_reset_status(ctx, from_dir, system, id, name):
+    """Create a job database entry manually
+    """
+
+    if id is None:
+        id = from_dir.name[4:]
+    if name is None:
+        name = id[:-54]
+
+    config.db.add(id=id, name=name, from_dir=str(from_dir.absolute()), status="created", system=system, remote_id="NA", remote_status="unknown")
+
+
+@cli.command("fail_job")
+@click.option("--id", "-i", help="comma separated list of regexps for entire job id")
+@click.option("--name", "-n", help="comma separated list of regexps for entire job name")
+@click.option("--status", "-s", help="comma separated list of status values to include, or '*' for all")
+@click.option("--system", "-S", help="comma separated list of regexps for entire system name")
+@click.option("--yes", "-y", is_flag=True, help="assume 'yes' for all confirmations, i.e. delete job and stage dirs without asking user")
+@click.pass_context
+def cli_fail_job(ctx, id, name, status, system, yes):
+    """Mark a job as failed
+    """
+    if id is None and name is None and status is None and system is None:
+        sys.stderr.write('At least one selection criterion is required\n\n')
+        sys.stderr.write(ctx.get_help()+'\n')
+        sys.exit(1)
+
+    if status == '*':
+        status = None
+
+    jobs = _get_jobs(id=id, name=name, status=status, system=system)
+
+    if len(jobs) == 0:
+        warnings.warn(f"sync found no jobs with status {status} to reset")
+
+    for job in jobs:
+        if not yes:
+            # ask user
+            answer = None
+            while answer not in ['y', 'n']:
+                answer = input(f'Fail "{job["id"]}"\nEnter n to reject or y to accept: ')
+            if answer != 'y':
+                sys.stderr.write(f'Not failing "{job["id"]}"\n')
+                sys.stderr.write('\n')
+                continue
+
+        from_dir = Path(job['from_dir'])
+
+        with open(from_dir / "_expyre_job_error", "w") as fout:
+            fout.write("xpr fail_job\n")
+        with open(from_dir / "_expyre_job_exception", "wb") as fout:
+            pickle.dump(RuntimeError("xpr fail_job"), fout)
+        (from_dir / "_expyre_job_succeeded").unlink(missing_ok=True)
