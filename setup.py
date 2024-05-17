@@ -2,7 +2,8 @@ import setuptools
 
 setuptools.setup(
     name="expyre-wfl",
-    version="0.1.3",
+    version="0.1.4",
+    license_files=["LICENSE"],
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(exclude=["tests"]),
