@@ -1,0 +1,14 @@
+[project]
+
+name = "expyre-wfl"
+version = "0.1.5b0"
+requires-python = ">=3.9"
+dependencies = ["click>=7.0"]
+
+readme = "README.md"
+license = { file = "LICENSE" }
+
+scripts = { xpr = "expyre.cli.cli:cli" }
+
+[tools.setuptools.packages.find]
+    exclude = ["tests*"]
