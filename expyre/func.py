@@ -775,6 +775,10 @@ class ExPyRe:
                     # reraise python exception that caused job to fail
                     with open(self.stage_dir / "_expyre_job_exception", "rb") as fin:
                         exc = pickle.load(fin)
+                    sys.stderr.write(f'Remote job {self.id} failed with exception '
+                                     f'error_msg {error_msg}\n'
+                                     f'stdout: {stdout}\nstderr: {stderr}\n'
+                                     f'job stdout: {job_stdout}\njob stderr: {job_stderr}')
                     raise exc
                 else:
                     raise ExPyReJobDiedError(f'Remote job {self.id} failed with no exception but remote status {remote_status} '
