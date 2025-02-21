@@ -167,7 +167,7 @@ def do_work(sys_name):
     # yet set up by conftest.py if imported outside the test function
     from expyre.func import ExPyRe
 
-    xpr = ExPyRe('test', function=sum, args=[[1, 2, 3]])
+    xpr = ExPyRe('test+1', function=sum, args=[[1, 2, 3]])
 
     print('job id', xpr.id)
 

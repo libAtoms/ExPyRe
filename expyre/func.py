@@ -539,7 +539,7 @@ class ExPyRe:
             # get remote statuses and update in JobsDB
             status_of_remote_id = system.scheduler.status([j['remote_id'] for j in jobs_to_sync], verbose=verbose)
             for j in jobs_to_sync:
-                old_remote_status = list(config.db.jobs(id=j['id']))[0]['remote_status']
+                old_remote_status = list(config.db.jobs(id=re.escape(j['id'])))[0]['remote_status']
                 new_remote_status = status_of_remote_id[j['remote_id']]
                 if old_remote_status != new_remote_status:
                     if cli:
