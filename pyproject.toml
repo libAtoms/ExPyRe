@@ -1,14 +1,17 @@
 [project]
 
 name = "expyre-wfl"
-version = "0.1.5"
 requires-python = ">=3.9"
 dependencies = ["click>=7.0"]
-
 readme = "README.md"
 license = { file = "LICENSE" }
+dynamic = ["version"]
 
-scripts = { xpr = "expyre.cli.cli:cli" }
+[project.scripts]
+    xpr = "expyre.cli.cli:cli"
 
-[tools.setuptools.packages.find]
-    exclude = ["tests*"]
+[tool.setuptools.packages.find]
+    exclude = [ "tests*" ]
+
+[tool.setuptools.dynamic]
+version = {attr  = "expyre.__version__"}
