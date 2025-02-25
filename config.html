@@ -342,7 +342,8 @@ document.write(`
 <p>The description of the available systems and associated resources is in a <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file.</p>
 <div class="section" id="file-format">
 <h2>File format<a class="headerlink" href="#file-format" title="Permalink to this heading">#</a></h2>
-<p>The top level structure is a single dict with one <code class="docutils literal notranslate"><span class="pre">&quot;systems&quot;</span></code> key with a dict value, containing
+<p>The top level structure is a single dict. Most of the content is in the <code class="docutils literal notranslate"><span class="pre">&quot;systems&quot;</span></code> key, which contains
+a dict value. The <cite>“systems”</cite> dict contains
 one key-value pair for each system. The key is the name of the system (used to select
 the system when evaluating the function).  See <code class="docutils literal notranslate"><span class="pre">expyre.System</span></code> docstring for full list. The
 value is a dict with the following keys:</p>
@@ -357,6 +358,11 @@ value is a dict with the following keys:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;rundir&quot;</span></code>: string for a path where the remote jobs should be run</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;partitions&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;queues&quot;</span></code>: dict with partitions/queues/node-type names as keys and dict of node properties as values.</p></li>
 </ul>
+<p>In addition, there is an optional <cite>“remote_rundir_submit_hostname”</cite> which overrides the hostname used
+when constructing the remote rundir, for use by people who run their scripts from different
+hostnames, e.g. multiple HPC login nodes. Because the hostname is embedded into the remote rundir, if the script run that submits
+the job and the script run that gathers the results are run on machines with different hostnames, the second
+run will look in a different remote rundir, and not find the remote rundir.</p>
 <div class="section" id="node-property-dict-includes">
 <h3>Node property dict includes<a class="headerlink" href="#node-property-dict-includes" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
