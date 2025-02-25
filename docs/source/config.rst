@@ -11,7 +11,8 @@ File format
 **********************************
 
 
-The top level structure is a single dict with one ``"systems"`` key with a dict value, containing
+The top level structure is a single dict. Most of the content is in the ``"systems"`` key, which contains
+a dict value. The `"systems"` dict contains
 one key-value pair for each system. The key is the name of the system (used to select
 the system when evaluating the function).  See ``expyre.System`` docstring for full list. The
 value is a dict with the following keys:
@@ -25,6 +26,12 @@ value is a dict with the following keys:
 - ``"remsh_cmd"``: optional string remote shell command, default ``"ssh"``
 - ``"rundir"``: string for a path where the remote jobs should be run
 - ``"partitions"`` or ``"queues"``: dict with partitions/queues/node-type names as keys and dict of node properties as values.
+
+In addition, there is an optional `"remote_rundir_submit_hostname"` which overrides the hostname used
+when constructing the remote rundir, for use by people who run their scripts from different
+hostnames, e.g. multiple HPC login nodes. Because the hostname is embedded into the remote rundir, if the script run that submits
+the job and the script run that gathers the results are run on machines with different hostnames, the second
+run will look in a different remote rundir, and not find the remote rundir.
 
 ===========================
 Node property dict includes
