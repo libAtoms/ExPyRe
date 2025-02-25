@@ -119,7 +119,8 @@ def init(root_dir, verbose=False):
         use_local_stage_dir = local_stage_dir.parent
     else:
         use_local_stage_dir = local_stage_dir
-    _rundir_extra = os.environ.get('HOSTNAME', 'unkownhost') + '-' + str(use_local_stage_dir).replace('/', '_')
+    hostname_use = _config_data.get('remote_rundir_submit_hostname', os.environ.get('HOSTNAME', 'unknown_host'))
+    _rundir_extra = hostname_use + '-' + str(use_local_stage_dir).replace('/', '_')
 
     systems = {}
     for _sys_name in _config_data['systems']:
